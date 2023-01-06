@@ -1,7 +1,10 @@
+using SoundPlay.DAL;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+Dependencies.ConfigureServices(builder.Configuration, builder.Services);
 
 var app = builder.Build();
 

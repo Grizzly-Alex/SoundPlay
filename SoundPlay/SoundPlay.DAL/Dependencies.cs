@@ -2,7 +2,8 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using SoundPlay.DAL.Data;
-
+using SoundPlay.DAL.Repository.Interfaces;
+using SoundPlay.DAL.Repository;
 
 namespace SoundPlay.DAL
 {
@@ -10,8 +11,10 @@ namespace SoundPlay.DAL
 	{
 		public static void ConfigureServices(IConfiguration configuration, IServiceCollection services)
 		{
-			services.AddDbContext<ApplicationDbContext>(context =>
-			context.UseSqlServer(configuration.GetConnectionString("CatalogConnection")));
+			services.AddDbContext<ApplicationDbContext>(options =>
+				options.UseSqlServer(configuration.GetConnectionString("CatalogConnection")));
+
+			services.AddTransient<IUnitOfWork, UnitOfWork>();
 		}
 	}
 }

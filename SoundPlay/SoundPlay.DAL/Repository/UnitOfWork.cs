@@ -1,7 +1,6 @@
 ﻿using SoundPlay.DAL.Data;
 using SoundPlay.DAL.Repository.Interfaces;
 using SoundPlay.DTO.Models;
-using System.Runtime.CompilerServices;
 
 namespace SoundPlay.DAL.Repository
 {
@@ -14,7 +13,7 @@ namespace SoundPlay.DAL.Repository
 		public UnitOfWork(ApplicationDbContext db)
 		{
 			_db = db;
-			Category = new(_db);
+			Category = new Repository<Category>(_db);
 		}
 
 		public async Task SaveChangesAsync() => await _db.SaveChangesAsync();

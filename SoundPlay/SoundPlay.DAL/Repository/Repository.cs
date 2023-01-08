@@ -4,7 +4,6 @@ using SoundPlay.DAL.Data;
 using SoundPlay.DAL.Repository.Interfaces;
 using System.Linq.Expressions;
 
-
 namespace SoundPlay.DAL.Repository
 {
 	public class Repository<T> : IRepository<T> where T : class

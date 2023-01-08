@@ -1,9 +1,11 @@
 using SoundPlay.DAL;
+using SoundPlay.DTO;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddAutoMapper(typeof(AppMappingProfile));
 Dependencies.ConfigureServices(builder.Configuration, builder.Services);
 
 var app = builder.Build();

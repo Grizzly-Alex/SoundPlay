@@ -17,7 +17,6 @@ namespace SoundPlay.DAL.Data.ModelConfigurations
 
 			builder.Property(p => p.Name)
 				.HasColumnName("TremoloName")
-				.HasColumnType("varchar(30)")
 				.IsRequired();
 		}
 	}

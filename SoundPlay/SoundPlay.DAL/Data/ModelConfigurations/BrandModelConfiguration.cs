@@ -17,7 +17,6 @@ namespace SoundPlay.DAL.Data.ModelConfigurations
 
 			builder.Property(p => p.Name)
 				.HasColumnName("BrandName")
-				.HasColumnType("varchar(30)")
 				.IsRequired();
 		}
 	}

@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-
-namespace SoundPlay.DTO.Models
+﻿namespace SoundPlay.DTO.Models
 {
     public sealed class Category
     {

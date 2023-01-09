@@ -7,8 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="12.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\SoundPlay.DAL\SoundPlay.DAL.csproj" />
-    <ProjectReference Include="..\SoundPlay.DTO\SoundPlay.DTO.csproj" />
   </ItemGroup>
 
 </Project>

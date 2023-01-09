@@ -1,4 +1,4 @@
-﻿using SoundPlay.DTO.Models;
+﻿using SoundPlay.DAL.Models;
 
 namespace SoundPlay.DAL.Repository.Interfaces
 {

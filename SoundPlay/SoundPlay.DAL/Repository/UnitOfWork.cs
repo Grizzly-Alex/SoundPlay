@@ -1,6 +1,6 @@
 ﻿using SoundPlay.DAL.Data;
+using SoundPlay.DAL.Models;
 using SoundPlay.DAL.Repository.Interfaces;
-using SoundPlay.DTO.Models;
 
 namespace SoundPlay.DAL.Repository
 {

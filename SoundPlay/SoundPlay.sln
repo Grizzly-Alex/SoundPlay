@@ -7,9 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SoundPlay.WEB", "SoundPlay.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SoundPlay.DAL", "SoundPlay.DAL\SoundPlay.DAL.csproj", "{8F43E95E-24BA-4B3F-8C29-4FD31FB571F1}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SoundPlay.DTO", "SoundPlay.DTO\SoundPlay.DTO.csproj", "{2EC25F37-50AD-4164-B870-512C62EFAB64}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoundPlay.BLL", "SoundPlay.BLL\SoundPlay.BLL.csproj", "{BF30A406-33D8-4528-B305-759E083E818E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SoundPlay.BLL", "SoundPlay.BLL\SoundPlay.BLL.csproj", "{BF30A406-33D8-4528-B305-759E083E818E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,10 +23,6 @@ Global
 		{8F43E95E-24BA-4B3F-8C29-4FD31FB571F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8F43E95E-24BA-4B3F-8C29-4FD31FB571F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8F43E95E-24BA-4B3F-8C29-4FD31FB571F1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2EC25F37-50AD-4164-B870-512C62EFAB64}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2EC25F37-50AD-4164-B870-512C62EFAB64}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2EC25F37-50AD-4164-B870-512C62EFAB64}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2EC25F37-50AD-4164-B870-512C62EFAB64}.Release|Any CPU.Build.0 = Release|Any CPU
 		{BF30A406-33D8-4528-B305-759E083E818E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{BF30A406-33D8-4528-B305-759E083E818E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BF30A406-33D8-4528-B305-759E083E818E}.Release|Any CPU.ActiveCfg = Release|Any CPU

@@ -2,13 +2,13 @@
 using Microsoft.Extensions.Logging;
 using SoundPlay.BLL.Exceptions;
 using SoundPlay.BLL.Interfaces;
+using SoundPlay.BLL.ViewModels;
+using SoundPlay.DAL.Models;
 using SoundPlay.DAL.Repository.Interfaces;
-using SoundPlay.DTO.Models;
-using SoundPlay.DTO.ViewModels;
 
 namespace SoundPlay.BLL.Services
 {
-    public class MaterialService:IGenericService<MaterialViewModel>
+    public class MaterialService:IMaterialService
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;

@@ -11,13 +11,10 @@ namespace SoundPlay.DAL
 	{
 		public static void ConfigureServices(IConfiguration configuration, IServiceCollection services)
 		{
-			//services.AddDbContext<ApplicationDbContext>(options =>
-			//	options.UseSqlServer(configuration.GetConnectionString("CatalogConnection")));
+			services.AddDbContext<ApplicationDbContext>(options =>
+				options.UseSqlServer(configuration.GetConnectionString("CatalogConnection")));
 
-            services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseNpgsql(configuration.GetConnectionString("DefaultConnection")));
-
-            services.AddTransient<IUnitOfWork, UnitOfWork>();
+			services.AddTransient<IUnitOfWork, UnitOfWork>();
 		}
 	}
 }

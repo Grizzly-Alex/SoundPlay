@@ -6,11 +6,11 @@ namespace SoundPlay.DAL.Repository
 {
 	public sealed class UnitOfWork : IUnitOfWork
 	{
-		public Repository<Category> Category { get; private set; }
-		public Repository<Brand> Brand { get; private set; }
-		public Repository<GuitarShape> GuitarShape { get; private set; }
-		public Repository<Material> Material { get; private set; }
-		public Repository<TremoloType> TremoloType { get; private set; }
+		public IRepository<Category> Category { get;}
+		public IRepository<Brand> Brand { get;}
+		public IRepository<GuitarShape> GuitarShape { get; }
+		public IRepository<Material> Material { get; }
+		public IRepository<TremoloType> TremoloType { get; }
 
 		private ApplicationDbContext _db;
 

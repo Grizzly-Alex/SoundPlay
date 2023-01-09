@@ -2,14 +2,14 @@
 {
     public interface IGenericService<TViewModel> where TViewModel : class
     {
-        public Task<IEnumerable<TViewModel>> GetMeetupsAsync();
+        public Task<IEnumerable<TViewModel>> GetViewModelsAsync();
 
-        public Task<TViewModel> GetMeetupByIdAsync(int id);
+        public Task<TViewModel> GetViewModelByIdAsync(int id);
 
-        public Task<TViewModel> CreateMeetupAsync(TViewModel viewModel);
+        public Task<TViewModel> CreateViewModelAsync(TViewModel viewModel);
 
-        public Task<TViewModel> UpdateMeetupAsync(TViewModel viewModel);
+        public Task<TViewModel> UpdateViewModelAsync(TViewModel viewModel);
 
-        public Task<TViewModel> DeleteMeetupAsync(TViewModel viewModel);
+        public Task<TViewModel> DeleteViewModelAsync(TViewModel viewModel);
     }
 }

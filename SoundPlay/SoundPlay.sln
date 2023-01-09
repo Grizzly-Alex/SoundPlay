@@ -3,11 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33205.214
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoundPlay.WEB", "SoundPlay.WEB\SoundPlay.WEB.csproj", "{F5012451-437D-4AFF-8B8B-1F55E46FD5AE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SoundPlay.WEB", "SoundPlay.WEB\SoundPlay.WEB.csproj", "{F5012451-437D-4AFF-8B8B-1F55E46FD5AE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoundPlay.DAL", "SoundPlay.DAL\SoundPlay.DAL.csproj", "{8F43E95E-24BA-4B3F-8C29-4FD31FB571F1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SoundPlay.DAL", "SoundPlay.DAL\SoundPlay.DAL.csproj", "{8F43E95E-24BA-4B3F-8C29-4FD31FB571F1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoundPlay.DTO", "SoundPlay.DTO\SoundPlay.DTO.csproj", "{2EC25F37-50AD-4164-B870-512C62EFAB64}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SoundPlay.DTO", "SoundPlay.DTO\SoundPlay.DTO.csproj", "{2EC25F37-50AD-4164-B870-512C62EFAB64}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoundPlay.BLL", "SoundPlay.BLL\SoundPlay.BLL.csproj", "{BF30A406-33D8-4528-B305-759E083E818E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{2EC25F37-50AD-4164-B870-512C62EFAB64}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2EC25F37-50AD-4164-B870-512C62EFAB64}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2EC25F37-50AD-4164-B870-512C62EFAB64}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BF30A406-33D8-4528-B305-759E083E818E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BF30A406-33D8-4528-B305-759E083E818E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BF30A406-33D8-4528-B305-759E083E818E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BF30A406-33D8-4528-B305-759E083E818E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

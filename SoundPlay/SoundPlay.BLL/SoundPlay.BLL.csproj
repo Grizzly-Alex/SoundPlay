@@ -6,4 +6,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\SoundPlay.DAL\SoundPlay.DAL.csproj" />
+    <ProjectReference Include="..\SoundPlay.DTO\SoundPlay.DTO.csproj" />
+  </ItemGroup>
+
 </Project>

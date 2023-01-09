@@ -66,7 +66,7 @@ namespace SoundPlay.BLL.Services
             if (model==null)
             {
                 _logger.LogError("Get_by_id operation is failed");
-                throw new ObjectNotFoundException("No brand found");
+                throw new ObjectNotFoundException("No object found");
             }
 
             _logger.LogInformation("Get_by_id operation is successfull");
@@ -81,7 +81,7 @@ namespace SoundPlay.BLL.Services
             if (models.Count()==0||models==null)
             {
                 _logger.LogError("Get_All operation is failed");
-                throw new ObjectNotFoundException("No brand found");
+                throw new ObjectNotFoundException("No object found");
             }
 
             _logger.LogInformation("Get_All operation is successfull");

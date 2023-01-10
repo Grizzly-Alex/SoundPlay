@@ -1,5 +1,6 @@
 using SoundPlay.WEB.Configuration;
 
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -24,6 +25,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
 	name: "default",
-	pattern: "{area=Customer}/{controller=Home}/{action=Index}/{id?}");
+	pattern: "{area=Admin}/{controller=Category}/{action=Index}/{id?}");
 
 app.Run();

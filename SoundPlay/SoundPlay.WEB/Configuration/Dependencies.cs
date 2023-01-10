@@ -20,8 +20,8 @@ namespace SoundPlay.WEB.Configuration
 
             #region Model CRUD services
             services.AddTransient<IUnitOfWork, UnitOfWork>();
-            services.AddTransient<IItemGenericService<BrandViewModel>, BrandService>();
             services.AddTransient<IItemGenericService<CategoryViewModel>, CategoryService>();
+            services.AddTransient<IItemGenericService<BrandViewModel>, BrandService>();
             services.AddTransient<IItemGenericService<GuitarShapeViewModel>, GuitarShapeService>();
             services.AddTransient<IItemGenericService<MaterialViewModel>, MaterialService>();
             services.AddTransient<IItemGenericService<TremoloTypeViewModel>, TremoloTypeService>();

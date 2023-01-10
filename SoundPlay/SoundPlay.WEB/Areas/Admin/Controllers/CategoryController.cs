@@ -2,9 +2,9 @@
 using SoundPlay.BLL.Services;
 using SoundPlay.BLL.ViewModels;
 
-
 namespace SoundPlay.WEB.Areas.Admin.Controllers
 {
+    [Area("Admin")]
     public class CategoryController : Controller
     {
         private readonly CategoryService _categoryService;
@@ -20,6 +20,7 @@ namespace SoundPlay.WEB.Areas.Admin.Controllers
             var viewModels = await _categoryService.GetViewModelsAsync();
             return View(viewModels);
         }
+        
 
         [HttpGet]
         public IActionResult Create()

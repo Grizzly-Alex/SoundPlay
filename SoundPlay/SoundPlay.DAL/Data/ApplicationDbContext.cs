@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SoundPlay.DAL.Data.ModelConfigurations;
-using SoundPlay.DTO.Models;
+using SoundPlay.DAL.Models;
 
 namespace SoundPlay.DAL.Data
 {

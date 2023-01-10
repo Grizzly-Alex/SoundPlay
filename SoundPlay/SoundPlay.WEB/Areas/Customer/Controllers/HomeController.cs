@@ -2,7 +2,7 @@
 using SoundPlay.WEB.Models;
 using System.Diagnostics;
 
-namespace SoundPlay.WEB.Customer.Controllers
+namespace SoundPlay.WEB.Areas.Customer.Controllers
 {
     public class HomeController : Controller
     {

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.Extensions.Logging;
 using SoundPlay.BLL.Exceptions;
 using SoundPlay.BLL.Interfaces;
@@ -76,7 +77,7 @@ namespace SoundPlay.BLL.Services
 
         public async Task<IEnumerable<GuitarShapeViewModel>> GetViewModelsAsync()
         {
-            var models = await _unitOfWork.GuitarShape.GetAllAsync();
+            var models = await _unitOfWork.GuitarShape.GetAllAsync(changeTrackerOn: false);
 
             if (models.Count == 0 || models is null)
             {

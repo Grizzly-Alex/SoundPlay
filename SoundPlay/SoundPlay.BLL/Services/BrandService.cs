@@ -76,7 +76,7 @@ namespace SoundPlay.BLL.Services
 
         public async Task<IEnumerable<BrandViewModel>> GetViewModelsAsync()
         {
-            var models = await _unitOfWork.Brand.GetAllAsync();
+            var models = await _unitOfWork.Brand.GetAllAsync(changeTrackerOn: false);
 
             if (models.Count == 0||models is null)
             {

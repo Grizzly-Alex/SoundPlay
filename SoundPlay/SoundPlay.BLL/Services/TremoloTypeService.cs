@@ -76,7 +76,7 @@ namespace SoundPlay.BLL.Services
 
         public async Task<IEnumerable<TremoloTypeViewModel>> GetViewModelsAsync()
         {
-            var models = await _unitOfWork.TremoloType.GetAllAsync();
+            var models = await _unitOfWork.TremoloType.GetAllAsync(changeTrackerOn: false);
 
             if (models.Count == 0 || models is null)
             {

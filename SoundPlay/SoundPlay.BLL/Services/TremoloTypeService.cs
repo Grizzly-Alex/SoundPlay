@@ -8,7 +8,7 @@ using SoundPlay.DAL.Repository.Interfaces;
 
 namespace SoundPlay.BLL.Services
 {
-    public class TremoloTypeService : IItemService<TremoloTypeViewModel>
+    public class TremoloTypeService : IItemGenericService<TremoloTypeViewModel>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;

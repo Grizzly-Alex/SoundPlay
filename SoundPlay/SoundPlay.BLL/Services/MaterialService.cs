@@ -8,7 +8,7 @@ using SoundPlay.DAL.Repository.Interfaces;
 
 namespace SoundPlay.BLL.Services
 {
-    public class MaterialService : IItemService<MaterialViewModel>
+    public class MaterialService : IItemGenericService<MaterialViewModel>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;

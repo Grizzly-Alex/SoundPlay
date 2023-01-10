@@ -5,6 +5,7 @@ using SoundPlay.DAL.Repository;
 using SoundPlay.BLL.Models;
 using SoundPlay.BLL.Interfaces;
 using SoundPlay.BLL.Services;
+using SoundPlay.BLL.ViewModels;
 
 namespace SoundPlay.WEB.Configuration
 {
@@ -18,14 +19,12 @@ namespace SoundPlay.WEB.Configuration
                 options.UseSqlServer(configuration.GetConnectionString("CatalogConnection")));
 
             #region Model CRUD services
-
             services.AddTransient<IUnitOfWork, UnitOfWork>();
-            services.AddTransient<IBrandService, BrandService>();
-            services.AddTransient<ICategoryService, CategoryService>();
-            services.AddTransient<IGuitarShapeService, GuitarShapeService>();
-            services.AddTransient<IMaterialService, MaterialService>();
-            services.AddTransient<ITremoloTypeService, TremoloTypeService>();
-
+            services.AddTransient<IItemService<BrandViewModel>, BrandService>();
+            services.AddTransient<IItemService<CategoryViewModel>, CategoryService>();
+            services.AddTransient<IItemService<GuitarShapeViewModel>, GuitarShapeService>();
+            services.AddTransient<IItemService<MaterialViewModel>, MaterialService>();
+            services.AddTransient<IItemService<TremoloTypeViewModel>, TremoloTypeService>();
             #endregion
         }
     }

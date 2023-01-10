@@ -8,7 +8,7 @@ using SoundPlay.DAL.Repository.Interfaces;
 
 namespace SoundPlay.BLL.Services
 {
-    public class MaterialService:IMaterialService
+    public class MaterialService : IItemService<MaterialViewModel>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
@@ -16,9 +16,9 @@ namespace SoundPlay.BLL.Services
 
         public MaterialService(IUnitOfWork unitOfWork, IMapper mapper, ILogger<MaterialService> logger)
         {
-            _unitOfWork=unitOfWork;
-            _mapper=mapper;
-            _logger=logger;
+            _unitOfWork = unitOfWork;
+            _mapper = mapper;
+            _logger = logger;
         }
 
         public async Task<MaterialViewModel> CreateViewModelAsync(MaterialViewModel viewModel)
@@ -61,12 +61,12 @@ namespace SoundPlay.BLL.Services
 
         public async Task<MaterialViewModel> GetViewModelByIdAsync(int id)
         {
-            var model = await _unitOfWork.Material.GetFirstOrDefaultAsync(b => b.Id==id);
+            var model = await _unitOfWork.Material.GetFirstOrDefaultAsync(b => b.Id == id);
 
-            if (model==null)
+            if (model is null)
             {
                 _logger.LogError("Get_by_id operation is failed");
-                throw new ObjectNotFoundException("No object found");
+                throw new ObjectNotFoundException("Object not found");
             }
 
             _logger.LogInformation("Get_by_id operation is successfull");
@@ -78,10 +78,10 @@ namespace SoundPlay.BLL.Services
         {
             var models = await _unitOfWork.Material.GetAllAsync();
 
-            if (models.Count()==0||models==null)
+            if (models.Count == 0 || models is null)
             {
                 _logger.LogError("Get_All operation is failed");
-                throw new ObjectNotFoundException("No object found");
+                throw new ObjectNotFoundException("Object not found");
             }
 
             _logger.LogInformation("Get_All operation is successfull");

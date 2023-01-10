@@ -22,7 +22,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Areas\Admin\Views\GuitarShape\" />
     <Folder Include="Areas\Admin\Views\Material\" />
     <Folder Include="Areas\Admin\Views\TremoloType\" />
   </ItemGroup>

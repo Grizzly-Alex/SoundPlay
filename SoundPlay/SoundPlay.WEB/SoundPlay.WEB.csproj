@@ -21,9 +21,4 @@
     <ProjectReference Include="..\SoundPlay.DAL\SoundPlay.DAL.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Areas\Admin\Views\Material\" />
-    <Folder Include="Areas\Admin\Views\TremoloType\" />
-  </ItemGroup>
-
 </Project>

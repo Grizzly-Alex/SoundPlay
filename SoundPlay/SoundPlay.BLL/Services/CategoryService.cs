@@ -61,7 +61,9 @@ namespace SoundPlay.BLL.Services
 
         public async Task<CategoryViewModel> GetViewModelByIdAsync(int id)
         {
-            var model = await _unitOfWork.Category.GetFirstOrDefaultAsync(b => b.Id == id);
+            var model = await _unitOfWork.Category.GetFirstOrDefaultAsync(
+                predicate: b => b.Id == id,
+                changeTrackerOn: false);
 
             if (model is null)
             {
@@ -78,7 +80,7 @@ namespace SoundPlay.BLL.Services
         {
             var models = await _unitOfWork.Category.GetAllAsync(changeTrackerOn: false);
 
-            if (models.Count == 0 || models is null)
+            if (models is null)
             {
                 _logger.LogError("Get_All operation is failed");
                 throw new ObjectNotFoundException("Object not found");

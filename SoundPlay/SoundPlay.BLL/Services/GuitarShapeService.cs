@@ -79,7 +79,7 @@ namespace SoundPlay.BLL.Services
         {
             var models = await _unitOfWork.GuitarShape.GetAllAsync(changeTrackerOn: false);
 
-            if (models.Count == 0 || models is null)
+            if (models is null)
             {
                 _logger.LogError("Get_All operation is failed");
                 throw new ObjectNotFoundException("Object not found");

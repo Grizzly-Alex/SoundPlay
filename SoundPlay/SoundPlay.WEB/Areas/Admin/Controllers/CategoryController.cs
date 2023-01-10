@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using SoundPlay.BLL.Services;
+using SoundPlay.BLL.Interfaces;
 using SoundPlay.BLL.ViewModels;
 
 namespace SoundPlay.WEB.Areas.Admin.Controllers
@@ -7,9 +7,9 @@ namespace SoundPlay.WEB.Areas.Admin.Controllers
     [Area("Admin")]
     public class CategoryController : Controller
     {
-        private readonly CategoryService _categoryService;
+        private readonly IItemGenericService<CategoryViewModel> _categoryService;
 
-        public CategoryController(CategoryService categoryService)
+        public CategoryController(IItemGenericService<CategoryViewModel> categoryService)
         {
             _categoryService = categoryService;
         }
@@ -28,25 +28,33 @@ namespace SoundPlay.WEB.Areas.Admin.Controllers
             return View();
         }
 
-        [HttpPut]
+        [HttpPost]
         public async Task<IActionResult> Create(CategoryViewModel obj)
-        {
-            var viewModel = await _categoryService.CreateViewModelAsync(obj);
-            return View(viewModel);
+        {    
+            if (ModelState.IsValid)
+            {
+				await _categoryService.CreateViewModelAsync(obj);
+				return RedirectToAction("Index");
+			}
+            return View(obj);
         }
 
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
-            var viewModel = await _categoryService.GetViewModelByIdAsync(id);
+			var viewModel = await _categoryService.GetViewModelByIdAsync(id);
             return View(viewModel);
         }
 
         [HttpPost]
         public async Task<IActionResult> Edit(CategoryViewModel obj)
         {
-            var viewModel = await _categoryService.UpdateViewModelAsync(obj);
-            return View(viewModel);
+            if (ModelState.IsValid)
+            {
+				await _categoryService.UpdateViewModelAsync(obj);
+				return RedirectToAction("Index");
+			}
+            return View(obj);
         }
 
 
@@ -57,11 +65,11 @@ namespace SoundPlay.WEB.Areas.Admin.Controllers
             return View(viewModel);
         }
 
-        [HttpDelete]
+        [HttpPost]
         public async Task<IActionResult> Delete(CategoryViewModel obj)
         {
-            var viewModel = await _categoryService.DeleteViewModelAsync(obj);
-            return View(viewModel);
-        }
+			await _categoryService.DeleteViewModelAsync(obj);
+			return RedirectToAction("Index");
+		}
     }
 }

@@ -8,7 +8,7 @@ namespace SoundPlay.BLL.ViewModels
         public int Id { get; set; }
 
         [Required]
-        [DisplayName("Material")]
+        [DisplayName("Tremolo type")]
         public string? Name { get; set; }
     }
 }

@@ -3,12 +3,12 @@ using System.ComponentModel;
 
 namespace SoundPlay.BLL.ViewModels
 {
-    public class MaterialViewModel
+    public sealed class PickupConfigurationViewModel
     {
         public int Id { get; set; }
 
         [Required]
-        [DisplayName("Material")]
+        [DisplayName("Pickup configuration")]
         public string? Name { get; set; }
     }
 }

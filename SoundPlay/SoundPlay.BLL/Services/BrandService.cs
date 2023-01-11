@@ -12,9 +12,9 @@ namespace SoundPlay.BLL.Services
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
-        private readonly ILogger<BrandService> _logger;
+        private readonly ILoggerAdapter<BrandService> _logger;
 
-        public BrandService(IUnitOfWork unitOfWork, IMapper mapper, ILogger<BrandService> logger)
+        public BrandService(IUnitOfWork unitOfWork, IMapper mapper, ILoggerAdapter<BrandService> logger)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
@@ -34,7 +34,7 @@ namespace SoundPlay.BLL.Services
 
             catch (Exception ex)
             {
-                _logger.LogError($"Create operation is failed, {ex.Message}");
+                _logger.LogError(ex,$"Create operation is failed!");
             }
 
             return viewModel;

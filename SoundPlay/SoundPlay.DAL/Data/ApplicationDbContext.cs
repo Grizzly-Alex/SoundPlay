@@ -11,10 +11,10 @@ namespace SoundPlay.DAL.Data
 		public DbSet<GuitarShape> GuitarShapes { get; set; }
 		public DbSet<Material> Materials { get; set; }
 		public DbSet<TremoloType> TremoloTypes { get; set; }
+        public DbSet<Color> Colors { get; set; }
+        public DbSet<PickupConfiguration> PickupConfigurations { get; set; }
 
-		public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
-		{
-		}
+		public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
 
 		protected override void OnModelCreating(ModelBuilder builder)
 		{
@@ -23,6 +23,8 @@ namespace SoundPlay.DAL.Data
 			builder.ApplyConfiguration(new GuitarShapeModelConfiguration());
 			builder.ApplyConfiguration(new MaterialModelConfiguration());
 			builder.ApplyConfiguration(new TremoloTypeModelConfiguration());
-		}
+            builder.ApplyConfiguration(new ColorModelConfiguration());
+            builder.ApplyConfiguration(new PickupConfigurationModelConfiguration());
+        }
 	}
 }

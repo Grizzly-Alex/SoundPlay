@@ -8,7 +8,7 @@ namespace SoundPlay.BLL.ViewModels
         public int Id { get; set; }
 
         [Required]
-        [DisplayName("GuitarShape")]
+        [DisplayName("Guitar shape")]
         public string? Name { get; set; }
     }
 }

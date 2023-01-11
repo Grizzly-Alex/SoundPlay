@@ -25,6 +25,9 @@ namespace SoundPlay.WEB.Configuration
             services.AddTransient<IItemGenericService<GuitarShapeViewModel>, GuitarShapeService>();
             services.AddTransient<IItemGenericService<MaterialViewModel>, MaterialService>();
             services.AddTransient<IItemGenericService<TremoloTypeViewModel>, TremoloTypeService>();
+            services.AddTransient<IItemGenericService<ColorViewModel>, ColorService>();
+            services.AddTransient<IItemGenericService<PickupConfigurationViewModel>, PickupConfigurationService>();
+
             #endregion
         }
     }

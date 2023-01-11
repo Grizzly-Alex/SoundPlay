@@ -5,19 +5,19 @@ using SoundPlay.BLL.ViewModels;
 namespace SoundPlay.WEB.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    public sealed class PickupConfigurationController:Controller
+    public sealed class PickupSetController:Controller
     {
-        private readonly IItemGenericService<PickupConfigurationViewModel> _pickupConfigurationService;
+        private readonly IItemGenericService<PickupSetViewModel> _pickupSetService;
 
-        public PickupConfigurationController(IItemGenericService<PickupConfigurationViewModel> pickupConfigurationService)
+        public PickupSetController(IItemGenericService<PickupSetViewModel> pickupSetService)
         {
-            _pickupConfigurationService = pickupConfigurationService;
+            _pickupSetService = pickupSetService;
         }
 
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            var viewModels = await _pickupConfigurationService.GetViewModelsAsync();
+            var viewModels = await _pickupSetService.GetViewModelsAsync();
             return View(viewModels);
         }
 
@@ -28,11 +28,11 @@ namespace SoundPlay.WEB.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(PickupConfigurationViewModel obj)
+        public async Task<IActionResult> Create(PickupSetViewModel obj)
         {
             if (ModelState.IsValid)
             {
-                await _pickupConfigurationService.CreateViewModelAsync(obj);
+                await _pickupSetService.CreateViewModelAsync(obj);
                 return RedirectToAction("Index");
             }
             return View(obj);
@@ -41,16 +41,16 @@ namespace SoundPlay.WEB.Areas.Admin.Controllers
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
-            var viewModel = await _pickupConfigurationService.GetViewModelByIdAsync(id);
+            var viewModel = await _pickupSetService.GetViewModelByIdAsync(id);
             return View(viewModel);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(PickupConfigurationViewModel obj)
+        public async Task<IActionResult> Edit(PickupSetViewModel obj)
         {
             if (ModelState.IsValid)
             {
-                await _pickupConfigurationService.UpdateViewModelAsync(obj);
+                await _pickupSetService.UpdateViewModelAsync(obj);
                 return RedirectToAction("Index");
             }
             return View(obj);
@@ -59,14 +59,14 @@ namespace SoundPlay.WEB.Areas.Admin.Controllers
         [HttpGet]
         public async Task<IActionResult> Delete(int id)
         {
-            var viewModel = await _pickupConfigurationService.GetViewModelByIdAsync(id);
+            var viewModel = await _pickupSetService.GetViewModelByIdAsync(id);
             return View(viewModel);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Delete(PickupConfigurationViewModel obj)
+        public async Task<IActionResult> Delete(PickupSetViewModel obj)
         {
-            await _pickupConfigurationService.DeleteViewModelAsync(obj);
+            await _pickupSetService.DeleteViewModelAsync(obj);
             return RedirectToAction("Index");
         }
     }

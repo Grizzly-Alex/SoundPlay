@@ -3,7 +3,7 @@ using System.ComponentModel;
 
 namespace SoundPlay.BLL.ViewModels
 {
-    public sealed class PickupConfigurationViewModel
+    public sealed class PickupSetViewModel
     {
         public int Id { get; set; }
 

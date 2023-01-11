@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using Microsoft.Extensions.Logging;
 using SoundPlay.BLL.Exceptions;
 using SoundPlay.BLL.Interfaces;
 using SoundPlay.BLL.ViewModels;
@@ -12,9 +11,9 @@ namespace SoundPlay.BLL.Services
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
-        private readonly ILogger<TremoloTypeService> _logger;
+        private readonly ILoggerAdapter<TremoloTypeService> _logger;
 
-        public TremoloTypeService(IUnitOfWork unitOfWork, IMapper mapper, ILogger<TremoloTypeService> logger)
+        public TremoloTypeService(IUnitOfWork unitOfWork, IMapper mapper, ILoggerAdapter<TremoloTypeService> logger)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
@@ -34,7 +33,7 @@ namespace SoundPlay.BLL.Services
 
             catch (Exception ex)
             {
-                _logger.LogError($"Create operation is failed, {ex.Message}");
+                _logger.LogError(ex, $"Create operation is failed, {ex.Message}");
             }
 
             return viewModel;
@@ -53,7 +52,7 @@ namespace SoundPlay.BLL.Services
 
             catch (Exception ex)
             {
-                _logger.LogInformation($"Delete operation is failed, {ex.Message}");
+                _logger.LogError(ex, $"Delete operation is failed, {ex.Message}");
             }
 
             return viewModel;
@@ -102,7 +101,7 @@ namespace SoundPlay.BLL.Services
 
             catch (Exception ex)
             {
-                _logger.LogError($"Update operation is failed, {ex.Message}");
+                _logger.LogError(ex, $"Update operation is failed, {ex.Message}");
             }
 
             return viewModel;

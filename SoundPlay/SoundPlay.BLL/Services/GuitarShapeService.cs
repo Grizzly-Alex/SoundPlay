@@ -1,6 +1,4 @@
 ﻿using AutoMapper;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
-using Microsoft.Extensions.Logging;
 using SoundPlay.BLL.Exceptions;
 using SoundPlay.BLL.Interfaces;
 using SoundPlay.BLL.ViewModels;
@@ -13,9 +11,9 @@ namespace SoundPlay.BLL.Services
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
-        private readonly ILogger<GuitarShapeService> _logger;
+        private readonly ILoggerAdapter<GuitarShapeService> _logger;
 
-        public GuitarShapeService(IUnitOfWork unitOfWork, IMapper mapper, ILogger<GuitarShapeService> logger)
+        public GuitarShapeService(IUnitOfWork unitOfWork, IMapper mapper, ILoggerAdapter<GuitarShapeService> logger)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
@@ -35,7 +33,7 @@ namespace SoundPlay.BLL.Services
 
             catch (Exception ex)
             {
-                _logger.LogError($"Create operation is failed, {ex.Message}");
+                _logger.LogError(ex, $"Create operation is failed, {ex.Message}");
             }
 
             return viewModel;
@@ -54,7 +52,7 @@ namespace SoundPlay.BLL.Services
 
             catch (Exception ex)
             {
-                _logger.LogInformation($"Delete operation is failed, {ex.Message}");
+                _logger.LogError(ex, $"Delete operation is failed, {ex.Message}");
             }
 
             return viewModel;
@@ -103,7 +101,7 @@ namespace SoundPlay.BLL.Services
 
             catch (Exception ex)
             {
-                _logger.LogError($"Update operation is failed, {ex.Message}");
+                _logger.LogError(ex, $"Update operation is failed, {ex.Message}");
             }
 
             return viewModel;

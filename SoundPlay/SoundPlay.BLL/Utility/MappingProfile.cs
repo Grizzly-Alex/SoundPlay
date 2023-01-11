@@ -2,9 +2,9 @@
 using SoundPlay.BLL.ViewModels;
 using SoundPlay.DAL.Models;
 
-namespace SoundPlay.BLL.Models
+namespace SoundPlay.BLL.Utility
 {
-    public class MappingProfile:Profile
+    public class MappingProfile : Profile
     {
         public MappingProfile()
         {
@@ -14,7 +14,7 @@ namespace SoundPlay.BLL.Models
             CreateMap<Material, MaterialViewModel>().ReverseMap();
             CreateMap<TremoloType, TremoloTypeViewModel>().ReverseMap();
             CreateMap<Color, ColorViewModel>().ReverseMap();
-            CreateMap<PickupConfiguration, PickupConfigurationViewModel>().ReverseMap();
+            CreateMap<PickupSet, PickupSetViewModel>().ReverseMap();
         }
     }
 }

@@ -8,7 +8,7 @@ using SoundPlay.DAL.Repository.Interfaces;
 
 namespace SoundPlay.BLL.Services
 {
-    public class CategoryService:ICategoryService
+    public class CategoryService : IItemGenericService<CategoryViewModel>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
@@ -16,9 +16,9 @@ namespace SoundPlay.BLL.Services
 
         public CategoryService(IUnitOfWork unitOfWork, IMapper mapper, ILogger<CategoryService> logger)
         {
-            _unitOfWork=unitOfWork;
-            _mapper=mapper;
-            _logger=logger;
+            _unitOfWork = unitOfWork;
+            _mapper = mapper;
+            _logger = logger;
         }
 
         public async Task<CategoryViewModel> CreateViewModelAsync(CategoryViewModel viewModel)
@@ -61,12 +61,14 @@ namespace SoundPlay.BLL.Services
 
         public async Task<CategoryViewModel> GetViewModelByIdAsync(int id)
         {
-            var model = await _unitOfWork.Category.GetFirstOrDefaultAsync(b => b.Id==id);
+            var model = await _unitOfWork.Category.GetFirstOrDefaultAsync(
+                predicate: b => b.Id == id,
+                changeTrackerOn: false);
 
-            if (model==null)
+            if (model is null)
             {
                 _logger.LogError("Get_by_id operation is failed");
-                throw new ObjectNotFoundException("No object found");
+                throw new ObjectNotFoundException("Object not found");
             }
 
             _logger.LogInformation("Get_by_id operation is successfull");
@@ -76,12 +78,12 @@ namespace SoundPlay.BLL.Services
 
         public async Task<IEnumerable<CategoryViewModel>> GetViewModelsAsync()
         {
-            var models = await _unitOfWork.Category.GetAllAsync();
+            var models = await _unitOfWork.Category.GetAllAsync(changeTrackerOn: false);
 
-            if (models.Count()==0||models==null)
+            if (models is null)
             {
                 _logger.LogError("Get_All operation is failed");
-                throw new ObjectNotFoundException("No object found");
+                throw new ObjectNotFoundException("Object not found");
             }
 
             _logger.LogInformation("Get_All operation is successfull");

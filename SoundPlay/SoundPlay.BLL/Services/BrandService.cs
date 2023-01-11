@@ -8,7 +8,7 @@ using SoundPlay.DAL.Repository.Interfaces;
 
 namespace SoundPlay.BLL.Services
 {
-    public class BrandService : IBrandService
+    public class BrandService : IItemGenericService<BrandViewModel>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
@@ -16,14 +16,14 @@ namespace SoundPlay.BLL.Services
 
         public BrandService(IUnitOfWork unitOfWork, IMapper mapper, ILogger<BrandService> logger)
         {
-            _unitOfWork=unitOfWork;
-            _mapper=mapper;
-            _logger=logger;
+            _unitOfWork = unitOfWork;
+            _mapper = mapper;
+            _logger = logger;
         }
 
         public async Task<BrandViewModel> CreateViewModelAsync(BrandViewModel viewModel)
         {
-            var model=_mapper.Map<Brand>(viewModel);
+            var model = _mapper.Map<Brand>(viewModel);
 
             try
             {
@@ -63,10 +63,10 @@ namespace SoundPlay.BLL.Services
         {
             var model = await _unitOfWork.Brand.GetFirstOrDefaultAsync(b=>b.Id==id);
             
-            if (model==null)
+            if (model is null)
             {
                 _logger.LogError("Get_by_id operation is failed");
-                throw new ObjectNotFoundException("No object found");
+                throw new ObjectNotFoundException("Object not found");
             }
 
             _logger.LogInformation("Get_by_id operation is successfull");
@@ -76,12 +76,12 @@ namespace SoundPlay.BLL.Services
 
         public async Task<IEnumerable<BrandViewModel>> GetViewModelsAsync()
         {
-            var models=await _unitOfWork.Brand.GetAllAsync();
+            var models = await _unitOfWork.Brand.GetAllAsync(changeTrackerOn: false);
 
-            if (models.Count()==0||models==null)
+            if (models is null)
             {
                 _logger.LogError("Get_All operation is failed");
-                throw new ObjectNotFoundException("No object found");
+                throw new ObjectNotFoundException("Object not found");
             }
 
             _logger.LogInformation("Get_All operation is successfull");

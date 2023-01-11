@@ -1,6 +1,6 @@
 ﻿namespace SoundPlay.BLL.Interfaces
 {
-    public interface IGenericService<TViewModel> where TViewModel : class
+    public interface IItemGenericService<TViewModel> where TViewModel : class
     {
         public Task<IEnumerable<TViewModel>> GetViewModelsAsync();
 

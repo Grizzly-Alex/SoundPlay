@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using Microsoft.Extensions.Logging;
 using SoundPlay.BLL.Exceptions;
 using SoundPlay.BLL.Interfaces;
 using SoundPlay.BLL.ViewModels;
@@ -34,7 +33,7 @@ namespace SoundPlay.BLL.Services
 
             catch (Exception ex)
             {
-                _logger.LogError(ex,$"Create operation is failed!");
+                _logger.LogError(ex, $"Create operation is failed, {ex.Message}");
             }
 
             return viewModel;
@@ -53,7 +52,7 @@ namespace SoundPlay.BLL.Services
 
             catch (Exception ex)
             {
-                _logger.LogInformation($"Delete operation is failed, {ex.Message}");
+                _logger.LogError(ex, $"Delete operation is failed, {ex.Message}");
             }
 
             return viewModel;
@@ -61,8 +60,8 @@ namespace SoundPlay.BLL.Services
 
         public async Task<BrandViewModel> GetViewModelByIdAsync(int id)
         {
-            var model = await _unitOfWork.Brand.GetFirstOrDefaultAsync(b=>b.Id==id);
-            
+            var model = await _unitOfWork.Brand.GetFirstOrDefaultAsync(b => b.Id == id);
+
             if (model is null)
             {
                 _logger.LogError("Get_by_id operation is failed");
@@ -70,7 +69,7 @@ namespace SoundPlay.BLL.Services
             }
 
             _logger.LogInformation("Get_by_id operation is successfull");
-            var viewModel=_mapper.Map<BrandViewModel>(model);
+            var viewModel = _mapper.Map<BrandViewModel>(model);
             return viewModel;
         }
 
@@ -102,7 +101,7 @@ namespace SoundPlay.BLL.Services
 
             catch (Exception ex)
             {
-                _logger.LogError($"Update operation is failed, {ex.Message}");
+                _logger.LogError(ex, $"Update operation is failed, {ex.Message}");
             }
 
             return viewModel;

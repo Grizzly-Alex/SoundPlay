@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using Microsoft.Extensions.Logging;
 using SoundPlay.BLL.Exceptions;
 using SoundPlay.BLL.Interfaces;
 using SoundPlay.BLL.ViewModels;
@@ -12,9 +11,9 @@ namespace SoundPlay.BLL.Services
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
-        private readonly ILogger<CategoryService> _logger;
+        private readonly ILoggerAdapter<CategoryService> _logger;
 
-        public CategoryService(IUnitOfWork unitOfWork, IMapper mapper, ILogger<CategoryService> logger)
+        public CategoryService(IUnitOfWork unitOfWork, IMapper mapper, ILoggerAdapter<CategoryService> logger)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
@@ -53,7 +52,7 @@ namespace SoundPlay.BLL.Services
 
             catch (Exception ex)
             {
-                _logger.LogInformation($"Delete operation is failed, {ex.Message}");
+                _logger.LogError(ex, $"Delete operation is failed, {ex.Message}");
             }
 
             return viewModel;
@@ -104,7 +103,7 @@ namespace SoundPlay.BLL.Services
 
             catch (Exception ex)
             {
-                _logger.LogError($"Update operation is failed, {ex.Message}");
+                _logger.LogError(ex, $"Update operation is failed, {ex.Message}");
             }
 
             return viewModel;

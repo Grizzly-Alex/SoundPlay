@@ -2,6 +2,7 @@ using SoundPlay.WEB.Configuration;
 
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Logging.ClearProviders();
 
 // Add services to the container.
 Dependencies.ConfigureServices(builder.Configuration, builder.Services);

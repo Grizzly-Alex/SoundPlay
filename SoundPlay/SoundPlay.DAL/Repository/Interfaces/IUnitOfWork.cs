@@ -10,7 +10,7 @@ namespace SoundPlay.DAL.Repository.Interfaces
         public IRepository<Material> Material { get; }
         public IRepository<TremoloType> TremoloType { get; }
         public IRepository<Color> Color { get; }
-        public IRepository<PickupConfiguration> PickupConfiguration { get; }
+        public IRepository<PickupSet> PickupSet { get; }
 
         public Task SaveChangesAsync();
 	}

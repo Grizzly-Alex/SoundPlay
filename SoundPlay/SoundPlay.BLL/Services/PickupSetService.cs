@@ -7,26 +7,26 @@ using SoundPlay.DAL.Repository.Interfaces;
 
 namespace SoundPlay.BLL.Services
 {
-    public sealed class PickupConfigurationService:IItemGenericService<PickupConfigurationViewModel>
+    public sealed class PickupSetService:IItemGenericService<PickupSetViewModel>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
-        private readonly ILoggerAdapter<PickupConfigurationService> _logger;
+        private readonly ILoggerAdapter<PickupSetService> _logger;
 
-        public PickupConfigurationService(IUnitOfWork unitOfWork, IMapper mapper, ILoggerAdapter<PickupConfigurationService> logger)
+        public PickupSetService(IUnitOfWork unitOfWork, IMapper mapper, ILoggerAdapter<PickupSetService> logger)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
             _logger = logger;
         }
 
-        public async Task<PickupConfigurationViewModel> CreateViewModelAsync(PickupConfigurationViewModel viewModel)
+        public async Task<PickupSetViewModel> CreateViewModelAsync(PickupSetViewModel viewModel)
         {
-            var model = _mapper.Map<PickupConfiguration>(viewModel);
+            var model = _mapper.Map<PickupSet>(viewModel);
 
             try
             {
-                _unitOfWork.PickupConfiguration.Add(model);
+                _unitOfWork.PickupSet.Add(model);
                 await _unitOfWork.SaveChangesAsync();
                 _logger.LogInformation("Create operation is successfull");
             }
@@ -39,13 +39,13 @@ namespace SoundPlay.BLL.Services
             return viewModel;
         }
 
-        public async Task<PickupConfigurationViewModel> DeleteViewModelAsync(PickupConfigurationViewModel viewModel)
+        public async Task<PickupSetViewModel> DeleteViewModelAsync(PickupSetViewModel viewModel)
         {
-            var model = _mapper.Map<PickupConfiguration>(viewModel);
+            var model = _mapper.Map<PickupSet>(viewModel);
 
             try
             {
-                _unitOfWork.PickupConfiguration.Remove(model);
+                _unitOfWork.PickupSet.Remove(model);
                 await _unitOfWork.SaveChangesAsync();
                 _logger.LogInformation("Delete operation is successfull");
             }
@@ -58,9 +58,9 @@ namespace SoundPlay.BLL.Services
             return viewModel;
         }
 
-        public async Task<PickupConfigurationViewModel> GetViewModelByIdAsync(int id)
+        public async Task<PickupSetViewModel> GetViewModelByIdAsync(int id)
         {
-            var model = await _unitOfWork.PickupConfiguration.GetFirstOrDefaultAsync(b => b.Id==id);
+            var model = await _unitOfWork.PickupSet.GetFirstOrDefaultAsync(b => b.Id==id);
 
             if (model is null)
             {
@@ -69,13 +69,13 @@ namespace SoundPlay.BLL.Services
             }
 
             _logger.LogInformation("Get_by_id operation is successfull");
-            var viewModel = _mapper.Map<PickupConfigurationViewModel>(model);
+            var viewModel = _mapper.Map<PickupSetViewModel>(model);
             return viewModel;
         }
 
-        public async Task<IEnumerable<PickupConfigurationViewModel>> GetViewModelsAsync()
+        public async Task<IEnumerable<PickupSetViewModel>> GetViewModelsAsync()
         {
-            var models = await _unitOfWork.PickupConfiguration.GetAllAsync(changeTrackerOn: false);
+            var models = await _unitOfWork.PickupSet.GetAllAsync(changeTrackerOn: false);
 
             if (models is null)
             {
@@ -84,17 +84,17 @@ namespace SoundPlay.BLL.Services
             }
 
             _logger.LogInformation("Get_All operation is successfull");
-            var viewModels = _mapper.Map<IEnumerable<PickupConfigurationViewModel>>(models);
+            var viewModels = _mapper.Map<IEnumerable<PickupSetViewModel>>(models);
             return viewModels;
         }
 
-        public async Task<PickupConfigurationViewModel> UpdateViewModelAsync(PickupConfigurationViewModel viewModel)
+        public async Task<PickupSetViewModel> UpdateViewModelAsync(PickupSetViewModel viewModel)
         {
-            var model = _mapper.Map<PickupConfiguration>(viewModel);
+            var model = _mapper.Map<PickupSet>(viewModel);
 
             try
             {
-                _unitOfWork.PickupConfiguration.Update(model);
+                _unitOfWork.PickupSet.Update(model);
                 await _unitOfWork.SaveChangesAsync();
                 _logger.LogInformation("Update operation is successfull");
             }

@@ -1,9 +1,9 @@
-﻿@model PickupConfigurationViewModel
+﻿@model PickupSetViewModel
 
 <form method="post" asp-action="Delete">
 	<div class="border p-3 mt-4">
 		<div class="row pb-2">
-			<h2 class="text-primary">Delete Pickup configuration</h2>
+			<h2 class="text-primary">Delete Pickup Set</h2>
 			<hr />
 		</div>
 		<div class="mb-3">
@@ -11,7 +11,7 @@
 			<input asp-for="Name" disabled class="form-control">
 		</div>
 		<button type="submit" class="btn btn-danger" style="width:150px">Delete</button>
-		<a asp-controller="PickupConfiguration" asp-action="index" class="btn btn-secondary" style="width:150px">
+		<a asp-controller="PickupSet" asp-action="index" class="btn btn-secondary" style="width:150px">
 			Back to List
 		</a>
 	</div>

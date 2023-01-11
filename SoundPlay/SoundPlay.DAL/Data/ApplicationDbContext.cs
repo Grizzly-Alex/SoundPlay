@@ -12,7 +12,7 @@ namespace SoundPlay.DAL.Data
 		public DbSet<Material> Materials { get; set; }
 		public DbSet<TremoloType> TremoloTypes { get; set; }
         public DbSet<Color> Colors { get; set; }
-        public DbSet<PickupConfiguration> PickupConfigurations { get; set; }
+        public DbSet<PickupSet> PickupSets { get; set; }
 
 		public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
 
@@ -24,7 +24,7 @@ namespace SoundPlay.DAL.Data
 			builder.ApplyConfiguration(new MaterialModelConfiguration());
 			builder.ApplyConfiguration(new TremoloTypeModelConfiguration());
             builder.ApplyConfiguration(new ColorModelConfiguration());
-            builder.ApplyConfiguration(new PickupConfigurationModelConfiguration());
+            builder.ApplyConfiguration(new PickupSetModelConfiguration());
         }
 	}
 }

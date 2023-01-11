@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SoundPlay.DAL.Data;
 
@@ -10,9 +11,11 @@ using SoundPlay.DAL.Data;
 namespace SoundPlay.DAL.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230111200012_AddColorAndPickupSetToDB")]
+    partial class AddColorAndPickupSetToDB
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -126,19 +129,19 @@ namespace SoundPlay.DAL.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasColumnName("PickupSetId");
+                        .HasColumnName("PickupConfigurationId");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)")
-                        .HasColumnName("PickupSetName");
+                        .HasColumnName("PickupConfigurationName");
 
                     b.HasKey("Id")
-                        .HasName("PickupSetId");
+                        .HasName("PickupConfigurationId");
 
-                    b.ToTable("PickupSets", (string)null);
+                    b.ToTable("PickupConfigurations", (string)null);
                 });
 
             modelBuilder.Entity("SoundPlay.DAL.Models.TremoloType", b =>

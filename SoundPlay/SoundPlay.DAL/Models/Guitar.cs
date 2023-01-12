@@ -16,6 +16,5 @@
         public PickupSet PickupSet { get; set; }
         public int TremoloTypeId { get; set; }
         public TremoloType TremoloType { get; set; }
-
     }
 }

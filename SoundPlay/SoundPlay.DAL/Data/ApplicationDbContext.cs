@@ -26,7 +26,7 @@ namespace SoundPlay.DAL.Data
 			builder.ApplyConfiguration(new TremoloTypeModelConfiguration());
             builder.ApplyConfiguration(new ColorModelConfiguration());
             builder.ApplyConfiguration(new PickupSetModelConfiguration());
-			builder.ApplyConfiguration(new GuitarShapeModelConfiguration());	
+			builder.ApplyConfiguration(new GuitarModelConfiguration());	
         }
 	}
 }

@@ -4,7 +4,7 @@ using SoundPlay.DAL.Models;
 
 namespace SoundPlay.DAL.Data.ModelConfigurations
 {
-    internal class PickupSetModelConfiguration : IEntityTypeConfiguration<PickupSet>
+    internal sealed class PickupSetModelConfiguration : IEntityTypeConfiguration<PickupSet>
     {
         public void Configure(EntityTypeBuilder<PickupSet> builder)
         {

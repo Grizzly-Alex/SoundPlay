@@ -4,7 +4,7 @@ using SoundPlay.DAL.Models;
 
 namespace SoundPlay.DAL.Data.ModelConfigurations
 {
-	internal class BrandModelConfiguration : IEntityTypeConfiguration<Brand>
+	internal sealed class BrandModelConfiguration : IEntityTypeConfiguration<Brand>
 	{
 		public void Configure(EntityTypeBuilder<Brand> builder)
 		{

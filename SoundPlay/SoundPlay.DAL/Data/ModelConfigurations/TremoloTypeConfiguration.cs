@@ -4,7 +4,7 @@ using SoundPlay.DAL.Models;
 
 namespace SoundPlay.DAL.Data.ModelConfigurations
 {
-	internal class TremoloTypeModelConfiguration : IEntityTypeConfiguration<TremoloType>
+	internal sealed class TremoloTypeModelConfiguration : IEntityTypeConfiguration<TremoloType>
 	{
 		public void Configure(EntityTypeBuilder<TremoloType> builder)
 		{

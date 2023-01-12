@@ -4,7 +4,7 @@ using SoundPlay.DAL.Models;
 
 namespace SoundPlay.DAL.Data.ModelConfigurations
 {
-	internal class CategoryModelConfiguration : IEntityTypeConfiguration<Category>
+	internal sealed class CategoryModelConfiguration : IEntityTypeConfiguration<Category>
 	{
 		public void Configure(EntityTypeBuilder<Category> builder)
 		{

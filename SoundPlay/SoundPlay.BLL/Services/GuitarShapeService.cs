@@ -7,7 +7,7 @@ using SoundPlay.DAL.Repository.Interfaces;
 
 namespace SoundPlay.BLL.Services
 {
-    public class GuitarShapeService : IItemGenericService<GuitarShapeViewModel>
+    public sealed class GuitarShapeService : IItemGenericService<GuitarShapeViewModel>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;

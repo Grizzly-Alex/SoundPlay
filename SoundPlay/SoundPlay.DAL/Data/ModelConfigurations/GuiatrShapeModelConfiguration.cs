@@ -4,7 +4,7 @@ using SoundPlay.DAL.Models;
 
 namespace SoundPlay.DAL.Data.ModelConfigurations
 {
-	internal class GuitarShapeModelConfiguration : IEntityTypeConfiguration<GuitarShape>
+	internal sealed class GuitarShapeModelConfiguration : IEntityTypeConfiguration<GuitarShape>
 	{
 		public void Configure(EntityTypeBuilder<GuitarShape> builder)
 		{

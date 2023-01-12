@@ -8,7 +8,7 @@ namespace SoundPlay.BLL.ViewModels
         public int Id { get; set; }
 
         [Required]
-        [DisplayName("Pickup configuration")]
+        [DisplayName("Pickup set")]
         public string? Name { get; set; }
     }
 }

@@ -7,7 +7,7 @@ using SoundPlay.DAL.Repository.Interfaces;
 
 namespace SoundPlay.BLL.Services
 {
-    public class CategoryService : IItemGenericService<CategoryViewModel>
+    public sealed class CategoryService : IItemGenericService<CategoryViewModel>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;

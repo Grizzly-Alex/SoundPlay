@@ -4,7 +4,7 @@ using SoundPlay.DAL.Models;
 
 namespace SoundPlay.DAL.Data.ModelConfigurations
 {
-	internal class MaterialModelConfiguration : IEntityTypeConfiguration<Material>
+	internal sealed class MaterialModelConfiguration : IEntityTypeConfiguration<Material>
 	{
 		public void Configure(EntityTypeBuilder<Material> builder)
 		{

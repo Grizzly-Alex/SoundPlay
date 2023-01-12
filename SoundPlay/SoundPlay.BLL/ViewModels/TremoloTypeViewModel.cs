@@ -3,7 +3,7 @@ using System.ComponentModel;
 
 namespace SoundPlay.BLL.ViewModels
 {
-    public class TremoloTypeViewModel
+    public sealed class TremoloTypeViewModel
     {
         public int Id { get; set; }
 

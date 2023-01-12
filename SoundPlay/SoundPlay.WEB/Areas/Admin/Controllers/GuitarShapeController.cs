@@ -5,7 +5,7 @@ using SoundPlay.BLL.ViewModels;
 namespace SoundPlay.WEB.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    public class GuitarShapeController : Controller
+    public sealed class GuitarShapeController : Controller
     {
         private readonly IItemGenericService<GuitarShapeViewModel> _guitarShapeService;
 

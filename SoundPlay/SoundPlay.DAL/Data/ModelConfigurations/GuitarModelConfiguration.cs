@@ -23,12 +23,12 @@ namespace SoundPlay.DAL.Data.ModelConfigurations
 
 			builder.Property(p => p.FrestCount)
 				.HasColumnName("FreastCount")
-				.HasColumnType("int")
+				.HasColumnType("integer(24) unsigned")
 				.IsRequired();
 
             builder.Property(p => p.StringsCount)
                 .HasColumnName("StringsCount")
-                .HasColumnType("int")
+                .HasColumnType("integer(12) unsigned")
                 .IsRequired();
 
             builder.Property(p => p.Description)
@@ -48,39 +48,48 @@ namespace SoundPlay.DAL.Data.ModelConfigurations
 
 			builder.Property(p => p.Category)
 				.HasColumnName("CategoryId")
+				.HasColumnType("int")
                 .IsRequired();
 
             builder.Property(p => p.Brand)
 				.HasColumnName("BrandId")
+                .HasColumnType("int")
                 .IsRequired();
 
             builder.Property(p => p.Color)
                 .HasColumnName("ColorId")
+                .HasColumnType("int")
                 .IsRequired();
 
             builder.Property(p => p.Shape)
 				.HasColumnName("ShapeId")
+                .HasColumnType("int")
                 .IsRequired(false);
 
             builder.Property(p => p.Soundboard)
 				.HasColumnName("SoundboardMaterialId")
+                .HasColumnType("int")
                 .IsRequired(false);
 
             builder.Property(p => p.Neck)
 				.HasColumnName("NeckMaterialId")
+                .HasColumnType("int")
                 .IsRequired(false);
 
             builder.Property(p => p.Fretboard)
 				.HasColumnName("FretboardMaterialId")
+                .HasColumnType("int")
                 .IsRequired(false);
 
 			builder.Property(p => p.PickupSet)
 				.HasColumnName("PickupSetId")
-				.IsRequired(false);
+                .HasColumnType("int")
+                .IsRequired(false);
 
             builder.Property(p => p.TremoloType)
 				.HasColumnName("TremoloTypeId")
-				.IsRequired(false);
+                .HasColumnType("int")
+                .IsRequired(false);
 
             builder.Property(p => p.DateDelivery)
 				.HasColumnName("DateDelivery")

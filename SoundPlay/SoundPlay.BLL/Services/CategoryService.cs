@@ -61,7 +61,7 @@ namespace SoundPlay.BLL.Services
         public async Task<CategoryViewModel> GetViewModelByIdAsync(int id)
         {
             var model = await _unitOfWork.Category.GetFirstOrDefaultAsync(
-                predicate: b => b.Id == id,
+                predicate: i => i.Id == id,
                 changeTrackerOn: false);
 
             if (model is null)

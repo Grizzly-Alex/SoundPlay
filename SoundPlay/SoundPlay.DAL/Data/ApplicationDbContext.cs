@@ -15,5 +15,5 @@ namespace SoundPlay.DAL.Data
         public DbSet<Guitar> Guitars { get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
-	}
+    }
 }

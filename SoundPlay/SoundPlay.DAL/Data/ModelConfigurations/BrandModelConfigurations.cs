@@ -4,13 +4,13 @@ using SoundPlay.DAL.Models;
 
 namespace SoundPlay.DAL.Data.ModelConfigurations
 {
-    internal sealed class MaterialModelConfiguration : IEntityTypeConfiguration<Material>
+    internal sealed class BrandModelConfiguration : IEntityTypeConfiguration<Brand>
     {
-        public void Configure(EntityTypeBuilder<Material> builder)
+        public void Configure(EntityTypeBuilder<Brand> builder)
         {
-            builder.ToTable("Materials")
+            builder.ToTable("Brands")
                 .HasKey(p => p.Id)
-                .HasName("MaterialId");
+                .HasName("BrandId");
 
             builder.Property(p => p.Id)
                 .HasColumnName("Id");

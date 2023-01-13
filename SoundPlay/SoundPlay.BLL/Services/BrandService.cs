@@ -7,7 +7,7 @@ using SoundPlay.DAL.Repository.Interfaces;
 
 namespace SoundPlay.BLL.Services
 {
-    public class BrandService : IItemGenericService<BrandViewModel>
+    public sealed class BrandService : IItemGenericService<BrandViewModel>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
@@ -60,7 +60,9 @@ namespace SoundPlay.BLL.Services
 
         public async Task<BrandViewModel> GetViewModelByIdAsync(int id)
         {
-            var model = await _unitOfWork.Brand.GetFirstOrDefaultAsync(b => b.Id == id);
+            var model = await _unitOfWork.Category.GetFirstOrDefaultAsync(
+                predicate: i => i.Id == id,
+                changeTrackerOn: false);
 
             if (model is null)
             {

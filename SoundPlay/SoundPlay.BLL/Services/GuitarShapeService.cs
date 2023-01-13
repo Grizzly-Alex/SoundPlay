@@ -7,7 +7,7 @@ using SoundPlay.DAL.Repository.Interfaces;
 
 namespace SoundPlay.BLL.Services
 {
-    public class GuitarShapeService : IItemGenericService<GuitarShapeViewModel>
+    public sealed class GuitarShapeService : IItemGenericService<GuitarShapeViewModel>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
@@ -60,7 +60,9 @@ namespace SoundPlay.BLL.Services
 
         public async Task<GuitarShapeViewModel> GetViewModelByIdAsync(int id)
         {
-            var model = await _unitOfWork.GuitarShape.GetFirstOrDefaultAsync(b => b.Id == id);
+            var model = await _unitOfWork.Category.GetFirstOrDefaultAsync(
+                predicate: i => i.Id == id,
+                changeTrackerOn: false);
 
             if (model is null)
             {

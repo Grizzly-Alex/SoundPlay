@@ -4,7 +4,7 @@ using SoundPlay.DAL.Models;
 
 namespace SoundPlay.BLL.Utility
 {
-    public class MappingProfile : Profile
+    public sealed class MappingProfile : Profile
     {
         public MappingProfile()
         {

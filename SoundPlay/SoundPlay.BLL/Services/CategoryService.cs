@@ -7,7 +7,7 @@ using SoundPlay.DAL.Repository.Interfaces;
 
 namespace SoundPlay.BLL.Services
 {
-    public class CategoryService : IItemGenericService<CategoryViewModel>
+    public sealed class CategoryService : IItemGenericService<CategoryViewModel>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
@@ -61,7 +61,7 @@ namespace SoundPlay.BLL.Services
         public async Task<CategoryViewModel> GetViewModelByIdAsync(int id)
         {
             var model = await _unitOfWork.Category.GetFirstOrDefaultAsync(
-                predicate: b => b.Id == id,
+                predicate: i => i.Id == id,
                 changeTrackerOn: false);
 
             if (model is null)

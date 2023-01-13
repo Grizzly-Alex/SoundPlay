@@ -1,10 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
+﻿
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore;
 using SoundPlay.DAL.Models;
 
 namespace SoundPlay.DAL.Data.ModelConfigurations
 {
-    internal class ColorModelConfiguration:IEntityTypeConfiguration<Color>
+    internal sealed class ColorModelConfiguration : IEntityTypeConfiguration<Color>
     {
         public void Configure(EntityTypeBuilder<Color> builder)
         {
@@ -13,10 +14,11 @@ namespace SoundPlay.DAL.Data.ModelConfigurations
                 .HasName("ColorId");
 
             builder.Property(p => p.Id)
-                .HasColumnName("ColorId");
+                .HasColumnName("Id");
 
             builder.Property(p => p.Name)
-                .HasColumnName("ColorName")
+                .HasColumnName("Name")
+                .HasColumnType("varchar(max)")
                 .IsRequired();
         }
     }

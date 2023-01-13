@@ -4,7 +4,7 @@ using SoundPlay.DAL.Models;
 
 namespace SoundPlay.DAL.Data.ModelConfigurations
 {
-    internal class PickupSetModelConfiguration : IEntityTypeConfiguration<PickupSet>
+    internal sealed class PickupSetModelConfiguration : IEntityTypeConfiguration<PickupSet>
     {
         public void Configure(EntityTypeBuilder<PickupSet> builder)
         {
@@ -13,10 +13,11 @@ namespace SoundPlay.DAL.Data.ModelConfigurations
                 .HasName("PickupSetId");
 
             builder.Property(p => p.Id)
-                .HasColumnName("PickupSetId");
+                .HasColumnName("Id");
 
             builder.Property(p => p.Name)
-                .HasColumnName("PickupSetName")
+                .HasColumnName("Name")
+                .HasColumnType("varchar(max)")
                 .IsRequired();
         }
     }

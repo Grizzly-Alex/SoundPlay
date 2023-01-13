@@ -4,13 +4,13 @@ using SoundPlay.DAL.Models;
 
 namespace SoundPlay.DAL.Data.ModelConfigurations
 {
-    internal sealed class MaterialModelConfiguration : IEntityTypeConfiguration<Material>
+    internal sealed class TremoloTypeModelConfiguration : IEntityTypeConfiguration<TremoloType>
     {
-        public void Configure(EntityTypeBuilder<Material> builder)
+        public void Configure(EntityTypeBuilder<TremoloType> builder)
         {
-            builder.ToTable("Materials")
+            builder.ToTable("TremoloTypes")
                 .HasKey(p => p.Id)
-                .HasName("MaterialId");
+                .HasName("TremoloId");
 
             builder.Property(p => p.Id)
                 .HasColumnName("Id");

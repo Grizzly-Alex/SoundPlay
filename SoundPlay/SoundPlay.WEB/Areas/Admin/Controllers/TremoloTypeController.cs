@@ -5,7 +5,7 @@ using SoundPlay.BLL.ViewModels;
 namespace SoundPlay.WEB.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    public class TremoloTypeController : Controller
+    public sealed class TremoloTypeController : Controller
     {
         private readonly IItemGenericService<TremoloTypeViewModel> _tremoloTypeService;
 

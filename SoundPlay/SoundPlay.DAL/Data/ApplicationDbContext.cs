@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using SoundPlay.DAL.Data.ModelConfigurations;
 using SoundPlay.DAL.Models;
 
 namespace SoundPlay.DAL.Data
@@ -13,18 +12,8 @@ namespace SoundPlay.DAL.Data
 		public DbSet<TremoloType> TremoloTypes { get; set; }
         public DbSet<Color> Colors { get; set; }
         public DbSet<PickupSet> PickupSets { get; set; }
+        public DbSet<Guitar> Guitars { get; set; }
 
-		public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
-
-		protected override void OnModelCreating(ModelBuilder builder)
-		{
-			builder.ApplyConfiguration(new CategoryModelConfiguration());
-			builder.ApplyConfiguration(new BrandModelConfiguration());
-			builder.ApplyConfiguration(new GuitarShapeModelConfiguration());
-			builder.ApplyConfiguration(new MaterialModelConfiguration());
-			builder.ApplyConfiguration(new TremoloTypeModelConfiguration());
-            builder.ApplyConfiguration(new ColorModelConfiguration());
-            builder.ApplyConfiguration(new PickupSetModelConfiguration());
-        }
-	}
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
+    }
 }

@@ -7,7 +7,7 @@ using SoundPlay.DAL.Repository.Interfaces;
 
 namespace SoundPlay.BLL.Services
 {
-    public class TremoloTypeService : IItemGenericService<TremoloTypeViewModel>
+    public sealed class TremoloTypeService : IItemGenericService<TremoloTypeViewModel>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
@@ -60,7 +60,9 @@ namespace SoundPlay.BLL.Services
 
         public async Task<TremoloTypeViewModel> GetViewModelByIdAsync(int id)
         {
-            var model = await _unitOfWork.TremoloType.GetFirstOrDefaultAsync(b => b.Id == id);
+            var model = await _unitOfWork.Category.GetFirstOrDefaultAsync(
+                predicate: i => i.Id == id,
+                changeTrackerOn: false);
 
             if (model is null)
             {

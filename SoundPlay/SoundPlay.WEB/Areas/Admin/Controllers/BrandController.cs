@@ -5,7 +5,7 @@ using SoundPlay.BLL.ViewModels;
 namespace SoundPlay.WEB.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    public class BrandController : Controller
+    public sealed class BrandController : Controller
     {
         private readonly IItemGenericService<BrandViewModel> _brandService;
 

@@ -15,6 +15,7 @@ namespace SoundPlay.DAL.Repository
 		public IRepository<TremoloType> TremoloType { get; }
         public IRepository<Color> Color { get; }
         public IRepository<PickupSet> PickupSet { get; }        
+		public IRepository<Guitar> Guitar { get; }
 
 		public UnitOfWork(ApplicationDbContext db)
 		{
@@ -25,7 +26,8 @@ namespace SoundPlay.DAL.Repository
 			Material = new Repository<Material>(_db);
 			TremoloType = new Repository<TremoloType>(_db);
 			Color = new Repository<Color>(_db);
-			PickupSet= new Repository<PickupSet>(_db);
+			PickupSet = new Repository<PickupSet>(_db);
+			Guitar = new Repository<Guitar>(_db);
 		}
 
 		public async Task SaveChangesAsync() => await _db.SaveChangesAsync();

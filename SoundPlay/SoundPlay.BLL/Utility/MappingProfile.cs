@@ -15,6 +15,7 @@ namespace SoundPlay.BLL.Utility
             CreateMap<TremoloType, TremoloTypeViewModel>().ReverseMap();
             CreateMap<Color, ColorViewModel>().ReverseMap();
             CreateMap<PickupSet, PickupSetViewModel>().ReverseMap();
+            CreateMap<Guitar, GuitarViewModel>().ReverseMap();
         }
     }
 }

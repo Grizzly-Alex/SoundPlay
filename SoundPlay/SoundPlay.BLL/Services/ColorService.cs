@@ -60,7 +60,7 @@ namespace SoundPlay.BLL.Services
 
         public async Task<ColorViewModel> GetViewModelByIdAsync(int id)
         {
-            var model = await _unitOfWork.Category.GetFirstOrDefaultAsync(
+            var model = await _unitOfWork.Color.GetFirstOrDefaultAsync(
                 predicate: i => i.Id == id,
                 changeTrackerOn: false);
 

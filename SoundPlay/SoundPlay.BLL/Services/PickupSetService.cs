@@ -60,7 +60,7 @@ namespace SoundPlay.BLL.Services
 
         public async Task<PickupSetViewModel> GetViewModelByIdAsync(int id)
         {
-            var model = await _unitOfWork.Category.GetFirstOrDefaultAsync(
+            var model = await _unitOfWork.PickupSet.GetFirstOrDefaultAsync(
                 predicate: i => i.Id == id,
                 changeTrackerOn: false);
 

@@ -32,8 +32,20 @@
                 <li><a href="#" class="nav-link px-2 link-dark">Service</a></li>
             </ul>
 
+            @*space for basket, wishlist, customer center *@
             <div class="col-md-3 text-end">
-                @*space for basket, wishlist, customer center *@
+                @*User*@
+                <button type="submit" class="btn btn-link">
+                    <i class="bi bi-person-circle" style="font-size: 1.5rem; color: gray;"></i>
+                </button>  
+                @*Basket*@
+                <button type="submit" class="btn btn-link position-relative">
+                    <i class="bi bi-bag-check" style="font-size: 1.5rem; color: gray;"></i>
+                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                        @*Product count*@99+
+                        <span class="visually-hidden">unread messages</span>
+                    </span>
+                </button>
             </div>
 
         </header>
@@ -125,8 +137,10 @@
             <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
 
+        @*offcanvass body*@
         <div class="offcanvas-body">
 
+            @*offcanvass bookmarks*@
             <nav>
                 <div class="nav nav-tabs" id="nav-tab" role="tablist">
                     <button class="nav-link active" id="nav-storage-tab" data-bs-toggle="tab" data-bs-target="#nav-storage" type="button" role="tab" aria-controls="nav-storage" aria-selected="true">
@@ -141,6 +155,7 @@
                 </div>
             </nav>
 
+            @*bookmarks links*@
             <div class="tab-content" id="nav-tabContent">
                 <div class="tab-pane fade show active" id="nav-storage" role="tabpanel" aria-labelledby="nav-storage-tab" tabindex="0">
 
@@ -184,6 +199,11 @@
 
                 <div class="tab-pane fade" id="nav-shopper" role="tabpanel" aria-labelledby="nav-shopper-tab" tabindex="0">
 
+                    <ul class="navbar-nav justify-content-start flex-grow-1 pe-3 ">
+                        <li class="nav-item">
+                            @*Other Link*@
+                        </li>
+                    </ul>
 
                 </div>
 

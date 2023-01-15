@@ -58,18 +58,12 @@ namespace SoundPlay.WEB.Areas.Admin.Controllers
         }
 
 
-        [HttpGet]
+        [HttpPost]
         public async Task<IActionResult> Delete(int id)
         {
             var viewModel = await _brandService.GetViewModelByIdAsync(id);
-            return View(viewModel);
+            await _brandService.DeleteViewModelAsync(viewModel);
+            return RedirectToAction("Index");
         }
-
-        [HttpPost]
-        public async Task<IActionResult> Delete(BrandViewModel obj)
-        {
-			await _brandService.DeleteViewModelAsync(obj);
-			return RedirectToAction("Index");
-		}
     }
 }

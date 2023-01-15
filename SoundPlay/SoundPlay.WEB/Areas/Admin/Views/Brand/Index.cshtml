@@ -58,12 +58,13 @@ else
                     </td>
                     <td align="left">
                         <div class="btn-group" role="group" aria-label="Basic outlined example">
-                            <a asp-controller="Brand" asp-action="Edit" asp-route-id="@obj.Id"
-                                class="btn btn-outline-primary"> <i class="bi bi-pencil-square"></i>                   
+                            <a asp-controller="Brand" asp-action="Edit" asp-route-id="@obj.Id" class="btn btn-outline-primary"> 
+                                <i class="bi bi-pencil-square"></i>                   
                             </a>
-                            <a asp-controller="Brand" asp-action="Delete" asp-route-id="@obj.Id"
-                                class="btn btn-outline-primary"> <i class="bi bi-trash"></i>                         
-                            </a>
+
+                            <form method="post" asp-controller="Brand" asp-action="Delete" asp-route-id="@obj.Id">
+                                <input type="submit" class="btn btn-danger w-100" value="Delete" />
+                            </form>              
                         </div>
                     </td>
                 </tr>

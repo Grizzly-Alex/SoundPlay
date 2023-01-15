@@ -60,7 +60,7 @@ namespace SoundPlay.BLL.Services
 
         public async Task<GuitarShapeViewModel> GetViewModelByIdAsync(int id)
         {
-            var model = await _unitOfWork.Category.GetFirstOrDefaultAsync(
+            var model = await _unitOfWork.GuitarShape.GetFirstOrDefaultAsync(
                 predicate: i => i.Id == id,
                 changeTrackerOn: false);
 

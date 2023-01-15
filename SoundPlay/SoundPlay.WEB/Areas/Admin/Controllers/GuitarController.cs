@@ -9,32 +9,33 @@ using SoundPlay.BLL.ViewModels;
 namespace SoundPlay.WEB.Areas.Admin.Controllers
 {
     //[Authorize]
-    public class GuitarController : Controller
+    public sealed class GuitarController : Controller
     {
         private readonly ILoggerAdapter<GuitarService>? _logger;
         private readonly IItemGenericService<GuitarViewModel>? _guitars;
+        private readonly IItemGenericService<BrandViewModel>? _brands;
+        private readonly IItemGenericService<CategoryViewModel>? _categories;
+        private readonly IItemGenericService<ColorViewModel>? _colors;
+        private readonly IItemGenericService<GuitarShapeViewModel>? _guitarShapes;
+        private readonly IItemGenericService<MaterialViewModel>? _soundBoards;
+        private readonly IItemGenericService<MaterialViewModel>? _necks;
+        private readonly IItemGenericService<MaterialViewModel>? _fretBoards;
+        private readonly IItemGenericService<PickupSetViewModel>? _pickups;
+        private readonly IItemGenericService<TremoloTypeViewModel>? _tremoloTypes;
 
-        //private readonly ILoggerAdapter<GuitarService>? _logger;
-        //private readonly IItemGenericService<BrandViewModel>? _brands;
-        //private readonly IItemGenericService<CategoryViewModel>? _categories;
-        //private readonly IItemGenericService<ColorViewModel>? _colors;
-        //private readonly IItemGenericService<GuitarShapeViewModel>? _guitarShapes;
-        //private readonly IItemGenericService<MaterialViewModel>? _soundBoards;
-        //private readonly IItemGenericService<MaterialViewModel>? _necks;
-        //private readonly IItemGenericService<GuitarShapeViewModel>? _fretBoards;
-        //private readonly IItemGenericService<PickupSetViewModel>? _pickups;
-        //private readonly IItemGenericService<TremoloTypeViewModel>? _tremoloTypes;
-        //private readonly IItemGenericService<GuitarService>? _guitars;
+        #region Not used
 
-        private readonly IEnumerable<BrandViewModel>? _brands;
-        private readonly IEnumerable<CategoryViewModel>? _categories;
-        private readonly IEnumerable<ColorViewModel>? _colors;
-        private readonly IEnumerable<GuitarShapeViewModel>? _guitarShapes;
-        private readonly IEnumerable<MaterialViewModel>? _soundBoards;
-        private readonly IEnumerable<MaterialViewModel>? _necks;
-        private readonly IEnumerable<MaterialViewModel>? _fretBoards;
-        private readonly IEnumerable<PickupSetViewModel>? _pickups;
-        private readonly IEnumerable<TremoloTypeViewModel>? _tremoloTypes;
+        //private readonly IEnumerable<BrandViewModel>? _brands;
+        //private readonly IEnumerable<CategoryViewModel>? _categories;
+        //private readonly IEnumerable<ColorViewModel>? _colors;
+        //private readonly IEnumerable<GuitarShapeViewModel>? _guitarShapes;
+        //private readonly IEnumerable<MaterialViewModel>? _soundBoards;
+        //private readonly IEnumerable<MaterialViewModel>? _necks;
+        //private readonly IEnumerable<MaterialViewModel>? _fretBoards;
+        //private readonly IEnumerable<PickupSetViewModel>? _pickups;
+        //private readonly IEnumerable<TremoloTypeViewModel>? _tremoloTypes;
+
+        #endregion
 
         public GuitarController(
             ILoggerAdapter<GuitarService>? logger,
@@ -51,28 +52,34 @@ namespace SoundPlay.WEB.Areas.Admin.Controllers
         {
             _logger= logger;
             _guitars= guitars;
+            _brands= brands;
+            _categories= categories;
+            _colors= colors;
+            _guitarShapes= guitarShapes;
+            _soundBoards= soundBoards;
+            _necks= necks;
+            _fretBoards=fretBoards;
+            _pickups= pickups;
+            _tremoloTypes= tremoloTypes;
 
-            //_logger= logger;
-            //_brands= brands;
-            //_categories= categories;
-            //_colors= colors;
-            //_guitarShapes= guitarShapes;
-            //_materials= materials;
-            //_pickups= pickups;
-            //_tremoloTypes= tremoloTypes;
 
-            _brands= brands!.GetViewModelsAsync().Result;
-            _categories= categories!.GetViewModelsAsync().Result;
-            _colors= colors!.GetViewModelsAsync().Result;
-            _guitarShapes= guitarShapes!.GetViewModelsAsync().Result;
-            _soundBoards= soundBoards!.GetViewModelsAsync().Result;
-            _necks= necks!.GetViewModelsAsync().Result;
-            _fretBoards= fretBoards!.GetViewModelsAsync().Result;
-            _pickups= pickups!.GetViewModelsAsync().Result;
-            _tremoloTypes= tremoloTypes!.GetViewModelsAsync().Result;
+            #region Not used
+
+            //_brands= brands!.GetViewModelsAsync().Result;
+            //_categories= categories!.GetViewModelsAsync().Result;
+            //_colors= colors!.GetViewModelsAsync().Result;
+            //_guitarShapes= guitarShapes!.GetViewModelsAsync().Result;
+            //_soundBoards= soundBoards!.GetViewModelsAsync().Result;
+            //_necks= necks!.GetViewModelsAsync().Result;
+            //_fretBoards= fretBoards!.GetViewModelsAsync().Result;
+            //_pickups= pickups!.GetViewModelsAsync().Result;
+            //_tremoloTypes= tremoloTypes!.GetViewModelsAsync().Result;
+
+            #endregion
         }
+
         [HttpGet]
-        public async Task<IActionResult> Index( )
+        public async Task<IActionResult> Index()
         {
             try
             {
@@ -80,7 +87,7 @@ namespace SoundPlay.WEB.Areas.Admin.Controllers
                 return View(guitars);
             }
 
-            catch ( ObjectNotFoundException ex )
+            catch (ObjectNotFoundException ex)
             {
                 _logger!.LogError(ex.Message);
                 return NotFound(ex.Message);
@@ -90,26 +97,36 @@ namespace SoundPlay.WEB.Areas.Admin.Controllers
             {
                 _logger!.LogError(ex.Message);
                 return BadRequest(ex.Message);
-            }            
+            }
         }
 
         [HttpGet]
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
             try
             {
+                var brandList = await _brands!.GetViewModelsAsync();
+                var categoryList = await _categories!.GetViewModelsAsync();
+                var colorList = await _colors!.GetViewModelsAsync();
+                var guitarShapeList = await _guitarShapes!.GetViewModelsAsync();
+                var soundBoardsList = await _brands!.GetViewModelsAsync();
+                var neckList = await _necks!.GetViewModelsAsync();
+                var fretBoard = await _fretBoards!.GetViewModelsAsync();
+                var pickupList = await _pickups!.GetViewModelsAsync();
+                var tremoloList = await _tremoloTypes!.GetViewModelsAsync();
+
                 GuitarForCreateViewModel guitarForCreateViewModel = new()
                 {
                     GuitarViewModel=new(),
-                    Brands=_brands!.Select(i => new SelectListItem {Value=i.Id.ToString(), Text=i.Name}),
-                    Categories=_categories!.Select(i => new SelectListItem { Value=i.Id.ToString(), Text=i.Name }),
-                    Colors=_colors!.Select(i => new SelectListItem { Value=i.Id.ToString(), Text=i.Name }),
-                    GuitarShapes=_guitarShapes!.Select(i => new SelectListItem { Value=i.Id.ToString(), Text=i.Name }),
-                    Soundboards=_soundBoards!.Select(i => new SelectListItem { Value=i.Id.ToString(), Text=i.Name }),
-                    Necks=_necks!.Select(i => new SelectListItem { Value=i.Id.ToString(), Text=i.Name }),
-                    Fretboards=_fretBoards!.Select(i => new SelectListItem { Value=i.Id.ToString(), Text=i.Name }),
-                    PickupSets=_pickups!.Select(i => new SelectListItem { Value=i.Id.ToString(), Text=i.Name }),
-                    TremoloTypes=_tremoloTypes!.Select(i => new SelectListItem { Value=i.Id.ToString(), Text=i.Name }),
+                    Brands=brandList!.Select(i => new SelectListItem { Value=i.Id.ToString(), Text=i.Name }),
+                    Categories=categoryList!.Select(i => new SelectListItem { Value=i.Id.ToString(), Text=i.Name }),
+                    Colors=colorList!.Select(i => new SelectListItem { Value=i.Id.ToString(), Text=i.Name }),
+                    GuitarShapes=guitarShapeList!.Select(i => new SelectListItem { Value=i.Id.ToString(), Text=i.Name }),
+                    Soundboards=soundBoardsList!.Select(i => new SelectListItem { Value=i.Id.ToString(), Text=i.Name }),
+                    Necks=neckList!.Select(i => new SelectListItem { Value=i.Id.ToString(), Text=i.Name }),
+                    Fretboards=fretBoard!.Select(i => new SelectListItem { Value=i.Id.ToString(), Text=i.Name }),
+                    PickupSets=pickupList!.Select(i => new SelectListItem { Value=i.Id.ToString(), Text=i.Name }),
+                    TremoloTypes=tremoloList!.Select(i => new SelectListItem { Value=i.Id.ToString(), Text=i.Name }),
                 };
 
                 return View(guitarForCreateViewModel);
@@ -131,7 +148,7 @@ namespace SoundPlay.WEB.Areas.Admin.Controllers
                 {
                     var viewModel = guitarForCreateViewModel.GuitarViewModel;
                     await _guitars!.CreateViewModelAsync(viewModel!);
-                    return RedirectToAction("Index");                    
+                    return RedirectToAction("Index");
                 }
 
                 else return View(guitarForCreateViewModel);
@@ -150,19 +167,28 @@ namespace SoundPlay.WEB.Areas.Admin.Controllers
             try
             {
                 var guitarViewModel = await _guitars!.GetViewModelByIdAsync(id);
+                var brandList = await _brands!.GetViewModelsAsync();
+                var categoryList = await _categories!.GetViewModelsAsync();
+                var colorList = await _colors!.GetViewModelsAsync();
+                var guitarShapeList = await _guitarShapes!.GetViewModelsAsync();
+                var soundBoardsList = await _brands!.GetViewModelsAsync();
+                var neckList = await _necks!.GetViewModelsAsync();
+                var fretBoard = await _fretBoards!.GetViewModelsAsync();
+                var pickupList = await _pickups!.GetViewModelsAsync();
+                var tremoloList = await _tremoloTypes!.GetViewModelsAsync();
 
                 GuitarForCreateViewModel guitarForCreateViewModel = new()
                 {
                     GuitarViewModel=guitarViewModel,
-                    Brands=_brands!.Select(i => new SelectListItem { Value=i.Id.ToString(), Text=i.Name }),
-                    Categories=_categories!.Select(i => new SelectListItem { Value=i.Id.ToString(), Text=i.Name }),
-                    Colors=_colors!.Select(i => new SelectListItem { Value=i.Id.ToString(), Text=i.Name }),
-                    GuitarShapes=_guitarShapes!.Select(i => new SelectListItem { Value=i.Id.ToString(), Text=i.Name }),
-                    Soundboards=_soundBoards!.Select(i => new SelectListItem { Value=i.Id.ToString(), Text=i.Name }),
-                    Necks=_necks!.Select(i => new SelectListItem { Value=i.Id.ToString(), Text=i.Name }),
-                    Fretboards=_fretBoards!.Select(i => new SelectListItem { Value=i.Id.ToString(), Text=i.Name }),
-                    PickupSets=_pickups!.Select(i => new SelectListItem { Value=i.Id.ToString(), Text=i.Name }),
-                    TremoloTypes=_tremoloTypes!.Select(i => new SelectListItem { Value=i.Id.ToString(), Text=i.Name }),
+                    Brands=brandList!.Select(i => new SelectListItem { Value=i.Id.ToString(), Text=i.Name }),
+                    Categories=categoryList!.Select(i => new SelectListItem { Value=i.Id.ToString(), Text=i.Name }),
+                    Colors=colorList!.Select(i => new SelectListItem { Value=i.Id.ToString(), Text=i.Name }),
+                    GuitarShapes=guitarShapeList!.Select(i => new SelectListItem { Value=i.Id.ToString(), Text=i.Name }),
+                    Soundboards=soundBoardsList!.Select(i => new SelectListItem { Value=i.Id.ToString(), Text=i.Name }),
+                    Necks=neckList!.Select(i => new SelectListItem { Value=i.Id.ToString(), Text=i.Name }),
+                    Fretboards=fretBoard!.Select(i => new SelectListItem { Value=i.Id.ToString(), Text=i.Name }),
+                    PickupSets=pickupList!.Select(i => new SelectListItem { Value=i.Id.ToString(), Text=i.Name }),
+                    TremoloTypes=tremoloList!.Select(i => new SelectListItem { Value=i.Id.ToString(), Text=i.Name }),
                 };
 
                 return View(guitarForCreateViewModel);
@@ -203,28 +229,15 @@ namespace SoundPlay.WEB.Areas.Admin.Controllers
             }
         }
 
-        [HttpGet]
+        //Use without View();
+        [HttpPost]
         public async Task<IActionResult> Delete(int id)
         {
             try
             {
                 var guitarViewModel = await _guitars!.GetViewModelByIdAsync(id);
-
-                GuitarForCreateViewModel guitarForCreateViewModel = new()
-                {
-                    GuitarViewModel=guitarViewModel,
-                    Brands=_brands!.Select(i => new SelectListItem { Value=i.Id.ToString(), Text=i.Name }),
-                    Categories=_categories!.Select(i => new SelectListItem { Value=i.Id.ToString(), Text=i.Name }),
-                    Colors=_colors!.Select(i => new SelectListItem { Value=i.Id.ToString(), Text=i.Name }),
-                    GuitarShapes=_guitarShapes!.Select(i => new SelectListItem { Value=i.Id.ToString(), Text=i.Name }),
-                    Soundboards=_soundBoards!.Select(i => new SelectListItem { Value=i.Id.ToString(), Text=i.Name }),
-                    Necks=_necks!.Select(i => new SelectListItem { Value=i.Id.ToString(), Text=i.Name }),
-                    Fretboards=_fretBoards!.Select(i => new SelectListItem { Value=i.Id.ToString(), Text=i.Name }),
-                    PickupSets=_pickups!.Select(i => new SelectListItem { Value=i.Id.ToString(), Text=i.Name }),
-                    TremoloTypes=_tremoloTypes!.Select(i => new SelectListItem { Value=i.Id.ToString(), Text=i.Name }),
-                };
-
-                return View(guitarForCreateViewModel);
+                await _guitars.DeleteViewModelAsync(guitarViewModel);
+                return RedirectToAction("Index");
             }
 
             catch (ObjectNotFoundException ex)
@@ -239,51 +252,5 @@ namespace SoundPlay.WEB.Areas.Admin.Controllers
                 return BadRequest(ex.Message);
             }
         }
-
-        [HttpPost]
-        public async Task<IActionResult> Delete(GuitarForCreateViewModel guitarForCreateViewModel)
-        {
-            try
-            {
-                if (ModelState.IsValid)
-                {
-                    var viewModel = guitarForCreateViewModel.GuitarViewModel;
-                    await _guitars!.DeleteViewModelAsync(viewModel!);
-                    return RedirectToAction("Index");
-                }
-
-                else return View(guitarForCreateViewModel);
-            }
-
-            catch (Exception ex)
-            {
-                _logger!.LogError(ex.Message);
-                return BadRequest(ex.Message);
-            }
-        }
-
-        //Use without View();
-        //[HttpPost]
-        //public async Task<IActionResult> Delete(int id)
-        //{
-        //    try
-        //    {
-        //        var guitarViewModel = await _guitars!.GetViewModelByIdAsync(id);
-        //        await _guitars.DeleteViewModelAsync(guitarViewModel);
-        //        return RedirectToAction("Index");
-        //    }
-
-        //    catch (ObjectNotFoundException ex)
-        //    {
-        //        _logger!.LogError(ex.Message);
-        //        return NotFound(ex.Message);
-        //    }
-
-        //    catch (Exception ex)
-        //    {
-        //        _logger!.LogError(ex.Message);
-        //        return BadRequest(ex.Message);
-        //    }
-        //}
     }
 }

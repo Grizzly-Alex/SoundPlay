@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
 using SoundPlay.BLL.Exceptions;
 using SoundPlay.BLL.Interfaces;
 using SoundPlay.BLL.ViewModels;
@@ -13,9 +12,9 @@ namespace SoundPlay.BLL.Services
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
-        private readonly ILogger<GuitarService> _logger;
+        private readonly ILoggerAdapter<GuitarService> _logger;
 
-        public GuitarService(IUnitOfWork unitOfWork, IMapper mapper, ILogger<GuitarService> logger)
+        public GuitarService(IUnitOfWork unitOfWork, IMapper mapper, ILoggerAdapter<GuitarService> logger)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;

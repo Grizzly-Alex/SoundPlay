@@ -11,17 +11,25 @@
 </head>
 
 
-
 <body class="bg-light">
 
     @*header main*@
     <div class="container">
+      
         <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-3 border-bottom">
+
+            @*Admin offcanvas button*@
+            <button class="btn btn-outline-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling">
+                Admin Panel
+                <span class="bi bi-arrow-bar-right"></span>
+            </button>
+
+            @*Down line*@
             <a href="/" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
                 <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"></use></svg>
             </a>
 
-            @*Page kinks*@
+            @*Page links*@
             <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
                 <li><a href="#" class="nav-link px-2 link-dark">Contacts</a></li>
                 <li><a href="#" class="nav-link px-2 link-dark">About</a></li>
@@ -58,8 +66,6 @@
                 <button type="button" class="btn btn-dark">Traditional</button>
 
                 @*searcher*@
-
-
                 <form class="d-flex mt-3 mt-lg-0" role="search">
                     <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                     <button class="btn btn-outline-success" type="submit">Search</button>
@@ -69,10 +75,10 @@
         </nav>
     </div>
 
-    @*offcanvass*@
+    @*offcanvass category*@
     <div class="offcanvas offcanvas-start text-bg-dark" tabindex="-1" id="offcanvasNavbarDark" aria-labelledby="offcanvasNavbarDarkLabel">
 
-        @*offcanvass buton close*@
+        @*offcanvass header*@
         <div class="offcanvas-header">
             <h5 class="offcanvas-title" id="offcanvasNavbarDarkLabel">Products</h5>
             <button type="button" class="btn-close btn-close-start" data-bs-dismiss="offcanvas" aria-label="Close"></button>
@@ -111,6 +117,43 @@
             </ul>
         </div>
     </div>
+ 
+    @*offcanvass admin panel*@
+    <div class="offcanvas offcanvas-start" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
+
+        @*offcanvass header*@
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="offcanvasScrollingLabel">Admin Panel</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+
+        <div class="offcanvas-body">
+            <nav>
+                <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                    <button class="nav-link active" id="nav-storage-tab" data-bs-toggle="tab" data-bs-target="#nav-storage" type="button" role="tab" aria-controls="nav-storage" aria-selected="true">
+                        Storage
+                    </button>
+                    <button class="nav-link" id="nav-stuff-tab" data-bs-toggle="tab" data-bs-target="#nav-stuff" type="button" role="tab" aria-controls="nav-stuff" aria-selected="false">
+                        Stuff                       
+                    </button>
+                    <button class="nav-link" id="nav-shopper-tab" data-bs-toggle="tab" data-bs-target="#nav-shopper" type="button" role="tab" aria-controls="nav-shopper" aria-selected="false">
+                        Shopper                       
+                    </button>
+                </div>
+            </nav>
+            <div class="tab-content" id="nav-tabContent">
+                <div class="tab-pane fade show active" id="nav-storage" role="tabpanel" aria-labelledby="nav-storage-tab" tabindex="0">
+                    Test1
+                </div>
+                <div class="tab-pane fade" id="nav-stuff" role="tabpanel" aria-labelledby="nav-stuff-tab" tabindex="0">
+                    Test2
+                </div>
+                <div class="tab-pane fade" id="nav-shopper" role="tabpanel" aria-labelledby="nav-shopper-tab" tabindex="0">
+                    Test3
+                </div>
+            </div>
+        </div>
+    </div>
 
 
     <div class="container">
@@ -119,11 +162,10 @@
         </main>
     </div>
 
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/js/bootstrap.bundle.js"></script>
     <script src="~/js/cheatsheet.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
-
-

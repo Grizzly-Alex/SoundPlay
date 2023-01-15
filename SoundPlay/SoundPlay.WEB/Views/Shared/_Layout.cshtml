@@ -4,68 +4,225 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - SoundPlay</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/SoundPlay.WEB.styles.css" asp-append-version="true" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
 </head>
-<body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">SoundPlay</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
+
+
+<body class="bg-light">
+
+    @*header main*@
+    <div class="container">
+      
+        <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-3 border-bottom">
+
+            @*Admin offcanvas button*@
+            <button class="btn btn-outline-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom" aria-controls="offcanvasBottom">
+                Admin Panel
+                <span class="bi bi-gear"></span>
+            </button>
+
+            @*Page links*@
+            <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+                <li><a href="#" class="nav-link px-2 link-dark">Contacts</a></li>
+                <li><a href="#" class="nav-link px-2 link-dark">About</a></li>
+                <li><a href="#" class="nav-link px-2 link-dark">FAQs</a></li>
+                <li><a href="#" class="nav-link px-2 link-dark">Service</a></li>
+            </ul>
+
+            @*space for basket, wishlist, customer center *@
+            <div class="col-md-3 text-end">
+                @*User*@
+                <button type="submit" class="btn btn-link">
+                    <i class="bi bi-person-circle" style="font-size: 1.5rem; color: gray;"></i>
+                </button>  
+                @*Basket*@
+                <button type="submit" class="btn btn-link position-relative">
+                    <i class="bi bi-bag-check" style="font-size: 1.5rem; color: gray;"></i>
+                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                        @*Product count*@99+
+                        <span class="visually-hidden">unread messages</span>
+                    </span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="Customer" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="Customer" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="Admin" asp-controller="Brand" asp-action="Index">Brand</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="Admin" asp-controller="Category" asp-action="Index">Category</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="Admin" asp-controller="Color" asp-action="Index">Color</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="Admin" asp-controller="GuitarShape" asp-action="Index">Guitar Shape</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="Admin" asp-controller="Material" asp-action="Index">Material</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="Admin" asp-controller="PickupSet" asp-action="Index">Pickup Set</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="Admin" asp-controller="TremoloType" asp-action="Index">Tremolo Type</a>
-                        </li>
-                    </ul>
-                </div>
+            </div>
+
+        </header>
+    </div>
+
+    @*header catalog*@
+    <div>
+        <nav class="navbar navbar-dark bg-dark" aria-label="Dark offcanvas navbar">
+            <div class="container-fluid">         
+                
+                @*button start offcanvass*@
+                <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbarDark" aria-controls="offcanvasNavbarDark">
+                    <span class="bi bi-music-note-list"></span>
+                </button>
+
+                @*button category*@
+                <button type="button" class="btn btn-dark">Guitars</button>
+                <button type="button" class="btn btn-dark">Basses</button>
+                <button type="button" class="btn btn-dark">Drums</button>
+                <button type="button" class="btn btn-dark">Keys</button>
+                <button type="button" class="btn btn-dark">Brass</button>
+                <button type="button" class="btn btn-dark">Microphones</button>
+                <button type="button" class="btn btn-dark">Accessories</button>
+                <button type="button" class="btn btn-dark">Cables</button>
+                <button type="button" class="btn btn-dark">Traditional</button>
+
+                @*searcher*@
+                <form class="d-flex mt-3 mt-lg-0" role="search">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit">Search</button>
+                </form>
+
             </div>
         </nav>
-    </header>
+    </div>
+
+    @*offcanvass category*@
+    <div class="offcanvas offcanvas-start text-bg-dark" tabindex="-1" id="offcanvasNavbarDark" aria-labelledby="offcanvasNavbarDarkLabel">
+
+        @*offcanvass header*@
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="offcanvasNavbarDarkLabel">Products</h5>
+            <button type="button" class="btn-close btn-close-start" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+
+        @*body offcanvas*@
+        <div class="offcanvas-body">
+            <ul class="navbar-nav justify-content-start flex-grow-1 pe-3">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Electro Guitars</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Classical Guitars</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Accustic Guitars</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Electric Bass</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Accustic Bass</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Amps</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Strings</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Effects</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Pickups</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+ 
+    @*offcanvass admin panel*@
+    <div class="offcanvas offcanvas-bottom show" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasBottom" aria-labelledby="offcanvasBottomLabel">
+
+        @*offcanvass header*@
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="offcanvasBottomLabel">
+                <i class="bi bi-gear-fill"></i>
+                Admin Panel
+            </h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+
+        @*offcanvass body*@
+        <div class="offcanvas-body">
+
+            @*offcanvass bookmarks*@
+            <nav>
+                <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                    <button class="nav-link active" id="nav-storage-tab" data-bs-toggle="tab" data-bs-target="#nav-storage" type="button" role="tab" aria-controls="nav-storage" aria-selected="true">
+                        Storage
+                    </button>
+                    <button class="nav-link" id="nav-stuff-tab" data-bs-toggle="tab" data-bs-target="#nav-stuff" type="button" role="tab" aria-controls="nav-stuff" aria-selected="false">
+                        Stuff                       
+                    </button>
+                    <button class="nav-link" id="nav-shopper-tab" data-bs-toggle="tab" data-bs-target="#nav-shopper" type="button" role="tab" aria-controls="nav-shopper" aria-selected="false">
+                        Shopper                       
+                    </button>
+                </div>
+            </nav>
+
+            @*bookmarks links*@
+            <div class="tab-content" id="nav-tabContent">
+                <div class="tab-pane fade show active" id="nav-storage" role="tabpanel" aria-labelledby="nav-storage-tab" tabindex="0">
+
+                    <ul class="navbar-nav justify-content-start flex-grow-1 pe-3">
+
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="Admin" asp-controller="Guitar" asp-action="Index">Guitars</a>
+                        </li>
+
+                    </ul>
+
+                </div>
+
+                <div class="tab-pane fade" id="nav-stuff" role="tabpanel" aria-labelledby="nav-stuff-tab" tabindex="0">
+
+                    <ul class="navbar-nav justify-content-start flex-grow-1 pe-3">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="Admin" asp-controller="Category" asp-action="Index">Categories</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="Admin" asp-controller="Brand" asp-action="Index">Brands</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="Admin" asp-controller="Color" asp-action="Index">Colors</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="Admin" asp-controller="GuitarShape" asp-action="Index">Guitar Shapes</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="Admin" asp-controller="Material" asp-action="Index">Materials</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="Admin" asp-controller="PickupSet" asp-action="Index">PickupSets</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="Admin" asp-controller="TremoloType" asp-action="Index">TremoloTypes</a>
+                        </li>
+                    </ul>   
+                    
+                </div>
+
+                <div class="tab-pane fade" id="nav-shopper" role="tabpanel" aria-labelledby="nav-shopper-tab" tabindex="0">
+
+                    <ul class="navbar-nav justify-content-start flex-grow-1 pe-3 ">
+                        <li class="nav-item">
+                            @*Other Link*@
+                        </li>
+                    </ul>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2023 - SoundPlay.WEB - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/lib/bootstrap/js/bootstrap.bundle.js"></script>
+    <script src="~/js/cheatsheet.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

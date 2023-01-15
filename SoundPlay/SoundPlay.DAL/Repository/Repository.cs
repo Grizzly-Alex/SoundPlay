@@ -6,7 +6,7 @@ using System.Linq.Expressions;
 
 namespace SoundPlay.DAL.Repository
 {
-	public sealed class Repository<T> : IRepository<T> where T : class
+	public class Repository<T> : IRepository<T> where T : class
 	{
 		protected readonly ApplicationDbContext _dbContext;
 		private readonly DbSet<T> _dbSet;

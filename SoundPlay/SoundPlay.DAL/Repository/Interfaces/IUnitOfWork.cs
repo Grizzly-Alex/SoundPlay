@@ -11,6 +11,8 @@ namespace SoundPlay.DAL.Repository.Interfaces
         public IRepository<TremoloType> TremoloType { get; }
         public IRepository<Color> Color { get; }
         public IRepository<PickupSet> PickupSet { get; }
+        public IRepository<Guitar> Guitar { get; }
+
 
         public Task SaveChangesAsync();
 	}

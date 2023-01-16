@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SoundPlay.BLL.Interfaces;
+using SoundPlay.BLL.Services;
 using SoundPlay.BLL.ViewModels;
 
 namespace SoundPlay.WEB.Areas.Admin.Controllers
@@ -56,17 +57,11 @@ namespace SoundPlay.WEB.Areas.Admin.Controllers
             return View(obj);
         }
 
-        [HttpGet]
+        [HttpPost]
         public async Task<IActionResult> Delete(int id)
         {
             var viewModel = await _colorService.GetViewModelByIdAsync(id);
-            return View(viewModel);
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> Delete(ColorViewModel obj)
-        {
-            await _colorService.DeleteViewModelAsync(obj);
+            await _colorService.DeleteViewModelAsync(viewModel);
             return RedirectToAction("Index");
         }
     }

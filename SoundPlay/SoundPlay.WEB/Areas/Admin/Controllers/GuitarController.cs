@@ -250,5 +250,26 @@ namespace SoundPlay.WEB.Areas.Admin.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+        public async Task<IActionResult> FullInfo(int id)
+        {
+            try
+            {
+                var guitarViewModel = await _guitars!.GetViewModelByIdAsync(id);
+                return View(guitarViewModel);
+            }
+
+			catch (ObjectNotFoundException ex)
+			{
+				_logger!.LogError(ex.Message);
+				return NotFound(ex.Message);
+			}
+
+			catch (Exception ex)
+			{
+				_logger!.LogError(ex.Message);
+				return BadRequest(ex.Message);
+			}
+		}
     }
 }

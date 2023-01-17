@@ -7,8 +7,8 @@ namespace SoundPlay.BLL.ViewModels
     public sealed class GuitarViewModel : ProductViewModel
     {
         [Required]
-		[DisplayName("Frest Count")]
-		public int FrestCount { get; set; }
+		[DisplayName("Frets Count")]
+		public int FretsCount { get; set; }
 
         [Required]
         [DisplayName("Strings Count")] 

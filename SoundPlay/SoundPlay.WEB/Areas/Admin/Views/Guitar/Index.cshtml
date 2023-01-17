@@ -6,7 +6,7 @@
 <div class="container p-3" />
 <div class="row pt-4">
     <div class="col-6">
-        <h2 class="text-primary text-black-50" >Guitars List</h2>
+        <h2 class="text-primary text-black-50" >Guitars</h2>
     </div>
     <div class="col-6 text-end">
         <a asp-controller="Guitar" asp-action="Create" class="btn btn-outline-success">
@@ -21,22 +21,10 @@
     <table class="table table-bordered table-striped">
         <thead>
             <tr>
-                <th>Name</th>
-                <th>Description</th>
-                <th>Color</th>
-                <th>Frest count</th>
-                <th>Strings count</th>
-                <th>Price</th>
-                <th>Picture Url</th>
-                <th>Date delivery</th>
                 <th>Category</th>
                 <th>Brand</th>
-                <th>Shape</th>
-                <th>Soundboard</th>
-                <th>Neck</th>
-                <th>Fretboard</th>
-                <th>Tremolo type</th>
-                <th>Pickup set</th>
+                <th>Name</th>
+                <th>Price</th>
             </tr>
         </thead>
     </table> 
@@ -46,7 +34,10 @@ else
     <table class="table table-bordered table-striped" style="width:100%">
         <thead>
             <tr>
-                <th>Guitar Name</th>
+                <th>Category</th>
+                <th>Brand</th>
+                <th>Name</th>
+                <th>Price</th>
                 <th width="110px"></th>
             </tr>
         </thead>
@@ -54,27 +45,15 @@ else
             @foreach (var obj in Model)
             {
                 <tr>
+                    <td>@obj.Category!.Name</td>
+                    <td>@obj.Brand!.Name</td>
                     <td>@obj.Name</td>
-                    <td>@obj.Description</td>
-                    <td>@obj.Color</td>
-                    <td>@obj.FrestCount</td>
-                    <td>@obj.StringsCount</td>
                     <td>@obj.Price</td>
-                    <td>@obj.PictureUrl</td>
-                    <td>@obj.DateDelivery</td>
-                    <td>@obj.Category</td>
-                    <td>@obj.Brand</td>
-                    <td>@obj.Shape</td>
-                    <td>@obj.Soundboard</td>
-                    <td>@obj.Neck</td>
-                    <td>@obj.Fretboard</td>
-                    <td>@obj.TremoloType</td>
-                    <td>@obj.PickupSet</td>
 
                     <td align="center">
                         <div class="btn-toolbar justify-content-between" role="toolbar">
-                            <a asp-controller="Guitar" asp-action="Edit" asp-route-id="@obj.Id" class="btn btn-outline-primary">
-                                <i class="bi bi-wrench"></i>
+                            <a asp-controller="Guitar" asp-action="FullInfo" asp-route-id="@obj.Id" class="btn btn-outline-primary">
+                                <i class="bi bi-info-lg"></i>
                             </a>
 
                             <form method="post" asp-controller="Guitar" asp-action="Delete" asp-route-id="@obj.Id">

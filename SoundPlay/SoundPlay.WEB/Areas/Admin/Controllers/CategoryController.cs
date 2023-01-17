@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SoundPlay.BLL.Exceptions;
 using SoundPlay.BLL.Interfaces;
 using SoundPlay.BLL.ViewModels;
+using SoundPlay.DAL.Models;
 
 namespace SoundPlay.WEB.Areas.Admin.Controllers
 {
@@ -8,18 +10,37 @@ namespace SoundPlay.WEB.Areas.Admin.Controllers
     public sealed class CategoryController : Controller
     {
         private readonly IItemGenericService<CategoryViewModel> _categoryService;
+		private readonly ILoggerAdapter<CategoryController> _logger;
 
-        public CategoryController(IItemGenericService<CategoryViewModel> categoryService)
+		public CategoryController(
+            IItemGenericService<CategoryViewModel> categoryService,
+			ILoggerAdapter<CategoryController> logger)
         {
             _categoryService = categoryService;
+            _logger = logger;
         }
 
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            var viewModels = await _categoryService.GetViewModelsAsync();
-            return View(viewModels);
-        }
+			try
+			{
+				var viewModels = await _categoryService.GetViewModelsAsync();
+				return View(viewModels);
+			}
+
+			catch (ObjectNotFoundException ex)
+			{
+				_logger!.LogError(ex.Message);
+				return NotFound(ex.Message);
+			}
+
+			catch (Exception ex)
+			{
+				_logger!.LogError(ex.Message);
+				return BadRequest(ex.Message);
+			}
+		}
         
 
         [HttpGet]
@@ -30,46 +51,87 @@ namespace SoundPlay.WEB.Areas.Admin.Controllers
 
         [HttpPost]
         public async Task<IActionResult> Create(CategoryViewModel obj)
-        {    
-            if (ModelState.IsValid)
-            {
-				await _categoryService.CreateViewModelAsync(obj);
-				return RedirectToAction("Index");
+        {
+			try
+			{
+				if (ModelState.IsValid)
+				{
+					await _categoryService.CreateViewModelAsync(obj);
+					return RedirectToAction("Index");
+				}
+				else return View(obj);
 			}
-            return View(obj);
-        }
+
+			catch (Exception ex)
+			{
+				_logger!.LogError(ex.Message);
+				return BadRequest(ex.Message);
+			}
+		}
 
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
-			var viewModel = await _categoryService.GetViewModelByIdAsync(id);
-            return View(viewModel);
-        }
+			try
+			{
+				var viewModel = await _categoryService.GetViewModelByIdAsync(id);
+				return View(viewModel);
+			}
+
+			catch (ObjectNotFoundException ex)
+			{
+				_logger!.LogError(ex.Message);
+				return NotFound(ex.Message);
+			}
+
+			catch (Exception ex)
+			{
+				_logger!.LogError(ex.Message);
+				return BadRequest(ex.Message);
+			}
+		}
 
         [HttpPost]
         public async Task<IActionResult> Edit(CategoryViewModel obj)
         {
-            if (ModelState.IsValid)
-            {
-				await _categoryService.UpdateViewModelAsync(obj);
+			try
+			{
+				if (ModelState.IsValid)
+				{
+					await _categoryService.UpdateViewModelAsync(obj);
+					return RedirectToAction("Index");
+				}
+				return View(obj);
+			}
+
+			catch (Exception ex)
+			{
+				_logger!.LogError(ex.Message);
+				return BadRequest(ex.Message);
+			}
+		}
+
+		[HttpPost]
+		public async Task<IActionResult> Delete(int id)
+		{
+			try
+			{
+				var viewModel = await _categoryService.GetViewModelByIdAsync(id);
+				await _categoryService.DeleteViewModelAsync(viewModel);
 				return RedirectToAction("Index");
 			}
-            return View(obj);
-        }
 
+			catch (ObjectNotFoundException ex)
+			{
+				_logger!.LogError(ex.Message);
+				return NotFound(ex.Message);
+			}
 
-        [HttpGet]
-        public async Task<IActionResult> Delete(int id)
-        {
-            var viewModel = await _categoryService.GetViewModelByIdAsync(id);
-            return View(viewModel);
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> Delete(CategoryViewModel obj)
-        {
-			await _categoryService.DeleteViewModelAsync(obj);
-			return RedirectToAction("Index");
+			catch (Exception ex)
+			{
+				_logger!.LogError(ex.Message);
+				return BadRequest(ex.Message);
+			}
 		}
-    }
+	}
 }

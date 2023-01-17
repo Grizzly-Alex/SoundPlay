@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SoundPlay.BLL.Exceptions;
 using SoundPlay.BLL.Interfaces;
 using SoundPlay.BLL.ViewModels;
 
@@ -7,69 +8,130 @@ namespace SoundPlay.WEB.Areas.Admin.Controllers
     [Area("Admin")]
     public sealed class GuitarShapeController : Controller
     {
-        private readonly IItemGenericService<GuitarShapeViewModel> _guitarShapeService;
+		private readonly IItemGenericService<GuitarShapeViewModel> _guitarShapeService;
+		private readonly ILoggerAdapter<GuitarShapeController> _logger;
 
-        public GuitarShapeController(IItemGenericService<GuitarShapeViewModel> guitarShapeService)
-        {
-            _guitarShapeService = guitarShapeService;
-        }
-
-        [HttpGet]
-        public async Task<IActionResult> Index()
-        {
-            var viewModels = await _guitarShapeService.GetViewModelsAsync();
-            return View(viewModels);
-        }
-        
-
-        [HttpGet]
-        public IActionResult Create()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> Create(GuitarShapeViewModel obj)
-        {    
-            if (ModelState.IsValid)
-            {
-				await _guitarShapeService.CreateViewModelAsync(obj);
-				return RedirectToAction("Index");
-			}
-            return View(obj);
-        }
-
-        [HttpGet]
-        public async Task<IActionResult> Edit(int id)
-        {
-			var viewModel = await _guitarShapeService.GetViewModelByIdAsync(id);
-            return View(viewModel);
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> Edit(GuitarShapeViewModel obj)
-        {
-            if (ModelState.IsValid)
-            {
-				await _guitarShapeService.UpdateViewModelAsync(obj);
-				return RedirectToAction("Index");
-			}
-            return View(obj);
-        }
-
-
-        [HttpGet]
-        public async Task<IActionResult> Delete(int id)
-        {
-            var viewModel = await _guitarShapeService.GetViewModelByIdAsync(id);
-            return View(viewModel);
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> Delete(GuitarShapeViewModel obj)
-        {
-			await _guitarShapeService.DeleteViewModelAsync(obj);
-			return RedirectToAction("Index");
+		public GuitarShapeController(
+			IItemGenericService<GuitarShapeViewModel> brandService,
+			ILoggerAdapter<GuitarShapeController> logger)
+		{
+			_guitarShapeService = brandService;
+			_logger = logger;
 		}
-    }
+
+		[HttpGet]
+		public async Task<IActionResult> Index()
+		{
+			try
+			{
+				var viewModels = await _guitarShapeService.GetViewModelsAsync();
+				return View(viewModels);
+			}
+
+			catch (ObjectNotFoundException ex)
+			{
+				_logger!.LogError(ex.Message);
+				return NotFound(ex.Message);
+			}
+
+			catch (Exception ex)
+			{
+				_logger!.LogError(ex.Message);
+				return BadRequest(ex.Message);
+			}
+		}
+
+
+		[HttpGet]
+		public IActionResult Create()
+		{
+			return View();
+		}
+
+		[HttpPost]
+		public async Task<IActionResult> Create(GuitarShapeViewModel obj)
+		{
+			try
+			{
+				if (ModelState.IsValid)
+				{
+					await _guitarShapeService.CreateViewModelAsync(obj);
+					return RedirectToAction("Index");
+				}
+				else return View(obj);
+			}
+
+			catch (Exception ex)
+			{
+				_logger!.LogError(ex.Message);
+				return BadRequest(ex.Message);
+			}
+		}
+
+		[HttpGet]
+		public async Task<IActionResult> Edit(int id)
+		{
+			try
+			{
+				var viewModel = await _guitarShapeService.GetViewModelByIdAsync(id);
+				return View(viewModel);
+			}
+
+			catch (ObjectNotFoundException ex)
+			{
+				_logger!.LogError(ex.Message);
+				return NotFound(ex.Message);
+			}
+
+			catch (Exception ex)
+			{
+				_logger!.LogError(ex.Message);
+				return BadRequest(ex.Message);
+			}
+		}
+
+		[HttpPost]
+		public async Task<IActionResult> Edit(GuitarShapeViewModel obj)
+		{
+			try
+			{
+				if (ModelState.IsValid)
+				{
+					await _guitarShapeService.UpdateViewModelAsync(obj);
+					return RedirectToAction("Index");
+				}
+				return View(obj);
+			}
+
+			catch (Exception ex)
+			{
+				_logger!.LogError(ex.Message);
+				return BadRequest(ex.Message);
+			}
+		}
+
+
+		[HttpPost]
+		public async Task<IActionResult> Delete(int id)
+		{
+			try
+			{
+				var viewModel = await _guitarShapeService.GetViewModelByIdAsync(id);
+				await _guitarShapeService.DeleteViewModelAsync(viewModel);
+				return RedirectToAction("Index");
+			}
+
+			catch (ObjectNotFoundException ex)
+			{
+				_logger!.LogError(ex.Message);
+				return NotFound(ex.Message);
+			}
+
+			catch (Exception ex)
+			{
+				_logger!.LogError(ex.Message);
+				return BadRequest(ex.Message);
+			}
+		}
+	}
 }

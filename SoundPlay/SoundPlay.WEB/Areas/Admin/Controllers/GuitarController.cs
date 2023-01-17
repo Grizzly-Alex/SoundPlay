@@ -146,8 +146,7 @@ namespace SoundPlay.WEB.Areas.Admin.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    var viewModel = guitarForCreateViewModel.GuitarViewModel;
-                    await _guitars!.CreateViewModelAsync(viewModel!);
+                    await _guitars!.CreateViewModelAsync(guitarForCreateViewModel.GuitarViewModel!);
                     return RedirectToAction("Index");
                 }
 

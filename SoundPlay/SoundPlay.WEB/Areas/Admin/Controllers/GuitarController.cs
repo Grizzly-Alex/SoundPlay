@@ -118,15 +118,15 @@ namespace SoundPlay.WEB.Areas.Admin.Controllers
                 GuitarForCreateViewModel guitarForCreateViewModel = new()
                 {
                     GuitarViewModel=new(),
-                    Brands=brandList!.Select(i => new SelectListItem { Value=i.Id.ToString(), Text=i.Name }),
-                    Categories=categoryList!.Select(i => new SelectListItem { Value=i.Id.ToString(), Text=i.Name }),
-                    Colors=colorList!.Select(i => new SelectListItem { Value=i.Id.ToString(), Text=i.Name }),
-                    GuitarShapes=guitarShapeList!.Select(i => new SelectListItem { Value=i.Id.ToString(), Text=i.Name }),
-                    Soundboards=soundBoardsList!.Select(i => new SelectListItem { Value=i.Id.ToString(), Text=i.Name }),
-                    Necks=neckList!.Select(i => new SelectListItem { Value=i.Id.ToString(), Text=i.Name }),
-                    Fretboards=fretBoard!.Select(i => new SelectListItem { Value=i.Id.ToString(), Text=i.Name }),
-                    PickupSets=pickupList!.Select(i => new SelectListItem { Value=i.Id.ToString(), Text=i.Name }),
-                    TremoloTypes=tremoloList!.Select(i => new SelectListItem { Value=i.Id.ToString(), Text=i.Name }),
+                    Brands = brandList!.Select(i => new SelectListItem { Value = i.Id.ToString(), Text = i.Name }),
+                    Categories = categoryList!.Select(i => new SelectListItem { Value = i.Id.ToString(), Text = i.Name }),
+                    Colors = colorList!.Select(i => new SelectListItem { Value = i.Id.ToString(), Text = i.Name }),
+                    GuitarShapes = guitarShapeList!.Select(i => new SelectListItem { Value = i.Id.ToString(), Text = i.Name }),
+                    Soundboards = soundBoardsList!.Select(i => new SelectListItem { Value = i.Id.ToString(), Text = i.Name }),
+                    Necks = neckList!.Select(i => new SelectListItem { Value = i.Id.ToString(), Text = i.Name }),
+                    Fretboards = fretBoard!.Select(i => new SelectListItem { Value = i.Id.ToString(), Text = i.Name }),
+                    PickupSets = pickupList!.Select(i => new SelectListItem { Value = i.Id.ToString(), Text = i.Name }),
+                    TremoloTypes = tremoloList!.Select(i => new SelectListItem { Value = i.Id.ToString(), Text = i.Name }),
                 };
 
                 return View(guitarForCreateViewModel);
@@ -162,7 +162,7 @@ namespace SoundPlay.WEB.Areas.Admin.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Update(int id)
+        public async Task<IActionResult> Edit(int id)
         {
             try
             {
@@ -179,16 +179,16 @@ namespace SoundPlay.WEB.Areas.Admin.Controllers
 
                 GuitarForCreateViewModel guitarForCreateViewModel = new()
                 {
-                    GuitarViewModel=guitarViewModel,
-                    Brands=brandList!.Select(i => new SelectListItem { Value=i.Id.ToString(), Text=i.Name }),
-                    Categories=categoryList!.Select(i => new SelectListItem { Value=i.Id.ToString(), Text=i.Name }),
-                    Colors=colorList!.Select(i => new SelectListItem { Value=i.Id.ToString(), Text=i.Name }),
-                    GuitarShapes=guitarShapeList!.Select(i => new SelectListItem { Value=i.Id.ToString(), Text=i.Name }),
-                    Soundboards=soundBoardsList!.Select(i => new SelectListItem { Value=i.Id.ToString(), Text=i.Name }),
-                    Necks=neckList!.Select(i => new SelectListItem { Value=i.Id.ToString(), Text=i.Name }),
-                    Fretboards=fretBoard!.Select(i => new SelectListItem { Value=i.Id.ToString(), Text=i.Name }),
-                    PickupSets=pickupList!.Select(i => new SelectListItem { Value=i.Id.ToString(), Text=i.Name }),
-                    TremoloTypes=tremoloList!.Select(i => new SelectListItem { Value=i.Id.ToString(), Text=i.Name }),
+                    GuitarViewModel = guitarViewModel,
+                    Brands = brandList!.Select(i => new SelectListItem { Value = i.Id.ToString(), Text = i.Name }),
+                    Categories = categoryList!.Select(i => new SelectListItem { Value = i.Id.ToString(), Text = i.Name }),
+                    Colors = colorList!.Select(i => new SelectListItem { Value = i.Id.ToString(), Text = i.Name }),
+                    GuitarShapes = guitarShapeList!.Select(i => new SelectListItem { Value = i.Id.ToString(), Text = i.Name }),
+                    Soundboards = soundBoardsList!.Select(i => new SelectListItem { Value = i.Id.ToString(), Text = i.Name }),
+                    Necks = neckList!.Select(i => new SelectListItem { Value = i.Id.ToString(), Text = i.Name }),
+                    Fretboards = fretBoard!.Select(i => new SelectListItem { Value = i.Id.ToString(), Text = i.Name }),
+                    PickupSets = pickupList!.Select(i => new SelectListItem { Value = i.Id.ToString(), Text = i.Name }),
+                    TremoloTypes = tremoloList!.Select(i => new SelectListItem { Value = i.Id.ToString(), Text = i.Name }),
                 };
 
                 return View(guitarForCreateViewModel);
@@ -208,7 +208,7 @@ namespace SoundPlay.WEB.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Update(GuitarForCreateViewModel guitarForCreateViewModel)
+        public async Task<IActionResult> Edit(GuitarForCreateViewModel guitarForCreateViewModel)
         {
             try
             {

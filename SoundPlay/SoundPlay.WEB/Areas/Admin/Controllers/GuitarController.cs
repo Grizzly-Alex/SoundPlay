@@ -8,8 +8,9 @@ using SoundPlay.BLL.ViewModels;
 
 namespace SoundPlay.WEB.Areas.Admin.Controllers
 {
-    //[Authorize]
-    public sealed class GuitarController : Controller
+	//[Authorize]
+	[Area("Admin")]
+	public sealed class GuitarController : Controller
     {
         private readonly ILoggerAdapter<GuitarService>? _logger;
         private readonly IItemGenericService<GuitarViewModel>? _guitars;
@@ -50,18 +51,17 @@ namespace SoundPlay.WEB.Areas.Admin.Controllers
             IItemGenericService<TremoloTypeViewModel>? tremoloTypes,
             IItemGenericService<GuitarViewModel>? guitars)
         {
-            _logger= logger;
-            _guitars= guitars;
-            _brands= brands;
-            _categories= categories;
-            _colors= colors;
-            _guitarShapes= guitarShapes;
-            _soundBoards= soundBoards;
-            _necks= necks;
-            _fretBoards=fretBoards;
-            _pickups= pickups;
-            _tremoloTypes= tremoloTypes;
-
+            _logger = logger;
+            _guitars = guitars;
+            _brands = brands;
+            _categories = categories;
+            _colors = colors;
+            _guitarShapes = guitarShapes;
+            _soundBoards = soundBoards;
+            _necks = necks;
+            _fretBoards = fretBoards;
+            _pickups = pickups;
+            _tremoloTypes = tremoloTypes;
 
             #region Not used
 
@@ -109,7 +109,7 @@ namespace SoundPlay.WEB.Areas.Admin.Controllers
                 var categoryList = await _categories!.GetViewModelsAsync();
                 var colorList = await _colors!.GetViewModelsAsync();
                 var guitarShapeList = await _guitarShapes!.GetViewModelsAsync();
-                var soundBoardsList = await _brands!.GetViewModelsAsync();
+                var soundBoardsList = await _soundBoards!.GetViewModelsAsync();
                 var neckList = await _necks!.GetViewModelsAsync();
                 var fretBoard = await _fretBoards!.GetViewModelsAsync();
                 var pickupList = await _pickups!.GetViewModelsAsync();
@@ -171,7 +171,7 @@ namespace SoundPlay.WEB.Areas.Admin.Controllers
                 var categoryList = await _categories!.GetViewModelsAsync();
                 var colorList = await _colors!.GetViewModelsAsync();
                 var guitarShapeList = await _guitarShapes!.GetViewModelsAsync();
-                var soundBoardsList = await _brands!.GetViewModelsAsync();
+                var soundBoardsList = await _soundBoards!.GetViewModelsAsync();
                 var neckList = await _necks!.GetViewModelsAsync();
                 var fretBoard = await _fretBoards!.GetViewModelsAsync();
                 var pickupList = await _pickups!.GetViewModelsAsync();
@@ -229,7 +229,6 @@ namespace SoundPlay.WEB.Areas.Admin.Controllers
             }
         }
 
-        //Use without View();
         [HttpPost]
         public async Task<IActionResult> Delete(int id)
         {

@@ -9,7 +9,7 @@ namespace SoundPlay.BLL.ViewModels
         [Required] public string? Name { get; set; }
         [Required] public string? Description { get; set; }
         [Required] public decimal Price { get; set; }
-        [Required] public string? PictureUrl { get; set; }
+        /*[Required]*/ public string? PictureUrl { get; set; }
         [Required] public DateTime DateDelivery { get; set; }
         public int? CategoryId { get; set; }
         public int? BrandId { get; set; }

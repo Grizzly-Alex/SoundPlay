@@ -12,6 +12,7 @@ namespace SoundPlay.WEB.Areas.Admin.Controllers
 	[Area("Admin")]
 	public sealed class GuitarController : Controller
     {
+        private readonly IContentLoader _contentLoader;
         private readonly ILoggerAdapter<GuitarService>? _logger;
         private readonly IItemGenericService<GuitarViewModel>? _guitars;
         private readonly IItemGenericService<BrandViewModel>? _brands;
@@ -26,6 +27,7 @@ namespace SoundPlay.WEB.Areas.Admin.Controllers
 
 
         public GuitarController(
+            IContentLoader contentLoader,
             ILoggerAdapter<GuitarService>? logger,
             IItemGenericService<BrandViewModel>? brands,
             IItemGenericService<CategoryViewModel>? categories,
@@ -38,6 +40,7 @@ namespace SoundPlay.WEB.Areas.Admin.Controllers
             IItemGenericService<TremoloTypeViewModel>? tremoloTypes,
             IItemGenericService<GuitarViewModel>? guitars)
         {
+            _contentLoader = contentLoader;
             _logger = logger;
             _guitars = guitars;
             _brands = brands;
@@ -113,12 +116,20 @@ namespace SoundPlay.WEB.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(GuitarForCreateViewModel guitarForCreateViewModel)
+		[ValidateAntiForgeryToken]
+		public async Task<IActionResult> Create(GuitarForCreateViewModel guitarForCreateViewModel, IFormFile file)
         {
             try
             {
-                if (ModelState.IsValid)
+                if (file is not null)
                 {
+					_contentLoader.UploadFile(file, @"images\products\guitars");
+					guitarForCreateViewModel.GuitarViewModel!.PictureUrl = _contentLoader.FileUrl;
+				}
+
+				if (ModelState.IsValid)
+                {
+                    
                     await _guitars!.CreateViewModelAsync(guitarForCreateViewModel.GuitarViewModel!);
                     return RedirectToAction("Index");
                 }
@@ -206,7 +217,7 @@ namespace SoundPlay.WEB.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Delete(int id)
+		public async Task<IActionResult> Delete(int id)
         {
             try
             {

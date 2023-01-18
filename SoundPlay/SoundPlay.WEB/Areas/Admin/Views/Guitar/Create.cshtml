@@ -1,24 +1,25 @@
 ﻿@model GuitarForCreateViewModel
 
-<form method="post">
+<form method="post" asp-action="Create" enctype="multipart/form-data">
+
 	<div class="border p-3 mt-4 row">
 		<div class="row pb-2">
 			<h2 class="text-black-50">Create Guitar</h2>	
 		</div>
 		<div class="mb-3">
-			<label asp-for="GuitarViewModel.Name"></label>
-			<input asp-for="GuitarViewModel.Name" class="form-control">
-			<span asp-validation-for="GuitarViewModel.Name" class="text-danger"></span>
-		</div>
-		<div class="mb-3">
-			<label asp-for="GuitarViewModel!.PictureUrl"></label>
-			<input asp-for="GuitarViewModel!.PictureUrl" class="form-control">
-			<span asp-validation-for="GuitarViewModel!.PictureUrl" class="text-danger"></span>
+			<label asp-for="GuitarViewModel!.Name"></label>
+			<input asp-for="GuitarViewModel!.Name" class="form-control">
+			<span asp-validation-for="GuitarViewModel!.Name" class="text-danger"></span>
 		</div>
 		<div class="mb-3">
 			<label asp-for="GuitarViewModel!.Description"></label>
 			<textarea asp-for="GuitarViewModel!.Description" rows="3" class="form-control"></textarea>
 			<span asp-validation-for="GuitarViewModel!.Description" class="text-danger"></span>
+		</div>
+		@*Upload file*@>
+		<div class="mb-3">
+			<label asp-for="GuitarViewModel!.PictureUrl"></label>
+			<input type="file" class="form-control" />
 		</div>
 		@*Counts*@
 		<div class="mb-3">
@@ -70,7 +71,7 @@
 			<select asp-for="GuitarViewModel!.SoundboardId" asp-items="@Model.Soundboards" class="form-select">
 				<option disabled selected>--Select Material--</option>
 			</select>
-			<span asp-validation-for="GuitarViewModel.SoundboardId" class="text-danger"></span>
+			<span asp-validation-for="GuitarViewModel!.SoundboardId" class="text-danger"></span>
 		</div>
 		<div class="mb-3 col-4">
 			<label asp-for="GuitarViewModel!.Neck"></label>
@@ -84,21 +85,21 @@
 			<select asp-for="GuitarViewModel!.FretboardId" asp-items="@Model.Fretboards" class="form-select">
 				<option disabled selected>--Select Material--</option>
 			</select>
-			<span asp-validation-for="GuitarViewModel.FretboardId" class="text-danger"></span>
+			<span asp-validation-for="GuitarViewModel!.FretboardId" class="text-danger"></span>
 		</div>
 		<div class="mb-3 col-4">
 			<label asp-for="GuitarViewModel!.TremoloType"></label>
 			<select asp-for="GuitarViewModel!.TremoloTypeId" asp-items="@Model.TremoloTypes" class="form-select">
 				<option disabled selected>--Select Tremolo Type--</option>
 			</select>
-			<span asp-validation-for="GuitarViewModel.TremoloTypeId" class="text-danger"></span>
+			<span asp-validation-for="GuitarViewModel!.TremoloTypeId" class="text-danger"></span>
 		</div>
 		<div class="mb-3 col-4">
-			<label asp-for="GuitarViewModel.PickupSet"></label>
-			<select asp-for="GuitarViewModel.PickupSetId" asp-items="@Model.PickupSets" class="form-select">
+			<label asp-for="GuitarViewModel!.PickupSet"></label>
+			<select asp-for="GuitarViewModel!.PickupSetId" asp-items="@Model.PickupSets" class="form-select">
 				<option disabled selected>--Select Pickup Set--</option>
 			</select>
-			<span asp-validation-for="GuitarViewModel.PickupSetId" class="text-danger"></span>
+			<span asp-validation-for="GuitarViewModel!.PickupSetId" class="text-danger"></span>
 		</div>
 
 		@*Buttons*@
@@ -115,7 +116,6 @@
 
 		</div>
 	</div>
-
 </form>
 
 @section Scripts{

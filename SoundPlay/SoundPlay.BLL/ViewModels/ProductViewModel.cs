@@ -1,4 +1,5 @@
-﻿using SoundPlay.DAL.Models;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using SoundPlay.DAL.Models;
 using System.ComponentModel.DataAnnotations;
 
 namespace SoundPlay.BLL.ViewModels
@@ -9,13 +10,13 @@ namespace SoundPlay.BLL.ViewModels
         [Required] public string? Name { get; set; }
         [Required] public string? Description { get; set; }
         [Required] public decimal Price { get; set; }
-        [Required] public string? PictureUrl { get; set; }
+		[ValidateNever] public string? PictureUrl { get; set; }
         [Required] public DateTime DateDelivery { get; set; }
         public int? CategoryId { get; set; }
         public int? BrandId { get; set; }
         public int? ColorId { get; set; }
-        public Category? Category { get; set; }
-        public Brand? Brand { get; set; }
-        public Color? Color { get; set; }
+        [ValidateNever] public Category? Category { get; set; }
+		[ValidateNever] public Brand? Brand { get; set; }
+		[ValidateNever] public Color? Color { get; set; }
     }
 }

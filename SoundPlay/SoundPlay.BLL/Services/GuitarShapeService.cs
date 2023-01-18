@@ -62,7 +62,7 @@ namespace SoundPlay.BLL.Services
         {
             var model = await _unitOfWork.GuitarShape.GetFirstOrDefaultAsync(
                 predicate: i => i.Id == id,
-                changeTrackerOn: false);
+                isTracking: false);
 
             if (model is null)
             {
@@ -77,7 +77,7 @@ namespace SoundPlay.BLL.Services
 
         public async Task<IEnumerable<GuitarShapeViewModel>> GetViewModelsAsync()
         {
-            var models = await _unitOfWork.GuitarShape.GetAllAsync(changeTrackerOn: false);
+            var models = await _unitOfWork.GuitarShape.GetAllAsync(isTracking: false);
 
             if (models is null)
             {

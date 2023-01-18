@@ -13,7 +13,8 @@ namespace SoundPlay.WEB.Configuration
     {
         public static void ConfigureServices(IConfiguration configuration, IServiceCollection services)
         {
-            services.AddControllersWithViews();
+			services.AddHttpContextAccessor();
+			services.AddControllersWithViews();
             services.AddSingleton(typeof(ILoggerAdapter<>), typeof(LoggerAdapter<>));
             services.AddScoped<IContentLoader, ContentLoader>();
             services.AddAutoMapper(typeof(MappingProfile));

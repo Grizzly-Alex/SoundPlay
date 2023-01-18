@@ -13,7 +13,7 @@ namespace SoundPlay.BLL.Utility
 		public ContentLoader(IWebHostEnvironment hostEnvironment)
 		{
 			_hostEnvironment = hostEnvironment;
-			_wwwRootPath = _hostEnvironment.ContentRootPath;	
+			_wwwRootPath = _hostEnvironment.ContentRootPath;
 		}
 
 		public void UploadFile(IFormFile file, string path)

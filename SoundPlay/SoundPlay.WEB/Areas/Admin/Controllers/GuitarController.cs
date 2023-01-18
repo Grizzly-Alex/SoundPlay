@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using SoundPlay.BLL.Exceptions;
@@ -12,6 +13,7 @@ namespace SoundPlay.WEB.Areas.Admin.Controllers
 	[Area("Admin")]
 	public sealed class GuitarController : Controller
     {
+        private readonly IWebHostEnvironment _webHostEnvironment;
         private readonly IContentLoader _contentLoader;
         private readonly ILoggerAdapter<GuitarService>? _logger;
         private readonly IItemGenericService<GuitarViewModel>? _guitars;
@@ -27,6 +29,7 @@ namespace SoundPlay.WEB.Areas.Admin.Controllers
 
 
         public GuitarController(
+            IWebHostEnvironment webHostEnvironment,
             IContentLoader contentLoader,
             ILoggerAdapter<GuitarService>? logger,
             IItemGenericService<BrandViewModel>? brands,
@@ -40,6 +43,7 @@ namespace SoundPlay.WEB.Areas.Admin.Controllers
             IItemGenericService<TremoloTypeViewModel>? tremoloTypes,
             IItemGenericService<GuitarViewModel>? guitars)
         {
+            _webHostEnvironment = webHostEnvironment;
             _contentLoader = contentLoader;
             _logger = logger;
             _guitars = guitars;
@@ -117,15 +121,21 @@ namespace SoundPlay.WEB.Areas.Admin.Controllers
 
         [HttpPost]
 		[ValidateAntiForgeryToken]
-		public async Task<IActionResult> Create(GuitarForCreateViewModel guitarForCreateViewModel, IFormFile file)
+		public async Task<IActionResult> Create(GuitarForCreateViewModel guitarForCreateViewModel)
         {
-            try
+			string webRootPath = _webHostEnvironment.WebRootPath;
+			var files = HttpContext.Request.Form.Files;
+
+			try
             {
-                if (file is not null)
-                {
-					_contentLoader.UploadFile(file, @"images\products\guitars");
-					guitarForCreateViewModel.GuitarViewModel!.PictureUrl = _contentLoader.FileUrl;
-				}
+				string upload = webRootPath + "/images/products/guitars";
+                string fileName = Guid.NewGuid().ToString();
+                string extension = Path.GetExtension(files[0].FileName);
+                string fullFileName = fileName + extension;
+				using (var fileStream = new FileStream(Path.Combine(upload, fullFileName), FileMode.Create)) { files[0].CopyTo(fileStream); }
+				guitarForCreateViewModel.GuitarViewModel.PictureUrl = fullFileName;
+
+
 
 				if (ModelState.IsValid)
                 {
@@ -134,8 +144,8 @@ namespace SoundPlay.WEB.Areas.Admin.Controllers
                     return RedirectToAction("Index");
                 }
 
-                else return View(guitarForCreateViewModel);
-            }
+				else return View(guitarForCreateViewModel);
+			}
 
             catch (Exception ex)
             {
@@ -201,13 +211,11 @@ namespace SoundPlay.WEB.Areas.Admin.Controllers
                     var viewModel = guitarForCreateViewModel.GuitarViewModel;
                     await _guitars!.UpdateViewModelAsync(viewModel!);
 
-                    return RedirectToAction(
-                        actionName: "FullInfo",
-                        routeValues: new { id = viewModel!.Id });
+                    return RedirectToAction("FullInfo", new { id = viewModel!.Id });
                 }
 
-                else return View(guitarForCreateViewModel);
-            }
+                else return RedirectToAction();
+			}
 
             catch (Exception ex)
             {
@@ -239,6 +247,7 @@ namespace SoundPlay.WEB.Areas.Admin.Controllers
             }
         }
 
+        [HttpGet]
         public async Task<IActionResult> FullInfo(int id)
         {
             try

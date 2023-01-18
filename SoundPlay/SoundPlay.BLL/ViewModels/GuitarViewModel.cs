@@ -1,4 +1,5 @@
-﻿using SoundPlay.DAL.Models;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using SoundPlay.DAL.Models;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
@@ -20,21 +21,29 @@ namespace SoundPlay.BLL.ViewModels
         public int? FretboardId { get; set; }
         public int? TremoloTypeId { get; set; }
         public int? PickupSetId { get; set; }
-        public GuitarShape? Shape { get; set; }
 
-        [DisplayName ("Soundboard Material")] 
-        public Material? Soundboard { get; set; }
+		[DisplayName("Shape")]
+		[ValidateNever]
+		public GuitarShape? Shape { get; set; }
 
-		[DisplayName("Neck Material")] 
-        public Material? Neck { get; set; }
+        [DisplayName ("Soundboard Material")]
+		[ValidateNever]
+		public Material? Soundboard { get; set; }
+
+		[DisplayName("Neck Material")]
+		[ValidateNever]
+		public Material? Neck { get; set; }
 
 		[DisplayName("Fretboard Material")]
-        public Material? Fretboard { get; set; }
+		[ValidateNever]
+		public Material? Fretboard { get; set; }
 
 		[DisplayName("Pickup Set")]
-        public PickupSet? PickupSet { get; set; }
+		[ValidateNever]
+		public PickupSet? PickupSet { get; set; }
 
 		[DisplayName("Tremolo Type")]
-        public TremoloType? TremoloType { get; set; }
+		[ValidateNever]
+		public TremoloType? TremoloType { get; set; }
     }
 }

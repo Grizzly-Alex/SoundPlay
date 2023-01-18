@@ -62,7 +62,7 @@ namespace SoundPlay.BLL.Services
         {
             var model = await _unitOfWork.Material.GetFirstOrDefaultAsync(
                 predicate: i => i.Id == id,
-                changeTrackerOn: false);
+                isTracking: false);
 
             if (model is null)
             {
@@ -77,7 +77,7 @@ namespace SoundPlay.BLL.Services
 
         public async Task<IEnumerable<MaterialViewModel>> GetViewModelsAsync()
         {
-            var models = await _unitOfWork.Material.GetAllAsync(changeTrackerOn: false);
+            var models = await _unitOfWork.Material.GetAllAsync(isTracking: false);
 
             if (models is null)
             {

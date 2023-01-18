@@ -62,7 +62,7 @@ namespace SoundPlay.BLL.Services
         {
             var model = await _unitOfWork.PickupSet.GetFirstOrDefaultAsync(
                 predicate: i => i.Id == id,
-                changeTrackerOn: false);
+                isTracking: false);
 
             if (model is null)
             {
@@ -77,7 +77,7 @@ namespace SoundPlay.BLL.Services
 
         public async Task<IEnumerable<PickupSetViewModel>> GetViewModelsAsync()
         {
-            var models = await _unitOfWork.PickupSet.GetAllAsync(changeTrackerOn: false);
+            var models = await _unitOfWork.PickupSet.GetAllAsync(isTracking: false);
 
             if (models is null)
             {

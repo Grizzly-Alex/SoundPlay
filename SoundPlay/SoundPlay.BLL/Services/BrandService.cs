@@ -62,7 +62,7 @@ namespace SoundPlay.BLL.Services
         {
             var model = await _unitOfWork.Brand.GetFirstOrDefaultAsync(
                 predicate: i => i.Id == id,
-                changeTrackerOn: false);
+                isTracking: false);
 
             if (model is null)
             {
@@ -77,7 +77,8 @@ namespace SoundPlay.BLL.Services
 
         public async Task<IEnumerable<BrandViewModel>> GetViewModelsAsync()
         {
-            var models = await _unitOfWork.Brand.GetAllAsync(changeTrackerOn: false);
+            var models = await _unitOfWork.Brand.GetAllAsync(
+                isTracking: false);
 
             if (models is null)
             {

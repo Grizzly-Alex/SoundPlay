@@ -25,8 +25,8 @@ namespace SoundPlay.BLL.Services
         {
             var models = await _unitOfWork.Guitar
                 .GetAllAsync(
-                    include:query=>query
-                        .Include(guitar=>guitar.Category)
+                    include:query => query
+                        .Include(guitar => guitar.Category)
                         .Include(guitar => guitar.Brand)
                         .Include(guitar => guitar.Color)
                         .Include(guitar => guitar.Shape)
@@ -35,7 +35,7 @@ namespace SoundPlay.BLL.Services
                         .Include(guitar => guitar.Fretboard)
                         .Include(guitar => guitar.PickupSet)
                         .Include(guitar => guitar.TremoloType)!,
-                    changeTrackerOn: false);
+                    isTracking: false);
 
             if (models is null)
             {
@@ -53,7 +53,7 @@ namespace SoundPlay.BLL.Services
             var model = await _unitOfWork.Guitar
                 .GetFirstOrDefaultAsync(
                     predicate: i => i.Id == id,
-                    include: query=>query
+                    include: query => query
                         .Include(guitar => guitar.Category)
                         .Include(guitar => guitar.Brand)
                         .Include(guitar => guitar.Color)
@@ -63,7 +63,7 @@ namespace SoundPlay.BLL.Services
                         .Include(guitar => guitar.Fretboard)
                         .Include(guitar => guitar.PickupSet)
                         .Include(guitar => guitar.TremoloType)!,
-                    changeTrackerOn: false);
+                    isTracking: false);
 
             if (model is null)
             {

@@ -24,19 +24,6 @@ namespace SoundPlay.WEB.Areas.Admin.Controllers
         private readonly IItemGenericService<PickupSetViewModel>? _pickups;
         private readonly IItemGenericService<TremoloTypeViewModel>? _tremoloTypes;
 
-        #region Not used
-
-        //private readonly IEnumerable<BrandViewModel>? _brands;
-        //private readonly IEnumerable<CategoryViewModel>? _categories;
-        //private readonly IEnumerable<ColorViewModel>? _colors;
-        //private readonly IEnumerable<GuitarShapeViewModel>? _guitarShapes;
-        //private readonly IEnumerable<MaterialViewModel>? _soundBoards;
-        //private readonly IEnumerable<MaterialViewModel>? _necks;
-        //private readonly IEnumerable<MaterialViewModel>? _fretBoards;
-        //private readonly IEnumerable<PickupSetViewModel>? _pickups;
-        //private readonly IEnumerable<TremoloTypeViewModel>? _tremoloTypes;
-
-        #endregion
 
         public GuitarController(
             ILoggerAdapter<GuitarService>? logger,
@@ -62,20 +49,6 @@ namespace SoundPlay.WEB.Areas.Admin.Controllers
             _fretBoards = fretBoards;
             _pickups = pickups;
             _tremoloTypes = tremoloTypes;
-
-            #region Not used
-
-            //_brands= brands!.GetViewModelsAsync().Result;
-            //_categories= categories!.GetViewModelsAsync().Result;
-            //_colors= colors!.GetViewModelsAsync().Result;
-            //_guitarShapes= guitarShapes!.GetViewModelsAsync().Result;
-            //_soundBoards= soundBoards!.GetViewModelsAsync().Result;
-            //_necks= necks!.GetViewModelsAsync().Result;
-            //_fretBoards= fretBoards!.GetViewModelsAsync().Result;
-            //_pickups= pickups!.GetViewModelsAsync().Result;
-            //_tremoloTypes= tremoloTypes!.GetViewModelsAsync().Result;
-
-            #endregion
         }
 
         [HttpGet]
@@ -207,6 +180,7 @@ namespace SoundPlay.WEB.Areas.Admin.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(GuitarForCreateViewModel guitarForCreateViewModel)
         {
             try
@@ -215,7 +189,10 @@ namespace SoundPlay.WEB.Areas.Admin.Controllers
                 {
                     var viewModel = guitarForCreateViewModel.GuitarViewModel;
                     await _guitars!.UpdateViewModelAsync(viewModel!);
-                    return RedirectToAction("Index");
+
+                    return RedirectToAction(
+                        actionName: "FullInfo",
+                        routeValues: new { id = viewModel!.Id });
                 }
 
                 else return View(guitarForCreateViewModel);

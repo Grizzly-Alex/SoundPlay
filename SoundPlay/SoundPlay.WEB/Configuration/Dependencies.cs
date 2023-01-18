@@ -15,6 +15,7 @@ namespace SoundPlay.WEB.Configuration
         {
             services.AddControllersWithViews();
             services.AddSingleton(typeof(ILoggerAdapter<>), typeof(LoggerAdapter<>));
+            services.AddScoped<IContentLoader, ContentLoader>();
             services.AddAutoMapper(typeof(MappingProfile));
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(configuration.GetConnectionString("CatalogConnection")));

@@ -6,16 +6,51 @@
 			<h2 class="text-black-50">Full Information</h2>
 		</div>
 
-		<div class="col-3">			
+		<div class="col-4">
+			<img src="/images/products/guitars/@Model.PictureUrl"
+				 style="width:100%" />
+		</div>
+
+		<div class="col-8 small">
+			<p><b>Model Guitar: </b>@Model.Name</p>
+			<p><b>Description: </b>@Model.Description</p>
+			<p><b>Price: </b>@Model.Price</p>
+			<p><b>Date Delivery: </b>@Model.DateDelivery</p>
+		</div>
+
+		<p></p>
+
+		<div class="col-4 small">
+			<p><b>Category: </b>@Model.Category!.Name</p>
+			<p><b>Brand: </b>@Model.Brand!.Name</p>
+			<p><b>Color: </b>@Model.Color!.Name</p>
+			<p><b>Shape: </b>@Model.Shape!.Name</p>
+		</div>
+
+		<div class="col-4 small">
+			<p><b>Frets Count: </b>@Model.FretsCount</p>
+			<p><b>Strings Count: </b>@Model.StringsCount</p>
+			<p><b>Tremolo Type: </b>@Model.TremoloType!.Name</p>
+			<p><b>Pickup Set: </b>@Model.PickupSet!.Name</p>
+		</div>
+
+		<div class="col-4 small">
+			<p><b>Soundboard Material: </b>@Model.Soundboard!.Name</p>
+			<p><b>Neck Material: </b>@Model.Neck!.Name</p>
+			<p><b>Fretboard Material: </b>@Model.Fretboard!.Name</p>
+		</div>
+
+
+@*		<div class="col-3">
 			<p><b>Category: </b>@Model.Category!.Name</p>
 			<p><b>Model Guitar: </b>@Model.Name</p>
 			<p><b>Brand: </b>@Model.Brand!.Name</p>
 			<p><b>Color: </b>@Model.Color!.Name</p>
 			<p><b>Shape: </b>@Model.Shape!.Name</p>	
 			<p><b>Tremolo Type: </b>@Model.TremoloType!.Name</p>
-		</div>
+		</div>*@
 
-		<div class="col-3">
+		@*<div class="col-3">
 			<p><b>Frets Count: </b>@Model.FretsCount</p>
 			<p><b>Strings Count: </b>@Model.StringsCount</p>
 			<p><b>Soundboard Material: </b>@Model.Soundboard!.Name</p>
@@ -28,11 +63,7 @@
 			<p><b>Price: </b>@Model.Price</p>
 			<p><b>Date Delivery: </b>@Model.DateDelivery</p>
 			<p><b>Description: </b>@Model.Description</p>
-		</div>
-
-		<div>
-			<img class="card-img-top img-fluid d-block mx-auto mb-3" style="width:200px" src="/images/products/guitars/956e3de4-4490-478c-9941-67069198f379" alt="Card image cap" />
-		</div>
+		</div>*@
 		
 		<div class="col-12">
 			<a asp-controller="Guitar" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-secondary btn-sm" style="width:100px">

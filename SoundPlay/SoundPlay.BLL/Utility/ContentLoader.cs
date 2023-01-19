@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using SoundPlay.BLL.Interfaces;
-using System.IO;
+
 
 namespace SoundPlay.BLL.Utility
 {
@@ -24,18 +24,23 @@ namespace SoundPlay.BLL.Utility
 
 		public void UploadFile(IFormFileCollection formFiles, string path)
 		{
-			if (formFiles.Count == 0) return;
-
-			string upload = string.Concat(_webRootPath, path);
-			string fileName = Guid.NewGuid().ToString();
-			string extension = Path.GetExtension(formFiles[0].FileName);
-			string fullFileName = string.Concat(fileName, extension);
-
-			FileUrl = fullFileName;
-
-			using (var fileStream = new FileStream(Path.Combine(upload, fullFileName), FileMode.Create))
+			if (formFiles.Count != 0)
 			{
-				formFiles[0].CopyTo(fileStream);
+				string upload = string.Concat(_webRootPath, path);
+				string fileName = Guid.NewGuid().ToString();
+				string extension = Path.GetExtension(formFiles[0].FileName);
+				string fullFileName = string.Concat(fileName, extension);
+
+				FileUrl = fullFileName;
+
+				using (var fileStream = new FileStream(Path.Combine(upload, fullFileName), FileMode.Create))
+				{
+					formFiles[0].CopyTo(fileStream);
+				}
+			}
+			else
+			{
+				return;
 			}
 		}
 
@@ -44,12 +49,13 @@ namespace SoundPlay.BLL.Utility
 			try
 			{			
 				string _filePath = Path.Combine(string.Concat(_webRootPath, contentPath), nameFile);
-
+				
 				if (File.Exists(_filePath))
 				{
 					File.Delete(_filePath);
 				}
 			}
+
 			catch (IOException ex)
 			{
 				_logger.LogError(ex, $"File not found");

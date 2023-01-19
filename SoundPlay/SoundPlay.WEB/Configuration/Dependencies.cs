@@ -18,6 +18,9 @@ namespace SoundPlay.WEB.Configuration
             services.AddSingleton(typeof(ILoggerAdapter<>), typeof(LoggerAdapter<>));
             services.AddScoped<IContentLoader, ContentLoader>();
             services.AddAutoMapper(typeof(MappingProfile));
+			services.AddSession(options => { options.IdleTimeout = TimeSpan.FromMinutes(10);
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true; });
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(configuration.GetConnectionString("CatalogConnection")));
 

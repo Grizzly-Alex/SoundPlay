@@ -62,7 +62,6 @@ namespace SoundPlay.BLL.Services
                 throw new ObjectNotFoundException("Object not found");
             }
 
-            _logger.LogInformation("Get_All operation is successfull");
             var viewModels = _mapper.Map<IEnumerable<TremoloTypeViewModel>>(models);
             return viewModels;
         }

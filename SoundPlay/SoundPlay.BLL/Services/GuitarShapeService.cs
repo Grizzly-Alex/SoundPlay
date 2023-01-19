@@ -48,7 +48,6 @@ namespace SoundPlay.BLL.Services
                 throw new ObjectNotFoundException("Object not found");
             }
 
-            _logger.LogInformation("Get_by_id operation is successfull");
             var viewModel = _mapper.Map<GuitarShapeViewModel>(model);
             return viewModel;
         }
@@ -63,7 +62,6 @@ namespace SoundPlay.BLL.Services
                 throw new ObjectNotFoundException("Object not found");
             }
 
-            _logger.LogInformation("Get_All operation is successfull");
             var viewModels = _mapper.Map<IEnumerable<GuitarShapeViewModel>>(models);
             return viewModels;
         }

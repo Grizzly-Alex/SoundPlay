@@ -192,10 +192,14 @@ namespace SoundPlay.WEB.Areas.Admin.Controllers
         {
             try
             {
-                _contentLoader.RemoveFile(@"\images\products\guitars", guitarForCreateViewModel.GuitarViewModel.PictureUrl);
-				_contentLoader.UploadFile(HttpContext.Request.Form.Files, @"\images\products\guitars");
-				guitarForCreateViewModel.GuitarViewModel.PictureUrl = _contentLoader.FileUrl;
+                var files = HttpContext.Request.Form.Files;
 
+                if (files.Count > 0)
+                {
+					_contentLoader.RemoveFile(@"\images\products\guitars", guitarForCreateViewModel.GuitarViewModel.PictureUrl);
+					_contentLoader.UploadFile(HttpContext.Request.Form.Files, @"\images\products\guitars");
+					guitarForCreateViewModel.GuitarViewModel.PictureUrl = _contentLoader.FileUrl;
+				}		
 
 				if (ModelState.IsValid)
                 {

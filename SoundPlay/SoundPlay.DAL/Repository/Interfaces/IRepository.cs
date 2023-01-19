@@ -9,12 +9,12 @@ namespace SoundPlay.DAL.Repository.Interfaces
 			Expression<Func<T, bool>>? predicate = null,
 			Func<IQueryable<T>, IOrderedQueryable<T>>? orderBy = null,
 			Func<IQueryable<T>, IIncludableQueryable<T, object>>? include = null,
-			bool changeTrackerOn = true);
+			bool isTracking = false);
 		Task<IList<T>> GetAllAsync(
 			Expression<Func<T, bool>>? predicate = null,
 			Func<IQueryable<T>, IOrderedQueryable<T>>? orderBy = null,
 			Func<IQueryable<T>, IIncludableQueryable<T, object>>? include = null,
-			bool changeTrackerOn = true);
+			bool isTracking = false);
 		void Remove(T entity);
 		void Remove(IEnumerable<T> entities);
 		void Add(T entity);

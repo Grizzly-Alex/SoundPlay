@@ -1,14 +1,14 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
 
-namespace SoundPlay.BLL.ViewModels
+namespace SoundPlay.BLL.ViewModels.Admin
 {
-    public sealed class PickupSetViewModel
+    public class MaterialViewModel
     {
         public int Id { get; set; }
 
         [Required]
-        [DisplayName("Pickup set")]
+        [DisplayName("Material")]
         public string? Name { get; set; }
     }
 }

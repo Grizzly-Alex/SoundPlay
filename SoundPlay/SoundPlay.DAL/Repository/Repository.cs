@@ -33,11 +33,11 @@ namespace SoundPlay.DAL.Repository
 			Expression<Func<T, bool>>? predicate = null,
 			Func<IQueryable<T>, IOrderedQueryable<T>>? orderBy = null,
 			Func<IQueryable<T>, IIncludableQueryable<T, object>>? include = null,
-			bool changeTrackerOn = true)
+			bool isTracking = false)
 		{
 			IQueryable<T> query = _dbSet;	
 
-			if (!changeTrackerOn) { query = query.AsNoTracking(); }
+			if (!isTracking) { query = query.AsNoTracking(); }
 			if (include is not null) { query = include(query); }
 			if (predicate is not null) { query = query.Where(predicate); }
 
@@ -50,11 +50,11 @@ namespace SoundPlay.DAL.Repository
 			Expression<Func<T, bool>>? predicate = null,
 			Func<IQueryable<T>, IOrderedQueryable<T>>? orderBy = null,
 			Func<IQueryable<T>, IIncludableQueryable<T, object>>? include = null,
-			bool changeTrackerOn = true)
+			bool isTracking = false)
 		{
 			IQueryable<T> query = _dbSet;
 
-			if (!changeTrackerOn) { query = query.AsNoTracking(); }
+			if (!isTracking) { query = query.AsNoTracking(); }
 			if (predicate is not null) { query = query.Where(predicate); }
 			if (include is not null) { query = include(query); }
 

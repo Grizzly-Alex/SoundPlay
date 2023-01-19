@@ -4,8 +4,8 @@ using SoundPlay.DAL.Repository.Interfaces;
 using SoundPlay.DAL.Repository;
 using SoundPlay.BLL.Interfaces;
 using SoundPlay.BLL.Services;
-using SoundPlay.BLL.ViewModels;
 using SoundPlay.BLL.Utility;
+using SoundPlay.BLL.ViewModels.Admin;
 
 namespace SoundPlay.WEB.Configuration
 {

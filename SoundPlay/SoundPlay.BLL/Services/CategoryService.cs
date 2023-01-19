@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using SoundPlay.BLL.Exceptions;
 using SoundPlay.BLL.Interfaces;
-using SoundPlay.BLL.ViewModels;
+using SoundPlay.BLL.ViewModels.Admin;
 using SoundPlay.DAL.Models;
 using SoundPlay.DAL.Repository.Interfaces;
 
@@ -23,46 +23,24 @@ namespace SoundPlay.BLL.Services
         public async Task<CategoryViewModel> CreateViewModelAsync(CategoryViewModel viewModel)
         {
             var model = _mapper.Map<Category>(viewModel);
-
-            try
-            {
-                _unitOfWork.Category.Add(model);
-                await _unitOfWork.SaveChangesAsync();
-                _logger.LogInformation("Create operation is successfull");
-            }
-
-            catch (Exception ex)
-            {
-                _logger.LogError($"Create operation is failed, {ex.Message}");
-            }
-
-            return viewModel;
+			_unitOfWork.Category.Add(model);
+			await _unitOfWork.SaveChangesAsync();
+			return viewModel;
         }
 
         public async Task<CategoryViewModel> DeleteViewModelAsync(CategoryViewModel viewModel)
         {
             var model = _mapper.Map<Category>(viewModel);
-
-            try
-            {
-                _unitOfWork.Category.Remove(model);
-                await _unitOfWork.SaveChangesAsync();
-                _logger.LogInformation("Delete operation is successfull");
-            }
-
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, $"Delete operation is failed, {ex.Message}");
-            }
-
-            return viewModel;
+			_unitOfWork.Category.Remove(model);
+			await _unitOfWork.SaveChangesAsync();
+			return viewModel;
         }
 
         public async Task<CategoryViewModel> GetViewModelByIdAsync(int id)
         {
             var model = await _unitOfWork.Category.GetFirstOrDefaultAsync(
                 predicate: i => i.Id == id,
-                changeTrackerOn: false);
+                isTracking: false);
 
             if (model is null)
             {
@@ -70,14 +48,13 @@ namespace SoundPlay.BLL.Services
                 throw new ObjectNotFoundException("Object not found");
             }
 
-            _logger.LogInformation("Get_by_id operation is successfull");
             var viewModel = _mapper.Map<CategoryViewModel>(model);
             return viewModel;
         }
 
         public async Task<IEnumerable<CategoryViewModel>> GetViewModelsAsync()
         {
-            var models = await _unitOfWork.Category.GetAllAsync(changeTrackerOn: false);
+            var models = await _unitOfWork.Category.GetAllAsync(isTracking: false);
 
             if (models is null)
             {
@@ -85,7 +62,6 @@ namespace SoundPlay.BLL.Services
                 throw new ObjectNotFoundException("Object not found");
             }
 
-            _logger.LogInformation("Get_All operation is successfull");
             var viewModels = _mapper.Map<IEnumerable<CategoryViewModel>>(models);
             return viewModels;
         }
@@ -93,20 +69,9 @@ namespace SoundPlay.BLL.Services
         public async Task<CategoryViewModel> UpdateViewModelAsync(CategoryViewModel viewModel)
         {
             var model = _mapper.Map<Category>(viewModel);
-
-            try
-            {
-                _unitOfWork.Category.Update(model);
-                await _unitOfWork.SaveChangesAsync();
-                _logger.LogInformation("Update operation is successfull");
-            }
-
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, $"Update operation is failed, {ex.Message}");
-            }
-
-            return viewModel;
+			_unitOfWork.Category.Update(model);
+			await _unitOfWork.SaveChangesAsync();
+			return viewModel;
         }
     }
 }

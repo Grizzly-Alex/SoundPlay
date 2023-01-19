@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc.Rendering;
 
-namespace SoundPlay.BLL.ViewModels
+namespace SoundPlay.BLL.ViewModels.Admin
 {
     public sealed class GuitarForCreateViewModel
     {

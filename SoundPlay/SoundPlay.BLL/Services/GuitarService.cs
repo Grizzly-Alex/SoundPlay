@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using SoundPlay.BLL.Exceptions;
 using SoundPlay.BLL.Interfaces;
-using SoundPlay.BLL.ViewModels;
+using SoundPlay.BLL.ViewModels.Admin;
 using SoundPlay.DAL.Models;
 using SoundPlay.DAL.Repository.Interfaces;
 
@@ -35,7 +35,7 @@ namespace SoundPlay.BLL.Services
                         .Include(guitar => guitar.Fretboard)
                         .Include(guitar => guitar.PickupSet)
                         .Include(guitar => guitar.TremoloType)!,
-                    changeTrackerOn: false);
+                    isTracking: false);
 
             if (models is null)
             {
@@ -43,7 +43,6 @@ namespace SoundPlay.BLL.Services
                 throw new ObjectNotFoundException("Object not found");
             }
 
-            _logger.LogInformation("Get_All operation is successfull");
             var viewModels = _mapper.Map<IEnumerable<GuitarViewModel>>(models);
             return viewModels;
         }
@@ -63,7 +62,7 @@ namespace SoundPlay.BLL.Services
                         .Include(guitar => guitar.Fretboard)
                         .Include(guitar => guitar.PickupSet)
                         .Include(guitar => guitar.TremoloType)!,
-                    changeTrackerOn: false);
+                    isTracking: false);
 
             if (model is null)
             {
@@ -71,7 +70,6 @@ namespace SoundPlay.BLL.Services
                 throw new ObjectNotFoundException("Object not found");
             }
 
-            _logger.LogInformation("Get_by_id operation is successfull");
             var viewModel = _mapper.Map<GuitarViewModel>(model);
             return viewModel;
         }
@@ -79,58 +77,25 @@ namespace SoundPlay.BLL.Services
         public async Task<GuitarViewModel> CreateViewModelAsync(GuitarViewModel viewModel)
         {
             var model = _mapper.Map<Guitar>(viewModel);
-
-            try
-            {
-                _unitOfWork.Guitar.Add(model);
-                await _unitOfWork.SaveChangesAsync();
-                _logger.LogInformation("Create operation is successfull");
-            }
-
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, $"Create operation is failed, {ex.Message}");
-            }
-
-            return viewModel;
+			_unitOfWork.Guitar.Add(model);
+			await _unitOfWork.SaveChangesAsync();
+			return viewModel;
         }
                 
         public async Task<GuitarViewModel> UpdateViewModelAsync(GuitarViewModel viewModel)
         {
             var model = _mapper.Map<Guitar>(viewModel);
-
-            try
-            {
-                _unitOfWork.Guitar.Update(model);
-                await _unitOfWork.SaveChangesAsync();
-                _logger.LogInformation("Update operation is successfull");
-            }
-
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, $"Update operation is failed, {ex.Message}");
-            }
-
-            return viewModel;
+			_unitOfWork.Guitar.Update(model);
+			await _unitOfWork.SaveChangesAsync();
+			return viewModel;
         }
 
         public async Task<GuitarViewModel> DeleteViewModelAsync(GuitarViewModel viewModel)
         {
             var model = _mapper.Map<Guitar>(viewModel);
-
-            try
-            {
-                _unitOfWork.Guitar.Remove(model);
-                await _unitOfWork.SaveChangesAsync();
-                _logger.LogInformation("Delete operation is successfull");
-            }
-
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, $"Delete operation is failed, {ex.Message}");
-            }
-
-            return viewModel;
+			_unitOfWork.Guitar.Remove(model);
+			await _unitOfWork.SaveChangesAsync();
+			return viewModel;
         }
     }
 }

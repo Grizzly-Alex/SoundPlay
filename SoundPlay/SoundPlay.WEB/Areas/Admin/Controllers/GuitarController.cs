@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using SoundPlay.BLL.Exceptions;
 using SoundPlay.BLL.Interfaces;
 using SoundPlay.BLL.Services;
-using SoundPlay.BLL.ViewModels;
+using SoundPlay.BLL.ViewModels.Admin;
 
 namespace SoundPlay.WEB.Areas.Admin.Controllers
 {
@@ -109,7 +109,7 @@ namespace SoundPlay.WEB.Areas.Admin.Controllers
                 var categoryList = await _categories!.GetViewModelsAsync();
                 var colorList = await _colors!.GetViewModelsAsync();
                 var guitarShapeList = await _guitarShapes!.GetViewModelsAsync();
-                var soundBoardsList = await _brands!.GetViewModelsAsync();
+                var soundBoardsList = await _soundBoards!.GetViewModelsAsync();
                 var neckList = await _necks!.GetViewModelsAsync();
                 var fretBoard = await _fretBoards!.GetViewModelsAsync();
                 var pickupList = await _pickups!.GetViewModelsAsync();

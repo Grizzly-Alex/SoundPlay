@@ -1,11 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SoundPlay.BLL.Exceptions;
 using SoundPlay.BLL.Interfaces;
-using SoundPlay.BLL.ViewModels;
+using SoundPlay.BLL.ViewModels.Admin;
 
 namespace SoundPlay.WEB.Areas.Admin.Controllers
 {
-	[Area("Admin")]
+    [Area("Admin")]
 	public sealed class TremoloTypeController : Controller
 	{
 		private readonly IItemGenericService<TremoloTypeViewModel> _tremoloTypeService;

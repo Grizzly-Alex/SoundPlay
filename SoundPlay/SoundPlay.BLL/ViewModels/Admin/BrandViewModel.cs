@@ -1,14 +1,14 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
 
-namespace SoundPlay.BLL.ViewModels
+namespace SoundPlay.BLL.ViewModels.Admin
 {
-    public sealed class GuitarShapeViewModel
+    public sealed class BrandViewModel
     {
         public int Id { get; set; }
 
         [Required]
-        [DisplayName("Guitar shape")]
+        [DisplayName("Brand")]
         public string? Name { get; set; }
     }
 }

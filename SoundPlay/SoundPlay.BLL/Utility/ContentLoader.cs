@@ -10,7 +10,6 @@ namespace SoundPlay.BLL.Utility
 		public string? FileUrl { get; private set; }	
 		private readonly string _webRootPath;
 		private readonly ILoggerAdapter<ContentLoader> _logger;
-
 		private readonly IWebHostEnvironment _hostEnvironment;
 
 		public ContentLoader(
@@ -22,10 +21,12 @@ namespace SoundPlay.BLL.Utility
 			_logger = logger;
 		}
 
-		public async Task UploadFile(IFormFileCollection files, string path)
+		public async Task<List<string>> UploadFile(IFormFileCollection files, string path)
 		{
+			List<string> fileUrls = new();
+
 			if (files.Count != 0)
-			{
+			{				
 				string upload = string.Concat(_webRootPath, path);
 
 				foreach (var file in files)
@@ -34,59 +35,32 @@ namespace SoundPlay.BLL.Utility
 					string extension = Path.GetExtension(file.FileName);
 					string fullFileName = string.Concat(fileName, extension);
 
+					fileUrls.Add(fullFileName);
+
 					using (var fileStream = new FileStream(Path.Combine(upload, fullFileName), FileMode.Create))
 					{
 						await file.CopyToAsync(fileStream);
 					}
 				}
+				
+				fileUrls.ForEach(value => _logger.LogInformation($"Files {value} added successfully"));
 			}
 
-
-				//string upload = string.Concat(_webRootPath, path);
-
-				//string[] paths = new string[formFiles.Count];
-
-				//for (int i = 0; i < paths.Length; i++)
-				//{
-				//	string fileName = Guid.NewGuid().ToString();
-				//	string extension = Path.GetExtension(formFiles[i].FileName);
-				//	string fullFileName = string.Concat(fileName, extension);
-				//	paths[i] = fullFileName;
-				//}
-
-				//using (var fileStream = new FileStream(Path.Combine(upload, fullFileName), FileMode.Create))
-				//{
-				//		formFiles[0].CopyTo(fileStream);
-				//}
-
-			
-
-
-			//if (formFiles.Count != 0)
-			//{
-			//	string upload = string.Concat(_webRootPath, path);
-			//	string fileName = Guid.NewGuid().ToString();
-			//	string extension = Path.GetExtension(formFiles[0].FileName);
-			//	string fullFileName = string.Concat(fileName, extension);
-
-			//	FileUrl = fullFileName;
-
-			//	using (var fileStream = new FileStream(Path.Combine(upload, fullFileName), FileMode.Create))
-			//	{
-			//		formFiles[0].CopyTo(fileStream);
-			//	}
-			//}
+			return fileUrls;
 		}
 
 		public void RemoveFile(string contentPath, string nameFile)
 		{
 			try
-			{			
-				string _filePath = Path.Combine(string.Concat(_webRootPath, contentPath), nameFile);
-				
-				if (File.Exists(_filePath))
+			{
+				if (nameFile is not null)
 				{
-					File.Delete(_filePath);
+					string _filePath = Path.Combine(string.Concat(_webRootPath, contentPath), nameFile);
+
+					if (File.Exists(_filePath))
+					{
+						File.Delete(_filePath);
+					}
 				}
 			}
 

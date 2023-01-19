@@ -23,46 +23,24 @@ namespace SoundPlay.BLL.Services
         public async Task<ColorViewModel> CreateViewModelAsync(ColorViewModel viewModel)
         {
             var model = _mapper.Map<Color>(viewModel);
-
-            try
-            {
-                _unitOfWork.Color.Add(model);
-                await _unitOfWork.SaveChangesAsync();
-                _logger.LogInformation("Create operation is successfull");
-            }
-
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, $"Create operation is failed, {ex.Message}");
-            }
-
-            return viewModel;
+			_unitOfWork.Color.Add(model);
+			await _unitOfWork.SaveChangesAsync();
+			return viewModel;
         }
 
         public async Task<ColorViewModel> DeleteViewModelAsync(ColorViewModel viewModel)
         {
             var model = _mapper.Map<Color>(viewModel);
-
-            try
-            {
-                _unitOfWork.Color.Remove(model);
-                await _unitOfWork.SaveChangesAsync();
-                _logger.LogInformation("Delete operation is successfull");
-            }
-
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, $"Delete operation is failed, {ex.Message}");
-            }
-
-            return viewModel;
+			_unitOfWork.Color.Remove(model);
+			await _unitOfWork.SaveChangesAsync();
+			return viewModel;
         }
 
         public async Task<ColorViewModel> GetViewModelByIdAsync(int id)
         {
             var model = await _unitOfWork.Color.GetFirstOrDefaultAsync(
                 predicate: i => i.Id == id,
-                changeTrackerOn: false);
+                isTracking: false);
 
             if (model is null)
             {
@@ -70,14 +48,13 @@ namespace SoundPlay.BLL.Services
                 throw new ObjectNotFoundException("Object not found");
             }
 
-            _logger.LogInformation("Get_by_id operation is successfull");
             var viewModel = _mapper.Map<ColorViewModel>(model);
             return viewModel;
         }
 
         public async Task<IEnumerable<ColorViewModel>> GetViewModelsAsync()
         {
-            var models = await _unitOfWork.Color.GetAllAsync(changeTrackerOn: false);
+            var models = await _unitOfWork.Color.GetAllAsync(isTracking: false);
 
             if (models is null)
             {
@@ -85,7 +62,6 @@ namespace SoundPlay.BLL.Services
                 throw new ObjectNotFoundException("Object not found");
             }
 
-            _logger.LogInformation("Get_All operation is successfull");
             var viewModels = _mapper.Map<IEnumerable<ColorViewModel>>(models);
             return viewModels;
         }
@@ -93,20 +69,9 @@ namespace SoundPlay.BLL.Services
         public async Task<ColorViewModel> UpdateViewModelAsync(ColorViewModel viewModel)
         {
             var model = _mapper.Map<Color>(viewModel);
-
-            try
-            {
-                _unitOfWork.Color.Update(model);
-                await _unitOfWork.SaveChangesAsync();
-                _logger.LogInformation("Update operation is successfull");
-            }
-
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, $"Update operation is failed, {ex.Message}");
-            }
-
-            return viewModel;
+			_unitOfWork.Color.Update(model);
+			await _unitOfWork.SaveChangesAsync();
+			return viewModel;
         }
     }
 }

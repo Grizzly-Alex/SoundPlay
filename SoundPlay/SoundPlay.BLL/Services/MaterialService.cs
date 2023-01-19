@@ -23,46 +23,24 @@ namespace SoundPlay.BLL.Services
         public async Task<MaterialViewModel> CreateViewModelAsync(MaterialViewModel viewModel)
         {
             var model = _mapper.Map<Material>(viewModel);
-
-            try
-            {
-                _unitOfWork.Material.Add(model);
-                await _unitOfWork.SaveChangesAsync();
-                _logger.LogInformation("Create operation is successfull");
-            }
-
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, $"Create operation is failed, {ex.Message}");
-            }
-
-            return viewModel;
+			_unitOfWork.Material.Add(model);
+			await _unitOfWork.SaveChangesAsync();
+			return viewModel;
         }
 
         public async Task<MaterialViewModel> DeleteViewModelAsync(MaterialViewModel viewModel)
         {
             var model = _mapper.Map<Material>(viewModel);
-
-            try
-            {
-                _unitOfWork.Material.Remove(model);
-                await _unitOfWork.SaveChangesAsync();
-                _logger.LogInformation("Delete operation is successfull");
-            }
-
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, $"Delete operation is failed, {ex.Message}");
-            }
-
-            return viewModel;
+			_unitOfWork.Material.Remove(model);
+			await _unitOfWork.SaveChangesAsync();
+			return viewModel;
         }
 
         public async Task<MaterialViewModel> GetViewModelByIdAsync(int id)
         {
             var model = await _unitOfWork.Material.GetFirstOrDefaultAsync(
                 predicate: i => i.Id == id,
-                changeTrackerOn: false);
+                isTracking: false);
 
             if (model is null)
             {
@@ -77,7 +55,7 @@ namespace SoundPlay.BLL.Services
 
         public async Task<IEnumerable<MaterialViewModel>> GetViewModelsAsync()
         {
-            var models = await _unitOfWork.Material.GetAllAsync(changeTrackerOn: false);
+            var models = await _unitOfWork.Material.GetAllAsync(isTracking: false);
 
             if (models is null)
             {
@@ -93,20 +71,9 @@ namespace SoundPlay.BLL.Services
         public async Task<MaterialViewModel> UpdateViewModelAsync(MaterialViewModel viewModel)
         {
             var model = _mapper.Map<Material>(viewModel);
-
-            try
-            {
-                _unitOfWork.Material.Update(model);
-                await _unitOfWork.SaveChangesAsync();
-                _logger.LogInformation("Update operation is successfull");
-            }
-
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, $"Update operation is failed, {ex.Message}");
-            }
-
-            return viewModel;
+			_unitOfWork.Material.Update(model);
+			await _unitOfWork.SaveChangesAsync();
+			return viewModel;
         }
     }
 }

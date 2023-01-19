@@ -8,7 +8,8 @@ using SoundPlay.BLL.ViewModels.Customer;
 
 namespace SoundPlay.WEB.Areas.Customer.Controllers
 {
-    public class PriceController : Controller
+	[Area("Customer")]
+	public sealed class PriceController : Controller
     {
         private readonly ILoggerAdapter<PriceController>? _logger;
         private readonly IItemGenericService<GuitarViewModel>? _guitars;

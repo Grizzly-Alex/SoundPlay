@@ -23,46 +23,24 @@ namespace SoundPlay.BLL.Services
         public async Task<PickupSetViewModel> CreateViewModelAsync(PickupSetViewModel viewModel)
         {
             var model = _mapper.Map<PickupSet>(viewModel);
-
-            try
-            {
-                _unitOfWork.PickupSet.Add(model);
-                await _unitOfWork.SaveChangesAsync();
-                _logger.LogInformation("Create operation is successfull");
-            }
-
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, $"Create operation is failed, {ex.Message}");
-            }
-
+			_unitOfWork.PickupSet.Add(model);
+			await _unitOfWork.SaveChangesAsync();			
             return viewModel;
         }
 
         public async Task<PickupSetViewModel> DeleteViewModelAsync(PickupSetViewModel viewModel)
         {
             var model = _mapper.Map<PickupSet>(viewModel);
-
-            try
-            {
-                _unitOfWork.PickupSet.Remove(model);
-                await _unitOfWork.SaveChangesAsync();
-                _logger.LogInformation("Delete operation is successfull");
-            }
-
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, $"Delete operation is failed, {ex.Message}");
-            }
-
-            return viewModel;
+			_unitOfWork.PickupSet.Remove(model);
+			await _unitOfWork.SaveChangesAsync();
+			return viewModel;
         }
 
         public async Task<PickupSetViewModel> GetViewModelByIdAsync(int id)
         {
             var model = await _unitOfWork.PickupSet.GetFirstOrDefaultAsync(
                 predicate: i => i.Id == id,
-                changeTrackerOn: false);
+                isTracking: false);
 
             if (model is null)
             {
@@ -77,7 +55,7 @@ namespace SoundPlay.BLL.Services
 
         public async Task<IEnumerable<PickupSetViewModel>> GetViewModelsAsync()
         {
-            var models = await _unitOfWork.PickupSet.GetAllAsync(changeTrackerOn: false);
+            var models = await _unitOfWork.PickupSet.GetAllAsync(isTracking: false);
 
             if (models is null)
             {
@@ -93,20 +71,9 @@ namespace SoundPlay.BLL.Services
         public async Task<PickupSetViewModel> UpdateViewModelAsync(PickupSetViewModel viewModel)
         {
             var model = _mapper.Map<PickupSet>(viewModel);
-
-            try
-            {
-                _unitOfWork.PickupSet.Update(model);
-                await _unitOfWork.SaveChangesAsync();
-                _logger.LogInformation("Update operation is successfull");
-            }
-
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, $"Update operation is failed, {ex.Message}");
-            }
-
-            return viewModel;
+			_unitOfWork.PickupSet.Update(model);
+			await _unitOfWork.SaveChangesAsync();
+			return viewModel;
         }
     }
 }

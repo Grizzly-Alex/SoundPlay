@@ -5,7 +5,8 @@ using SoundPlay.BLL.ViewModels.Customer;
 
 namespace SoundPlay.WEB.Areas.Customer.Controllers
 {
-    public class BasketController : Controller
+	[Area("Customer")]
+	public sealed class BasketController : Controller
     {
         private readonly ILoggerAdapter<BasketController> _logger;
 

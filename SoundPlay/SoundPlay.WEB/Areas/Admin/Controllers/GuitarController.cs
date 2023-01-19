@@ -192,7 +192,10 @@ namespace SoundPlay.WEB.Areas.Admin.Controllers
         {
             try
             {
-                if (ModelState.IsValid)
+				_contentLoader.UploadFile(HttpContext.Request.Form.Files, "/images/products/guitars");
+				guitarForCreateViewModel.GuitarViewModel.PictureUrl = _contentLoader.FileUrl;
+
+				if (ModelState.IsValid)
                 {
                     var viewModel = guitarForCreateViewModel.GuitarViewModel;
                     await _guitars!.UpdateViewModelAsync(viewModel!);

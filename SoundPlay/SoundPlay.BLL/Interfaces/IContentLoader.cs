@@ -7,5 +7,6 @@ namespace SoundPlay.BLL.Interfaces
 	{
 		public string? FileUrl { get; }
 		public void UploadFile(IFormFileCollection formFiles, string path);
+		public void RemoveFile(string contentPath, string nameFile);
 	}
 }

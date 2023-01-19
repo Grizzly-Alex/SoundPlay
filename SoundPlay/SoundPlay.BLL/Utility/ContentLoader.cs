@@ -8,26 +8,27 @@ namespace SoundPlay.BLL.Utility
 	{
 		public string? FileUrl { get; private set; }
 		private readonly IWebHostEnvironment _hostEnvironment;
-		private readonly string _wwwRootPath;
+		private readonly string _webRootPath;
 
 		public ContentLoader(IWebHostEnvironment hostEnvironment)
 		{
 			_hostEnvironment = hostEnvironment;
-			_wwwRootPath = _hostEnvironment.ContentRootPath;
+			_webRootPath = _hostEnvironment.WebRootPath;
 		}
 
-		public void UploadFile(IFormFile file, string path)
+		public void UploadFile(IFormFileCollection formFiles, string path)
 		{
+			string upload = string.Concat(_webRootPath, path); 
 			string fileName = Guid.NewGuid().ToString();
-			var uploads = Path.Combine(_wwwRootPath, path);
-			var extension = Path.GetExtension(file.FileName);
+			string extension = Path.GetExtension(formFiles[0].FileName);
+			string fullFileName = string.Concat(fileName, extension);
 
-			FileUrl = path + fileName + extension;
+			FileUrl = fullFileName;
 
-			using (var fileStrims = new FileStream(Path.Combine(uploads, fileName + extension), FileMode.Create))
+			using (var fileStream = new FileStream(Path.Combine(upload, fullFileName), FileMode.Create))
 			{
-				file.CopyTo(fileStrims);
-			}			
+				formFiles[0].CopyTo(fileStream);
+			}
 		}
 	}
 }

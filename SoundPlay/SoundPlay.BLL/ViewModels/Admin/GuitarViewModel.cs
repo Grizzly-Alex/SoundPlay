@@ -1,9 +1,9 @@
 ﻿using SoundPlay.DAL.Models;
 using System.ComponentModel.DataAnnotations;
 
-namespace SoundPlay.BLL.ViewModels
+namespace SoundPlay.BLL.ViewModels.Admin
 {
-    public sealed class GuitarViewModel:ProductViewModel
+    public sealed class GuitarViewModel : ProductViewModel
     {
         [Required] public int FrestCount { get; set; }
         [Required] public int StringsCount { get; set; }

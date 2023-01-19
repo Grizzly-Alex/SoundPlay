@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using SoundPlay.BLL.ViewModels;
+using SoundPlay.BLL.ViewModels.Admin;
 using SoundPlay.DAL.Models;
 
 namespace SoundPlay.BLL.Utility

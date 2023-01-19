@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using SoundPlay.BLL.Exceptions;
 using SoundPlay.BLL.Interfaces;
-using SoundPlay.BLL.ViewModels;
+using SoundPlay.BLL.ViewModels.Admin;
 using SoundPlay.DAL.Models;
 using SoundPlay.DAL.Repository.Interfaces;
 

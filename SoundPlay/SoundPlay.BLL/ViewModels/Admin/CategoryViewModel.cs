@@ -1,14 +1,14 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
 
-namespace SoundPlay.BLL.ViewModels
+namespace SoundPlay.BLL.ViewModels.Admin
 {
-    public class MaterialViewModel
+    public sealed class CategoryViewModel
     {
         public int Id { get; set; }
 
         [Required]
-        [DisplayName("Material")]
+        [DisplayName("Category")]
         public string? Name { get; set; }
     }
 }

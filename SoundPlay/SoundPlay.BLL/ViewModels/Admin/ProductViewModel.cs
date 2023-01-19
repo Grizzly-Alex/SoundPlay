@@ -1,7 +1,7 @@
 ﻿using SoundPlay.DAL.Models;
 using System.ComponentModel.DataAnnotations;
 
-namespace SoundPlay.BLL.ViewModels
+namespace SoundPlay.BLL.ViewModels.Admin
 {
     public class ProductViewModel
     {

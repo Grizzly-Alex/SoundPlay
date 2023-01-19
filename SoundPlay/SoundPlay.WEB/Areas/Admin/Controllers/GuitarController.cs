@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using SoundPlay.BLL.Exceptions;
 using SoundPlay.BLL.Interfaces;
 using SoundPlay.BLL.Services;
-using SoundPlay.BLL.ViewModels;
+using SoundPlay.BLL.ViewModels.Admin;
 
 namespace SoundPlay.WEB.Areas.Admin.Controllers
 {

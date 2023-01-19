@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using SoundPlay.BLL.ViewModels.Admin;
+using SoundPlay.BLL.ViewModels.Customer;
 using SoundPlay.DAL.Models;
 
 namespace SoundPlay.BLL.Utility
@@ -16,6 +17,11 @@ namespace SoundPlay.BLL.Utility
             CreateMap<Color, ColorViewModel>().ReverseMap();
             CreateMap<PickupSet, PickupSetViewModel>().ReverseMap();
             CreateMap<Guitar, GuitarViewModel>().ReverseMap();
+            CreateMap<GuitarViewModel, BasketPosition>()
+                .ForMember(position => position.ProductId, opt => opt.MapFrom(guitar => guitar.Id))
+                .ForMember(position => position.ProductName, opt => opt.MapFrom(guitar => guitar.Name))
+                .ForMember(position => position.ProductPictureUrl, opt => opt.MapFrom(guitar => guitar.PictureUrl))
+                .ForMember(position => position.ProductPrice, opt => opt.MapFrom(guitar => guitar.Price));
         }
     }
 }

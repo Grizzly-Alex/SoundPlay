@@ -197,7 +197,7 @@ namespace SoundPlay.WEB.Areas.Admin.Controllers
                 if (files.Count > 0)
                 {
 					_contentLoader.RemoveFile(@"\images\products\guitars", guitarForCreateViewModel.GuitarViewModel.PictureUrl);
-					_contentLoader.UploadFile(HttpContext.Request.Form.Files, @"\images\products\guitars");
+					await _contentLoader.UploadFile(HttpContext.Request.Form.Files, @"\images\products\guitars");
 					guitarForCreateViewModel.GuitarViewModel.PictureUrl = _contentLoader.FileUrl;
 				}		
 

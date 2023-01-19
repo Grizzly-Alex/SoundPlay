@@ -22,26 +22,60 @@ namespace SoundPlay.BLL.Utility
 			_logger = logger;
 		}
 
-		public void UploadFile(IFormFileCollection formFiles, string path)
+		public async Task UploadFile(IFormFileCollection files, string path)
 		{
-			if (formFiles.Count != 0)
+			if (files.Count != 0)
 			{
 				string upload = string.Concat(_webRootPath, path);
-				string fileName = Guid.NewGuid().ToString();
-				string extension = Path.GetExtension(formFiles[0].FileName);
-				string fullFileName = string.Concat(fileName, extension);
 
-				FileUrl = fullFileName;
-
-				using (var fileStream = new FileStream(Path.Combine(upload, fullFileName), FileMode.Create))
+				foreach (var file in files)
 				{
-					formFiles[0].CopyTo(fileStream);
+					string fileName = Guid.NewGuid().ToString();
+					string extension = Path.GetExtension(file.FileName);
+					string fullFileName = string.Concat(fileName, extension);
+
+					using (var fileStream = new FileStream(Path.Combine(upload, fullFileName), FileMode.Create))
+					{
+						await file.CopyToAsync(fileStream);
+					}
 				}
 			}
-			else
-			{
-				return;
-			}
+
+
+				//string upload = string.Concat(_webRootPath, path);
+
+				//string[] paths = new string[formFiles.Count];
+
+				//for (int i = 0; i < paths.Length; i++)
+				//{
+				//	string fileName = Guid.NewGuid().ToString();
+				//	string extension = Path.GetExtension(formFiles[i].FileName);
+				//	string fullFileName = string.Concat(fileName, extension);
+				//	paths[i] = fullFileName;
+				//}
+
+				//using (var fileStream = new FileStream(Path.Combine(upload, fullFileName), FileMode.Create))
+				//{
+				//		formFiles[0].CopyTo(fileStream);
+				//}
+
+			
+
+
+			//if (formFiles.Count != 0)
+			//{
+			//	string upload = string.Concat(_webRootPath, path);
+			//	string fileName = Guid.NewGuid().ToString();
+			//	string extension = Path.GetExtension(formFiles[0].FileName);
+			//	string fullFileName = string.Concat(fileName, extension);
+
+			//	FileUrl = fullFileName;
+
+			//	using (var fileStream = new FileStream(Path.Combine(upload, fullFileName), FileMode.Create))
+			//	{
+			//		formFiles[0].CopyTo(fileStream);
+			//	}
+			//}
 		}
 
 		public void RemoveFile(string contentPath, string nameFile)

@@ -13,8 +13,10 @@ namespace SoundPlay.WEB.Configuration
     {
         public static void ConfigureServices(IConfiguration configuration, IServiceCollection services)
         {
-            services.AddControllersWithViews();
+			services.AddHttpContextAccessor();
+			services.AddControllersWithViews();
             services.AddSingleton(typeof(ILoggerAdapter<>), typeof(LoggerAdapter<>));
+            services.AddScoped<IContentLoader, ContentLoader>();
             services.AddAutoMapper(typeof(MappingProfile));
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(configuration.GetConnectionString("CatalogConnection")));
@@ -28,6 +30,7 @@ namespace SoundPlay.WEB.Configuration
             services.AddTransient<IItemGenericService<TremoloTypeViewModel>, TremoloTypeService>();
             services.AddTransient<IItemGenericService<ColorViewModel>, ColorService>();
             services.AddTransient<IItemGenericService<PickupSetViewModel>, PickupSetService>();
+            services.AddTransient<IItemGenericService<GuitarViewModel>, GuitarService>();
             #endregion
         }
     }

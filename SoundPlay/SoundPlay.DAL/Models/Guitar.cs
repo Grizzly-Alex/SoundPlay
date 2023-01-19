@@ -4,7 +4,7 @@ namespace SoundPlay.DAL.Models
 {
     public sealed class Guitar : Product
     {
-        public int FrestCount { get; set; }
+        public int FretsCount { get; set; }
         public int StringsCount { get; set; }
         public int? ShapeId { get; set; }
         public int? SoundboardId { get; set; }

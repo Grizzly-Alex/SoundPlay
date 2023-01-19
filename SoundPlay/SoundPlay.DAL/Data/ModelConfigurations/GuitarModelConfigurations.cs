@@ -21,7 +21,7 @@ namespace SoundPlay.DAL.Data.ModelConfigurations
                 .HasColumnType("varchar(max)")
                 .IsRequired();
 
-            builder.Property(p => p.FrestCount)
+            builder.Property(p => p.FretsCount)
                 .HasColumnName("FreastCount")
                 .HasColumnType("int")
                 .IsRequired();

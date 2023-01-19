@@ -1,0 +1,47 @@
+﻿@model GuitarViewModel
+
+<form method="get">
+	<div class="border p-3 mt-4 row">
+		<div class="row pb-2">
+			<h2 class="text-black-50">Full Information</h2>
+		</div>
+
+		<div class="col-3">			
+			<p><b>Category: </b>@Model.Category!.Name</p>
+			<p><b>Model Guitar: </b>@Model.Name</p>
+			<p><b>Brand: </b>@Model.Brand!.Name</p>
+			<p><b>Color: </b>@Model.Color!.Name</p>
+			<p><b>Shape: </b>@Model.Shape!.Name</p>	
+			<p><b>Tremolo Type: </b>@Model.TremoloType!.Name</p>
+		</div>
+
+		<div class="col-3">
+			<p><b>Frets Count: </b>@Model.FretsCount</p>
+			<p><b>Strings Count: </b>@Model.StringsCount</p>
+			<p><b>Soundboard Material: </b>@Model.Soundboard!.Name</p>
+			<p><b>Neck Material: </b>@Model.Neck!.Name</p>
+			<p><b>Fretboard Material: </b>@Model.Fretboard!.Name</p>
+			<p><b>Pickup Set: </b>@Model.PickupSet!.Name</p>
+		</div>
+
+		<div class="col-4">
+			<p><b>Price: </b>@Model.Price</p>
+			<p><b>Date Delivery: </b>@Model.DateDelivery</p>
+			<p><b>Description: </b>@Model.Description</p>
+		</div>
+
+		<div>
+			<img class="card-img-top img-fluid d-block mx-auto mb-3" style="width:200px" src="/images/products/guitars/956e3de4-4490-478c-9941-67069198f379" alt="Card image cap" />
+		</div>
+		
+		<div class="col-12">
+			<a asp-controller="Guitar" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-secondary btn-sm" style="width:100px">
+				<span class="bi bi-wrench"> Edit</span>
+			</a>
+
+			<a asp-controller="Guitar" asp-action="index" class="btn btn-secondary btn-sm" style="width:100px">
+				<span class="bi bi-reply"> Back</span>
+			</a>
+		</div>
+	</div>
+</form>

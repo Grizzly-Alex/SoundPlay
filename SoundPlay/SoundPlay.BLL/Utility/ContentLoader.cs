@@ -1,13 +1,13 @@
 ﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using SoundPlay.BLL.Interfaces;
+using System.IO;
 
 namespace SoundPlay.BLL.Utility
 {
 	public sealed class ContentLoader : IContentLoader
 	{
-		public string? FileUrl { get; private set; }
-		private string? _filePath;	
+		public string? FileUrl { get; private set; }	
 		private readonly string _webRootPath;
 		private readonly ILoggerAdapter<ContentLoader> _logger;
 
@@ -42,19 +42,17 @@ namespace SoundPlay.BLL.Utility
 		public void RemoveFile(string contentPath, string nameFile)
 		{
 			try
-			{
-				_filePath = Path.Combine(_webRootPath, contentPath, nameFile);
+			{			
+				string _filePath = Path.Combine(string.Concat(_webRootPath, contentPath), nameFile);
 
 				if (File.Exists(_filePath))
 				{
 					File.Delete(_filePath);
-					_filePath = string.Empty;
 				}
 			}
 			catch (IOException ex)
 			{
-				_logger.LogError(ex, $"File not found, {_filePath}");
-				_filePath = string.Empty;
+				_logger.LogError(ex, $"File not found");
 			}
 		}
 	}

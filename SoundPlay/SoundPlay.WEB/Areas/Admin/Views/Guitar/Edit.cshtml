@@ -1,8 +1,9 @@
 ﻿@model GuitarForCreateViewModel
 
-<form method="post" asp-action="Edit">
+<form method="post" asp-controller="Guitar" asp-action="Edit" enctype="multipart/form-data">
 
 	<input asp-for="GuitarViewModel!.Id" hidden />
+	<input asp-for="GuitarViewModel!.PictureUrl" hidden />
 
 	<div class="border p-3 mt-4 row">
 		<div class="row pb-2">
@@ -14,14 +15,18 @@
 			<span asp-validation-for="GuitarViewModel!.Name" class="text-danger"></span>
 		</div>
 		<div class="mb-3">
-			<label asp-for="GuitarViewModel!.PictureUrl"></label>
-			<input asp-for="GuitarViewModel!.PictureUrl" class="form-control">
-			<span asp-validation-for="GuitarViewModel!.PictureUrl" class="text-danger"></span>
-		</div>
-		<div class="mb-3">
 			<label asp-for="GuitarViewModel!.Description"></label>
 			<textarea asp-for="GuitarViewModel!.Description" rows="3" class="form-control"></textarea>
 			<span asp-validation-for="GuitarViewModel!.Description" class="text-danger"></span>
+		</div>
+		@*Picture*@
+		<div class="mb-3">
+			<div class="form-group row">
+				<label asp-for="GuitarViewModel!.PictureUrl"></label>
+				<div class="col-8">
+					<input type="file" name="files" id="uploadBox" class=" form-control" />
+				</div>
+			</div>
 		</div>
 		@*Counts*@
 		<div class="mb-3">
@@ -103,7 +108,6 @@
 			</select>
 			<span asp-validation-for="GuitarViewModel!.PickupSetId" class="text-danger"></span>
 		</div>
-
 		@*Buttons*@
 		<div class="col-12">
 

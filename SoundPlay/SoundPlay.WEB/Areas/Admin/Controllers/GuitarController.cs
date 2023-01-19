@@ -120,7 +120,7 @@ namespace SoundPlay.WEB.Areas.Admin.Controllers
         {
 			try
             {
-				_contentLoader.UploadFile(HttpContext.Request.Form.Files, "/images/products/guitars");
+				_contentLoader.UploadFile(HttpContext.Request.Form.Files, @"/images/products/guitars");
 				guitarForCreateViewModel.GuitarViewModel.PictureUrl = _contentLoader.FileUrl;
 		
 				if (ModelState.IsValid)
@@ -192,8 +192,10 @@ namespace SoundPlay.WEB.Areas.Admin.Controllers
         {
             try
             {
-				_contentLoader.UploadFile(HttpContext.Request.Form.Files, "/images/products/guitars");
+                _contentLoader.RemoveFile(@"\images\products\guitars", guitarForCreateViewModel.GuitarViewModel.PictureUrl);
+				_contentLoader.UploadFile(HttpContext.Request.Form.Files, @"\images\products\guitars");
 				guitarForCreateViewModel.GuitarViewModel.PictureUrl = _contentLoader.FileUrl;
+
 
 				if (ModelState.IsValid)
                 {
@@ -218,7 +220,10 @@ namespace SoundPlay.WEB.Areas.Admin.Controllers
         {
             try
             {
-                var guitarViewModel = await _guitars!.GetViewModelByIdAsync(id);
+				var guitarViewModel = await _guitars!.GetViewModelByIdAsync(id);
+
+				_contentLoader.RemoveFile(@"/images/products/guitars", guitarViewModel.PictureUrl);
+
                 await _guitars.DeleteViewModelAsync(guitarViewModel);
                 return RedirectToAction("Index");
             }

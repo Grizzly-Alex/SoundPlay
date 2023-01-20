@@ -12,9 +12,12 @@ namespace SoundPlay.BLL.Services
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
-        private readonly ILoggerAdapter<GuitarService> _logger;
+		private readonly ILoggerAdapter<GuitarService> _logger;
 
-        public GuitarService(IUnitOfWork unitOfWork, IMapper mapper, ILoggerAdapter<GuitarService> logger)
+        public GuitarService(
+			IUnitOfWork unitOfWork,
+            IMapper mapper,
+            ILoggerAdapter<GuitarService> logger)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
@@ -76,7 +79,7 @@ namespace SoundPlay.BLL.Services
 
         public async Task<GuitarViewModel> CreateViewModelAsync(GuitarViewModel viewModel)
         {
-            var model = _mapper.Map<Guitar>(viewModel);
+			var model = _mapper.Map<Guitar>(viewModel);
 			_unitOfWork.Guitar.Add(model);
 			await _unitOfWork.SaveChangesAsync();
 			return viewModel;

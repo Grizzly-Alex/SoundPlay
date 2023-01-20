@@ -7,26 +7,26 @@ namespace SoundPlay.BLL.Utility
 {
 	public sealed class ContentLoader : IContentLoader
 	{
-		public string? FileUrl { get; private set; }	
+		public List<string> NameFiles { get; private set; }
 		private readonly string _webRootPath;
 		private readonly ILoggerAdapter<ContentLoader> _logger;
 		private readonly IWebHostEnvironment _hostEnvironment;
+
 
 		public ContentLoader(
 			IWebHostEnvironment hostEnvironment,
 			ILoggerAdapter<ContentLoader> logger)
 		{
+			NameFiles = new();
 			_hostEnvironment = hostEnvironment;
 			_webRootPath = _hostEnvironment.WebRootPath;
 			_logger = logger;
 		}
 
-		public async Task<List<string>> UploadFile(IFormFileCollection files, string path)
-		{
-			List<string> fileUrls = new();
-
-			if (files.Count != 0)
-			{				
+		public void UploadFiles(IFormFileCollection files, string path)
+		{					
+			try
+			{
 				string upload = string.Concat(_webRootPath, path);
 
 				foreach (var file in files)
@@ -35,18 +35,21 @@ namespace SoundPlay.BLL.Utility
 					string extension = Path.GetExtension(file.FileName);
 					string fullFileName = string.Concat(fileName, extension);
 
-					fileUrls.Add(fullFileName);
+					NameFiles.Add(fullFileName);
 
 					using (var fileStream = new FileStream(Path.Combine(upload, fullFileName), FileMode.Create))
 					{
-						await file.CopyToAsync(fileStream);
+						file.CopyTo(fileStream);
 					}
 				}
-				
-				fileUrls.ForEach(value => _logger.LogInformation($"Files {value} added successfully"));
+
+				NameFiles.ForEach(value => _logger.LogInformation($"File {value} added successfully"));
 			}
 
-			return fileUrls;
+			catch (Exception ex)
+			{
+				_logger.LogError(ex,"Files upload is failed");
+			}			
 		}
 
 		public void RemoveFile(string contentPath, string nameFile)

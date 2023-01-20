@@ -38,7 +38,7 @@ namespace SoundPlay.DAL.Data.ModelConfigurations
             builder.Property(p => p.Price)
                 .HasColumnName("Price")
                 .HasColumnType("decimal")
-                .HasPrecision(8, 2)
+                .HasPrecision(8, 3)
                 .IsRequired();
 
             builder.Property(p => p.PictureUrl)

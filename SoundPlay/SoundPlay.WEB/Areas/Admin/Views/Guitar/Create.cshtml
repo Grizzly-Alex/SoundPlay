@@ -27,11 +27,18 @@
 			</div>
 		</div>
 		@*Counts*@
-		<div class="mb-3">
+@*		<div class="mb-3">
 			<label asp-for="GuitarViewModel!.Price"></label>
 			<input asp-for="GuitarViewModel!.Price" class="form-control">
 
+		</div>*@
+
+		<div class="input-group mb-3">
+			<span class="input-group-text">$</span>
+			<span class="input-group-text">0.000</span>
+			<input asp-for="GuitarViewModel!.Price" class="form-control" aria-label="Dollar amount (with dot and three decimal places)">
 		</div>
+
 		<div class="mb-3 col-6">
 			<label asp-for="GuitarViewModel!.FretsCount"></label>
 			<input asp-for="GuitarViewModel!.FretsCount" class="form-control">

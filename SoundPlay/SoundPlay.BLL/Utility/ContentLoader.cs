@@ -1,55 +1,72 @@
 ﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using SoundPlay.BLL.Interfaces;
-using System.IO;
+
 
 namespace SoundPlay.BLL.Utility
 {
 	public sealed class ContentLoader : IContentLoader
 	{
-		public string? FileUrl { get; private set; }	
+		public List<string> NameFiles { get; private set; }
 		private readonly string _webRootPath;
 		private readonly ILoggerAdapter<ContentLoader> _logger;
-
 		private readonly IWebHostEnvironment _hostEnvironment;
+
 
 		public ContentLoader(
 			IWebHostEnvironment hostEnvironment,
 			ILoggerAdapter<ContentLoader> logger)
 		{
+			NameFiles = new();
 			_hostEnvironment = hostEnvironment;
 			_webRootPath = _hostEnvironment.WebRootPath;
 			_logger = logger;
 		}
 
-		public void UploadFile(IFormFileCollection formFiles, string path)
-		{
-			if (formFiles.Count == 0) return;
-
-			string upload = string.Concat(_webRootPath, path);
-			string fileName = Guid.NewGuid().ToString();
-			string extension = Path.GetExtension(formFiles[0].FileName);
-			string fullFileName = string.Concat(fileName, extension);
-
-			FileUrl = fullFileName;
-
-			using (var fileStream = new FileStream(Path.Combine(upload, fullFileName), FileMode.Create))
+		public void UploadFiles(IFormFileCollection files, string path)
+		{					
+			try
 			{
-				formFiles[0].CopyTo(fileStream);
+				string upload = string.Concat(_webRootPath, path);
+
+				foreach (var file in files)
+				{
+					string fileName = Guid.NewGuid().ToString();
+					string extension = Path.GetExtension(file.FileName);
+					string fullFileName = string.Concat(fileName, extension);
+
+					NameFiles.Add(fullFileName);
+
+					using (var fileStream = new FileStream(Path.Combine(upload, fullFileName), FileMode.Create))
+					{
+						file.CopyTo(fileStream);
+					}
+				}
+
+				NameFiles.ForEach(value => _logger.LogInformation($"File {value} added successfully"));
 			}
+
+			catch (Exception ex)
+			{
+				_logger.LogError(ex,"Files upload is failed");
+			}			
 		}
 
 		public void RemoveFile(string contentPath, string nameFile)
 		{
 			try
-			{			
-				string _filePath = Path.Combine(string.Concat(_webRootPath, contentPath), nameFile);
-
-				if (File.Exists(_filePath))
+			{
+				if (nameFile is not null)
 				{
-					File.Delete(_filePath);
+					string _filePath = Path.Combine(string.Concat(_webRootPath, contentPath), nameFile);
+
+					if (File.Exists(_filePath))
+					{
+						File.Delete(_filePath);
+					}
 				}
 			}
+
 			catch (IOException ex)
 			{
 				_logger.LogError(ex, $"File not found");

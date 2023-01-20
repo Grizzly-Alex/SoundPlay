@@ -120,12 +120,16 @@ namespace SoundPlay.WEB.Areas.Admin.Controllers
         {
 			try
             {
-				_contentLoader.UploadFile(HttpContext.Request.Form.Files, @"/images/products/guitars");
-				guitarForCreateViewModel.GuitarViewModel.PictureUrl = _contentLoader.FileUrl;
+				var files = HttpContext.Request.Form.Files;
+
+				if (files.Count > 0)
+                {
+					_contentLoader.UploadFiles(HttpContext.Request.Form.Files, @"/images/products/guitars");
+					guitarForCreateViewModel.GuitarViewModel!.PictureUrl = _contentLoader.NameFiles.FirstOrDefault();
+				}
 		
 				if (ModelState.IsValid)
-                {
-                    
+                {                    
                     await _guitars!.CreateViewModelAsync(guitarForCreateViewModel.GuitarViewModel!);
                     return RedirectToAction("Index");
                 }
@@ -192,10 +196,14 @@ namespace SoundPlay.WEB.Areas.Admin.Controllers
         {
             try
             {
-                _contentLoader.RemoveFile(@"\images\products\guitars", guitarForCreateViewModel.GuitarViewModel.PictureUrl);
-				_contentLoader.UploadFile(HttpContext.Request.Form.Files, @"\images\products\guitars");
-				guitarForCreateViewModel.GuitarViewModel.PictureUrl = _contentLoader.FileUrl;
+                var files = HttpContext.Request.Form.Files;
 
+                if (files.Count > 0)
+                {
+					_contentLoader.RemoveFile(@"\images\products\guitars", guitarForCreateViewModel.GuitarViewModel.PictureUrl);
+					_contentLoader.UploadFiles(files, @"\images\products\guitars");
+                    guitarForCreateViewModel.GuitarViewModel.PictureUrl = _contentLoader.NameFiles.FirstOrDefault();              
+				}		
 
 				if (ModelState.IsValid)
                 {

@@ -11,9 +11,9 @@ namespace SoundPlay.BLL.ViewModels.Admin
         public decimal Price { get; set; }
         public DateTime DateDelivery { get; set; }
 		[ValidateNever] public string? PictureUrl { get; set; }
-        public int? CategoryId { get; set; }
-        public int? BrandId { get; set; }
-        public int? ColorId { get; set; }
+        public int CategoryId { get; set; }
+        public int BrandId { get; set; }
+        public int ColorId { get; set; }
         [ValidateNever] public Category? Category { get; set; }
 		[ValidateNever] public Brand? Brand { get; set; }
 		[ValidateNever] public Color? Color { get; set; }

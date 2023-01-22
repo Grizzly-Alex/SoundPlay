@@ -23,7 +23,6 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\images\products\guitars\" />
-    <Folder Include="wwwroot\lib\" />
   </ItemGroup>
 
 </Project>

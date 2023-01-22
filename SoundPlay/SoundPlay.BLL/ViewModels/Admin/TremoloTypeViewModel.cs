@@ -1,5 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 
 namespace SoundPlay.BLL.ViewModels.Admin
 {
@@ -7,8 +6,7 @@ namespace SoundPlay.BLL.ViewModels.Admin
     {
         public int Id { get; set; }
 
-        [Required]
         [DisplayName("Tremolo type")]
-        public string? Name { get; set; }
+        public string Name { get; set; }
     }
 }

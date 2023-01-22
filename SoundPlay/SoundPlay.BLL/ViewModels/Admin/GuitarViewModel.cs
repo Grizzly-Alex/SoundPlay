@@ -1,19 +1,17 @@
 ﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using SoundPlay.DAL.Models;
 using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
+
 
 namespace SoundPlay.BLL.ViewModels.Admin
 {
     public sealed class GuitarViewModel : ProductViewModel
     {
-        [Required]
 		[DisplayName("Frets Count")]
-		public int FretsCount { get; set; }
+		public byte FretsCount { get; set; }
 
-        [Required]
         [DisplayName("Strings Count")] 
-        public int StringsCount { get; set; }
+        public byte StringsCount { get; set; }
 
         public int? ShapeId { get; set; }
         public int? SoundboardId { get; set; }

@@ -7,8 +7,7 @@ namespace SoundPlay.BLL.ViewModels.Admin
     {
         public int Id { get; set; }
 
-        [Required]
         [DisplayName("Guitar shape")]
-        public string? Name { get; set; }
+        public string Name { get; set; }
     }
 }

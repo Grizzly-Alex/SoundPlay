@@ -1,22 +1,32 @@
 ﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using SoundPlay.DAL.Models;
 using System.ComponentModel;
-
+using System.ComponentModel.DataAnnotations;
 
 namespace SoundPlay.BLL.ViewModels.Admin
 {
     public sealed class GuitarViewModel : ProductViewModel
     {
 		[DisplayName("Frets Count")]
+		[Required(ErrorMessage = "Value {0} must not be empty!")]
+		[Range(1, 50, ErrorMessage = "Value for {0} must be between {1} and {2}.")]
 		public byte FretsCount { get; set; }
 
-        [DisplayName("Strings Count")] 
-        public byte StringsCount { get; set; }
+        [DisplayName("Strings Count")]
+		[Required(ErrorMessage = "Value {0} must not be empty!")]
+		[Range(1, 50, ErrorMessage = "Value for {0} must be between {1} and {2}.")]
+		public byte StringsCount { get; set; }
 
         public int? ShapeId { get; set; }
-        public int SoundboardId { get; set; }
-        public int NeckId { get; set; }
-        public int FretboardId { get; set; }
+
+		[Required(ErrorMessage = "Value {0} from the list must be selected!")]
+		public int SoundboardId { get; set; }
+
+		[Required(ErrorMessage = "Value {0} from the list must be selected!")]
+		public int NeckId { get; set; }
+
+		[Required(ErrorMessage = "Value {0} from the list must be selected!")]
+		public int FretboardId { get; set; }
         public int? TremoloTypeId { get; set; }
         public int? PickupSetId { get; set; }
 

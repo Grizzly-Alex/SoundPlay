@@ -10,7 +10,7 @@ namespace SoundPlay.BLL.ViewModels.Admin
     {
         public int Id { get; set; }
 
-		[Required(ErrorMessage = "Value {0} field must not be empty!")]
+		[Required(ErrorMessage = "Value {0} must not be empty!")]
 		public string Name { get; set; }
 
 		[Required(ErrorMessage = "Value {0} must not be empty!")]

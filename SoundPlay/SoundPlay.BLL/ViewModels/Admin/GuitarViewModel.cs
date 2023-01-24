@@ -17,18 +17,26 @@ namespace SoundPlay.BLL.ViewModels.Admin
 		[Range(1, 50, ErrorMessage = "Value for {0} must be between {1} and {2}.")]
 		public byte StringsCount { get; set; }
 
-        public int? ShapeId { get; set; }
+		[DisplayName("Shape")]
+		public int? ShapeId { get; set; }
 
 		[Required(ErrorMessage = "Value {0} from the list must be selected!")]
+		[DisplayName("Soundboard")]
 		public int SoundboardId { get; set; }
 
 		[Required(ErrorMessage = "Value {0} from the list must be selected!")]
+		[DisplayName("Neck")]
 		public int NeckId { get; set; }
 
 		[Required(ErrorMessage = "Value {0} from the list must be selected!")]
+		[DisplayName("Fretboard")]
 		public int FretboardId { get; set; }
-        public int? TremoloTypeId { get; set; }
-        public int? PickupSetId { get; set; }
+
+		[DisplayName("Tremolo Type")]
+		public int? TremoloTypeId { get; set; }
+
+		[DisplayName("Pickup Set")]
+		public int? PickupSetId { get; set; }
 
 		[DisplayName("Shape")]
 		[ValidateNever]

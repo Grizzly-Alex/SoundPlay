@@ -6,15 +6,22 @@
 			<h2 class="text-black-50">Full Information</h2>
 		</div>
 
-		<div class="col-4">
+		<div>
 			<p><b>Model Guitar: </b>@Model.Name</p>
-			<p><b>Price: </b>@Model.ViewPrice</p>
-			<p><b>Date Delivery: </b>@Model.DateDelivery</p>
-			<img src="/images/products/guitars/@Model.PictureUrl"
-				style="width:100%" />
 		</div>
 
-		<div class="col-4">
+		<div class="col-6">
+			<img src="@WebConstants.GuitarsImagesFolder@Model.PictureUrl"
+				style="width:100%" />
+			<p></p>
+		</div>
+
+		<div>
+			<p><b>Price: </b>@Model.ViewPrice</p>
+			<p><b>Date Delivery: </b>@Model.DateDelivery</p>
+		</div>
+
+		<div >
 			<b>Description:</b>
 			<div class="small">
 				<p>@Html.Raw(Model.Description)</p>

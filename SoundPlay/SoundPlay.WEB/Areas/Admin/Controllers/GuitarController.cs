@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using SoundPlay.BLL.Exceptions;
 using SoundPlay.BLL.Interfaces;
 using SoundPlay.BLL.Services;
+using SoundPlay.BLL.Utility;
 using SoundPlay.BLL.ViewModels.Admin;
 
 namespace SoundPlay.WEB.Areas.Admin.Controllers
@@ -124,7 +125,7 @@ namespace SoundPlay.WEB.Areas.Admin.Controllers
 
 				if (files.Count > 0)
                 {
-					_contentManager.UploadFiles(HttpContext.Request.Form.Files, @"/images/products/guitars");
+					_contentManager.UploadFiles(HttpContext.Request.Form.Files, WebConstants.GuitarsImagesFolder);
 					guitarForCreateViewModel.GuitarViewModel!.PictureUrl = _contentManager.NameFiles.FirstOrDefault();
 				}
 		
@@ -201,8 +202,8 @@ namespace SoundPlay.WEB.Areas.Admin.Controllers
 
                 if (files.Count > 0)
                 {
-					_contentManager.RemoveFile(@"\images\products\guitars", guitarForCreateViewModel.GuitarViewModel.PictureUrl);
-					_contentManager.UploadFiles(files, @"\images\products\guitars");
+					_contentManager.RemoveFile(WebConstants.GuitarsImagesFolder, guitarForCreateViewModel.GuitarViewModel.PictureUrl);
+					_contentManager.UploadFiles(files, WebConstants.GuitarsImagesFolder);
                     guitarForCreateViewModel.GuitarViewModel.PictureUrl = _contentManager.NameFiles.FirstOrDefault();              
 				}		
 
@@ -231,7 +232,7 @@ namespace SoundPlay.WEB.Areas.Admin.Controllers
             {
 				var guitarViewModel = await _guitars!.GetViewModelByIdAsync(id);
 
-				_contentManager.RemoveFile(@"/images/products/guitars", guitarViewModel.PictureUrl);
+				_contentManager.RemoveFile(WebConstants.GuitarsImagesFolder, guitarViewModel.PictureUrl);
 
                 await _guitars.DeleteViewModelAsync(guitarViewModel);
                 return RedirectToAction("Index");

@@ -38,7 +38,7 @@
 
 				<div class="mb-3">
 					<span>Current Picture</span>
-					<img src="/images/products/guitars/@Model.GuitarViewModel!.PictureUrl"
+					<img src="@WebConstants.GuitarsImagesFolder@Model.GuitarViewModel!.PictureUrl"
 						 style="width:100%; border-radius:10px; border:2px solid #D6D6D8" />
 				</div>
 			</div>
@@ -52,10 +52,10 @@
 				<span class="input-group-text">0.00</span>
 				<input asp-for="GuitarViewModel!.Price" type="number" class="form-control"
 					   placeholder="0.00" step="0.01" min="1" max="999999" required>
-			</div>
-			<span asp-validation-for="GuitarViewModel!.Price" class="text-danger"></span>
-			<div class="valid-feedback">
-				Looks good!
+				<span asp-validation-for="GuitarViewModel!.Price" class="text-danger"></span>
+				<div class="valid-feedback">
+					Looks good!
+				</div>
 			</div>
 		</div>
 

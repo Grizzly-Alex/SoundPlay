@@ -129,7 +129,8 @@ namespace SoundPlay.WEB.Areas.Admin.Controllers
 				}
 		
 				if (ModelState.IsValid)
-                {                    
+                {    
+                    guitarForCreateViewModel.GuitarViewModel!.DateDelivery = DateTime.Now;
                     await _guitars!.CreateViewModelAsync(guitarForCreateViewModel.GuitarViewModel!);
                     return RedirectToAction("Index");
                 }

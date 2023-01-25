@@ -3,7 +3,7 @@
 
 namespace SoundPlay.BLL.Interfaces
 {
-	public interface IContentLoader
+	public interface IContentManager
 	{
 		public List<string> NameFiles { get; }
 		public void UploadFiles(IFormFileCollection files, string path);

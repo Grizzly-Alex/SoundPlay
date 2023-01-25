@@ -57,7 +57,7 @@ namespace SoundPlay.WEB.Areas.Admin.Controllers
 				if (ModelState.IsValid)
 				{
 					await _categoryService.CreateViewModelAsync(obj);
-					return RedirectToAction("Index");
+					return RedirectToAction(nameof(Index));
 				}
 				else return View(obj);
 			}
@@ -99,7 +99,7 @@ namespace SoundPlay.WEB.Areas.Admin.Controllers
 				if (ModelState.IsValid)
 				{
 					await _categoryService.UpdateViewModelAsync(obj);
-					return RedirectToAction("Index");
+					return RedirectToAction(nameof(Index));
 				}
 				return View(obj);
 			}
@@ -118,7 +118,7 @@ namespace SoundPlay.WEB.Areas.Admin.Controllers
 			{
 				var viewModel = await _categoryService.GetViewModelByIdAsync(id);
 				await _categoryService.DeleteViewModelAsync(viewModel);
-				return RedirectToAction("Index");
+				return RedirectToAction(nameof(Index));
 			}
 
 			catch (ObjectNotFoundException ex)

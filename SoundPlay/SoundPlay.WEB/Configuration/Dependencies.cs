@@ -16,7 +16,7 @@ namespace SoundPlay.WEB.Configuration
 			services.AddHttpContextAccessor();
 			services.AddControllersWithViews();
             services.AddSingleton(typeof(ILoggerAdapter<>), typeof(LoggerAdapter<>));
-            services.AddScoped<IContentLoader, ContentLoader>();
+            services.AddScoped<IContentManager, ContentManager>();
             services.AddAutoMapper(typeof(MappingProfile));
 			services.AddSession(options => { options.IdleTimeout = TimeSpan.FromMinutes(10);
                 options.Cookie.HttpOnly = true;

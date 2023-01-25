@@ -5,17 +5,17 @@ using SoundPlay.BLL.Interfaces;
 
 namespace SoundPlay.BLL.Utility
 {
-	public sealed class ContentLoader : IContentLoader
+	public sealed class ContentManager : IContentManager
 	{
 		public List<string> NameFiles { get; private set; }
 		private readonly string _webRootPath;
-		private readonly ILoggerAdapter<ContentLoader> _logger;
+		private readonly ILoggerAdapter<ContentManager> _logger;
 		private readonly IWebHostEnvironment _hostEnvironment;
 
 
-		public ContentLoader(
+		public ContentManager(
 			IWebHostEnvironment hostEnvironment,
-			ILoggerAdapter<ContentLoader> logger)
+			ILoggerAdapter<ContentManager> logger)
 		{
 			NameFiles = new();
 			_hostEnvironment = hostEnvironment;

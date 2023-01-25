@@ -7,9 +7,9 @@ namespace SoundPlay.DAL.Models
         public byte FretsCount { get; set; }
         public byte StringsCount { get; set; }
         public int? ShapeId { get; set; }
-        public int? SoundboardId { get; set; }
-        public int? NeckId { get; set; }
-        public int? FretboardId { get; set; }
+        public int SoundboardId { get; set; }
+        public int NeckId { get; set; }
+        public int FretboardId { get; set; }
         public int? TremoloTypeId { get; set; } 
         public int? PickupSetId { get; set; }
         [ForeignKey("ShapeId")] public GuitarShape? Shape { get; set; }

@@ -1,118 +1,166 @@
 ﻿@model GuitarForCreateViewModel
 
 
-<form method="post" asp-controller="Guitar" asp-action="Create" enctype="multipart/form-data">
+<form method="post" asp-controller="Guitar" asp-action="Create" enctype="multipart/form-data" class="row g-3 needs-validation" novalidate>
 
-	<div class="border p-3 mt-4 row">
+	<div class="border p-3 mt-5 row">
 		<div class="row pb-2">
 			<h2 class="text-black-50">Create Guitar</h2>	
 		</div>
 		<div class="mb-3">
 			<label asp-for="GuitarViewModel!.Name"></label>
-			<input asp-for="GuitarViewModel!.Name" class="form-control">
-
+			<input asp-for="GuitarViewModel!.Name" class="form-control" required>
+			<span asp-validation-for="GuitarViewModel!.Name" class="text-danger"></span>
+			<div class="valid-feedback">
+				Looks good!
+			</div>
 		</div>
 		<div class="mb-3">
 			<label asp-for="GuitarViewModel!.Description"></label>
-			<textarea asp-for="GuitarViewModel!.Description" rows="3" class="form-control"></textarea>
-
+			<textarea asp-for="GuitarViewModel!.Description" id="tinytextarea" rows="3" class="form-control"
+			required placeholder="Text area must be required"></textarea>
+			<span asp-validation-for="GuitarViewModel!.Description" class="text-danger"></span>
 		</div>
+
 		@*Picture*@
-		<div class="mb-3">
+		<div class="mb-3 col-6">
 			<div class="form-group row">
 				<label asp-for="GuitarViewModel!.PictureUrl"></label>
-				<div class="col-8">  
-					<input type="file" name="files" id="uploadBox" class=" form-control" />   
+				<div class="col-12">  
+					<input type="file" name="files" id="uploadBox" class=" form-control" required />
 				</div>   
 			</div>
+			<div class="valid-feedback">
+				Looks good!
+			</div>
 		</div>
-		@*Counts*@
-@*		<div class="mb-3">
+
+		@*Price*@
+		<div class="mb-7 col-6">
 			<label asp-for="GuitarViewModel!.Price"></label>
-			<input asp-for="GuitarViewModel!.Price" class="form-control">
-
-		</div>*@
-
-		<div class="input-group mb-3">
-			<span class="input-group-text">$</span>
-			<span class="input-group-text">0.000</span>
-			<input asp-for="GuitarViewModel!.Price" class="form-control" aria-label="Dollar amount (with dot and three decimal places)">
+			<div class="input-group">
+				<span class="input-group-text">$</span>
+				<span class="input-group-text">0.00</span>
+				<input asp-for="GuitarViewModel!.Price" type="number" value="0.00" class="form-control"
+				placeholder="0.00" step="0.01" min="1" max="999999" required>
+			</div>
+			<span asp-validation-for="GuitarViewModel!.Price" class="text-danger"></span>
+			<div class="valid-feedback">
+				Looks good!
+			</div>
 		</div>
 
+
+		@*Counts*@
 		<div class="mb-3 col-6">
 			<label asp-for="GuitarViewModel!.FretsCount"></label>
-			<input asp-for="GuitarViewModel!.FretsCount" class="form-control">
-
+			<input asp-for="GuitarViewModel!.FretsCount" class="form-control" min="1" max="50" required>
+			<span asp-validation-for="GuitarViewModel!.FretsCount" class="text-danger"></span>
+			<div class="valid-feedback">
+				Looks good!
+			</div>
 		</div>
 		<div class="mb-3 col-6">
 			<label asp-for="GuitarViewModel!.StringsCount"></label>
-			<input asp-for="GuitarViewModel!.StringsCount" class="form-control">
-
+			<input asp-for="GuitarViewModel!.StringsCount" class="form-control" min="1" max="50" required>
+			<span asp-validation-for="GuitarViewModel!.StringsCount" class="text-danger"></span>
+			<div class="valid-feedback">
+				Looks good!
+			</div>
 		</div>
+
 		@*Item lists*@
 		<div class="mb-3 col-4">
 			<label asp-for="GuitarViewModel!.Category"></label>
-			<select asp-for="GuitarViewModel!.CategoryId" asp-items="@Model.Categories" class="form-select">
-				<option disabled selected>--Select Category--</option>
+			<select asp-for="GuitarViewModel!.CategoryId" asp-items="@Model.Categories" class="form-select" required>
+				<option selected disabled value="">--Select Category--</option>
 			</select>
-
+			<span asp-validation-for="GuitarViewModel!.CategoryId" class="text-danger"></span>
+			<div class="valid-feedback">
+				Looks good!
+			</div>
 		</div>
 		<div class="mb-3 col-4">
 			<label asp-for="GuitarViewModel!.Brand"></label>
-			<select asp-for="GuitarViewModel!.BrandId" asp-items="@Model.Brands" class="form-select">
-				<option disabled selected>--Select Brand--</option>
+			<select asp-for="GuitarViewModel!.BrandId" asp-items="@Model.Brands" class="form-select" required>
+				<option selected disabled value="">--Select Brand--</option>
 			</select>
-
+			<span asp-validation-for="GuitarViewModel!.BrandId" class="text-danger"></span>
+			<div class="valid-feedback">
+				Looks good!
+			</div>
 		</div>
 		<div class="mb-3 col-4">
 			<label asp-for="GuitarViewModel!.Color"></label>
-			<select asp-for="GuitarViewModel!.ColorId" asp-items="@Model.Colors" class="form-select">
-				<option disabled selected>--Select Color--</option>
+			<select asp-for="GuitarViewModel!.ColorId" asp-items="@Model.Colors" class="form-select" required>
+				<option selected disabled value="">--Select Color--</option>
 			</select>
-
+			<span asp-validation-for="GuitarViewModel!.ColorId" class="text-danger"></span>
+			<div class="valid-feedback">
+				Looks good!
+			</div>
 		</div>
 		<div class="mb-3 col-4">
 			<label asp-for="GuitarViewModel!.Shape"></label>
 			<select asp-for="GuitarViewModel!.ShapeId" asp-items="@Model.GuitarShapes" class="form-select">
-				<option disabled selected>--Select Shape--</option>
+				<option selected disabled value="">--Select Shape--</option>
 			</select>
-
+			<span asp-validation-for="GuitarViewModel!.ShapeId" class="text-danger"></span>
+			<div class="valid-feedback">
+				Optional field
+			</div>
 		</div>
 		<div class="mb-3 col-4">
 			<label asp-for="GuitarViewModel!.Soundboard"></label>
-			<select asp-for="GuitarViewModel!.SoundboardId" asp-items="@Model.Soundboards" class="form-select">
-				<option disabled selected>--Select Material--</option>
+			<select asp-for="GuitarViewModel!.SoundboardId" asp-items="@Model.Soundboards" class="form-select" required>
+				<option selected disabled value="">--Select Material--</option>
 			</select>
-
+			<span asp-validation-for="GuitarViewModel!.SoundboardId" class="text-danger"></span>
+			<div class="valid-feedback">
+				Looks good!
+			</div>
 		</div>
 		<div class="mb-3 col-4">
 			<label asp-for="GuitarViewModel!.Neck"></label>
-			<select asp-for="GuitarViewModel!.NeckId" asp-items="@Model.Necks" class="form-select">
-				<option disabled selected>--Select Material--</option>
+			<select asp-for="GuitarViewModel!.NeckId" asp-items="@Model.Necks" class="form-select" required>
+				<option selected disabled value="">--Select Material--</option>
 			</select>
-
+			<span asp-validation-for="GuitarViewModel!.NeckId" class="text-danger"></span>
+			<div class="valid-feedback">
+				Looks good!
+			</div>
 		</div>
 		<div class="mb-3 col-4">
 			<label asp-for="GuitarViewModel!.Fretboard"></label>
-			<select asp-for="GuitarViewModel!.FretboardId" asp-items="@Model.Fretboards" class="form-select">
-				<option disabled selected>--Select Material--</option>
+			<select asp-for="GuitarViewModel!.FretboardId" asp-items="@Model.Fretboards" class="form-select" required>
+				<option selected disabled value="">--Select Material--</option>
 			</select>
-
+			<span asp-validation-for="GuitarViewModel!.FretboardId" class="text-danger"></span>
+			<div class="valid-feedback">
+				Looks good!
+			</div>
 		</div>
 		<div class="mb-3 col-4">
 			<label asp-for="GuitarViewModel!.TremoloType"></label>
 			<select asp-for="GuitarViewModel!.TremoloTypeId" asp-items="@Model.TremoloTypes" class="form-select">
-				<option disabled selected>--Select Tremolo Type--</option>
+				<option selected disabled value="">--Select Tremolo Type--</option>
 			</select>
-
+			<span asp-validation-for="GuitarViewModel!.TremoloTypeId" class="text-danger"></span>
+			<div class="valid-feedback">
+				Optional field.
+			</div>
 		</div>
 		<div class="mb-3 col-4">
 			<label asp-for="GuitarViewModel!.PickupSet"></label>
-			<select asp-for="GuitarViewModel!.PickupSetId" asp-items="@Model.PickupSets" class="form-select">
-				<option disabled selected>--Select Pickup Set--</option>
+			<select asp-for="GuitarViewModel!.PickupSetId" asp-items="@Model.PickupSets" class="form-select" >
+				<option selected disabled value="">--Select Pickup Set--</option>
 			</select>
-
+			<span asp-validation-for="GuitarViewModel!.PickupSetId" class="text-danger"></span>
+			<div class="valid-feedback">
+				Optional field.
+			</div>
 		</div>
+
 		@*Buttons*@
 		<div class="col-12">
 
@@ -129,3 +177,8 @@
 	</div>
 </form>
 
+
+@section Scripts{	
+	<partial name="_ValidationScriptsPartial" />
+	<script src="~/js/textareaTinyMCE.js"></script>	
+}

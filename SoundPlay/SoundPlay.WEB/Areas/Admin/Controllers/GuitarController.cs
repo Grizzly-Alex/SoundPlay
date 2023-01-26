@@ -133,7 +133,7 @@ namespace SoundPlay.WEB.Areas.Admin.Controllers
                 {    
                     guitarForCreateViewModel.GuitarViewModel!.DateDelivery = DateTime.Now;
                     await _guitars!.CreateViewModelAsync(guitarForCreateViewModel.GuitarViewModel!);
-                    return RedirectToAction("Index");
+                    return RedirectToAction(nameof(Index));
                 }
 
 				else return View(guitarForCreateViewModel);
@@ -212,7 +212,7 @@ namespace SoundPlay.WEB.Areas.Admin.Controllers
                     var viewModel = guitarForCreateViewModel.GuitarViewModel;
                     await _guitars!.UpdateViewModelAsync(viewModel!);
 
-                    return RedirectToAction("FullInfo", new { id = viewModel!.Id });
+                    return RedirectToAction(nameof(FullInfo), new { id = viewModel!.Id });
                 }
 
                 else return RedirectToAction();
@@ -235,7 +235,7 @@ namespace SoundPlay.WEB.Areas.Admin.Controllers
 				_contentManager.RemoveFile(WebConstants.GuitarsImagesFolder, guitarViewModel.PictureUrl);
 
                 await _guitars.DeleteViewModelAsync(guitarViewModel);
-                return RedirectToAction("Index");
+                return RedirectToAction(nameof(Index));
             }
 
             catch (ObjectNotFoundException ex)

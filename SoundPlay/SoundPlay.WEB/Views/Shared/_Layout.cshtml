@@ -54,23 +54,30 @@
     @*header catalog*@
     <div>
         <nav class="navbar navbar-dark bg-dark" aria-label="Dark offcanvas navbar">
-            <div class="container-fluid">         
-                
+            <div class="container">
+
                 @*button start offcanvass*@
                 <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbarDark" aria-controls="offcanvasNavbarDark">
                     <span class="bi bi-music-note-list"></span>
                 </button>
 
                 @*button category*@
-                <button type="button" class="btn btn-dark">Guitars</button>
-                <button type="button" class="btn btn-dark">Basses</button>
-                <button type="button" class="btn btn-dark">Drums</button>
-                <button type="button" class="btn btn-dark">Keys</button>
-                <button type="button" class="btn btn-dark">Brass</button>
-                <button type="button" class="btn btn-dark">Microphones</button>
-                <button type="button" class="btn btn-dark">Accessories</button>
-                <button type="button" class="btn btn-dark">Cables</button>
-                <button type="button" class="btn btn-dark">Traditional</button>
+                <div class="navbar-expand">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="btn btn-dark" asp-controller="Home" asp-action="Index">All Categories</a>
+                            <a class="btn btn-dark" asp-controller="Home" asp-action="Index">Guitars</a>
+                            <a class="btn btn-dark" asp-controller="Home" asp-action="Index">Drums</a>
+                            <a class="btn btn-dark" asp-controller="Home" asp-action="Index">Keys</a>
+                            <a class="btn btn-dark" asp-controller="Home" asp-action="Index">Brass</a>
+                            <a class="btn btn-dark" asp-controller="Home" asp-action="Index">Traditional</a>
+                            <a class="btn btn-dark" asp-controller="Home" asp-action="Index">Studio</a>
+                            <a class="btn btn-dark" asp-controller="Home" asp-action="Index">Cases</a>
+                            <a class="btn btn-dark" asp-controller="Home" asp-action="Index">Cables</a>
+                            <a class="btn btn-dark" asp-controller="Home" asp-action="Index">Accessories</a>
+                        </li>
+                    </ul>
+                </div>
 
                 @*searcher*@
                 <form class="d-flex mt-3 mt-lg-0" role="search">

@@ -21,8 +21,4 @@
     <ProjectReference Include="..\SoundPlay.DAL\SoundPlay.DAL.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="wwwroot\images\products\guitars\" />
-  </ItemGroup>
-
 </Project>

@@ -111,7 +111,7 @@ namespace SoundPlay.WEB.Areas.Customer.Controllers
 
                     // putting a basket with new properties into the session
                     HttpContext.Session.Set(WebConstants.BasketSession, basket);
-                    return RedirectToAction("Index");
+                    return RedirectToAction(nameof(Index));
                 }
             }
 
@@ -152,7 +152,7 @@ namespace SoundPlay.WEB.Areas.Customer.Controllers
 
                     // putting a basket with new properties into the session
                     HttpContext.Session.Set(WebConstants.BasketSession, basket);
-                    return RedirectToAction("Index");
+                    return RedirectToAction(nameof(Index));
                 }
             }
 
@@ -188,7 +188,7 @@ namespace SoundPlay.WEB.Areas.Customer.Controllers
 
                 // putting a basket with new properties into the session
                 HttpContext.Session.Set(WebConstants.BasketSession, basket);
-                return RedirectToAction("Index");
+                return RedirectToAction(nameof(Index));
             }
 
             catch (Exception ex)

@@ -35,11 +35,11 @@
             @*space for basket, wishlist, customer center *@
             <div class="col-md-3 text-end">
                 @*User*@
-                <button type="submit" class="btn btn-link">
+                <button type="submit" class="btn btn-link scale">
                     <i class="bi bi-person-circle" style="font-size: 1.5rem; color: gray;"></i>
                 </button>  
                 @*Basket*@
-                <button type="submit" class="btn btn-link position-relative">
+                <button type="submit" class="btn btn-link position-relative scale">
                     <i class="bi bi-bag-check" style="font-size: 1.5rem; color: gray;"></i>
                     <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
                         @*Product count*@99+
@@ -54,23 +54,30 @@
     @*header catalog*@
     <div>
         <nav class="navbar navbar-dark bg-dark" aria-label="Dark offcanvas navbar">
-            <div class="container-fluid">         
-                
+            <div class="container">
+             
                 @*button start offcanvass*@
                 <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbarDark" aria-controls="offcanvasNavbarDark">
                     <span class="bi bi-music-note-list"></span>
                 </button>
 
                 @*button category*@
-                <button type="button" class="btn btn-dark">Guitars</button>
-                <button type="button" class="btn btn-dark">Basses</button>
-                <button type="button" class="btn btn-dark">Drums</button>
-                <button type="button" class="btn btn-dark">Keys</button>
-                <button type="button" class="btn btn-dark">Brass</button>
-                <button type="button" class="btn btn-dark">Microphones</button>
-                <button type="button" class="btn btn-dark">Accessories</button>
-                <button type="button" class="btn btn-dark">Cables</button>
-                <button type="button" class="btn btn-dark">Traditional</button>
+                <div class="navbar-expand">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="btn btn-dark" asp-controller="Catalog" asp-action="AllCategories">All Categories</a>
+                            <a class="btn btn-dark" asp-controller="Catalog" asp-action="Guitars">Guitars</a>
+                            <a class="btn btn-dark" asp-controller="Catalog" asp-action="Drums">Drums</a>
+                            <a class="btn btn-dark" asp-controller="Catalog" asp-action="Keys">Keys</a>
+                            <a class="btn btn-dark" asp-controller="Catalog" asp-action="Brass">Brass</a>
+                            <a class="btn btn-dark" asp-controller="Catalog" asp-action="Traditional">Traditional</a>
+                            <a class="btn btn-dark" asp-controller="Catalog" asp-action="Studio">Studio</a>
+                            <a class="btn btn-dark" asp-controller="Catalog" asp-action="Cases">Cases</a>
+                            <a class="btn btn-dark" asp-controller="Catalog" asp-action="Cables">Cables</a>
+                            <a class="btn btn-dark" asp-controller="Catalog" asp-action="Accessories">Accessories</a>
+                        </li>
+                    </ul>
+                </div>
 
                 @*searcher*@
                 <form class="d-flex mt-3 mt-lg-0" role="search">
@@ -215,7 +222,6 @@
     </div>
 
 
-
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
@@ -227,6 +233,7 @@
     <script src="~/lib/bootstrap/js/bootstrap.bundle.js"></script>
     <script src="~/js/cheatsheet.js" asp-append-version="true"></script>
     <script src="https://cdn.tiny.cloud/1/ia0sr3vihwibbslg5o7ktdm2v362cz4mazddl49ekljeta4b/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+
 
     @await RenderSectionAsync("Scripts", required: false)
 </body>

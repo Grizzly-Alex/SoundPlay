@@ -1,137 +1,131 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using SoundPlay.BLL.Exceptions;
-using SoundPlay.BLL.Interfaces;
-using SoundPlay.BLL.ViewModels.Admin;
+﻿namespace SoundPlay.WEB.Areas.Admin.Controllers;
 
-namespace SoundPlay.WEB.Areas.Admin.Controllers
+[Area("Admin")]
+public sealed class TremoloTypeController : Controller
 {
-    [Area("Admin")]
-	public sealed class TremoloTypeController : Controller
+	private readonly IItemGenericService<TremoloTypeViewModel> _tremoloTypeService;
+	private readonly ILoggerAdapter<TremoloTypeController> _logger;
+
+	public TremoloTypeController(
+		IItemGenericService<TremoloTypeViewModel> brandService,
+		ILoggerAdapter<TremoloTypeController> logger)
 	{
-		private readonly IItemGenericService<TremoloTypeViewModel> _tremoloTypeService;
-		private readonly ILoggerAdapter<TremoloTypeController> _logger;
+		_tremoloTypeService = brandService;
+		_logger = logger;
+	}
 
-		public TremoloTypeController(
-			IItemGenericService<TremoloTypeViewModel> brandService,
-			ILoggerAdapter<TremoloTypeController> logger)
+	[HttpGet]
+	public async Task<IActionResult> Index()
+	{
+		try
 		{
-			_tremoloTypeService = brandService;
-			_logger = logger;
+			var viewModels = await _tremoloTypeService.GetViewModelsAsync();
+			return View(viewModels);
 		}
 
-		[HttpGet]
-		public async Task<IActionResult> Index()
+		catch (ObjectNotFoundException ex)
 		{
-			try
-			{
-				var viewModels = await _tremoloTypeService.GetViewModelsAsync();
-				return View(viewModels);
-			}
-
-			catch (ObjectNotFoundException ex)
-			{
-				_logger!.LogError(ex.Message);
-				return NotFound(ex.Message);
-			}
-
-			catch (Exception ex)
-			{
-				_logger!.LogError(ex.Message);
-				return BadRequest(ex.Message);
-			}
+			_logger!.LogError(ex.Message);
+			return NotFound(ex.Message);
 		}
 
-
-		[HttpGet]
-		public IActionResult Create()
+		catch (Exception ex)
 		{
-			return View();
+			_logger!.LogError(ex.Message);
+			return BadRequest(ex.Message);
 		}
+	}
 
-		[HttpPost]
-		public async Task<IActionResult> Create(TremoloTypeViewModel obj)
+
+	[HttpGet]
+	public IActionResult Create()
+	{
+		return View();
+	}
+
+	[HttpPost]
+	public async Task<IActionResult> Create(TremoloTypeViewModel obj)
+	{
+		try
 		{
-			try
+			if (ModelState.IsValid)
 			{
-				if (ModelState.IsValid)
-				{
-					await _tremoloTypeService.CreateViewModelAsync(obj);
-					return RedirectToAction(nameof(Index));
-				}
-				else return View(obj);
-			}
-
-			catch (Exception ex)
-			{
-				_logger!.LogError(ex.Message);
-				return BadRequest(ex.Message);
-			}
-		}
-
-		[HttpGet]
-		public async Task<IActionResult> Edit(int id)
-		{
-			try
-			{
-				var viewModel = await _tremoloTypeService.GetViewModelByIdAsync(id);
-				return View(viewModel);
-			}
-
-			catch (ObjectNotFoundException ex)
-			{
-				_logger!.LogError(ex.Message);
-				return NotFound(ex.Message);
-			}
-
-			catch (Exception ex)
-			{
-				_logger!.LogError(ex.Message);
-				return BadRequest(ex.Message);
-			}
-		}
-
-		[HttpPost]
-		public async Task<IActionResult> Edit(TremoloTypeViewModel obj)
-		{
-			try
-			{
-				if (ModelState.IsValid)
-				{
-					await _tremoloTypeService.UpdateViewModelAsync(obj);
-					return RedirectToAction(nameof(Index));
-				}
-				return View(obj);
-			}
-
-			catch (Exception ex)
-			{
-				_logger!.LogError(ex.Message);
-				return BadRequest(ex.Message);
-			}
-		}
-
-
-		[HttpPost]
-		public async Task<IActionResult> Delete(int id)
-		{
-			try
-			{
-				var viewModel = await _tremoloTypeService.GetViewModelByIdAsync(id);
-				await _tremoloTypeService.DeleteViewModelAsync(viewModel);
+				await _tremoloTypeService.CreateViewModelAsync(obj);
 				return RedirectToAction(nameof(Index));
 			}
+			else return View(obj);
+		}
 
-			catch (ObjectNotFoundException ex)
-			{
-				_logger!.LogError(ex.Message);
-				return NotFound(ex.Message);
-			}
+		catch (Exception ex)
+		{
+			_logger!.LogError(ex.Message);
+			return BadRequest(ex.Message);
+		}
+	}
 
-			catch (Exception ex)
+	[HttpGet]
+	public async Task<IActionResult> Edit(int id)
+	{
+		try
+		{
+			var viewModel = await _tremoloTypeService.GetViewModelByIdAsync(id);
+			return View(viewModel);
+		}
+
+		catch (ObjectNotFoundException ex)
+		{
+			_logger!.LogError(ex.Message);
+			return NotFound(ex.Message);
+		}
+
+		catch (Exception ex)
+		{
+			_logger!.LogError(ex.Message);
+			return BadRequest(ex.Message);
+		}
+	}
+
+	[HttpPost]
+	public async Task<IActionResult> Edit(TremoloTypeViewModel obj)
+	{
+		try
+		{
+			if (ModelState.IsValid)
 			{
-				_logger!.LogError(ex.Message);
-				return BadRequest(ex.Message);
+				await _tremoloTypeService.UpdateViewModelAsync(obj);
+				return RedirectToAction(nameof(Index));
 			}
+			return View(obj);
+		}
+
+		catch (Exception ex)
+		{
+			_logger!.LogError(ex.Message);
+			return BadRequest(ex.Message);
+		}
+	}
+
+
+	[HttpPost]
+	public async Task<IActionResult> Delete(int id)
+	{
+		try
+		{
+			var viewModel = await _tremoloTypeService.GetViewModelByIdAsync(id);
+			await _tremoloTypeService.DeleteViewModelAsync(viewModel);
+			return RedirectToAction(nameof(Index));
+		}
+
+		catch (ObjectNotFoundException ex)
+		{
+			_logger!.LogError(ex.Message);
+			return NotFound(ex.Message);
+		}
+
+		catch (Exception ex)
+		{
+			_logger!.LogError(ex.Message);
+			return BadRequest(ex.Message);
 		}
 	}
 }

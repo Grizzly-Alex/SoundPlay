@@ -1,22 +1,20 @@
-﻿namespace SoundPlay.BLL.ViewModels.Customer
+﻿namespace SoundPlay.BLL.ViewModels.Customer;
+
+public sealed class BasketPosition
 {
-    public sealed class BasketPosition
+    public Guid BasketPositionId { get; set; }
+    public int ProductId { get; set; }
+    public string? ProductName { get; set; }
+    public decimal ProductPrice { get; set; }
+    public string? ProductPictureUrl { get; set; }
+    public byte Count { get; set; }
+    public decimal Sum
     {
-        public Guid BasketPositionId { get; set; }
-        public int ProductId { get; set; }
-        public string? ProductName { get; set; }
-        public decimal ProductPrice { get; set; }
-        public string? ProductPictureUrl { get; set; }
-        public byte Count { get; set; }
-        public decimal Sum
-        {
-            get => ProductPrice * Count;
-        }
+        get => ProductPrice * Count;
+    }
 
-        public BasketPosition()
-        {
-            BasketPositionId = Guid.NewGuid();
-        }
-
+    public BasketPosition()
+    {
+        BasketPositionId = Guid.NewGuid();
     }
 }

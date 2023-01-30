@@ -43,8 +43,8 @@ else
             @foreach (var obj in Model)
             {
                 <tr>
-                    <td>@obj.Category!.Name</td>
-                    <td>@obj.Brand!.Name</td>
+                    <td>@obj.Category?.Name</td>
+                    <td>@obj.Brand?.Name</td>
                     <td>@obj.Name</td>
                     <td>@obj.ViewPrice</td>
 

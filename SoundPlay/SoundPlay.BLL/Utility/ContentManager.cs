@@ -1,76 +1,70 @@
-﻿using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
-using SoundPlay.BLL.Interfaces;
+﻿namespace SoundPlay.BLL.Utility;
 
-
-namespace SoundPlay.BLL.Utility
+public sealed class ContentManager : IContentManager
 {
-	public sealed class ContentManager : IContentManager
+	public List<string> NameFiles { get; private set; }
+	private readonly string _webRootPath;
+	private readonly ILoggerAdapter<ContentManager> _logger;
+	private readonly IWebHostEnvironment _hostEnvironment;
+
+
+	public ContentManager(
+		IWebHostEnvironment hostEnvironment,
+		ILoggerAdapter<ContentManager> logger)
 	{
-		public List<string> NameFiles { get; private set; }
-		private readonly string _webRootPath;
-		private readonly ILoggerAdapter<ContentManager> _logger;
-		private readonly IWebHostEnvironment _hostEnvironment;
+		NameFiles = new();
+		_hostEnvironment = hostEnvironment;
+		_webRootPath = _hostEnvironment.WebRootPath;
+		_logger = logger;
+	}
 
-
-		public ContentManager(
-			IWebHostEnvironment hostEnvironment,
-			ILoggerAdapter<ContentManager> logger)
+	public void UploadFiles(IFormFileCollection files, string path)
+	{					
+		try
 		{
-			NameFiles = new();
-			_hostEnvironment = hostEnvironment;
-			_webRootPath = _hostEnvironment.WebRootPath;
-			_logger = logger;
-		}
+			string upload = string.Concat(_webRootPath, path);
 
-		public void UploadFiles(IFormFileCollection files, string path)
-		{					
-			try
+			foreach (var file in files)
 			{
-				string upload = string.Concat(_webRootPath, path);
+				string fileName = Guid.NewGuid().ToString();
+				string extension = Path.GetExtension(file.FileName);
+				string fullFileName = string.Concat(fileName, extension);
 
-				foreach (var file in files)
+				NameFiles.Add(fullFileName);
+
+				using (var fileStream = new FileStream(Path.Combine(upload, fullFileName), FileMode.Create))
 				{
-					string fileName = Guid.NewGuid().ToString();
-					string extension = Path.GetExtension(file.FileName);
-					string fullFileName = string.Concat(fileName, extension);
-
-					NameFiles.Add(fullFileName);
-
-					using (var fileStream = new FileStream(Path.Combine(upload, fullFileName), FileMode.Create))
-					{
-						file.CopyTo(fileStream);
-					}
-				}
-
-				NameFiles.ForEach(value => _logger.LogInformation($"File {value} added successfully"));
-			}
-
-			catch (Exception ex)
-			{
-				_logger.LogError(ex,"Files upload is failed");
-			}			
-		}
-
-		public void RemoveFile(string contentPath, string nameFile)
-		{
-			try
-			{
-				if (nameFile is not null)
-				{
-					string _filePath = Path.Combine(string.Concat(_webRootPath, contentPath), nameFile);
-
-					if (File.Exists(_filePath))
-					{
-						File.Delete(_filePath);
-					}
+					file.CopyTo(fileStream);
 				}
 			}
 
-			catch (IOException ex)
+			NameFiles.ForEach(value => _logger.LogInformation($"File {value} added successfully"));
+		}
+
+		catch (Exception ex)
+		{
+			_logger.LogError(ex,"Files upload is failed");
+		}			
+	}
+
+	public void RemoveFile(string contentPath, string nameFile)
+	{
+		try
+		{
+			if (nameFile is not null)
 			{
-				_logger.LogError(ex, $"File not found");
+				string _filePath = Path.Combine(string.Concat(_webRootPath, contentPath), nameFile);
+
+				if (File.Exists(_filePath))
+				{
+					File.Delete(_filePath);
+				}
 			}
+		}
+
+		catch (IOException ex)
+		{
+			_logger.LogError(ex, $"File not found");
 		}
 	}
 }

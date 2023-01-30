@@ -1,137 +1,131 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using SoundPlay.BLL.Exceptions;
-using SoundPlay.BLL.Interfaces;
-using SoundPlay.BLL.ViewModels.Admin;
+﻿namespace SoundPlay.WEB.Areas.Admin.Controllers;
 
-namespace SoundPlay.WEB.Areas.Admin.Controllers
+[Area("Admin")]
+public sealed class BrandController : Controller
 {
-    [Area("Admin")]
-    public sealed class BrandController : Controller
+    private readonly IItemGenericService<BrandViewModel> _brandService;
+    private readonly ILoggerAdapter<BrandController> _logger;
+
+    public BrandController(
+        IItemGenericService<BrandViewModel> brandService,
+        ILoggerAdapter<BrandController> logger)
     {
-        private readonly IItemGenericService<BrandViewModel> _brandService;
-        private readonly ILoggerAdapter<BrandController> _logger;
+        _brandService = brandService;
+        _logger = logger;
+    }
 
-        public BrandController(
-            IItemGenericService<BrandViewModel> brandService,
-            ILoggerAdapter<BrandController> logger)
+    [HttpGet]
+    public async Task<IActionResult> Index()
+    {
+        try
         {
-            _brandService = brandService;
-            _logger = logger;
-        }
-
-        [HttpGet]
-        public async Task<IActionResult> Index()
-        {
-            try
-            {
-				var viewModels = await _brandService.GetViewModelsAsync();
-				return View(viewModels);
-			}
-
-			catch (ObjectNotFoundException ex)
-			{
-				_logger!.LogError(ex.Message);
-				return NotFound(ex.Message);
-			}
-
-			catch (Exception ex)
-			{
-				_logger!.LogError(ex.Message);
-				return BadRequest(ex.Message);
-			}
+			var viewModels = await _brandService.GetViewModelsAsync();
+			return View(viewModels);
 		}
+
+		catch (ObjectNotFoundException ex)
+		{
+			_logger!.LogError(ex.Message);
+			return NotFound(ex.Message);
+		}
+
+		catch (Exception ex)
+		{
+			_logger!.LogError(ex.Message);
+			return BadRequest(ex.Message);
+		}
+	}
         
 
-        [HttpGet]
-        public IActionResult Create()
+    [HttpGet]
+    public IActionResult Create()
+    {
+        return View();
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> Create(BrandViewModel obj)
+    {
+        try
         {
-            return View();
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> Create(BrandViewModel obj)
-        {
-            try
-            {
-				if (ModelState.IsValid)
-				{
-					await _brandService.CreateViewModelAsync(obj);
-					return RedirectToAction(nameof(Index));
-				}
-				else return View(obj);
-			}
-
-			catch (Exception ex)
+			if (ModelState.IsValid)
 			{
-				_logger!.LogError(ex.Message);
-				return BadRequest(ex.Message);
-			}
-		}
-
-        [HttpGet]
-        public async Task<IActionResult> Edit(int id)
-        {
-			try
-			{
-				var viewModel = await _brandService.GetViewModelByIdAsync(id);
-				return View(viewModel);
-			}
-
-			catch (ObjectNotFoundException ex)
-			{
-				_logger!.LogError(ex.Message);
-				return NotFound(ex.Message);
-			}
-
-			catch (Exception ex)
-			{
-				_logger!.LogError(ex.Message);
-				return BadRequest(ex.Message);
-			}
-		}
-
-        [HttpPost]
-        public async Task<IActionResult> Edit(BrandViewModel obj)
-        {
-			try
-			{
-				if (ModelState.IsValid)
-				{
-					await _brandService.UpdateViewModelAsync(obj);
-					return RedirectToAction(nameof(Index));
-				}
-				return View(obj);
-			}
-
-			catch (Exception ex)
-			{
-				_logger!.LogError(ex.Message);
-				return BadRequest(ex.Message);
-			}
-        }
-
-
-        [HttpPost]
-        public async Task<IActionResult> Delete(int id)
-        {
-            try
-            {
-				var viewModel = await _brandService.GetViewModelByIdAsync(id);
-				await _brandService.DeleteViewModelAsync(viewModel);
+				await _brandService.CreateViewModelAsync(obj);
 				return RedirectToAction(nameof(Index));
 			}
+			else return View(obj);
+		}
 
-			catch (ObjectNotFoundException ex)
-			{
-				_logger!.LogError(ex.Message);
-				return NotFound(ex.Message);
-			}
+		catch (Exception ex)
+		{
+			_logger!.LogError(ex.Message);
+			return BadRequest(ex.Message);
+		}
+	}
 
-			catch (Exception ex)
+    [HttpGet]
+    public async Task<IActionResult> Edit(int id)
+    {
+		try
+		{
+			var viewModel = await _brandService.GetViewModelByIdAsync(id);
+			return View(viewModel);
+		}
+
+		catch (ObjectNotFoundException ex)
+		{
+			_logger!.LogError(ex.Message);
+			return NotFound(ex.Message);
+		}
+
+		catch (Exception ex)
+		{
+			_logger!.LogError(ex.Message);
+			return BadRequest(ex.Message);
+		}
+	}
+
+    [HttpPost]
+    public async Task<IActionResult> Edit(BrandViewModel obj)
+    {
+		try
+		{
+			if (ModelState.IsValid)
 			{
-				_logger!.LogError(ex.Message);
-				return BadRequest(ex.Message);
+				await _brandService.UpdateViewModelAsync(obj);
+				return RedirectToAction(nameof(Index));
 			}
+			return View(obj);
+		}
+
+		catch (Exception ex)
+		{
+			_logger!.LogError(ex.Message);
+			return BadRequest(ex.Message);
 		}
     }
+
+
+    [HttpPost]
+    public async Task<IActionResult> Delete(int id)
+    {
+        try
+        {
+			var viewModel = await _brandService.GetViewModelByIdAsync(id);
+			await _brandService.DeleteViewModelAsync(viewModel);
+			return RedirectToAction(nameof(Index));
+		}
+
+		catch (ObjectNotFoundException ex)
+		{
+			_logger!.LogError(ex.Message);
+			return NotFound(ex.Message);
+		}
+
+		catch (Exception ex)
+		{
+			_logger!.LogError(ex.Message);
+			return BadRequest(ex.Message);
+		}
+	}
 }

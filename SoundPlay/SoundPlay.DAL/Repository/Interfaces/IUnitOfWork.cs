@@ -1,7 +1,7 @@
 ﻿namespace SoundPlay.DAL.Repository.Interfaces;
 
-	public interface IUnitOfWork
-	{
+public interface IUnitOfWork
+{
     public IRepository<Category> Category { get; }
     public IRepository<Brand> Brand { get; }
     public IRepository<GuitarShape> GuitarShape { get; }
@@ -11,6 +11,6 @@
     public IRepository<PickupSet> PickupSet { get; }
     public IRepository<Guitar> Guitar { get; }
 
-
-    public Task SaveChangesAsync();
+    public Task SaveChangesAsync(); 
+    public IRepository<T> GetRepository<T>()  where T : class;
 }

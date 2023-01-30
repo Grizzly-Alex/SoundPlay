@@ -1,16 +1,16 @@
 ﻿namespace SoundPlay.DAL.Repository;
 
-public sealed class UnitOfWork : IUnitOfWork
+public sealed class UnitOfWork : IUnitOfWork 
 {
     private ApplicationDbContext _db;
 
-    public IRepository<Category> Category { get;}
-	public IRepository<Brand> Brand { get;}
+	public IRepository<Category> Category { get; }
+	public IRepository<Brand> Brand { get; }
 	public IRepository<GuitarShape> GuitarShape { get; }
 	public IRepository<Material> Material { get; }
 	public IRepository<TremoloType> TremoloType { get; }
-    public IRepository<Color> Color { get; }
-    public IRepository<PickupSet> PickupSet { get; }        
+	public IRepository<Color> Color { get; }
+	public IRepository<PickupSet> PickupSet { get; }
 	public IRepository<Guitar> Guitar { get; }
 
 	public UnitOfWork(ApplicationDbContext db)
@@ -27,4 +27,9 @@ public sealed class UnitOfWork : IUnitOfWork
 	}
 
 	public async Task SaveChangesAsync() => await _db.SaveChangesAsync();
+
+	public  IRepository<T> GetRepository<T>() where T : class
+	{
+		throw new NotImplementedException();
+	}
 }

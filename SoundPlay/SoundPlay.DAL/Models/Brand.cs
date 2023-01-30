@@ -1,7 +1,6 @@
 ﻿namespace SoundPlay.DAL.Models;
 
-public sealed class Brand
+public sealed class Brand : Entity
 {
-    [Key] public int Id { get; set; }
     public string Name { get; set; }
 }

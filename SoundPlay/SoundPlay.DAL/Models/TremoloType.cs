@@ -1,7 +1,6 @@
 ﻿namespace SoundPlay.DAL.Models;
 
-public sealed class TremoloType
+public sealed class TremoloType : Entity
 {
-    [Key] public int Id { get; set; }
     public string Name { get; set; }
 }

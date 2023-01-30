@@ -1,6 +1,6 @@
 ﻿namespace SoundPlay.DAL.Repository;
 
-public class Repository<T> : IRepository<T> where T : class
+public class Repository<T> : IRepository<T> where T : Entity
 {
 	protected readonly ApplicationDbContext _dbContext;
 	private readonly DbSet<T> _dbSet;

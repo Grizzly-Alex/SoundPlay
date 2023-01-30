@@ -1,7 +1,6 @@
 ﻿namespace SoundPlay.DAL.Models;
 
-public sealed class PickupSet
+public sealed class PickupSet : Entity
 {
-    [Key] public int Id { get; set; }
     public string Name { get; set; }
 }

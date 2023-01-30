@@ -1,8 +1,7 @@
 ﻿namespace SoundPlay.BLL.ViewModels.Admin;
 
-public sealed class TremoloTypeViewModel
+public sealed class TremoloTypeViewModel : EntityViewModel
 {
-    public int Id { get; set; }
 
     [DisplayName("Tremolo type")]
 	[Required(ErrorMessage = "This field must not be empty!")]

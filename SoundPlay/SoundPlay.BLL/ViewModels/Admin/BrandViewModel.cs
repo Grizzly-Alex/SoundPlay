@@ -1,9 +1,7 @@
 ﻿namespace SoundPlay.BLL.ViewModels.Admin;
 
-public sealed class BrandViewModel
+public sealed class BrandViewModel : EntityViewModel
 {
-    public int Id { get; set; }
-
     [DisplayName("Brand")]
     [Required(ErrorMessage = "This field must not be empty!")]
     public string Name { get; set; }

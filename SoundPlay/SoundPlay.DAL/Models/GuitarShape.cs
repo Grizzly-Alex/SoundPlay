@@ -1,7 +1,6 @@
 ﻿namespace SoundPlay.DAL.Models;
 
-public sealed class GuitarShape
+public sealed class GuitarShape : Entity
 {
-    [Key] public int Id { get; set; }
     public string Name { get; set; }
 }

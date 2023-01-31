@@ -3,11 +3,11 @@
 [Area("Admin")]
 public sealed class PickupSetController : Controller
 {
-	private readonly IItemGenericService<PickupSetViewModel> _pickupSetService;
+	private readonly IEntityService<PickupSet, PickupSetViewModel> _pickupSetService;
 	private readonly ILoggerAdapter<PickupSetController> _logger;
 
 	public PickupSetController(
-		IItemGenericService<PickupSetViewModel> brandService,
+		IEntityService<PickupSet, PickupSetViewModel> brandService,
 		ILoggerAdapter<PickupSetController> logger)
 	{
 		_pickupSetService = brandService;

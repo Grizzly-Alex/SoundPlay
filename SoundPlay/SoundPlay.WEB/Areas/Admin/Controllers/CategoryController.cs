@@ -3,11 +3,11 @@
 [Area("Admin")]
 public sealed class CategoryController : Controller
 {
-    private readonly IItemGenericService<CategoryViewModel> _categoryService;
+    private readonly IEntityService<Category, CategoryViewModel> _categoryService;
 	private readonly ILoggerAdapter<CategoryController> _logger;
 
 	public CategoryController(
-        IItemGenericService<CategoryViewModel> categoryService,
+		IEntityService<Category, CategoryViewModel> categoryService,
 		ILoggerAdapter<CategoryController> logger)
     {
         _categoryService = categoryService;

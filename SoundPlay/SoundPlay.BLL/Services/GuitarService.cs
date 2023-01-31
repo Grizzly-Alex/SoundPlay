@@ -1,13 +1,13 @@
 ﻿namespace SoundPlay.BLL.Services;
 
-public sealed class GuitarService : IItemGenericService<GuitarViewModel>
+public sealed class GuitarService : IProductService<GuitarViewModel>
 {
     private readonly IUnitOfWork _unitOfWork;
     private readonly IMapper _mapper;
-		private readonly ILoggerAdapter<GuitarService> _logger;
+	private readonly ILoggerAdapter<GuitarService> _logger;
 
     public GuitarService(
-			IUnitOfWork unitOfWork,
+		IUnitOfWork unitOfWork,
         IMapper mapper,
         ILoggerAdapter<GuitarService> logger)
     {
@@ -18,7 +18,7 @@ public sealed class GuitarService : IItemGenericService<GuitarViewModel>
 
     public async Task<IEnumerable<GuitarViewModel>> GetViewModelsAsync()
     {
-        var models = await _unitOfWork.Guitar
+        var models = await _unitOfWork.GetRepository<Guitar>()
             .GetAllAsync(
                 include:query => query
                     .Include(guitar => guitar.Category)
@@ -44,7 +44,7 @@ public sealed class GuitarService : IItemGenericService<GuitarViewModel>
 
     public async Task<GuitarViewModel> GetViewModelByIdAsync(int id)
     {
-        var model = await _unitOfWork.Guitar
+        var model = await _unitOfWork.GetRepository<Guitar>()
             .GetFirstOrDefaultAsync(
                 predicate: i => i.Id == id,
                 include: query => query
@@ -71,25 +71,25 @@ public sealed class GuitarService : IItemGenericService<GuitarViewModel>
 
     public async Task<GuitarViewModel> CreateViewModelAsync(GuitarViewModel viewModel)
     {
-			var model = _mapper.Map<Guitar>(viewModel);
-			_unitOfWork.Guitar.Add(model);
-			await _unitOfWork.SaveChangesAsync();
-			return viewModel;
+		var model = _mapper.Map<Guitar>(viewModel);
+			_unitOfWork.GetRepository<Guitar>().Add(model);
+		await _unitOfWork.SaveChangesAsync();
+		return viewModel;
     }
             
     public async Task<GuitarViewModel> UpdateViewModelAsync(GuitarViewModel viewModel)
     {
         var model = _mapper.Map<Guitar>(viewModel);
-			_unitOfWork.Guitar.Update(model);
-			await _unitOfWork.SaveChangesAsync();
-			return viewModel;
+			_unitOfWork.GetRepository<Guitar>().Update(model);
+		await _unitOfWork.SaveChangesAsync();
+		return viewModel;
     }
 
     public async Task<GuitarViewModel> DeleteViewModelAsync(GuitarViewModel viewModel)
     {
         var model = _mapper.Map<Guitar>(viewModel);
-			_unitOfWork.Guitar.Remove(model);
-			await _unitOfWork.SaveChangesAsync();
-			return viewModel;
+			_unitOfWork.GetRepository<Guitar>().Remove(model);
+		await _unitOfWork.SaveChangesAsync();
+		return viewModel;
     }
 }

@@ -3,11 +3,11 @@
 [Area("Admin")]
 public sealed class BrandController : Controller
 {
-    private readonly IItemGenericService<BrandViewModel> _brandService;
-    private readonly ILoggerAdapter<BrandController> _logger;
+	private readonly IEntityService<Brand, BrandViewModel> _brandService;
+	private readonly ILoggerAdapter<BrandController> _logger;
 
     public BrandController(
-        IItemGenericService<BrandViewModel> brandService,
+		IEntityService<Brand, BrandViewModel> brandService,
         ILoggerAdapter<BrandController> logger)
     {
         _brandService = brandService;

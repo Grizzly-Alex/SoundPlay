@@ -6,31 +6,27 @@ public sealed class GuitarController : Controller
 {
     private readonly IContentManager _contentManager;
     private readonly ILoggerAdapter<GuitarService>? _logger;
-    private readonly IItemGenericService<GuitarViewModel>? _guitars;
-    private readonly IItemGenericService<BrandViewModel>? _brands;
-    private readonly IItemGenericService<CategoryViewModel>? _categories;
-    private readonly IItemGenericService<ColorViewModel>? _colors;
-    private readonly IItemGenericService<GuitarShapeViewModel>? _guitarShapes;
-    private readonly IItemGenericService<MaterialViewModel>? _soundBoards;
-    private readonly IItemGenericService<MaterialViewModel>? _necks;
-    private readonly IItemGenericService<MaterialViewModel>? _fretBoards;
-    private readonly IItemGenericService<PickupSetViewModel>? _pickups;
-    private readonly IItemGenericService<TremoloTypeViewModel>? _tremoloTypes;
+    private readonly IEntityService<Brand, BrandViewModel>? _brands;
+    private readonly IEntityService<Category,CategoryViewModel>? _categories;
+    private readonly IEntityService<Color, ColorViewModel>? _colors;
+    private readonly IEntityService<GuitarShape, GuitarShapeViewModel>? _guitarShapes;
+    private readonly IEntityService<Material, MaterialViewModel>? _materials;
+    private readonly IEntityService<PickupSet, PickupSetViewModel>? _pickups;
+    private readonly IEntityService<TremoloType, TremoloTypeViewModel>? _tremoloTypes;
+    private readonly IProductService<GuitarViewModel>? _guitars;
 
 
     public GuitarController(
         IContentManager contentManager,
         ILoggerAdapter<GuitarService>? logger,
-        IItemGenericService<BrandViewModel>? brands,
-        IItemGenericService<CategoryViewModel>? categories,
-        IItemGenericService<ColorViewModel>? colors,
-        IItemGenericService<GuitarShapeViewModel>? guitarShapes,
-        IItemGenericService<MaterialViewModel>? soundBoards,
-        IItemGenericService<MaterialViewModel>? necks,
-        IItemGenericService<MaterialViewModel>? fretBoards,
-        IItemGenericService<PickupSetViewModel>? pickups,
-        IItemGenericService<TremoloTypeViewModel>? tremoloTypes,
-        IItemGenericService<GuitarViewModel>? guitars)
+		IEntityService<Brand, BrandViewModel>? brands,
+		IEntityService<Category, CategoryViewModel>? categories,
+		IEntityService<Color, ColorViewModel>? colors,
+		IEntityService<GuitarShape, GuitarShapeViewModel>? guitarShapes,
+		IEntityService<Material, MaterialViewModel>? materials,
+		IEntityService<PickupSet, PickupSetViewModel>? pickups,
+		IEntityService<TremoloType, TremoloTypeViewModel>? tremoloTypes,
+		IProductService<GuitarViewModel>? guitars)
     {
         _contentManager = contentManager;
         _logger = logger;
@@ -39,9 +35,7 @@ public sealed class GuitarController : Controller
         _categories = categories;
         _colors = colors;
         _guitarShapes = guitarShapes;
-        _soundBoards = soundBoards;
-        _necks = necks;
-        _fretBoards = fretBoards;
+        _materials = materials;
         _pickups = pickups;
         _tremoloTypes = tremoloTypes;
     }
@@ -77,9 +71,9 @@ public sealed class GuitarController : Controller
             var categoryList = await _categories!.GetViewModelsAsync();
             var colorList = await _colors!.GetViewModelsAsync();
             var guitarShapeList = await _guitarShapes!.GetViewModelsAsync();
-            var soundBoardsList = await _soundBoards!.GetViewModelsAsync();
-            var neckList = await _necks!.GetViewModelsAsync();
-            var fretBoard = await _fretBoards!.GetViewModelsAsync();
+            var soundBoardsList = await _materials!.GetViewModelsAsync();
+            var neckList = await _materials!.GetViewModelsAsync();
+            var fretBoard = await _materials!.GetViewModelsAsync();
             var pickupList = await _pickups!.GetViewModelsAsync();
             var tremoloList = await _tremoloTypes!.GetViewModelsAsync();
 
@@ -148,9 +142,9 @@ public sealed class GuitarController : Controller
             var categoryList = await _categories!.GetViewModelsAsync();
             var colorList = await _colors!.GetViewModelsAsync();
             var guitarShapeList = await _guitarShapes!.GetViewModelsAsync();
-            var soundBoardsList = await _soundBoards!.GetViewModelsAsync();
-            var neckList = await _necks!.GetViewModelsAsync();
-            var fretBoard = await _fretBoards!.GetViewModelsAsync();
+            var soundBoardsList = await _materials!.GetViewModelsAsync();
+            var neckList = await _materials!.GetViewModelsAsync();
+            var fretBoard = await _materials!.GetViewModelsAsync();
             var pickupList = await _pickups!.GetViewModelsAsync();
             var tremoloList = await _tremoloTypes!.GetViewModelsAsync();
 

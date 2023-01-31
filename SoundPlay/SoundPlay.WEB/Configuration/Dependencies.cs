@@ -18,14 +18,15 @@ public static class Dependencies
         #region Model CRUD services
         services.AddTransient<IUnitOfWork, UnitOfWork>();
         services.AddTransient(typeof(IEntityService<,>), typeof(EntityService<,>));
-        services.AddTransient<IItemGenericService<CategoryViewModel>, CategoryService>();
-        services.AddTransient<IItemGenericService<BrandViewModel>, BrandService>();
-        services.AddTransient<IItemGenericService<GuitarShapeViewModel>, GuitarShapeService>();
-        services.AddTransient<IItemGenericService<MaterialViewModel>, MaterialService>();
-        services.AddTransient<IItemGenericService<TremoloTypeViewModel>, TremoloTypeService>();
-        services.AddTransient<IItemGenericService<ColorViewModel>, ColorService>();
-        services.AddTransient<IItemGenericService<PickupSetViewModel>, PickupSetService>();
-        services.AddTransient<IItemGenericService<GuitarViewModel>, GuitarService>();
+        services.AddTransient<IProductService<GuitarViewModel>, GuitarService>();
+        //services.AddTransient<IItemGenericService<CategoryViewModel>, CategoryService>();
+        //services.AddTransient<IItemGenericService<BrandViewModel>, BrandService>();
+        //services.AddTransient<IItemGenericService<GuitarShapeViewModel>, GuitarShapeService>();
+        //services.AddTransient<IItemGenericService<MaterialViewModel>, MaterialService>();
+        //services.AddTransient<IItemGenericService<TremoloTypeViewModel>, TremoloTypeService>();
+        //services.AddTransient<IItemGenericService<ColorViewModel>, ColorService>();
+        //services.AddTransient<IItemGenericService<PickupSetViewModel>, PickupSetService>();
+        //services.AddTransient<IItemGenericService<GuitarViewModel>, GuitarService>();
         #endregion
     }
 }

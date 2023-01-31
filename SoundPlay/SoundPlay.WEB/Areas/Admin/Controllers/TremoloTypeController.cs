@@ -3,11 +3,11 @@
 [Area("Admin")]
 public sealed class TremoloTypeController : Controller
 {
-	private readonly IItemGenericService<TremoloTypeViewModel> _tremoloTypeService;
+	private readonly IEntityService<TremoloType, TremoloTypeViewModel> _tremoloTypeService;
 	private readonly ILoggerAdapter<TremoloTypeController> _logger;
 
 	public TremoloTypeController(
-		IItemGenericService<TremoloTypeViewModel> brandService,
+		IEntityService<TremoloType, TremoloTypeViewModel> brandService,
 		ILoggerAdapter<TremoloTypeController> logger)
 	{
 		_tremoloTypeService = brandService;

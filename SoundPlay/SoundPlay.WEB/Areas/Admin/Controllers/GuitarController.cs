@@ -77,7 +77,7 @@ public sealed class GuitarController : Controller
             var pickupList = await _pickups!.GetViewModelsAsync();
             var tremoloList = await _tremoloTypes!.GetViewModelsAsync();
 
-            GuitarForCreateViewModel guitarForCreateViewModel = new()
+            CreateGuitarViewModel guitarForCreateViewModel = new()
             {
                 
                 GuitarViewModel=new(),
@@ -104,7 +104,7 @@ public sealed class GuitarController : Controller
 
     [HttpPost]
 	[ValidateAntiForgeryToken]
-	public async Task<IActionResult> Create(GuitarForCreateViewModel guitarForCreateViewModel)
+	public async Task<IActionResult> Create(CreateGuitarViewModel guitarForCreateViewModel)
     {
 		try
         {
@@ -149,7 +149,7 @@ public sealed class GuitarController : Controller
             var pickupList = await _pickups!.GetViewModelsAsync();
             var tremoloList = await _tremoloTypes!.GetViewModelsAsync();
 
-            GuitarForCreateViewModel guitarForCreateViewModel = new()
+            CreateGuitarViewModel guitarForCreateViewModel = new()
             {
                 GuitarViewModel = guitarViewModel,
                 Brands = brandList!.OrderBy(i => i.Name).Select(i => new SelectListItem { Value = i.Id.ToString(), Text = i.Name }),
@@ -181,7 +181,7 @@ public sealed class GuitarController : Controller
 
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Edit(GuitarForCreateViewModel guitarForCreateViewModel)
+    public async Task<IActionResult> Edit(CreateGuitarViewModel guitarForCreateViewModel)
     {
         try
         {

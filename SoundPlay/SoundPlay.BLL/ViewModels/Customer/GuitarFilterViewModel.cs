@@ -1,6 +1,6 @@
 ﻿namespace SoundPlay.BLL.ViewModels.Customer;
 
-public class GuitarsCatalogViewModel
+public class GuitarFilterViewModel
 {
 	public List<GuitarViewModel>? Guitars { get; set; }
 	public IEnumerable<SelectListItem>? Brands { get; set; }
@@ -11,4 +11,12 @@ public class GuitarsCatalogViewModel
 	public IEnumerable<SelectListItem>? Fretboards { get; set; }
 	public IEnumerable<SelectListItem>? PickupSets { get; set; }
 	public IEnumerable<SelectListItem>? TremoloTypes { get; set; }
+	public int? BrandId { get; set; }
+	public int? ColorId { get; set; }
+	public int? GuitarShapeId { get; set; }
+	public int? SoundboardId { get; set; }
+	public int? NeckId { get; set; }
+	public int? FretboardId { get; set; }
+	public int? PickupSetId { get; set; }
+	public int? TremoloTypeId { get; set; }
 }

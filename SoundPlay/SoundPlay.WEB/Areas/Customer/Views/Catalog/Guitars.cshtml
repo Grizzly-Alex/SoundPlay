@@ -2,13 +2,12 @@
 <form method="get" asp-controller="Catalog" asp-action="Guitars" >
 
 
-
     <div class="container text-center">
         <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
 
             <div class="col mt-5">
                 <div class="p-3 catside">
-                    <a href="#" class="nav-link scale">
+                    <a asp-area="Customer" asp-controller="GuitarCatalog" asp-action="ElectricGuitars" class="nav-link scale">
                         <img src="\images\bits\guitarCatalog\ElectricGuitarsCatalogCover.png" style="width:75%">
                         <p class="text-center fs-5">Electric Guitars</p>
                     </a>

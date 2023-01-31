@@ -1,6 +1,6 @@
 ﻿namespace SoundPlay.BLL.ViewModels.Admin;
 
-public sealed class GuitarForCreateViewModel
+public sealed class CreateGuitarViewModel
 {
     public GuitarViewModel? GuitarViewModel { get; set; }
     public IEnumerable<SelectListItem>? Categories { get; set; }

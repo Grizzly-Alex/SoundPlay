@@ -1,6 +1,6 @@
 ﻿namespace SoundPlay.DAL.Repository.Interfaces;
 
-public interface IRepository<T> where T : class
+public interface IRepository<T> where T : Entity
 {
 	Task<T?> GetFirstOrDefaultAsync(
 		Expression<Func<T, bool>>? predicate = null,

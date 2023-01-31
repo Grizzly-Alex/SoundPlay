@@ -4,17 +4,17 @@
 public sealed class PriceController : Controller
 {
     private readonly ILoggerAdapter<PriceController>? _logger;
-    private readonly IItemGenericService<GuitarViewModel>? _guitars;
+    private readonly IProductService<GuitarViewModel>? _guitars;
     private readonly IMapper _mapper;
 
     public PriceController(
         ILoggerAdapter<PriceController>? logger,
-        IItemGenericService<GuitarViewModel>? guitars,
+        IProductService<GuitarViewModel>? guitars,
         IMapper mapper)
     {
-        _logger=logger;
-        _guitars=guitars;
-        _mapper=mapper;
+        _logger = logger;
+        _guitars = guitars;
+        _mapper = mapper;
     }
 
     [HttpGet]

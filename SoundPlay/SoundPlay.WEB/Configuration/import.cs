@@ -13,3 +13,4 @@ global using SoundPlay.BLL.ViewModels.Customer;
 global using SoundPlay.WEB.Models;
 global using System.Diagnostics;
 global using AutoMapper;
+global using SoundPlay.DAL.Models;

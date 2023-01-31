@@ -3,11 +3,11 @@
 [Area("Admin")]
 public sealed class GuitarShapeController : Controller
 {
-	private readonly IItemGenericService<GuitarShapeViewModel> _guitarShapeService;
+	private readonly IEntityService<GuitarShape, GuitarShapeViewModel> _guitarShapeService;
 	private readonly ILoggerAdapter<GuitarShapeController> _logger;
 
 	public GuitarShapeController(
-		IItemGenericService<GuitarShapeViewModel> brandService,
+		IEntityService<GuitarShape, GuitarShapeViewModel> brandService,
 		ILoggerAdapter<GuitarShapeController> logger)
 	{
 		_guitarShapeService = brandService;

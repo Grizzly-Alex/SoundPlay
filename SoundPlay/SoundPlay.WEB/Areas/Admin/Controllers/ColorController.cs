@@ -3,11 +3,11 @@
 [Area("Admin")]
 public sealed class ColorController : Controller
 {
-    private readonly IItemGenericService<ColorViewModel> _colorService;
+    private readonly IEntityService<Color, ColorViewModel> _colorService;
 	private readonly ILoggerAdapter<ColorController> _logger;
 
 	public ColorController(
-        IItemGenericService<ColorViewModel> colorService,
+		IEntityService<Color, ColorViewModel> colorService,
 		ILoggerAdapter<ColorController> logger)
     {
         _colorService = colorService;

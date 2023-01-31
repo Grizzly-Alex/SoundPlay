@@ -3,11 +3,11 @@
 [Area("Admin")]
 public sealed class MaterialController : Controller
 {
-	private readonly IItemGenericService<MaterialViewModel> _materialService;
+	private readonly IEntityService<Material, MaterialViewModel> _materialService;
 	private readonly ILoggerAdapter<MaterialController> _logger;
 
 	public MaterialController(
-		IItemGenericService<MaterialViewModel> brandService,
+		IEntityService<Material, MaterialViewModel> brandService,
 		ILoggerAdapter<MaterialController> logger)
 	{
 		_materialService = brandService;

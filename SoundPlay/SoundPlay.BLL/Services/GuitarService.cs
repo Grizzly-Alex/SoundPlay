@@ -29,7 +29,7 @@ public sealed class GuitarService : IProductService<GuitarViewModel>
                     .Include(guitar => guitar.Neck)
                     .Include(guitar => guitar.Fretboard)
                     .Include(guitar => guitar.PickupSet)
-                    .Include(guitar => guitar.TremoloType)!,
+                    .Include(guitar => guitar.TremoloType)!,            
                 isTracking: false);
 
         if (models is null)
@@ -50,13 +50,13 @@ public sealed class GuitarService : IProductService<GuitarViewModel>
                 include: query => query
                     .Include(guitar => guitar.Category)
                     .Include(guitar => guitar.Brand)
-                    .Include(guitar => guitar.Color)
-                    .Include(guitar => guitar.Shape)
-                    .Include(guitar => guitar.Soundboard)
-                    .Include(guitar => guitar.Neck)
-                    .Include(guitar => guitar.Fretboard)
-                    .Include(guitar => guitar.PickupSet)
-                    .Include(guitar => guitar.TremoloType)!,
+					.Include(guitar => guitar.Color)
+					.Include(guitar => guitar.Shape)
+					.Include(guitar => guitar.Soundboard)
+					.Include(guitar => guitar.Neck)
+					.Include(guitar => guitar.Fretboard)
+					.Include(guitar => guitar.PickupSet)
+					.Include(guitar => guitar.TremoloType)!,
                 isTracking: false);
 
         if (model is null)

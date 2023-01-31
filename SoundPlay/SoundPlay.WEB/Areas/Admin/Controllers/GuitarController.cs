@@ -79,16 +79,17 @@ public sealed class GuitarController : Controller
 
             GuitarForCreateViewModel guitarForCreateViewModel = new()
             {
+                
                 GuitarViewModel=new(),
-                Brands = brandList!.Select(i => new SelectListItem { Value = i.Id.ToString(), Text = i.Name }),
-                Categories = categoryList!.Select(i => new SelectListItem { Value = i.Id.ToString(), Text = i.Name }),
-                Colors = colorList!.Select(i => new SelectListItem { Value = i.Id.ToString(), Text = i.Name }),
-                GuitarShapes = guitarShapeList!.Select(i => new SelectListItem { Value = i.Id.ToString(), Text = i.Name }),
-                Soundboards = soundBoardsList!.Select(i => new SelectListItem { Value = i.Id.ToString(), Text = i.Name }),
-                Necks = neckList!.Select(i => new SelectListItem { Value = i.Id.ToString(), Text = i.Name }),
-                Fretboards = fretBoard!.Select(i => new SelectListItem { Value = i.Id.ToString(), Text = i.Name }),
-                PickupSets = pickupList!.Select(i => new SelectListItem { Value = i.Id.ToString(), Text = i.Name }),
-                TremoloTypes = tremoloList!.Select(i => new SelectListItem { Value = i.Id.ToString(), Text = i.Name }),
+                Brands = brandList!.OrderBy(i => i.Name).Select(i => new SelectListItem { Value = i.Id.ToString(), Text = i.Name }),
+                Categories = categoryList!.OrderBy(i => i.Name).Select(i => new SelectListItem { Value = i.Id.ToString(), Text = i.Name }),
+                Colors = colorList!.OrderBy(i => i.Name).Select(i => new SelectListItem { Value = i.Id.ToString(), Text = i.Name }),
+                GuitarShapes = guitarShapeList!.OrderBy(i => i.Name).Select(i => new SelectListItem { Value = i.Id.ToString(), Text = i.Name }),
+                Soundboards = soundBoardsList!.OrderBy(i => i.Name).Select(i => new SelectListItem { Value = i.Id.ToString(), Text = i.Name }),
+                Necks = neckList!.OrderBy(i => i.Name).Select(i => new SelectListItem { Value = i.Id.ToString(), Text = i.Name }),
+                Fretboards = fretBoard!.OrderBy(i => i.Name).Select(i => new SelectListItem { Value = i.Id.ToString(), Text = i.Name }),
+                PickupSets = pickupList!.OrderBy(i => i.Name).Select(i => new SelectListItem { Value = i.Id.ToString(), Text = i.Name }),
+                TremoloTypes = tremoloList!.OrderBy(i => i.Name).Select(i => new SelectListItem { Value = i.Id.ToString(), Text = i.Name }),
             };
 
             return View(guitarForCreateViewModel);
@@ -151,15 +152,15 @@ public sealed class GuitarController : Controller
             GuitarForCreateViewModel guitarForCreateViewModel = new()
             {
                 GuitarViewModel = guitarViewModel,
-                Brands = brandList!.Select(i => new SelectListItem { Value = i.Id.ToString(), Text = i.Name }),
-                Categories = categoryList!.Select(i => new SelectListItem { Value = i.Id.ToString(), Text = i.Name }),
-                Colors = colorList!.Select(i => new SelectListItem { Value = i.Id.ToString(), Text = i.Name }),
-                GuitarShapes = guitarShapeList!.Select(i => new SelectListItem { Value = i.Id.ToString(), Text = i.Name }),
-                Soundboards = soundBoardsList!.Select(i => new SelectListItem { Value = i.Id.ToString(), Text = i.Name }),
-                Necks = neckList!.Select(i => new SelectListItem { Value = i.Id.ToString(), Text = i.Name }),
-                Fretboards = fretBoard!.Select(i => new SelectListItem { Value = i.Id.ToString(), Text = i.Name }),
-                PickupSets = pickupList!.Select(i => new SelectListItem { Value = i.Id.ToString(), Text = i.Name }),
-                TremoloTypes = tremoloList!.Select(i => new SelectListItem { Value = i.Id.ToString(), Text = i.Name }),
+                Brands = brandList!.OrderBy(i => i.Name).Select(i => new SelectListItem { Value = i.Id.ToString(), Text = i.Name }),
+                Categories = categoryList!.OrderBy(i => i.Name).Select(i => new SelectListItem { Value = i.Id.ToString(), Text = i.Name }),
+                Colors = colorList!.OrderBy(i => i.Name).Select(i => new SelectListItem { Value = i.Id.ToString(), Text = i.Name }),
+                GuitarShapes = guitarShapeList!.OrderBy(i => i.Name).Select(i => new SelectListItem { Value = i.Id.ToString(), Text = i.Name }),
+                Soundboards = soundBoardsList!.OrderBy(i => i.Name).Select(i => new SelectListItem { Value = i.Id.ToString(), Text = i.Name }),
+                Necks = neckList!.OrderBy(i => i.Name).Select(i => new SelectListItem { Value = i.Id.ToString(), Text = i.Name }),
+                Fretboards = fretBoard!.OrderBy(i => i.Name).Select(i => new SelectListItem { Value = i.Id.ToString(), Text = i.Name }),
+                PickupSets = pickupList!.OrderBy(i => i.Name).Select(i => new SelectListItem { Value = i.Id.ToString(), Text = i.Name }),
+                TremoloTypes = tremoloList!.OrderBy(i => i.Name).Select(i => new SelectListItem { Value = i.Id.ToString(), Text = i.Name }),
             };
 
             return View(guitarForCreateViewModel);

@@ -12,5 +12,5 @@ public interface IUnitOfWork
     public IRepository<Guitar> Guitar { get; }
 
     public Task SaveChangesAsync(); 
-    public IRepository<T> GetRepository<T>()  where T : class;
+    public IRepository<T> GetRepository<T>()  where T : Entity;
 }

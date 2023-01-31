@@ -28,8 +28,5 @@ public sealed class UnitOfWork : IUnitOfWork
 
 	public async Task SaveChangesAsync() => await _db.SaveChangesAsync();
 
-	public  IRepository<T> GetRepository<T>() where T : class
-	{
-		throw new NotImplementedException();
-	}
+	public  IRepository<T> GetRepository<T>() where T : Entity => new Repository<T>(_db);
 }

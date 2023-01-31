@@ -1,8 +1,6 @@
-﻿using SoundPlay.BLL.ViewModels;
+﻿namespace SoundPlay.BLL.Services;
 
-namespace SoundPlay.BLL.Services;
-
-public sealed class EntityService<TModel, TViewModel> : IItemGenericService<TViewModel>
+public sealed class EntityService<TModel, TViewModel> : IEntityService<TModel, TViewModel>
 	where TModel : Entity
 	where TViewModel : EntityViewModel
 {
@@ -20,33 +18,57 @@ public sealed class EntityService<TModel, TViewModel> : IItemGenericService<TVie
 		_logger = logger;
 	}
 
-
-	public Task<TViewModel> CreateViewModelAsync(TViewModel viewModel)
+	public async Task<TViewModel> CreateViewModelAsync(TViewModel viewModel)
 	{
 		var model = _mapper.Map<TModel>(viewModel);
-
-		_unitOfWork.GetRepository<Brand>().Remove(model);
-			
-		throw new NotImplementedException();
+		_unitOfWork.GetRepository<TModel>().Add(model);
+		await _unitOfWork.SaveChangesAsync();
+		return viewModel;
 	}
 
-	public Task<TViewModel> DeleteViewModelAsync(TViewModel viewModel)
+	public async Task<TViewModel> DeleteViewModelAsync(TViewModel viewModel)
 	{
-		throw new NotImplementedException();
+		var model = _mapper.Map<TModel>(viewModel);
+		_unitOfWork.GetRepository<TModel>().Remove(model);
+		await _unitOfWork.SaveChangesAsync();
+		return viewModel;
 	}
 
-	public Task<TViewModel> GetViewModelByIdAsync(int id)
+	public async Task<TViewModel> GetViewModelByIdAsync(int id)
 	{
-		throw new NotImplementedException();
+		var model = await _unitOfWork.GetRepository<TModel>().GetFirstOrDefaultAsync(
+			predicate: i => i.Id == id,
+			isTracking: false);
+
+		if (model is null)
+		{
+			_logger.LogError("Get_by_id operation is failed");
+			throw new ObjectNotFoundException("Object not found");
+		}
+
+		var viewModel = _mapper.Map<TViewModel>(model);
+		return viewModel;
 	}
 
-	public Task<IEnumerable<TViewModel>> GetViewModelsAsync()
+	public async Task<IEnumerable<TViewModel>> GetViewModelsAsync()
 	{
-		throw new NotImplementedException();
+		var models = await _unitOfWork.GetRepository<TModel>().GetAllAsync(isTracking: false);
+
+		if (models is null)
+		{
+			_logger.LogError("Get_All operation is failed");
+			throw new ObjectNotFoundException("Object not found");
+		}
+
+		var viewModels = _mapper.Map<IEnumerable<TViewModel>>(models);
+		return viewModels;
 	}
 
-	public Task<TViewModel> UpdateViewModelAsync(TViewModel viewModel)
+	public async Task<TViewModel> UpdateViewModelAsync(TViewModel viewModel)
 	{
-		throw new NotImplementedException();
+		var model = _mapper.Map<TModel>(viewModel);
+		_unitOfWork.GetRepository<TModel>().Update(model);
+		await _unitOfWork.SaveChangesAsync();
+		return viewModel;
 	}
 }

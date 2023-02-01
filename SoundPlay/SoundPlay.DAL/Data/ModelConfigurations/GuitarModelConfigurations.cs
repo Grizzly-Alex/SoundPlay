@@ -1,4 +1,6 @@
-﻿namespace SoundPlay.DAL.Data.ModelConfigurations;
+﻿using Microsoft.EntityFrameworkCore;
+
+namespace SoundPlay.DAL.Data.ModelConfigurations;
 
 internal sealed class GuitarModelConfiguration : IEntityTypeConfiguration<Guitar>
 {
@@ -17,6 +19,11 @@ internal sealed class GuitarModelConfiguration : IEntityTypeConfiguration<Guitar
             .HasColumnType("varchar(max)")
             .IsRequired();
 
+        builder.Property(p => p.GuitarCategory)
+            .IsRequired()
+			.HasColumnName("Category")
+			.HasConversion(p => p.ToString(), p => Enum.Parse<GuitarCategory>(p));
+
         builder.Property(p => p.FretsCount)
             .HasColumnName("FreastCount")
             .HasColumnType("int")
@@ -34,7 +41,7 @@ internal sealed class GuitarModelConfiguration : IEntityTypeConfiguration<Guitar
         builder.Property(p => p.Price)
             .HasColumnName("Price")
             .HasColumnType("decimal")
-            .HasPrecision(8, 3)
+            .HasPrecision(8, 2)
             .IsRequired();
 
         builder.Property(p => p.PictureUrl)

@@ -36,7 +36,7 @@ namespace SoundPlay.DAL.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Brands");
+                    b.ToTable("Brands", (string)null);
                 });
 
             modelBuilder.Entity("SoundPlay.DAL.Models.Category", b =>
@@ -53,7 +53,7 @@ namespace SoundPlay.DAL.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categories");
+                    b.ToTable("Categories", (string)null);
                 });
 
             modelBuilder.Entity("SoundPlay.DAL.Models.Color", b =>
@@ -70,7 +70,7 @@ namespace SoundPlay.DAL.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Colors");
+                    b.ToTable("Colors", (string)null);
                 });
 
             modelBuilder.Entity("SoundPlay.DAL.Models.Guitar", b =>
@@ -152,7 +152,7 @@ namespace SoundPlay.DAL.Data.Migrations
 
                     b.HasIndex("TremoloTypeId");
 
-                    b.ToTable("Guitars");
+                    b.ToTable("Guitars", (string)null);
                 });
 
             modelBuilder.Entity("SoundPlay.DAL.Models.GuitarShape", b =>
@@ -169,7 +169,7 @@ namespace SoundPlay.DAL.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("GuitarShapes");
+                    b.ToTable("GuitarShapes", (string)null);
                 });
 
             modelBuilder.Entity("SoundPlay.DAL.Models.Material", b =>
@@ -186,7 +186,7 @@ namespace SoundPlay.DAL.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Materials");
+                    b.ToTable("Materials", (string)null);
                 });
 
             modelBuilder.Entity("SoundPlay.DAL.Models.PickupSet", b =>
@@ -203,7 +203,7 @@ namespace SoundPlay.DAL.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("PickupSets");
+                    b.ToTable("PickupSets", (string)null);
                 });
 
             modelBuilder.Entity("SoundPlay.DAL.Models.TremoloType", b =>
@@ -220,7 +220,7 @@ namespace SoundPlay.DAL.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("TremoloTypes");
+                    b.ToTable("TremoloTypes", (string)null);
                 });
 
             modelBuilder.Entity("SoundPlay.DAL.Models.Guitar", b =>

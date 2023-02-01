@@ -17,6 +17,8 @@ public sealed class ApplicationDbContext : DbContext
 	{
 		base.OnModelCreating(modelBuilder);
 
+		modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
+
 		foreach (var foreignKey in modelBuilder.Model.GetEntityTypes()
 			.SelectMany(e => e.GetForeignKeys()))
 		{

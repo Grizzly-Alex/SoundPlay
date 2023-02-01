@@ -112,7 +112,7 @@ public sealed class GuitarController : Controller
 
 			if (files.Count > 0)
             {
-				_contentManager.UploadFiles(HttpContext.Request.Form.Files, WebConstants.GuitarsImagesFolder);
+				_contentManager.UploadFiles(HttpContext.Request.Form.Files, WebConstants.GuitarsImages);
 				guitarForCreateViewModel.GuitarViewModel!.PictureUrl = _contentManager.NameFiles.FirstOrDefault();
 			}
 		
@@ -189,8 +189,8 @@ public sealed class GuitarController : Controller
 
             if (files.Count > 0)
             {
-				_contentManager.RemoveFile(WebConstants.GuitarsImagesFolder, guitarForCreateViewModel.GuitarViewModel.PictureUrl);
-				_contentManager.UploadFiles(files, WebConstants.GuitarsImagesFolder);
+				_contentManager.RemoveFile(WebConstants.GuitarsImages, guitarForCreateViewModel.GuitarViewModel.PictureUrl);
+				_contentManager.UploadFiles(files, WebConstants.GuitarsImages);
                 guitarForCreateViewModel.GuitarViewModel.PictureUrl = _contentManager.NameFiles.FirstOrDefault();              
 			}		
 
@@ -219,7 +219,7 @@ public sealed class GuitarController : Controller
         {
 			var guitarViewModel = await _guitars!.GetViewModelByIdAsync(id);
 
-			_contentManager.RemoveFile(WebConstants.GuitarsImagesFolder, guitarViewModel.PictureUrl);
+			_contentManager.RemoveFile(WebConstants.GuitarsImages, guitarViewModel.PictureUrl);
 
             await _guitars.DeleteViewModelAsync(guitarViewModel);
             return RedirectToAction(nameof(Index));

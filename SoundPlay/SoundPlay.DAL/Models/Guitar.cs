@@ -2,6 +2,7 @@
 
 public sealed class Guitar : Product
 {
+    public GuitarCategory GuitarCategory { get; set; }
     public byte FretsCount { get; set; }
     public byte StringsCount { get; set; }
     public int? ShapeId { get; set; }

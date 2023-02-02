@@ -4,15 +4,12 @@ internal sealed class ColorModelConfiguration : IEntityTypeConfiguration<Color>
 {
     public void Configure(EntityTypeBuilder<Color> builder)
     {
-        builder.ToTable("Colors")
-            .HasKey(p => p.Id)
-            .HasName("ColorId");
-
         builder.Property(p => p.Id)
-            .HasColumnName("Id");
+            .HasColumnName("id")
+            .IsRequired();
 
-        builder.Property(p => p.Name)
-            .HasColumnName("Name")
+		builder.Property(p => p.Name)
+            .HasColumnName("name")
             .HasColumnType("varchar(max)")
             .IsRequired();
     }

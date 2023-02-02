@@ -4,15 +4,11 @@ internal sealed class PickupSetModelConfiguration : IEntityTypeConfiguration<Pic
 {
     public void Configure(EntityTypeBuilder<PickupSet> builder)
     {
-        builder.ToTable("PickupSets")
-            .HasKey(p => p.Id)
-            .HasName("PickupSetId");
-
         builder.Property(p => p.Id)
-            .HasColumnName("Id");
+            .HasColumnName("id");
 
         builder.Property(p => p.Name)
-            .HasColumnName("Name")
+            .HasColumnName("name")
             .HasColumnType("varchar(max)")
             .IsRequired();
     }

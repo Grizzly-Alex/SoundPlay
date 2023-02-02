@@ -4,15 +4,11 @@ internal sealed class GuitarShapeModelConfiguration : IEntityTypeConfiguration<G
 {
     public void Configure(EntityTypeBuilder<GuitarShape> builder)
     {
-        builder.ToTable("GuitarShapes")
-            .HasKey(p => p.Id)
-            .HasName("ShapeId");
-
         builder.Property(p => p.Id)
-            .HasColumnName("Id");
+            .HasColumnName("id");
 
         builder.Property(p => p.Name)
-            .HasColumnName("Name")
+            .HasColumnName("name")
             .HasColumnType("varchar(max)")
             .IsRequired();
     }

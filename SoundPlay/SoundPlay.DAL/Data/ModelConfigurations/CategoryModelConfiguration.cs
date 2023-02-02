@@ -4,15 +4,11 @@ internal sealed class CategoryModelConfiguration : IEntityTypeConfiguration<Cate
 {
     public void Configure(EntityTypeBuilder<Category> builder)
     {
-        builder.ToTable("Categories")
-            .HasKey(p => p.Id)
-            .HasName("CategoryId");
-
         builder.Property(p => p.Id)
-            .HasColumnName("Id");
+            .HasColumnName("id");
 
         builder.Property(p => p.Name)
-            .HasColumnName("Name")
+            .HasColumnName("name")
             .HasColumnType("varchar(max)")
             .IsRequired();
     }

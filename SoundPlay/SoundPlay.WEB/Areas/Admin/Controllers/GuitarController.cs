@@ -7,7 +7,6 @@ public sealed class GuitarController : Controller
     private readonly IContentManager _contentManager;
     private readonly ILoggerAdapter<GuitarService>? _logger;
     private readonly IEntityService<Brand, BrandViewModel>? _brands;
-    private readonly IEntityService<Category,CategoryViewModel>? _categories;
     private readonly IEntityService<Color, ColorViewModel>? _colors;
     private readonly IEntityService<GuitarShape, GuitarShapeViewModel>? _guitarShapes;
     private readonly IEntityService<Material, MaterialViewModel>? _materials;
@@ -20,7 +19,6 @@ public sealed class GuitarController : Controller
         IContentManager contentManager,
         ILoggerAdapter<GuitarService>? logger,
 		IEntityService<Brand, BrandViewModel>? brands,
-		IEntityService<Category, CategoryViewModel>? categories,
 		IEntityService<Color, ColorViewModel>? colors,
 		IEntityService<GuitarShape, GuitarShapeViewModel>? guitarShapes,
 		IEntityService<Material, MaterialViewModel>? materials,
@@ -32,7 +30,6 @@ public sealed class GuitarController : Controller
         _logger = logger;
         _guitars = guitars;
         _brands = brands;
-        _categories = categories;
         _colors = colors;
         _guitarShapes = guitarShapes;
         _materials = materials;
@@ -68,7 +65,6 @@ public sealed class GuitarController : Controller
         try
         {
             var brandList = await _brands!.GetViewModelsAsync();
-            var categoryList = await _categories!.GetViewModelsAsync();
             var colorList = await _colors!.GetViewModelsAsync();
             var guitarShapeList = await _guitarShapes!.GetViewModelsAsync();
             var soundBoardsList = await _materials!.GetViewModelsAsync();
@@ -82,7 +78,6 @@ public sealed class GuitarController : Controller
                 
                 GuitarViewModel = new(),              
 				Brands = brandList!.OrderBy(i => i.Name).Select(i => new SelectListItem { Value = i.Id.ToString(), Text = i.Name }),
-                Categories = categoryList!.OrderBy(i => i.Name).Select(i => new SelectListItem { Value = i.Id.ToString(), Text = i.Name }),
                 Colors = colorList!.OrderBy(i => i.Name).Select(i => new SelectListItem { Value = i.Id.ToString(), Text = i.Name }),
                 GuitarShapes = guitarShapeList!.OrderBy(i => i.Name).Select(i => new SelectListItem { Value = i.Id.ToString(), Text = i.Name }),
                 Soundboards = soundBoardsList!.OrderBy(i => i.Name).Select(i => new SelectListItem { Value = i.Id.ToString(), Text = i.Name }),
@@ -140,7 +135,6 @@ public sealed class GuitarController : Controller
         {
             var guitarViewModel = await _guitars!.GetViewModelByIdAsync(id);
             var brandList = await _brands!.GetViewModelsAsync();
-            var categoryList = await _categories!.GetViewModelsAsync();
             var colorList = await _colors!.GetViewModelsAsync();
             var guitarShapeList = await _guitarShapes!.GetViewModelsAsync();
             var soundBoardsList = await _materials!.GetViewModelsAsync();
@@ -153,7 +147,6 @@ public sealed class GuitarController : Controller
             {
                 GuitarViewModel = guitarViewModel,
                 Brands = brandList!.OrderBy(i => i.Name).Select(i => new SelectListItem { Value = i.Id.ToString(), Text = i.Name }),
-                Categories = categoryList!.OrderBy(i => i.Name).Select(i => new SelectListItem { Value = i.Id.ToString(), Text = i.Name }),
                 Colors = colorList!.OrderBy(i => i.Name).Select(i => new SelectListItem { Value = i.Id.ToString(), Text = i.Name }),
                 GuitarShapes = guitarShapeList!.OrderBy(i => i.Name).Select(i => new SelectListItem { Value = i.Id.ToString(), Text = i.Name }),
                 Soundboards = soundBoardsList!.OrderBy(i => i.Name).Select(i => new SelectListItem { Value = i.Id.ToString(), Text = i.Name }),

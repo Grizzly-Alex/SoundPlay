@@ -5,7 +5,6 @@ public sealed class MappingProfile : Profile
     public MappingProfile()
     {
         CreateMap<Brand, BrandViewModel>().ReverseMap();
-        CreateMap<Category, CategoryViewModel>().ReverseMap();
         CreateMap<GuitarShape, GuitarShapeViewModel>().ReverseMap();
         CreateMap<Material, MaterialViewModel>().ReverseMap();
         CreateMap<TremoloType, TremoloTypeViewModel>().ReverseMap();

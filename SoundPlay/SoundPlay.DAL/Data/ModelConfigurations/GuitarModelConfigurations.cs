@@ -45,10 +45,10 @@ internal sealed class GuitarModelConfiguration : IEntityTypeConfiguration<Guitar
 			.HasColumnName("color_id")
 	        .HasColumnType("int");
 
-		builder.Property(p => p.GuitarCategory)
-			.HasColumnName("category")
-			.HasConversion(p => p.ToString(), p => Enum.Parse<GuitarCategory>(p))
-			.IsRequired();
+		//builder.Property(p => p.GuitarType)
+		//	.HasColumnName("category")
+		//	.HasConversion(p => p.ToString(), p => Enum.Parse<GuitarType>(p))
+		//	.IsRequired();
 
 		builder.Property(p => p.FretsCount)
 	        .HasColumnName("frets_count")
@@ -58,6 +58,11 @@ internal sealed class GuitarModelConfiguration : IEntityTypeConfiguration<Guitar
 		builder.Property(p => p.StringsCount)
 			.HasColumnName("strings_count")
 			.HasColumnType("tinyint")
+			.IsRequired();
+
+		builder.Property(p => p.CategoryId)
+			.HasColumnName("category_id")
+            .HasColumnType("int")
 			.IsRequired();
 
         builder.Property(p => p.ShapeId)

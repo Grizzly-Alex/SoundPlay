@@ -70,17 +70,17 @@
 		</div>
 
 		@*Item lists*@
-		<div class="mb-3 col-4">
-			<label asp-for="GuitarViewModel!.GuitarCategory"></label>
-			<select asp-for="GuitarViewModel!.GuitarCategory" 
-					asp-items="Html.GetEnumSelectList<GuitarCategory>()" class="form-select" required>
+@*		<div class="mb-3 col-4">
+			<label asp-for="GuitarViewModel!.GuitarType"></label>
+			<select asp-for="GuitarViewModel!.GuitarType" 
+					asp-items="Html.GetEnumSelectList<GuitarType>()" class="form-select" required>
 				<option selected disabled value="">--Select Category--</option>
 			</select>
-			<span asp-validation-for="GuitarViewModel!.GuitarCategory" class="text-danger"></span>
+			<span asp-validation-for="GuitarViewModel!.GuitarType" class="text-danger"></span>
 			<div class="valid-feedback">
 				Looks good!
 			</div>
-		</div>
+		</div>*@
 		<div class="mb-3 col-4">
 			<label asp-for="GuitarViewModel!.Brand"></label>
 			<select asp-for="GuitarViewModel!.BrandId" asp-items="@Model.Brands" class="form-select" required>

@@ -7,3 +7,5 @@ global using Microsoft.EntityFrameworkCore.Query;
 global using System.Linq.Expressions;
 global using SoundPlay.DAL.Data;
 global using SoundPlay.DAL.Repository.Interfaces;
+global using System.Reflection;
+global using SoundPlay.DAL.Extensions;

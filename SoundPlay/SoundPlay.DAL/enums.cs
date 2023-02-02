@@ -1,17 +1,11 @@
 ﻿namespace SoundPlay.DAL;
 
-public enum GuitarCategory
-{
-	[Display(Name = "Electric Guitar")]
-	ElectricGuitar = 1,
-	[Display(Name = "Accoustic Guitar")]
-	AcousticGuitar = 2,
-	[Display(Name = "Classic Guitar")]
-	ClassicGuitar = 3,
-	[Display(Name = "Electric Bass")]
-	ElectricBass = 4,
-	[Display(Name = "Accoustic Bass")]
-	AcousticBass = 5,
-	[Display(Name = "Ukulele")]
-	Ukulele = 6,
+public enum GuitarType 
+{ 
+	[Display(Name = "Electric Guitar")] ElectricGuitar = 1,
+	[Display(Name = "Accoustic Guitar")] AcousticGuitar = 2,
+	[Display(Name = "Classic Guitar")] ClassicGuitar = 3,
+	[Display(Name = "Electric Bass")] ElectricBass = 4,
+	[Display(Name = "Accoustic Bass")] AcousticBass = 5,
+	[Display(Name = "Ukulele")] Ukulele = 6,
 }

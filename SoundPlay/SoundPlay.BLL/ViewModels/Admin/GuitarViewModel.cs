@@ -3,7 +3,7 @@
 public sealed class GuitarViewModel : ProductViewModel
 {
 	[DisplayName("Category")]
-	public GuitarCategory GuitarCategory { get; set; }	
+	public GuitarType GuitarType { get; set; }	
 
 	[DisplayName("Frets Count")]
 	[Required(ErrorMessage = "Value {0} must not be empty!")]

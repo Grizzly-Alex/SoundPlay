@@ -20,17 +20,13 @@ public abstract class ProductViewModel : EntityViewModel
 	public string? PictureUrl { get; set; }
 
 	[Required(ErrorMessage = "Value {0} from the list must be selected!")]
-	[DisplayName("Category")]
-	public int CategoryId { get; set; }
-
-	[Required(ErrorMessage = "Value {0} from the list must be selected!")]
 	[DisplayName("Brand")]
 	public int BrandId { get; set; }
 
 	[Required(ErrorMessage = "Value {0} from the list must be selected!")]
 	[DisplayName("Color")]
 	public int ColorId { get; set; }
-    [ValidateNever] public Category? Category { get; set; }
+
 	[ValidateNever] public Brand? Brand { get; set; }
 	[ValidateNever] public Color? Color { get; set; }
 }

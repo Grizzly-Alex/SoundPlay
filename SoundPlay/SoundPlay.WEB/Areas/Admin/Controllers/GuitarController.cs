@@ -80,8 +80,8 @@ public sealed class GuitarController : Controller
             CreateGuitarViewModel guitarForCreateViewModel = new()
             {
                 
-                GuitarViewModel=new(),
-                Brands = brandList!.OrderBy(i => i.Name).Select(i => new SelectListItem { Value = i.Id.ToString(), Text = i.Name }),
+                GuitarViewModel = new(),              
+				Brands = brandList!.OrderBy(i => i.Name).Select(i => new SelectListItem { Value = i.Id.ToString(), Text = i.Name }),
                 Categories = categoryList!.OrderBy(i => i.Name).Select(i => new SelectListItem { Value = i.Id.ToString(), Text = i.Name }),
                 Colors = colorList!.OrderBy(i => i.Name).Select(i => new SelectListItem { Value = i.Id.ToString(), Text = i.Name }),
                 GuitarShapes = guitarShapeList!.OrderBy(i => i.Name).Select(i => new SelectListItem { Value = i.Id.ToString(), Text = i.Name }),

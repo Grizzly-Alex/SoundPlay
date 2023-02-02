@@ -20,6 +20,11 @@ internal sealed class GuitarModelConfiguration : IEntityTypeConfiguration<Guitar
             .HasColumnType("varchar(max)")
             .IsRequired();
 
+		builder.Property(p => p.PictureUrl)
+			.HasColumnName("picture_url")
+			.HasColumnType("varchar(max)")
+			.IsRequired();
+
 		builder.Property(p => p.Price)
             .HasColumnName("price")
             .HasColumnType("decimal")
@@ -41,9 +46,9 @@ internal sealed class GuitarModelConfiguration : IEntityTypeConfiguration<Guitar
 	        .HasColumnType("int");
 
 		builder.Property(p => p.GuitarCategory)
-            .IsRequired()
 			.HasColumnName("category")
-			.HasConversion(p => p.ToString(), p => Enum.Parse<GuitarCategory>(p));
+			.HasConversion(p => p.ToString(), p => Enum.Parse<GuitarCategory>(p))
+			.IsRequired();
 
 		builder.Property(p => p.FretsCount)
 	        .HasColumnName("frets_count")

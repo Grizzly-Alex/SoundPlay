@@ -135,7 +135,9 @@ namespace SoundPlay.DAL.Data.Migrations
                         .HasColumnName("pickup_set_id");
 
                     b.Property<string>("PictureUrl")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasColumnType("varchar(max)")
+                        .HasColumnName("picture_url");
 
                     b.Property<decimal>("Price")
                         .HasPrecision(8, 2)

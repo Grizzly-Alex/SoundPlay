@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace SoundPlay.DAL.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class UpdateEverything : Migration
+    public partial class EverythingUpdate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -122,6 +122,11 @@ namespace SoundPlay.DAL.Data.Migrations
                 name: "ShapeId",
                 table: "Guitars",
                 newName: "shape_id");
+
+            migrationBuilder.RenameColumn(
+                name: "PictureUrl",
+                table: "Guitars",
+                newName: "picture_url");
 
             migrationBuilder.RenameColumn(
                 name: "PickupSetId",
@@ -275,6 +280,16 @@ namespace SoundPlay.DAL.Data.Migrations
                 nullable: false,
                 oldClrType: typeof(string),
                 oldType: "nvarchar(max)");
+
+            migrationBuilder.AlterColumn<string>(
+                name: "picture_url",
+                table: "Guitars",
+                type: "varchar(max)",
+                nullable: false,
+                defaultValue: "",
+                oldClrType: typeof(string),
+                oldType: "nvarchar(max)",
+                oldNullable: true);
 
             migrationBuilder.AlterColumn<DateTime>(
                 name: "date_delivery",
@@ -500,6 +515,11 @@ namespace SoundPlay.DAL.Data.Migrations
                 newName: "ShapeId");
 
             migrationBuilder.RenameColumn(
+                name: "picture_url",
+                table: "Guitars",
+                newName: "PictureUrl");
+
+            migrationBuilder.RenameColumn(
                 name: "pickup_set_id",
                 table: "Guitars",
                 newName: "PickupSetId");
@@ -649,6 +669,14 @@ namespace SoundPlay.DAL.Data.Migrations
                 table: "Guitars",
                 type: "nvarchar(max)",
                 nullable: false,
+                oldClrType: typeof(string),
+                oldType: "varchar(max)");
+
+            migrationBuilder.AlterColumn<string>(
+                name: "PictureUrl",
+                table: "Guitars",
+                type: "nvarchar(max)",
+                nullable: true,
                 oldClrType: typeof(string),
                 oldType: "varchar(max)");
 

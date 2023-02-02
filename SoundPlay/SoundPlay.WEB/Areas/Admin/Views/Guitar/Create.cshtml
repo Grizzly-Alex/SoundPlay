@@ -71,11 +71,12 @@
 
 		@*Item lists*@
 		<div class="mb-3 col-4">
-			<label asp-for="GuitarViewModel!.Category"></label>
-			<select asp-for="GuitarViewModel!.CategoryId" asp-items="@Model.Categories" class="form-select" required>
+			<label asp-for="GuitarViewModel!.GuitarCategory"></label>
+			<select asp-for="GuitarViewModel!.GuitarCategory" 
+					asp-items="Html.GetEnumSelectList<GuitarCategory>()" class="form-select" required>
 				<option selected disabled value="">--Select Category--</option>
 			</select>
-			<span asp-validation-for="GuitarViewModel!.CategoryId" class="text-danger"></span>
+			<span asp-validation-for="GuitarViewModel!.GuitarCategory" class="text-danger"></span>
 			<div class="valid-feedback">
 				Looks good!
 			</div>

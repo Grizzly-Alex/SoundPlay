@@ -10,7 +10,7 @@ public sealed class ApplicationDbContext : DbContext
     public DbSet<Color> Colors { get; set; }
     public DbSet<PickupSet> PickupSets { get; set; }
     public DbSet<Guitar> Guitars { get; set; }
-
+	
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
 
 	protected override void OnModelCreating(ModelBuilder modelBuilder)

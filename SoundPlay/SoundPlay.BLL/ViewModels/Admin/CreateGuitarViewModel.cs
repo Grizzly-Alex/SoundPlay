@@ -3,6 +3,7 @@
 public sealed class CreateGuitarViewModel
 {
     public GuitarViewModel? GuitarViewModel { get; set; }
+    public IEnumerable<SelectListItem>? CategoryEnum { get; set; }
     public IEnumerable<SelectListItem>? Categories { get; set; }
     public IEnumerable<SelectListItem>? Brands { get; set; }
     public IEnumerable<SelectListItem>? Colors { get; set; }

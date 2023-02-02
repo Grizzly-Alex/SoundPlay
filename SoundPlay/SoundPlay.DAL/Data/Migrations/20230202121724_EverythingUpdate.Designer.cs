@@ -12,8 +12,8 @@ using SoundPlay.DAL.Data;
 namespace SoundPlay.DAL.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230202074619_UpdateEverything")]
-    partial class UpdateEverything
+    [Migration("20230202121724_EverythingUpdate")]
+    partial class EverythingUpdate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -138,7 +138,9 @@ namespace SoundPlay.DAL.Data.Migrations
                         .HasColumnName("pickup_set_id");
 
                     b.Property<string>("PictureUrl")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasColumnType("varchar(max)")
+                        .HasColumnName("picture_url");
 
                     b.Property<decimal>("Price")
                         .HasPrecision(8, 2)

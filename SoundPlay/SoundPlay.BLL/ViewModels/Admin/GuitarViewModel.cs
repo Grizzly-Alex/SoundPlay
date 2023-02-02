@@ -2,6 +2,9 @@
 
 public sealed class GuitarViewModel : ProductViewModel
 {
+	[DisplayName("Category")]
+	public GuitarCategory GuitarCategory { get; set; }	
+
 	[DisplayName("Frets Count")]
 	[Required(ErrorMessage = "Value {0} must not be empty!")]
 	[Range(1, 50, ErrorMessage = "Value for {0} must be between {1} and {2}.")]

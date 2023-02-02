@@ -2,7 +2,6 @@
 
 public sealed class ApplicationDbContext : DbContext
 {
-	public DbSet<Category> Categories { get; set; }
 	public DbSet<Brand> Brands { get; set; }
 	public DbSet<GuitarShape> GuitarShapes { get; set; }
 	public DbSet<Material> Materials { get; set; }

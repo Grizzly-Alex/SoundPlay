@@ -81,6 +81,17 @@
 				Looks good!
 			</div>
 		</div>*@
+
+		<div class="mb-3 col-4">
+			<label asp-for="GuitarViewModel!.Category"></label>
+			<select asp-for="GuitarViewModel!.CategoryId" asp-items="@Model.Categories" class="form-select" required>
+				<option selected disabled value="">--Select Category--</option>
+			</select>
+			<span asp-validation-for="GuitarViewModel!.CategoryId" class="text-danger"></span>
+			<div class="valid-feedback">
+				Looks good!
+			</div>
+		</div>
 		<div class="mb-3 col-4">
 			<label asp-for="GuitarViewModel!.Brand"></label>
 			<select asp-for="GuitarViewModel!.BrandId" asp-items="@Model.Brands" class="form-select" required>

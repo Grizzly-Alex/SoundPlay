@@ -6,7 +6,8 @@ public sealed class GuitarController : Controller
 {
     private readonly IContentManager _contentManager;
     private readonly ILoggerAdapter<GuitarService>? _logger;
-    private readonly IEntityService<Brand, BrandViewModel>? _brands;
+	private readonly IEntityService<GuitarCategory, GuitarCategoryViewModel>? _category;
+	private readonly IEntityService<Brand, BrandViewModel>? _brands;
     private readonly IEntityService<Color, ColorViewModel>? _colors;
     private readonly IEntityService<GuitarShape, GuitarShapeViewModel>? _guitarShapes;
     private readonly IEntityService<Material, MaterialViewModel>? _materials;
@@ -17,7 +18,8 @@ public sealed class GuitarController : Controller
 
     public GuitarController(
         IContentManager contentManager,
-        ILoggerAdapter<GuitarService>? logger,
+		IEntityService<GuitarCategory, GuitarCategoryViewModel> category,
+		ILoggerAdapter<GuitarService>? logger,
 		IEntityService<Brand, BrandViewModel>? brands,
 		IEntityService<Color, ColorViewModel>? colors,
 		IEntityService<GuitarShape, GuitarShapeViewModel>? guitarShapes,
@@ -26,6 +28,7 @@ public sealed class GuitarController : Controller
 		IEntityService<TremoloType, TremoloTypeViewModel>? tremoloTypes,
 		IProductService<GuitarViewModel>? guitars)
     {
+        _category = category;
         _contentManager = contentManager;
         _logger = logger;
         _guitars = guitars;
@@ -64,6 +67,7 @@ public sealed class GuitarController : Controller
     {
         try
         {
+            var categoryList = await _category!.GetViewModelsAsync(); 
             var brandList = await _brands!.GetViewModelsAsync();
             var colorList = await _colors!.GetViewModelsAsync();
             var guitarShapeList = await _guitarShapes!.GetViewModelsAsync();
@@ -74,9 +78,9 @@ public sealed class GuitarController : Controller
             var tremoloList = await _tremoloTypes!.GetViewModelsAsync();
 
             CreateGuitarViewModel guitarForCreateViewModel = new()
-            {
-                
-                GuitarViewModel = new(),              
+            {             
+                GuitarViewModel = new(), 
+                Categories = categoryList!.OrderBy(i => i.Name).Select(i => new SelectListItem { Value = i.Id.ToString(), Text = i.Name }),
 				Brands = brandList!.OrderBy(i => i.Name).Select(i => new SelectListItem { Value = i.Id.ToString(), Text = i.Name }),
                 Colors = colorList!.OrderBy(i => i.Name).Select(i => new SelectListItem { Value = i.Id.ToString(), Text = i.Name }),
                 GuitarShapes = guitarShapeList!.OrderBy(i => i.Name).Select(i => new SelectListItem { Value = i.Id.ToString(), Text = i.Name }),
@@ -133,7 +137,8 @@ public sealed class GuitarController : Controller
     {
         try
         {
-            var guitarViewModel = await _guitars!.GetViewModelByIdAsync(id);
+			var categoryList = await _category!.GetViewModelsAsync();
+			var guitarViewModel = await _guitars!.GetViewModelByIdAsync(id);
             var brandList = await _brands!.GetViewModelsAsync();
             var colorList = await _colors!.GetViewModelsAsync();
             var guitarShapeList = await _guitarShapes!.GetViewModelsAsync();
@@ -146,7 +151,8 @@ public sealed class GuitarController : Controller
             CreateGuitarViewModel guitarForCreateViewModel = new()
             {
                 GuitarViewModel = guitarViewModel,
-                Brands = brandList!.OrderBy(i => i.Name).Select(i => new SelectListItem { Value = i.Id.ToString(), Text = i.Name }),
+				Categories = categoryList!.OrderBy(i => i.Name).Select(i => new SelectListItem { Value = i.Id.ToString(), Text = i.Name }),
+				Brands = brandList!.OrderBy(i => i.Name).Select(i => new SelectListItem { Value = i.Id.ToString(), Text = i.Name }),
                 Colors = colorList!.OrderBy(i => i.Name).Select(i => new SelectListItem { Value = i.Id.ToString(), Text = i.Name }),
                 GuitarShapes = guitarShapeList!.OrderBy(i => i.Name).Select(i => new SelectListItem { Value = i.Id.ToString(), Text = i.Name }),
                 Soundboards = soundBoardsList!.OrderBy(i => i.Name).Select(i => new SelectListItem { Value = i.Id.ToString(), Text = i.Name }),

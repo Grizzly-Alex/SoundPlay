@@ -21,6 +21,7 @@ public sealed class GuitarService : IProductService<GuitarViewModel>
         var models = await _unitOfWork.GetRepository<Guitar>()
             .GetAllAsync(
                 include:query => query
+                    .Include(guitar => guitar.Category)
                     .Include(guitar => guitar.Brand)
                     .Include(guitar => guitar.Color)
                     .Include(guitar => guitar.Shape)
@@ -47,6 +48,7 @@ public sealed class GuitarService : IProductService<GuitarViewModel>
             .GetFirstOrDefaultAsync(
                 predicate: i => i.Id == id,
                 include: query => query
+					.Include(guitar => guitar.Category)
                     .Include(guitar => guitar.Brand)
 					.Include(guitar => guitar.Color)
 					.Include(guitar => guitar.Shape)

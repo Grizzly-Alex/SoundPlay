@@ -74,7 +74,9 @@ namespace SoundPlay.DAL.Data.Migrations
                         .HasColumnName("brand_id");
 
                     b.Property<int>("CategoryId")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int")
+                        .HasDefaultValue(1)
                         .HasColumnName("category_id");
 
                     b.Property<int>("ColorId")
@@ -178,32 +180,32 @@ namespace SoundPlay.DAL.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = 0,
+                            Id = 1,
                             Name = "Electric Guitar"
                         },
                         new
                         {
-                            Id = 1,
+                            Id = 2,
                             Name = "Accoustic Guitar"
                         },
                         new
                         {
-                            Id = 2,
+                            Id = 3,
                             Name = "Classic Guitar"
                         },
                         new
                         {
-                            Id = 3,
+                            Id = 4,
                             Name = "Electric Bass"
                         },
                         new
                         {
-                            Id = 4,
+                            Id = 5,
                             Name = "Accoustic Bass"
                         },
                         new
                         {
-                            Id = 5,
+                            Id = 6,
                             Name = "Ukulele"
                         });
                 });

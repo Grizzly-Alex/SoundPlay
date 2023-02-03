@@ -63,6 +63,7 @@ internal sealed class GuitarModelConfiguration : IEntityTypeConfiguration<Guitar
 		builder.Property(p => p.CategoryId)
 			.HasColumnName("category_id")
             .HasColumnType("int")
+			.HasDefaultValue(1)
 			.IsRequired();
 
         builder.Property(p => p.ShapeId)

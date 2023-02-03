@@ -116,8 +116,7 @@ public sealed class GuitarController : Controller
 			}
 		
 			if (ModelState.IsValid)
-            {    
-                guitarForCreateViewModel.GuitarViewModel!.DateDelivery = DateTime.Now;
+            {                   
                 await _guitars!.CreateViewModelAsync(guitarForCreateViewModel.GuitarViewModel!);
                 return RedirectToAction(nameof(Index));
             }

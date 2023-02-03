@@ -71,6 +71,7 @@ public sealed class GuitarService : IProductService<GuitarViewModel>
 
     public async Task<GuitarViewModel> CreateViewModelAsync(GuitarViewModel viewModel)
     {
+        viewModel.DateDelivery = DateTime.Now;
 		var model = _mapper.Map<Guitar>(viewModel);
 			_unitOfWork.GetRepository<Guitar>().Add(model);
 		await _unitOfWork.SaveChangesAsync();
@@ -79,7 +80,10 @@ public sealed class GuitarService : IProductService<GuitarViewModel>
             
     public async Task<GuitarViewModel> UpdateViewModelAsync(GuitarViewModel viewModel)
     {
-        var model = _mapper.Map<Guitar>(viewModel);
+        var modelFromDb = await _unitOfWork.GetRepository<Guitar>().GetFirstOrDefaultAsync(i => i.Id == viewModel.Id);
+		viewModel.DateDelivery = modelFromDb.DateDelivery;
+
+		var model = _mapper.Map<Guitar>(viewModel);
 			_unitOfWork.GetRepository<Guitar>().Update(model);
 		await _unitOfWork.SaveChangesAsync();
 		return viewModel;

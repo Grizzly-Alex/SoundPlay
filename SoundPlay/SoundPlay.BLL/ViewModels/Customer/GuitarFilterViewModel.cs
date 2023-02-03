@@ -1,6 +1,6 @@
 ﻿namespace SoundPlay.BLL.ViewModels.Customer;
 
-public class GuitarFilterViewModel
+public sealed class GuitarFilterViewModel
 {
 	public List<GuitarViewModel>? Guitars { get; set; }
 	public IEnumerable<SelectListItem>? Brands { get; set; }

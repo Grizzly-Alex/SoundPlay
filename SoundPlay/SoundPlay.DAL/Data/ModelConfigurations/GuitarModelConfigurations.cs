@@ -1,6 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-
-namespace SoundPlay.DAL.Data.ModelConfigurations;
+﻿namespace SoundPlay.DAL.Data.ModelConfigurations;
 
 internal sealed class GuitarModelConfiguration : IEntityTypeConfiguration<Guitar>
 {
@@ -44,11 +42,6 @@ internal sealed class GuitarModelConfiguration : IEntityTypeConfiguration<Guitar
 			.IsRequired()
 			.HasColumnName("color_id")
 	        .HasColumnType("int");
-
-		//builder.Property(p => p.GuitarType)
-		//	.HasColumnName("category")
-		//	.HasConversion(p => p.ToString(), p => Enum.Parse<GuitarType>(p))
-		//	.IsRequired();
 
 		builder.Property(p => p.FretsCount)
 	        .HasColumnName("frets_count")

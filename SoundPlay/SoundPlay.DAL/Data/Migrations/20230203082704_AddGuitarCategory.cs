@@ -43,12 +43,12 @@ namespace SoundPlay.DAL.Data.Migrations
                 columns: new[] { "id", "name" },
                 values: new object[,]
                 {
-                    { 1, "Electric Guitar" },
-                    { 2, "Accoustic Guitar" },
-                    { 3, "Classic Guitar" },
-                    { 4, "Electric Bass" },
-                    { 5, "Accoustic Bass" },
-                    { 6, "Ukulele" }
+                    { 0, "Electric Guitar" },
+                    { 1, "Accoustic Guitar" },
+                    { 2, "Classic Guitar" },
+                    { 3, "Electric Bass" },
+                    { 4, "Accoustic Bass" },
+                    { 5, "Ukulele" }
                 });
 
             migrationBuilder.CreateIndex(

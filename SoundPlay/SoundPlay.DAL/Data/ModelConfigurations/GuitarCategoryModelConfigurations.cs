@@ -10,6 +10,7 @@ internal sealed class GuitarCategoryConfiguration : IEntityTypeConfiguration<Gui
 
         builder.Property(p => p.Name)
             .HasColumnName("name")
-            .HasColumnType("varchar(max)");
+            .HasColumnType("varchar(max)")
+            .IsRequired();
     }
 }

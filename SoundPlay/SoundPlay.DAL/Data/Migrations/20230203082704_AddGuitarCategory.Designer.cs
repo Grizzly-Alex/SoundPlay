@@ -12,7 +12,7 @@ using SoundPlay.DAL.Data;
 namespace SoundPlay.DAL.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230202210009_AddGuitarCategory")]
+    [Migration("20230203082704_AddGuitarCategory")]
     partial class AddGuitarCategory
     {
         /// <inheritdoc />
@@ -181,32 +181,32 @@ namespace SoundPlay.DAL.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = 1,
+                            Id = 0,
                             Name = "Electric Guitar"
                         },
                         new
                         {
-                            Id = 2,
+                            Id = 1,
                             Name = "Accoustic Guitar"
                         },
                         new
                         {
-                            Id = 3,
+                            Id = 2,
                             Name = "Classic Guitar"
                         },
                         new
                         {
-                            Id = 4,
+                            Id = 3,
                             Name = "Electric Bass"
                         },
                         new
                         {
-                            Id = 5,
+                            Id = 4,
                             Name = "Accoustic Bass"
                         },
                         new
                         {
-                            Id = 6,
+                            Id = 5,
                             Name = "Ukulele"
                         });
                 });

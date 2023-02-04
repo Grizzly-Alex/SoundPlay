@@ -2,7 +2,7 @@
 
 public sealed class GuitarFilterViewModel
 {
-	public List<GuitarViewModel>? Guitars { get; set; }
+	public List<CatalogProductViewModel>? Guitars { get; set; }
 	public IEnumerable<SelectListItem>? Brands { get; set; }
 	public IEnumerable<SelectListItem>? Colors { get; set; }
 	public IEnumerable<SelectListItem>? GuitarShapes { get; set; }

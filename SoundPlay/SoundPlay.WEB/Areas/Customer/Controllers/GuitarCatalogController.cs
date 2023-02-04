@@ -1,6 +1,4 @@
-﻿using SoundPlay.DAL;
-
-namespace SoundPlay.WEB.Areas.Customer.Controllers;
+﻿namespace SoundPlay.WEB.Areas.Customer.Controllers;
 
 [Area("Customer")]
 public class GuitarCatalogController : Controller

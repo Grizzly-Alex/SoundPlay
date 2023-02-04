@@ -74,4 +74,22 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : Entity
 			? await orderBy(query).Select(selector).FirstOrDefaultAsync()
 			: await query.Select(selector).FirstOrDefaultAsync();
 	}
+
+	public async Task<IList<TResult>> GetAllAsync<TResult>(
+		Expression<Func<TEntity, TResult>> selector,
+		Expression<Func<TEntity, bool>>? predicate = null,
+		Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>>? orderBy = null,
+		Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>>? include = null,
+		bool isTracking = false)
+	{
+		IQueryable<TEntity> query = _dbSet;
+
+		if (!isTracking) { query = query.AsNoTracking(); }
+		if (predicate is not null) { query = query.Where(predicate); }
+		if (include is not null) { query = include(query); }
+
+		return orderBy is not null
+			? await orderBy(query).Select(selector).ToListAsync()
+			: await query.Select(selector).ToListAsync();
+	}
 }

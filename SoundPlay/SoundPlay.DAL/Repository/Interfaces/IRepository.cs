@@ -1,21 +1,35 @@
 ﻿namespace SoundPlay.DAL.Repository.Interfaces;
 
-public interface IRepository<T> where T : Entity
+public interface IRepository<TEntity> where TEntity : Entity
 {
-	Task<T?> GetFirstOrDefaultAsync(
-		Expression<Func<T, bool>>? predicate = null,
-		Func<IQueryable<T>, IOrderedQueryable<T>>? orderBy = null,
-		Func<IQueryable<T>, IIncludableQueryable<T, object>>? include = null,
+	Task<TResult?> GetFirstOrDefaultAsync<TResult>(
+		Expression<Func<TEntity, TResult>> selector,
+		Expression<Func<TEntity, bool>>? predicate = null,
+		Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>>? orderBy = null,
+		Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>>? include = null,
+		bool isTracking = true);
+
+	Task<TEntity?> GetFirstOrDefaultAsync(
+		Expression<Func<TEntity, bool>>? predicate = null,
+		Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>>? orderBy = null,
+		Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>>? include = null,
 		bool isTracking = false);
-	Task<IList<T>> GetAllAsync(
-		Expression<Func<T, bool>>? predicate = null,
-		Func<IQueryable<T>, IOrderedQueryable<T>>? orderBy = null,
-		Func<IQueryable<T>, IIncludableQueryable<T, object>>? include = null,
+
+	Task<IList<TEntity>> GetAllAsync(
+		Expression<Func<TEntity, bool>>? predicate = null,
+		Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>>? orderBy = null,
+		Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>>? include = null,
 		bool isTracking = false);
-	void Remove(T entity);
-	void Remove(IEnumerable<T> entities);
-	void Add(T entity);
-	void Add(IEnumerable<T> entities);
-	void Update(T entity);	
-	void Update(IEnumerable<T> entities);
+
+	void Remove(TEntity entity);
+
+	void Remove(IEnumerable<TEntity> entities);
+
+	void Add(TEntity entity);
+
+	void Add(IEnumerable<TEntity> entities);
+
+	void Update(TEntity entity);	
+
+	void Update(IEnumerable<TEntity> entities);
 }

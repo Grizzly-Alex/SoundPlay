@@ -6,21 +6,21 @@ public class CatalogController : Controller
 	[HttpGet]
 	public IActionResult AllCategories() => View();
 	[HttpGet]
-	public IActionResult Guitars() => View();
+	public IActionResult GuitarsArea() => View();
 	[HttpGet]
-	public IActionResult Drums() => View();
+	public IActionResult DrumsArea() => View();
 	[HttpGet]
-	public IActionResult Keys() => View();
+	public IActionResult KeysArea() => View();
 	[HttpGet]
-	public IActionResult Brass() => View();
+	public IActionResult BrassArea() => View();
 	[HttpGet]
-	public IActionResult Traditional() => View();
+	public IActionResult TraditionalArea() => View();
 	[HttpGet]
-	public IActionResult Studio() => View();
+	public IActionResult StudioArea() => View();
 	[HttpGet]
-	public IActionResult Cases() => View();
+	public IActionResult CasesArea() => View();
 	[HttpGet]
-	public IActionResult Cables() => View();
+	public IActionResult CablesArea() => View();
 	[HttpGet]
-	public IActionResult Accessories() => View();
+	public IActionResult AccessoriesArea() => View();
 }

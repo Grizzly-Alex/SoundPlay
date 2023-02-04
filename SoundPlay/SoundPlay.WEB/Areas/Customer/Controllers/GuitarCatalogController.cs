@@ -1,16 +1,23 @@
-﻿namespace SoundPlay.WEB.Areas.Customer.Controllers;
+﻿using SoundPlay.DAL;
+
+namespace SoundPlay.WEB.Areas.Customer.Controllers;
 
 [Area("Customer")]
 public class GuitarCatalogController : Controller
 {
-	[HttpGet]
-	public IActionResult ElectricGuitar()
+	private readonly ILoggerAdapter<GuitarCatalogController> _logger;
+	private readonly IProductService<GuitarViewModel> _guitarService;
+
+	public GuitarCatalogController(
+		ILoggerAdapter<GuitarCatalogController> logger,
+		IProductService<GuitarViewModel> guitarService)
 	{
-		return View();
+		_logger = logger;
+		_guitarService = guitarService;
 	}
 
 	[HttpGet]
-	public IActionResult Details(int id)
+	public IActionResult Index(GuitarType guitarType)
 	{
 		return View();
 	}

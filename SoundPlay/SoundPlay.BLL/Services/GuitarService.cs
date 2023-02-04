@@ -80,8 +80,10 @@ public sealed class GuitarService : IProductService<GuitarViewModel>
             
     public async Task<GuitarViewModel> UpdateViewModelAsync(GuitarViewModel viewModel)
     {
-        var modelFromDb = await _unitOfWork.GetRepository<Guitar>().GetFirstOrDefaultAsync(i => i.Id == viewModel.Id);
-		viewModel.DateDelivery = modelFromDb.DateDelivery;
+		viewModel.DateDelivery = await _unitOfWork.GetRepository<Guitar>()
+            .GetFirstOrDefaultAsync(
+            selector: i => i.DateDelivery,
+            predicate: i => i.Id == viewModel.Id);
 
 		var model = _mapper.Map<Guitar>(viewModel);
 			_unitOfWork.GetRepository<Guitar>().Update(model);

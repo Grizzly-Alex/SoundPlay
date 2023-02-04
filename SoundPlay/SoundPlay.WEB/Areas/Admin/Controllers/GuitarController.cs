@@ -197,7 +197,7 @@ public sealed class GuitarController : Controller
                 var viewModel = guitarForCreateViewModel.GuitarViewModel;
                 await _guitars!.UpdateViewModelAsync(viewModel!);
 
-                return RedirectToAction(nameof(FullInfo), new { id = viewModel!.Id });
+                return RedirectToAction(nameof(Details), new { id = viewModel!.Id });
             }
 
             else return RedirectToAction();
@@ -237,7 +237,7 @@ public sealed class GuitarController : Controller
     }
 
     [HttpGet]
-    public async Task<IActionResult> FullInfo(int id)
+    public async Task<IActionResult> Details(int id)
     {
         try
         {

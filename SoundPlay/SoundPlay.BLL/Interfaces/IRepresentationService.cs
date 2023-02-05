@@ -2,5 +2,5 @@
 
 public interface IRepresentationService
 {
-	public Task<IEnumerable<SelectListItem>> GetSelectList<TEntity>() where TEntity : Entity;
+	public Task<IEnumerable<SelectListItem>> GetSelectListAsync<TEntity>() where TEntity : Entity;
 }

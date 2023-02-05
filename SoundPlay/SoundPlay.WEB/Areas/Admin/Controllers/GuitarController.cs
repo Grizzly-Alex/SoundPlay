@@ -6,38 +6,18 @@ public sealed class GuitarController : Controller
 {
     private readonly IContentManager _contentManager;
     private readonly ILoggerAdapter<GuitarService>? _logger;
-	private readonly IEntityService<GuitarCategory, GuitarCategoryViewModel>? _category;
-	private readonly IEntityService<Brand, BrandViewModel>? _brands;
-    private readonly IEntityService<Color, ColorViewModel>? _colors;
-    private readonly IEntityService<GuitarShape, GuitarShapeViewModel>? _guitarShapes;
-    private readonly IEntityService<Material, MaterialViewModel>? _materials;
-    private readonly IEntityService<PickupSet, PickupSetViewModel>? _pickups;
-    private readonly IEntityService<TremoloType, TremoloTypeViewModel>? _tremoloTypes;
     private readonly IEntityService<Guitar, GuitarViewModel> _guitars;
+    private readonly IRepresentationService _representationService;
 
 
 	public GuitarController(
         IContentManager contentManager,
-		IEntityService<GuitarCategory, GuitarCategoryViewModel> category,
-		ILoggerAdapter<GuitarService>? logger,
-		IEntityService<Brand, BrandViewModel>? brands,
-		IEntityService<Color, ColorViewModel>? colors,
-		IEntityService<GuitarShape, GuitarShapeViewModel>? guitarShapes,
-		IEntityService<Material, MaterialViewModel>? materials,
-		IEntityService<PickupSet, PickupSetViewModel>? pickups,
-		IEntityService<TremoloType, TremoloTypeViewModel>? tremoloTypes,
-		IEntityService<Guitar, GuitarViewModel> guitars)
+		IEntityService<Guitar, GuitarViewModel> guitars,
+        IRepresentationService representationService)
     {
-        _category = category;
         _contentManager = contentManager;
-        _logger = logger;
         _guitars = guitars;
-        _brands = brands;
-        _colors = colors;
-        _guitarShapes = guitarShapes;
-        _materials = materials;
-        _pickups = pickups;
-        _tremoloTypes = tremoloTypes;
+        _representationService = representationService;
     }
 
     [HttpGet]
@@ -67,28 +47,18 @@ public sealed class GuitarController : Controller
     {
         try
         {
-            var categoryList = await _category!.GetViewModelsAsync(); 
-            var brandList = await _brands!.GetViewModelsAsync();
-            var colorList = await _colors!.GetViewModelsAsync();
-            var guitarShapeList = await _guitarShapes!.GetViewModelsAsync();
-            var soundBoardsList = await _materials!.GetViewModelsAsync();
-            var neckList = await _materials!.GetViewModelsAsync();
-            var fretBoard = await _materials!.GetViewModelsAsync();
-            var pickupList = await _pickups!.GetViewModelsAsync();
-            var tremoloList = await _tremoloTypes!.GetViewModelsAsync();
-
             CreateGuitarViewModel guitarForCreateViewModel = new()
             {             
                 GuitarViewModel = new(), 
-                Categories = categoryList!.OrderBy(i => i.Name).Select(i => new SelectListItem { Value = i.Id.ToString(), Text = i.Name }),
-				Brands = brandList!.OrderBy(i => i.Name).Select(i => new SelectListItem { Value = i.Id.ToString(), Text = i.Name }),
-                Colors = colorList!.OrderBy(i => i.Name).Select(i => new SelectListItem { Value = i.Id.ToString(), Text = i.Name }),
-                GuitarShapes = guitarShapeList!.OrderBy(i => i.Name).Select(i => new SelectListItem { Value = i.Id.ToString(), Text = i.Name }),
-                Soundboards = soundBoardsList!.OrderBy(i => i.Name).Select(i => new SelectListItem { Value = i.Id.ToString(), Text = i.Name }),
-                Necks = neckList!.OrderBy(i => i.Name).Select(i => new SelectListItem { Value = i.Id.ToString(), Text = i.Name }),
-                Fretboards = fretBoard!.OrderBy(i => i.Name).Select(i => new SelectListItem { Value = i.Id.ToString(), Text = i.Name }),
-                PickupSets = pickupList!.OrderBy(i => i.Name).Select(i => new SelectListItem { Value = i.Id.ToString(), Text = i.Name }),
-                TremoloTypes = tremoloList!.OrderBy(i => i.Name).Select(i => new SelectListItem { Value = i.Id.ToString(), Text = i.Name }),
+                Categories = await _representationService.GetSelectListAsync<GuitarCategory>(),
+				Brands = await _representationService.GetSelectListAsync<Brand>(),
+                Colors = await _representationService.GetSelectListAsync<Color>(),
+				GuitarShapes = await _representationService.GetSelectListAsync<GuitarShape>(),
+				Soundboards = await _representationService.GetSelectListAsync<Material>(),
+                Necks = await _representationService.GetSelectListAsync<Material>(),
+				Fretboards = await _representationService.GetSelectListAsync<Material>(),
+                PickupSets = await _representationService.GetSelectListAsync<PickupSet>(),
+                TremoloTypes = await _representationService.GetSelectListAsync<TremoloType>(),
             };
 
             return View(guitarForCreateViewModel);
@@ -136,30 +106,19 @@ public sealed class GuitarController : Controller
     {
         try
         {
-			var categoryList = await _category!.GetViewModelsAsync();
-			var guitarViewModel = await _guitars!.GetViewModelByIdAsync(id);
-            var brandList = await _brands!.GetViewModelsAsync();
-            var colorList = await _colors!.GetViewModelsAsync();
-            var guitarShapeList = await _guitarShapes!.GetViewModelsAsync();
-            var soundBoardsList = await _materials!.GetViewModelsAsync();
-            var neckList = await _materials!.GetViewModelsAsync();
-            var fretBoard = await _materials!.GetViewModelsAsync();
-            var pickupList = await _pickups!.GetViewModelsAsync();
-            var tremoloList = await _tremoloTypes!.GetViewModelsAsync();
-
             CreateGuitarViewModel guitarForCreateViewModel = new()
             {
-                GuitarViewModel = guitarViewModel,
-				Categories = categoryList!.OrderBy(i => i.Name).Select(i => new SelectListItem { Value = i.Id.ToString(), Text = i.Name }),
-				Brands = brandList!.OrderBy(i => i.Name).Select(i => new SelectListItem { Value = i.Id.ToString(), Text = i.Name }),
-                Colors = colorList!.OrderBy(i => i.Name).Select(i => new SelectListItem { Value = i.Id.ToString(), Text = i.Name }),
-                GuitarShapes = guitarShapeList!.OrderBy(i => i.Name).Select(i => new SelectListItem { Value = i.Id.ToString(), Text = i.Name }),
-                Soundboards = soundBoardsList!.OrderBy(i => i.Name).Select(i => new SelectListItem { Value = i.Id.ToString(), Text = i.Name }),
-                Necks = neckList!.OrderBy(i => i.Name).Select(i => new SelectListItem { Value = i.Id.ToString(), Text = i.Name }),
-                Fretboards = fretBoard!.OrderBy(i => i.Name).Select(i => new SelectListItem { Value = i.Id.ToString(), Text = i.Name }),
-                PickupSets = pickupList!.OrderBy(i => i.Name).Select(i => new SelectListItem { Value = i.Id.ToString(), Text = i.Name }),
-                TremoloTypes = tremoloList!.OrderBy(i => i.Name).Select(i => new SelectListItem { Value = i.Id.ToString(), Text = i.Name }),
-            };
+                GuitarViewModel = await _guitars!.GetViewModelByIdAsync(id),
+				Categories = await _representationService.GetSelectListAsync<GuitarCategory>(),
+				Brands = await _representationService.GetSelectListAsync<Brand>(),
+				Colors = await _representationService.GetSelectListAsync<Color>(),
+				GuitarShapes = await _representationService.GetSelectListAsync<GuitarShape>(),
+				Soundboards = await _representationService.GetSelectListAsync<Material>(),
+				Necks = await _representationService.GetSelectListAsync<Material>(),
+				Fretboards = await _representationService.GetSelectListAsync<Material>(),
+				PickupSets = await _representationService.GetSelectListAsync<PickupSet>(),
+				TremoloTypes = await _representationService.GetSelectListAsync<TremoloType>(),
+			};
 
             return View(guitarForCreateViewModel);
         }

@@ -5,7 +5,7 @@ public sealed class GuitarFilterViewModel : ProductFilterViewModel
 	public int? CategoryId { get; set; }
 	public int? BrandId { get; set; }
 	public int? ColorId { get; set; }
-	public int? GuitarShapeId { get; set; }
+	public int? ShapeId { get; set; }
 	public int? SoundboardId { get; set; }
 	public int? NeckId { get; set; }
 	public int? FretboardId { get; set; }

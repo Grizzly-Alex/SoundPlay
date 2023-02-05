@@ -47,18 +47,26 @@ public sealed class GuitarController : Controller
     {
         try
         {
-            CreateGuitarViewModel guitarForCreateViewModel = new()
+			var selectCategories = await _representationService.GetSelectListAsync<GuitarCategory>();
+			var selectBrands = await _representationService.GetSelectListAsync<Brand>();
+			var selectColors = await _representationService.GetSelectListAsync<Color>();
+			var selectGuitarShapes = await _representationService.GetSelectListAsync<GuitarShape>();
+			var selectMaterials = await _representationService.GetSelectListAsync<Material>();
+			var selectPickupSets = await _representationService.GetSelectListAsync<PickupSet>();
+			var selectTremoloTypes = await _representationService.GetSelectListAsync<TremoloType>();
+
+			CreateGuitarViewModel guitarForCreateViewModel = new()
             {             
                 GuitarViewModel = new(), 
-                Categories = await _representationService.GetSelectListAsync<GuitarCategory>(),
-				Brands = await _representationService.GetSelectListAsync<Brand>(),
-                Colors = await _representationService.GetSelectListAsync<Color>(),
-				GuitarShapes = await _representationService.GetSelectListAsync<GuitarShape>(),
-				Soundboards = await _representationService.GetSelectListAsync<Material>(),
-                Necks = await _representationService.GetSelectListAsync<Material>(),
-				Fretboards = await _representationService.GetSelectListAsync<Material>(),
-                PickupSets = await _representationService.GetSelectListAsync<PickupSet>(),
-                TremoloTypes = await _representationService.GetSelectListAsync<TremoloType>(),
+                Categories = selectCategories,
+				Brands = selectBrands,
+                Colors = selectColors,
+				GuitarShapes = selectGuitarShapes,
+				Soundboards = selectMaterials,
+                Necks = selectMaterials,
+				Fretboards = selectMaterials,
+                PickupSets = selectPickupSets,
+                TremoloTypes = selectTremoloTypes,
             };
 
             return View(guitarForCreateViewModel);
@@ -106,19 +114,29 @@ public sealed class GuitarController : Controller
     {
         try
         {
-            CreateGuitarViewModel guitarForCreateViewModel = new()
+            var guitars = await _guitars!.GetViewModelByIdAsync(id);
+			var selectCategories = await _representationService.GetSelectListAsync<GuitarCategory>();
+			var selectBrands = await _representationService.GetSelectListAsync<Brand>();
+			var selectColors = await _representationService.GetSelectListAsync<Color>();
+			var selectGuitarShapes = await _representationService.GetSelectListAsync<GuitarShape>();
+			var selectMaterials = await _representationService.GetSelectListAsync<Material>();
+			var selectPickupSets = await _representationService.GetSelectListAsync<PickupSet>();
+			var selectTremoloTypes = await _representationService.GetSelectListAsync<TremoloType>();
+
+
+			CreateGuitarViewModel guitarForCreateViewModel = new()
             {
-                GuitarViewModel = await _guitars!.GetViewModelByIdAsync(id),
-				Categories = await _representationService.GetSelectListAsync<GuitarCategory>(),
-				Brands = await _representationService.GetSelectListAsync<Brand>(),
-				Colors = await _representationService.GetSelectListAsync<Color>(),
-				GuitarShapes = await _representationService.GetSelectListAsync<GuitarShape>(),
-				Soundboards = await _representationService.GetSelectListAsync<Material>(),
-				Necks = await _representationService.GetSelectListAsync<Material>(),
-				Fretboards = await _representationService.GetSelectListAsync<Material>(),
-				PickupSets = await _representationService.GetSelectListAsync<PickupSet>(),
-				TremoloTypes = await _representationService.GetSelectListAsync<TremoloType>(),
-			};
+                GuitarViewModel = guitars,
+                Categories = selectCategories,
+                Brands = selectBrands,
+                Colors = selectColors,
+                GuitarShapes = selectGuitarShapes,
+                Soundboards = selectMaterials,
+                Necks = selectMaterials,
+                Fretboards = selectMaterials,
+                PickupSets = selectPickupSets,
+                TremoloTypes = selectTremoloTypes,
+            };
 
             return View(guitarForCreateViewModel);
         }

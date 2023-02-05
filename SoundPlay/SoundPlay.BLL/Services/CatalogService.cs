@@ -8,8 +8,7 @@ public sealed class CatalogService<TProduct> : ICatalogService<TProduct>
 
 	public CatalogService(
 		ILoggerAdapter<CatalogService<TProduct>>? logger,
-		IUnitOfWork unitOfWork,
-		IMapper mapper)
+		IUnitOfWork unitOfWork)
 	{
 		_logger = logger;
 		_unitOfWork = unitOfWork;
@@ -34,12 +33,5 @@ public sealed class CatalogService<TProduct> : ICatalogService<TProduct>
 		}
 
 		return catalogProducts;
-	}
-
-	public async Task<IEnumerable<SelectListItem>> GetSelectList<TEntity>() where TEntity : Entity
-	{
-		var listEntity = await _unitOfWork.GetRepository<TEntity>().GetAllAsync();
-		var selectList = listEntity!.OrderBy(i => i.Name).Select(i => new SelectListItem { Value = i.Id.ToString(), Text = i.Name });
-		return selectList;
 	}
 }

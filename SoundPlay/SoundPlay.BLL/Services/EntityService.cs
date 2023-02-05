@@ -1,12 +1,12 @@
 ﻿namespace SoundPlay.BLL.Services;
 
-public sealed class EntityService<TModel, TViewModel> : IEntityService<TModel, TViewModel>
+public class EntityService<TModel, TViewModel> : IEntityService<TModel, TViewModel>
 	where TModel : Entity
 	where TViewModel : EntityViewModel
 {
-	private readonly IMapper _mapper;
-	private readonly IUnitOfWork _unitOfWork;
-	private readonly ILoggerAdapter<EntityService<TModel, TViewModel>> _logger;
+	protected readonly IMapper _mapper;
+	protected readonly IUnitOfWork _unitOfWork;
+	protected readonly ILoggerAdapter<EntityService<TModel, TViewModel>> _logger;
 
 	public EntityService(
 		IMapper mapper,
@@ -18,7 +18,7 @@ public sealed class EntityService<TModel, TViewModel> : IEntityService<TModel, T
 		_logger = logger;
 	}
 
-	public async Task<TViewModel> CreateViewModelAsync(TViewModel viewModel)
+	public virtual async Task<TViewModel> CreateViewModelAsync(TViewModel viewModel)
 	{
 		var model = _mapper.Map<TModel>(viewModel);
 		_unitOfWork.GetRepository<TModel>().Add(model);
@@ -26,7 +26,7 @@ public sealed class EntityService<TModel, TViewModel> : IEntityService<TModel, T
 		return viewModel;
 	}
 
-	public async Task<TViewModel> DeleteViewModelAsync(TViewModel viewModel)
+	public virtual async Task<TViewModel> DeleteViewModelAsync(TViewModel viewModel)
 	{
 		var model = _mapper.Map<TModel>(viewModel);
 		_unitOfWork.GetRepository<TModel>().Remove(model);
@@ -34,7 +34,7 @@ public sealed class EntityService<TModel, TViewModel> : IEntityService<TModel, T
 		return viewModel;
 	}
 
-	public async Task<TViewModel> GetViewModelByIdAsync(int id)
+	public virtual async Task<TViewModel> GetViewModelByIdAsync(int id)
 	{
 		var model = await _unitOfWork.GetRepository<TModel>().GetFirstOrDefaultAsync(
 			predicate: i => i.Id == id,
@@ -50,7 +50,7 @@ public sealed class EntityService<TModel, TViewModel> : IEntityService<TModel, T
 		return viewModel;
 	}
 
-	public async Task<IEnumerable<TViewModel>> GetViewModelsAsync()
+	public virtual async Task<IEnumerable<TViewModel>> GetViewModelsAsync()
 	{
 		var models = await _unitOfWork.GetRepository<TModel>().GetAllAsync(isTracking: false);
 
@@ -64,7 +64,7 @@ public sealed class EntityService<TModel, TViewModel> : IEntityService<TModel, T
 		return viewModels;
 	}
 
-	public async Task<TViewModel> UpdateViewModelAsync(TViewModel viewModel)
+	public virtual async Task<TViewModel> UpdateViewModelAsync(TViewModel viewModel)
 	{
 		var model = _mapper.Map<TModel>(viewModel);
 		_unitOfWork.GetRepository<TModel>().Update(model);

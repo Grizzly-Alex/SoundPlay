@@ -13,10 +13,10 @@ public sealed class GuitarController : Controller
     private readonly IEntityService<Material, MaterialViewModel>? _materials;
     private readonly IEntityService<PickupSet, PickupSetViewModel>? _pickups;
     private readonly IEntityService<TremoloType, TremoloTypeViewModel>? _tremoloTypes;
-    private readonly IProductService<GuitarViewModel>? _guitars;
+    private readonly IEntityService<Guitar, GuitarViewModel> _guitars;
 
 
-    public GuitarController(
+	public GuitarController(
         IContentManager contentManager,
 		IEntityService<GuitarCategory, GuitarCategoryViewModel> category,
 		ILoggerAdapter<GuitarService>? logger,
@@ -26,7 +26,7 @@ public sealed class GuitarController : Controller
 		IEntityService<Material, MaterialViewModel>? materials,
 		IEntityService<PickupSet, PickupSetViewModel>? pickups,
 		IEntityService<TremoloType, TremoloTypeViewModel>? tremoloTypes,
-		IProductService<GuitarViewModel>? guitars)
+		IEntityService<Guitar, GuitarViewModel> guitars)
     {
         _category = category;
         _contentManager = contentManager;

@@ -1,9 +1,7 @@
 ﻿namespace SoundPlay.DAL.Models;
 
 public class GuitarCategory : Entity
-{
-    public string Name { get; set; }	
-
+{	
 	private GuitarCategory(GuitarType enumGuitar)
 	{
 		Id = (int)enumGuitar;

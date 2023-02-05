@@ -3,20 +3,31 @@
 [Area("Customer")]
 public class GuitarCatalogController : Controller
 {
-	private readonly ILoggerAdapter<GuitarCatalogController> _logger;
-	private readonly IProductService<GuitarViewModel> _guitarService;
+	private readonly ICatalogService<Guitar> _catalogGuitar;
+	private readonly IUnitOfWork _unitOfWork;
 
 	public GuitarCatalogController(
-		ILoggerAdapter<GuitarCatalogController> logger,
-		IProductService<GuitarViewModel> guitarService)
+		ICatalogService<Guitar> catalogGuitar,
+		IUnitOfWork unitOfWork)
 	{
-		_logger = logger;
-		_guitarService = guitarService;
-	}
+		_catalogGuitar = catalogGuitar;
+		_unitOfWork = unitOfWork;
+	}	
 
 	[HttpGet]
-	public IActionResult Index(GuitarType guitarType)
+	public async Task<IActionResult> Index(GuitarFilterViewModel filter)
 	{
-		return View();
+		var listCatalogProducts = await _catalogGuitar.GetProductsAsync(
+			i => i.CategoryId == filter.CategoryId &&
+			i.BrandId == filter.BrandId);
+
+		var filterViewModel = new GuitarFilterViewModel()
+		{
+			Products = listCatalogProducts.ToList(),
+			
+
+		};
+		
+		return View(filterViewModel);
 	}
 }

@@ -2,5 +2,4 @@
 
 public sealed class PickupSet : Entity
 {
-    public string Name { get; set; }
 }

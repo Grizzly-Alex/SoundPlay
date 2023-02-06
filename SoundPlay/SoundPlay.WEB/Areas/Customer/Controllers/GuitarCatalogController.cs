@@ -16,18 +16,18 @@ public class GuitarCatalogController : Controller
 	}	
 
 	[HttpGet]
-	public async Task<IActionResult> Index(GuitarFilterViewModel filter)
+	public async Task<IActionResult> Index(GuitarFilterViewModel filter, GuitarType type)
 	{
 		var listCatalogProducts = await _catalogGuitar.GetProductsAsync(
-			i => i.CategoryId == filter.CategoryId &&
-			i.BrandId == filter.BrandId &&
-			i.ColorId == filter.ColorId &&
-			i.ShapeId == filter.ShapeId &&	
-			i.SoundboardId == filter.SoundboardId &&
-			i.NeckId == filter.NeckId &&
-			i.FretboardId == filter.FretboardId &&
-			i.PickupSetId == filter.PickupSetId &&
-			i.TremoloTypeId == filter.TremoloTypeId);
+			i => (i.CategoryId == (int)type)
+			&& (!filter.BrandId.HasValue || i.BrandId == filter.BrandId)
+			&& (!filter.ColorId.HasValue || i.ColorId == filter.ColorId)
+			&& (!filter.ShapeId.HasValue || i.ShapeId == filter.ShapeId)
+			&& (!filter.SoundboardId.HasValue || i.SoundboardId == filter.SoundboardId)
+			&& (!filter.NeckId.HasValue || i.NeckId == filter.NeckId)
+			&& (!filter.FretboardId.HasValue || i.FretboardId == filter.FretboardId)
+			&& (!filter.PickupSetId.HasValue || i.PickupSetId == filter.PickupSetId)
+			&& (!filter.TremoloTypeId.HasValue || i.TremoloTypeId == filter.TremoloTypeId));
 
 		var selectBrands = await _representationService.GetSelectListAsync<Brand>();
 		var selectColors = await _representationService.GetSelectListAsync<Color>();
@@ -49,7 +49,7 @@ public class GuitarCatalogController : Controller
 			PickupSets = selectPickupSets,
 			TremoloTypes = selectTremoloTypes,
 		};
-		
+
 		return View(filterViewModel);
 	}
 }

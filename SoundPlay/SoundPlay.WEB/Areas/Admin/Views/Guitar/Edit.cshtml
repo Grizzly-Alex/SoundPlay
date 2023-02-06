@@ -77,19 +77,6 @@
 			</div>
 		</div>
 
-		@*Item lists*@
-@*		<div class="mb-3 col-4">
-			<label asp-for="GuitarViewModel!.GuitarType"></label>
-			<select asp-for="GuitarViewModel!.GuitarType"
-					asp-items="Html.GetEnumSelectList<GuitarType>()" class="form-select" required>
-				<option selected disabled value="">--Select Category--</option>
-			</select>
-			<span asp-validation-for="GuitarViewModel!.GuitarType" class="text-danger"></span>
-			<div class="valid-feedback">
-				Valid!
-			</div>
-		</div>*@
-
 		<div class="mb-3 col-4">
 			<label asp-for="GuitarViewModel!.Category"></label>
 			<select asp-for="GuitarViewModel!.CategoryId" asp-items="@Model.Categories" class="form-select" required>
@@ -189,7 +176,7 @@
 				Update
 			</button>
 
-			<a asp-controller="Guitar" asp-action="FullInfo" asp-route-id="@Model.GuitarViewModel!.Id" class="btn btn-secondary btn-sm" style="width:100px">
+			<a asp-controller="Guitar" asp-action="Details" asp-route-id="@Model.GuitarViewModel!.Id" class="btn btn-secondary btn-sm" style="width:100px">
 				<span class="bi bi-reply"> Back</span>
 			</a>
 

@@ -15,10 +15,15 @@ public class GuitarCatalogController : Controller
 	}	
 
 	[HttpGet]
-	public async Task<IActionResult> Index(GuitarFilterViewModel filter, GuitarType type)
+	public async Task<IActionResult> Index(GuitarFilterViewModel filter, GuitarType? type)
 	{
+		if (type is not null) 
+		{ 
+			filter.CategoryId = (int)type; 
+		}
+		
 		var listCatalogProducts = await _catalogGuitar.GetCatalogProductsAsync<Guitar>(
-			i => (i.CategoryId == (int)type)
+			i => (i.CategoryId == filter.CategoryId)
 			&& (!filter.BrandId.HasValue || i.BrandId == filter.BrandId)
 			&& (!filter.ColorId.HasValue || i.ColorId == filter.ColorId)
 			&& (!filter.ShapeId.HasValue || i.ShapeId == filter.ShapeId)

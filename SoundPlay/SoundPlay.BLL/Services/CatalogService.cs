@@ -1,22 +1,22 @@
 ﻿namespace SoundPlay.BLL.Services;
 
-public sealed class CatalogService<TProduct> : ICatalogService<TProduct>
-	where TProduct : Product
+public sealed class CatalogService : ICatalogService
 {
-	private readonly ILoggerAdapter<CatalogService<TProduct>>? _logger;
+	private readonly IRepresentationService _representService;
 	private readonly IUnitOfWork _unitOfWork;
 
 	public CatalogService(
-		ILoggerAdapter<CatalogService<TProduct>>? logger,
-		IUnitOfWork unitOfWork)
+		IUnitOfWork unitOfWork,
+		IRepresentationService representService)
 	{
-		_logger = logger;
 		_unitOfWork = unitOfWork;
+		_representService= representService;
 	}
 
-	public async Task<IEnumerable<CatalogProductViewModel>> GetProductsAsync(Expression<Func<TProduct, bool>>? filter)
+	public async Task<IEnumerable<CatalogProductViewModel>> GetCatalogProductsAsync<TProduct>(Expression<Func<TProduct, bool>>? filter)
+		where TProduct : Product
 	{
-		var catalogProducts = await _unitOfWork.GetRepository<TProduct>().GetAllAsync(
+		return await _unitOfWork.GetRepository<TProduct>().GetAllAsync(
 			predicate: filter,
 			selector: i => new CatalogProductViewModel
 			{
@@ -25,13 +25,28 @@ public sealed class CatalogService<TProduct> : ICatalogService<TProduct>
 				Price = i.Price,
 				PictureUrl = i.PictureUrl
 			});
+	}
 
-		if (catalogProducts is null)
+	public async Task<GuitarFilterViewModel> GetGuitarCatalogFilterAsync(IEnumerable<CatalogProductViewModel> catalogProducts)
+	{
+		var selectBrands = await _representService.GetSelectListAsync<Brand>();
+		var selectColors = await _representService.GetSelectListAsync<Color>();
+		var selectGuitarShapes = await _representService.GetSelectListAsync<GuitarShape>();
+		var selectMaterials = await _representService.GetSelectListAsync<Material>();
+		var selectPickupSets = await _representService.GetSelectListAsync<PickupSet>();
+		var selectTremoloTypes = await _representService.GetSelectListAsync<TremoloType>();
+
+		return new GuitarFilterViewModel()
 		{
-			_logger.LogError("Get_Products operation is failed");
-			throw new ObjectNotFoundException("Objects not found");
-		}
-
-		return catalogProducts;
+			Products = catalogProducts.ToList(),
+			Brands = selectBrands,
+			Colors = selectColors,
+			GuitarShapes = selectGuitarShapes,
+			Soundboards = selectMaterials,
+			Necks = selectMaterials,
+			Fretboards = selectMaterials,
+			PickupSets = selectPickupSets,
+			TremoloTypes = selectTremoloTypes,
+		};
 	}
 }

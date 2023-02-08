@@ -14,3 +14,4 @@ global using SoundPlay.WEB.Models;
 global using System.Diagnostics;
 global using AutoMapper;
 global using SoundPlay.DAL.Models;
+global using SoundPlay.DAL;

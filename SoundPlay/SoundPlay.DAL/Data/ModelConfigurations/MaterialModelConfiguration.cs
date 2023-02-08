@@ -4,15 +4,11 @@ internal sealed class MaterialModelConfiguration : IEntityTypeConfiguration<Mate
 {
     public void Configure(EntityTypeBuilder<Material> builder)
     {
-        builder.ToTable("Materials")
-            .HasKey(p => p.Id)
-            .HasName("MaterialId");
-
         builder.Property(p => p.Id)
-            .HasColumnName("Id");
+            .HasColumnName("id");
 
         builder.Property(p => p.Name)
-            .HasColumnName("Name")
+            .HasColumnName("name")
             .HasColumnType("varchar(max)")
             .IsRequired();
     }

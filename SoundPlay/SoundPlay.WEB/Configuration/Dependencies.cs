@@ -18,7 +18,9 @@ public static class Dependencies
         #region Model CRUD services
         services.AddTransient<IUnitOfWork, UnitOfWork>();
         services.AddTransient(typeof(IEntityService<,>), typeof(EntityService<,>));
-        services.AddTransient<IProductService<GuitarViewModel>, GuitarService>();
+		services.AddTransient<IEntityService <Guitar, GuitarViewModel>, GuitarService>();
+		services.AddTransient<ICatalogService, CatalogService>();
+        services.AddTransient<IRepresentationService, RepresentationService>();
         #endregion
     }
 }

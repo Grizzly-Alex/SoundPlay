@@ -4,15 +4,11 @@ internal sealed class TremoloTypeModelConfiguration : IEntityTypeConfiguration<T
 {
     public void Configure(EntityTypeBuilder<TremoloType> builder)
     {
-        builder.ToTable("TremoloTypes")
-            .HasKey(p => p.Id)
-            .HasName("TremoloId");
-
         builder.Property(p => p.Id)
-            .HasColumnName("Id");
+            .HasColumnName("id");
 
         builder.Property(p => p.Name)
-            .HasColumnName("Name")
+            .HasColumnName("name")
             .HasColumnType("varchar(max)")
             .IsRequired();
     }

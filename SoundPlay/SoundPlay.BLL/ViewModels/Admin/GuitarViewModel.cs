@@ -12,6 +12,10 @@ public sealed class GuitarViewModel : ProductViewModel
 	[Range(1, 50, ErrorMessage = "Value for {0} must be between {1} and {2}.")]
 	public byte StringsCount { get; set; }
 
+	[Required(ErrorMessage = "Value {0} from the list must be selected!")]
+	[DisplayName("Category")]
+	public int CategoryId { get; set; }
+
 	[DisplayName("Shape")]
 	public int? ShapeId { get; set; }
 
@@ -32,6 +36,10 @@ public sealed class GuitarViewModel : ProductViewModel
 
 	[DisplayName("Pickup Set")]
 	public int? PickupSetId { get; set; }
+
+	[DisplayName("Category")]
+	[ValidateNever]
+	public GuitarCategory? Category { get; set; }
 
 	[DisplayName("Shape")]
 	[ValidateNever]

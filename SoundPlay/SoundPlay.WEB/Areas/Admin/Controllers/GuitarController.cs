@@ -6,38 +6,18 @@ public sealed class GuitarController : Controller
 {
     private readonly IContentManager _contentManager;
     private readonly ILoggerAdapter<GuitarService>? _logger;
-    private readonly IEntityService<Brand, BrandViewModel>? _brands;
-    private readonly IEntityService<Category,CategoryViewModel>? _categories;
-    private readonly IEntityService<Color, ColorViewModel>? _colors;
-    private readonly IEntityService<GuitarShape, GuitarShapeViewModel>? _guitarShapes;
-    private readonly IEntityService<Material, MaterialViewModel>? _materials;
-    private readonly IEntityService<PickupSet, PickupSetViewModel>? _pickups;
-    private readonly IEntityService<TremoloType, TremoloTypeViewModel>? _tremoloTypes;
-    private readonly IProductService<GuitarViewModel>? _guitars;
+    private readonly IEntityService<Guitar, GuitarViewModel> _guitars;
+    private readonly IRepresentationService _representationService;
 
 
-    public GuitarController(
+	public GuitarController(
         IContentManager contentManager,
-        ILoggerAdapter<GuitarService>? logger,
-		IEntityService<Brand, BrandViewModel>? brands,
-		IEntityService<Category, CategoryViewModel>? categories,
-		IEntityService<Color, ColorViewModel>? colors,
-		IEntityService<GuitarShape, GuitarShapeViewModel>? guitarShapes,
-		IEntityService<Material, MaterialViewModel>? materials,
-		IEntityService<PickupSet, PickupSetViewModel>? pickups,
-		IEntityService<TremoloType, TremoloTypeViewModel>? tremoloTypes,
-		IProductService<GuitarViewModel>? guitars)
+		IEntityService<Guitar, GuitarViewModel> guitars,
+        IRepresentationService representationService)
     {
         _contentManager = contentManager;
-        _logger = logger;
         _guitars = guitars;
-        _brands = brands;
-        _categories = categories;
-        _colors = colors;
-        _guitarShapes = guitarShapes;
-        _materials = materials;
-        _pickups = pickups;
-        _tremoloTypes = tremoloTypes;
+        _representationService = representationService;
     }
 
     [HttpGet]
@@ -67,28 +47,26 @@ public sealed class GuitarController : Controller
     {
         try
         {
-            var brandList = await _brands!.GetViewModelsAsync();
-            var categoryList = await _categories!.GetViewModelsAsync();
-            var colorList = await _colors!.GetViewModelsAsync();
-            var guitarShapeList = await _guitarShapes!.GetViewModelsAsync();
-            var soundBoardsList = await _materials!.GetViewModelsAsync();
-            var neckList = await _materials!.GetViewModelsAsync();
-            var fretBoard = await _materials!.GetViewModelsAsync();
-            var pickupList = await _pickups!.GetViewModelsAsync();
-            var tremoloList = await _tremoloTypes!.GetViewModelsAsync();
+			var selectCategories = await _representationService.GetSelectListAsync<GuitarCategory>();
+			var selectBrands = await _representationService.GetSelectListAsync<Brand>();
+			var selectColors = await _representationService.GetSelectListAsync<Color>();
+			var selectGuitarShapes = await _representationService.GetSelectListAsync<GuitarShape>();
+			var selectMaterials = await _representationService.GetSelectListAsync<Material>();
+			var selectPickupSets = await _representationService.GetSelectListAsync<PickupSet>();
+			var selectTremoloTypes = await _representationService.GetSelectListAsync<TremoloType>();
 
-            GuitarForCreateViewModel guitarForCreateViewModel = new()
-            {
-                GuitarViewModel=new(),
-                Brands = brandList!.Select(i => new SelectListItem { Value = i.Id.ToString(), Text = i.Name }),
-                Categories = categoryList!.Select(i => new SelectListItem { Value = i.Id.ToString(), Text = i.Name }),
-                Colors = colorList!.Select(i => new SelectListItem { Value = i.Id.ToString(), Text = i.Name }),
-                GuitarShapes = guitarShapeList!.Select(i => new SelectListItem { Value = i.Id.ToString(), Text = i.Name }),
-                Soundboards = soundBoardsList!.Select(i => new SelectListItem { Value = i.Id.ToString(), Text = i.Name }),
-                Necks = neckList!.Select(i => new SelectListItem { Value = i.Id.ToString(), Text = i.Name }),
-                Fretboards = fretBoard!.Select(i => new SelectListItem { Value = i.Id.ToString(), Text = i.Name }),
-                PickupSets = pickupList!.Select(i => new SelectListItem { Value = i.Id.ToString(), Text = i.Name }),
-                TremoloTypes = tremoloList!.Select(i => new SelectListItem { Value = i.Id.ToString(), Text = i.Name }),
+			CreateGuitarViewModel guitarForCreateViewModel = new()
+            {             
+                GuitarViewModel = new(), 
+                Categories = selectCategories,
+				Brands = selectBrands,
+                Colors = selectColors,
+				GuitarShapes = selectGuitarShapes,
+				Soundboards = selectMaterials,
+                Necks = selectMaterials,
+				Fretboards = selectMaterials,
+                PickupSets = selectPickupSets,
+                TremoloTypes = selectTremoloTypes,
             };
 
             return View(guitarForCreateViewModel);
@@ -103,7 +81,7 @@ public sealed class GuitarController : Controller
 
     [HttpPost]
 	[ValidateAntiForgeryToken]
-	public async Task<IActionResult> Create(GuitarForCreateViewModel guitarForCreateViewModel)
+	public async Task<IActionResult> Create(CreateGuitarViewModel guitarForCreateViewModel)
     {
 		try
         {
@@ -111,13 +89,12 @@ public sealed class GuitarController : Controller
 
 			if (files.Count > 0)
             {
-				_contentManager.UploadFiles(HttpContext.Request.Form.Files, WebConstants.GuitarsImagesFolder);
+				_contentManager.UploadFiles(HttpContext.Request.Form.Files, WebConstants.GuitarsImages);
 				guitarForCreateViewModel.GuitarViewModel!.PictureUrl = _contentManager.NameFiles.FirstOrDefault();
 			}
 		
 			if (ModelState.IsValid)
-            {    
-                guitarForCreateViewModel.GuitarViewModel!.DateDelivery = DateTime.Now;
+            {                   
                 await _guitars!.CreateViewModelAsync(guitarForCreateViewModel.GuitarViewModel!);
                 return RedirectToAction(nameof(Index));
             }
@@ -137,29 +114,28 @@ public sealed class GuitarController : Controller
     {
         try
         {
-            var guitarViewModel = await _guitars!.GetViewModelByIdAsync(id);
-            var brandList = await _brands!.GetViewModelsAsync();
-            var categoryList = await _categories!.GetViewModelsAsync();
-            var colorList = await _colors!.GetViewModelsAsync();
-            var guitarShapeList = await _guitarShapes!.GetViewModelsAsync();
-            var soundBoardsList = await _materials!.GetViewModelsAsync();
-            var neckList = await _materials!.GetViewModelsAsync();
-            var fretBoard = await _materials!.GetViewModelsAsync();
-            var pickupList = await _pickups!.GetViewModelsAsync();
-            var tremoloList = await _tremoloTypes!.GetViewModelsAsync();
+            var guitars = await _guitars!.GetViewModelByIdAsync(id);
+			var selectCategories = await _representationService.GetSelectListAsync<GuitarCategory>();
+			var selectBrands = await _representationService.GetSelectListAsync<Brand>();
+			var selectColors = await _representationService.GetSelectListAsync<Color>();
+			var selectGuitarShapes = await _representationService.GetSelectListAsync<GuitarShape>();
+			var selectMaterials = await _representationService.GetSelectListAsync<Material>();
+			var selectPickupSets = await _representationService.GetSelectListAsync<PickupSet>();
+			var selectTremoloTypes = await _representationService.GetSelectListAsync<TremoloType>();
 
-            GuitarForCreateViewModel guitarForCreateViewModel = new()
+
+			CreateGuitarViewModel guitarForCreateViewModel = new()
             {
-                GuitarViewModel = guitarViewModel,
-                Brands = brandList!.Select(i => new SelectListItem { Value = i.Id.ToString(), Text = i.Name }),
-                Categories = categoryList!.Select(i => new SelectListItem { Value = i.Id.ToString(), Text = i.Name }),
-                Colors = colorList!.Select(i => new SelectListItem { Value = i.Id.ToString(), Text = i.Name }),
-                GuitarShapes = guitarShapeList!.Select(i => new SelectListItem { Value = i.Id.ToString(), Text = i.Name }),
-                Soundboards = soundBoardsList!.Select(i => new SelectListItem { Value = i.Id.ToString(), Text = i.Name }),
-                Necks = neckList!.Select(i => new SelectListItem { Value = i.Id.ToString(), Text = i.Name }),
-                Fretboards = fretBoard!.Select(i => new SelectListItem { Value = i.Id.ToString(), Text = i.Name }),
-                PickupSets = pickupList!.Select(i => new SelectListItem { Value = i.Id.ToString(), Text = i.Name }),
-                TremoloTypes = tremoloList!.Select(i => new SelectListItem { Value = i.Id.ToString(), Text = i.Name }),
+                GuitarViewModel = guitars,
+                Categories = selectCategories,
+                Brands = selectBrands,
+                Colors = selectColors,
+                GuitarShapes = selectGuitarShapes,
+                Soundboards = selectMaterials,
+                Necks = selectMaterials,
+                Fretboards = selectMaterials,
+                PickupSets = selectPickupSets,
+                TremoloTypes = selectTremoloTypes,
             };
 
             return View(guitarForCreateViewModel);
@@ -180,7 +156,7 @@ public sealed class GuitarController : Controller
 
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Edit(GuitarForCreateViewModel guitarForCreateViewModel)
+    public async Task<IActionResult> Edit(CreateGuitarViewModel guitarForCreateViewModel)
     {
         try
         {
@@ -188,8 +164,8 @@ public sealed class GuitarController : Controller
 
             if (files.Count > 0)
             {
-				_contentManager.RemoveFile(WebConstants.GuitarsImagesFolder, guitarForCreateViewModel.GuitarViewModel.PictureUrl);
-				_contentManager.UploadFiles(files, WebConstants.GuitarsImagesFolder);
+				_contentManager.RemoveFile(WebConstants.GuitarsImages, guitarForCreateViewModel.GuitarViewModel.PictureUrl);
+				_contentManager.UploadFiles(files, WebConstants.GuitarsImages);
                 guitarForCreateViewModel.GuitarViewModel.PictureUrl = _contentManager.NameFiles.FirstOrDefault();              
 			}		
 
@@ -198,7 +174,7 @@ public sealed class GuitarController : Controller
                 var viewModel = guitarForCreateViewModel.GuitarViewModel;
                 await _guitars!.UpdateViewModelAsync(viewModel!);
 
-                return RedirectToAction(nameof(FullInfo), new { id = viewModel!.Id });
+                return RedirectToAction(nameof(Details), new { id = viewModel!.Id });
             }
 
             else return RedirectToAction();
@@ -218,7 +194,7 @@ public sealed class GuitarController : Controller
         {
 			var guitarViewModel = await _guitars!.GetViewModelByIdAsync(id);
 
-			_contentManager.RemoveFile(WebConstants.GuitarsImagesFolder, guitarViewModel.PictureUrl);
+			_contentManager.RemoveFile(WebConstants.GuitarsImages, guitarViewModel.PictureUrl);
 
             await _guitars.DeleteViewModelAsync(guitarViewModel);
             return RedirectToAction(nameof(Index));
@@ -238,7 +214,7 @@ public sealed class GuitarController : Controller
     }
 
     [HttpGet]
-    public async Task<IActionResult> FullInfo(int id)
+    public async Task<IActionResult> Details(int id)
     {
         try
         {

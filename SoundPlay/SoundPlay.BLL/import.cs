@@ -18,3 +18,4 @@ global using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 global using Microsoft.EntityFrameworkCore;
 global using System.Globalization;
 global using SoundPlay.BLL.ViewModels;
+global using System.Linq.Expressions;

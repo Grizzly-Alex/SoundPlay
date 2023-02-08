@@ -26,47 +26,34 @@ namespace SoundPlay.DAL.Data.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("id");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("varchar(max)")
+                        .HasColumnName("name");
 
                     b.HasKey("Id");
 
                     b.ToTable("Brands");
                 });
 
-            modelBuilder.Entity("SoundPlay.DAL.Models.Category", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Categories");
-                });
-
             modelBuilder.Entity("SoundPlay.DAL.Models.Color", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("id");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("varchar(max)")
+                        .HasColumnName("name");
 
                     b.HasKey("Id");
 
@@ -77,60 +64,80 @@ namespace SoundPlay.DAL.Data.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("id");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("BrandId")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("brand_id");
 
                     b.Property<int>("CategoryId")
-                        .HasColumnType("int");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(1)
+                        .HasColumnName("category_id");
 
                     b.Property<int>("ColorId")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("color_id");
 
                     b.Property<DateTime>("DateDelivery")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime2(7)")
+                        .HasColumnName("date_delivery");
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("varchar(max)")
+                        .HasColumnName("description");
 
                     b.Property<int>("FretboardId")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("fretboard_id");
 
                     b.Property<byte>("FretsCount")
-                        .HasColumnType("tinyint");
+                        .HasColumnType("tinyint")
+                        .HasColumnName("frets_count");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("varchar(max)")
+                        .HasColumnName("name");
 
                     b.Property<int>("NeckId")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("neck_id");
 
                     b.Property<int?>("PickupSetId")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("pickup_set_id");
 
                     b.Property<string>("PictureUrl")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasColumnType("varchar(max)")
+                        .HasColumnName("picture_url");
 
                     b.Property<decimal>("Price")
                         .HasPrecision(8, 2)
-                        .HasColumnType("decimal(8,2)");
+                        .HasColumnType("decimal")
+                        .HasColumnName("price");
 
                     b.Property<int?>("ShapeId")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("shape_id");
 
                     b.Property<int>("SoundboardId")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("soundboard_id");
 
                     b.Property<byte>("StringsCount")
-                        .HasColumnType("tinyint");
+                        .HasColumnType("tinyint")
+                        .HasColumnName("strings_count");
 
                     b.Property<int?>("TremoloTypeId")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("tremolo_id");
 
                     b.HasKey("Id");
 
@@ -155,17 +162,67 @@ namespace SoundPlay.DAL.Data.Migrations
                     b.ToTable("Guitars");
                 });
 
+            modelBuilder.Entity("SoundPlay.DAL.Models.GuitarCategory", b =>
+                {
+                    b.Property<int>("Id")
+                        .HasColumnType("int")
+                        .HasColumnName("id");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("varchar(max)")
+                        .HasColumnName("name");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("GuitarCategories");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Electric Guitar"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Accoustic Guitar"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Classic Guitar"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "Electric Bass"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Name = "Accoustic Bass"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Name = "Ukulele"
+                        });
+                });
+
             modelBuilder.Entity("SoundPlay.DAL.Models.GuitarShape", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("id");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("varchar(max)")
+                        .HasColumnName("name");
 
                     b.HasKey("Id");
 
@@ -176,13 +233,15 @@ namespace SoundPlay.DAL.Data.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("id");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("varchar(max)")
+                        .HasColumnName("name");
 
                     b.HasKey("Id");
 
@@ -193,13 +252,15 @@ namespace SoundPlay.DAL.Data.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("id");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("varchar(max)")
+                        .HasColumnName("name");
 
                     b.HasKey("Id");
 
@@ -210,13 +271,15 @@ namespace SoundPlay.DAL.Data.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("id");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("varchar(max)")
+                        .HasColumnName("name");
 
                     b.HasKey("Id");
 
@@ -231,7 +294,7 @@ namespace SoundPlay.DAL.Data.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("SoundPlay.DAL.Models.Category", "Category")
+                    b.HasOne("SoundPlay.DAL.Models.GuitarCategory", "Category")
                         .WithMany()
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Restrict)

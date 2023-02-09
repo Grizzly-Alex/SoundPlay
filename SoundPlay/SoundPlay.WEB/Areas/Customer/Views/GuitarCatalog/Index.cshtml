@@ -1,14 +1,20 @@
 ﻿@model GuitarFilterViewModel
 
-<input asp-for="@Model.CategoryId" hidden />
-
 <div class="container text-center">
     <div class="row">
         <div class="col-2">
-            <div>
-                <label asp-for="@Model.Brands"></label>
-                <select asp-for="@Model.BrandId" asp-items="@Model.Brands" class="form-select" required></select>
-            </div>
+            <form method="get">
+                <input asp-for="@Model.CategoryId" hidden />
+                <div>
+                    <label asp-for="@Model.Brands"></label>
+                    <select asp-for="@Model.BrandId" asp-items="@Model.Brands" class="form-select"></select>                  
+                </div>
+                <div>
+                    <label asp-for="@Model.Colors"></label>
+                    <select asp-for="@Model.ColorId" asp-items="@Model.Colors" class="form-select"></select>
+                </div>
+                <input type="submit" value="Apply Filters" />
+            </form>
         </div>
         <div class="col-10">
             <p></p>

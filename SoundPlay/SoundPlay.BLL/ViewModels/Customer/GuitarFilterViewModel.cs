@@ -1,4 +1,7 @@
-﻿namespace SoundPlay.BLL.ViewModels.Customer;
+﻿using SoundPlay.DAL;
+using System.Net.Http.Headers;
+
+namespace SoundPlay.BLL.ViewModels.Customer;
 
 public sealed class GuitarFilterViewModel : ProductFilterViewModel
 {
@@ -19,4 +22,11 @@ public sealed class GuitarFilterViewModel : ProductFilterViewModel
 	public IEnumerable<SelectListItem>? Fretboards { get; set; }
 	public IEnumerable<SelectListItem>? PickupSets { get; set; }
 	public IEnumerable<SelectListItem>? TremoloTypes { get; set; }
+
+	public GuitarFilterViewModel()
+	{
+	}
+
+	public GuitarFilterViewModel(GuitarType type) => CategoryId = (int)type;
+
 }

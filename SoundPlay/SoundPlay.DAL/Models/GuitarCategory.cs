@@ -1,6 +1,6 @@
 ﻿namespace SoundPlay.DAL.Models;
 
-public class GuitarCategory : Entity
+public class GuitarCategory : Item
 {	
 	private GuitarCategory(GuitarType enumGuitar)
 	{

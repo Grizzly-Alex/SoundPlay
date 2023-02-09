@@ -1,6 +1,6 @@
 ﻿namespace SoundPlay.DAL.Models;
 
-public abstract class Product : Entity
+public abstract class Product : Item
 {
     public string Description { get; set; }
     public decimal Price { get; set; }

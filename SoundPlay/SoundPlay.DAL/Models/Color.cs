@@ -1,5 +1,5 @@
 ﻿namespace SoundPlay.DAL.Models;
 
-public sealed class Color : Entity
+public sealed class Color : Item
 {
 }

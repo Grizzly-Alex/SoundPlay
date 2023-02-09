@@ -29,12 +29,14 @@ public sealed class CatalogService : ICatalogService
 
 	public async Task<GuitarFilterViewModel> GetGuitarCatalogFilterAsync(IEnumerable<CatalogProductViewModel> catalogProducts)
 	{
-		var selectBrands = await _representService.GetSelectListAsync<Brand>();
-		var selectColors = await _representService.GetSelectListAsync<Color>();
-		var selectGuitarShapes = await _representService.GetSelectListAsync<GuitarShape>();
-		var selectMaterials = await _representService.GetSelectListAsync<Material>();
-		var selectPickupSets = await _representService.GetSelectListAsync<PickupSet>();
-		var selectTremoloTypes = await _representService.GetSelectListAsync<TremoloType>();
+		var allItems = new SelectListItem() { Value = null, Text = "All", Selected = true };
+
+        var selectBrands = await _representService.GetSelectListAsync<Brand>(allItems);
+		var selectColors = await _representService.GetSelectListAsync<Color>(allItems);
+		var selectGuitarShapes = await _representService.GetSelectListAsync<GuitarShape>(allItems);
+		var selectMaterials = await _representService.GetSelectListAsync<Material>(allItems);
+		var selectPickupSets = await _representService.GetSelectListAsync<PickupSet>(allItems);
+		var selectTremoloTypes = await _representService.GetSelectListAsync<TremoloType>(allItems);
 
 		return new GuitarFilterViewModel()
 		{

@@ -15,3 +15,5 @@ global using System.Diagnostics;
 global using AutoMapper;
 global using SoundPlay.DAL.Models;
 global using SoundPlay.DAL;
+global using SoundPlay.WEB.Configuration;
+global using SoundPlay.WEB.Utilities;

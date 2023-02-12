@@ -20,89 +20,44 @@ public sealed class PriceController : Controller
     [HttpGet]
     public async Task<IActionResult> Index()
     {
-        try
-        {
-            var guitars = await _guitars!.GetViewModelsAsync();
-            return View(guitars);
-        }
-
-        catch (ObjectNotFoundException ex)
-        {
-            _logger!.LogError(ex.Message);
-            return NotFound(ex.Message);
-        }
-
-        catch (Exception ex)
-        {
-            _logger!.LogError(ex.Message);
-            return BadRequest(ex.Message);
-        }
+        var guitars = await _guitars!.GetViewModelsAsync();
+        return View(guitars);
     }
 
     [HttpGet]
     public async Task<IActionResult> AddToBasket(int id)
     {
-        try
-        {
-            var guitar = await _guitars!.GetViewModelByIdAsync(id);
-            var basketPosition = _mapper.Map<BasketPosition>(guitar);
-            return View(basketPosition);
-        }
-
-        catch (ObjectNotFoundException ex)
-        {
-            _logger!.LogError(ex.Message);
-            return NotFound(ex.Message);
-        }
-
-        catch (Exception ex)
-        {
-            _logger!.LogError(ex.Message);
-            return BadRequest(ex.Message);
-        }
+        var guitar = await _guitars!.GetViewModelByIdAsync(id);
+        var basketPosition = _mapper.Map<BasketPosition>(guitar);
+        return View(basketPosition);
     }
 
     [HttpPost]
     public IActionResult AddToBasket(BasketPosition basketPosition)
     {
-        try
+        #region Formation of a basket taking into account data from the session
+
+        Basket basket = new();
+
+        // getting Basket from session
+        var basketFromSession = HttpContext.Session.Get<Basket>(WebConstants.BasketSession);
+
+        // if there is a filled Basket in the session, then take the data from it    
+        if (basketFromSession!=null
+            &&basketFromSession!.TotalCount>0)
         {
-            #region Formation of a basket taking into account data from the session
-
-            Basket basket = new();
-
-            // getting Basket from session
-            var basketFromSession = HttpContext.Session.Get<Basket>(WebConstants.BasketSession);
-
-            // if there is a filled Basket in the session, then take the data from it    
-            if (basketFromSession!=null
-                &&basketFromSession!.TotalCount>0)
-            {
-                basket=basketFromSession!;
-            }
-
-            #endregion
-
-            var position = basket.ProductList!.First(p => p.ProductId.Equals(basketPosition.ProductId));
-
-            if (position==null) basket.ProductList!.Add(basketPosition);
-            else position.Count+=basketPosition.Count;
-
-            // putting a basket with new properties into the session
-            HttpContext.Session.Set(WebConstants.BasketSession, basket);
-            return RedirectToAction(nameof(Index));
+            basket=basketFromSession!;
         }
 
-        catch (ObjectNotFoundException ex)
-        {
-            _logger!.LogError(ex.Message);
-            return NotFound(ex.Message);
-        }
+        #endregion
 
-        catch (Exception ex)
-        {
-            _logger!.LogError(ex.Message);
-            return BadRequest(ex.Message);
-        }
+        var position = basket.ProductList!.First(p => p.ProductId.Equals(basketPosition.ProductId));
+
+        if (position==null) basket.ProductList!.Add(basketPosition);
+        else position.Count+=basketPosition.Count;
+
+        // putting a basket with new properties into the session
+        HttpContext.Session.Set(WebConstants.BasketSession, basket);
+        return RedirectToAction(nameof(Index));
     }
 }

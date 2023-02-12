@@ -5,7 +5,8 @@ public static class Dependencies
     public static void ConfigureServices(IConfiguration configuration, IServiceCollection services)
     {
 		services.AddHttpContextAccessor();
-		services.AddControllersWithViews();
+        services.AddTransient<ExceptionHandlingMiddleware>();
+        services.AddControllersWithViews();
         services.AddSingleton(typeof(ILoggerAdapter<>), typeof(LoggerAdapter<>));
         services.AddScoped<IContentManager, ContentManager>();
         services.AddAutoMapper(typeof(MappingProfile));

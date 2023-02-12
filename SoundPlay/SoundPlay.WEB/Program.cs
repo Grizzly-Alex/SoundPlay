@@ -1,6 +1,3 @@
-using SoundPlay.WEB.Configuration;
-
-
 var builder = WebApplication.CreateBuilder(args);
 builder.Logging.ClearProviders();
 
@@ -28,5 +25,7 @@ app.UseSession();
 app.MapControllerRoute(
 	name: "default",
 	pattern: "{area=Customer}/{controller=Home}/{action=Index}/{id?}");
+
+app.UseMiddleware<ExceptionHandlingMiddleware>();
 
 app.Run();

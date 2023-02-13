@@ -5,7 +5,7 @@
 public sealed class GuitarController : Controller
 {
     private readonly IContentManager _contentManager;
-    private readonly ILoggerAdapter<GuitarService>? _logger;
+    private readonly ILogger<GuitarService>? _logger;
     private readonly IEntityService<Guitar, GuitarViewModel> _guitars;
     private readonly IRepresentationService _representationService;
 

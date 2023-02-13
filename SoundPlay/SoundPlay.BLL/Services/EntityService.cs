@@ -6,12 +6,12 @@ public class EntityService<TModel, TViewModel> : IEntityService<TModel, TViewMod
 {
 	protected readonly IMapper _mapper;
 	protected readonly IUnitOfWork _unitOfWork;
-	protected readonly ILoggerAdapter<EntityService<TModel, TViewModel>> _logger;
+	protected readonly ILogger<EntityService<TModel, TViewModel>> _logger;
 
 	public EntityService(
 		IMapper mapper,
 		IUnitOfWork unitOfWork,
-		ILoggerAdapter<EntityService<TModel, TViewModel>> logger)
+		ILogger<EntityService<TModel, TViewModel>> logger)
 	{
 		_mapper = mapper;
 		_unitOfWork = unitOfWork;

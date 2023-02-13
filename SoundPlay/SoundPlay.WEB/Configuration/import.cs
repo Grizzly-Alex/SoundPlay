@@ -18,3 +18,4 @@ global using SoundPlay.DAL;
 global using SoundPlay.WEB.Configuration;
 global using SoundPlay.WEB.Utilities;
 global using Serilog;
+global using System.Net;

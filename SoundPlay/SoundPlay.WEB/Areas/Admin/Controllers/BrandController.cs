@@ -4,11 +4,11 @@
 public sealed class BrandController : Controller
 {
 	private readonly IEntityService<Brand, BrandViewModel> _brandService;
-	private readonly ILoggerAdapter<BrandController> _logger;
+	private readonly ILogger<BrandController> _logger;
 
     public BrandController(
 		IEntityService<Brand, BrandViewModel> brandService,
-        ILoggerAdapter<BrandController> logger)
+        ILogger<BrandController> logger)
     {
         _brandService = brandService;
         _logger = logger;

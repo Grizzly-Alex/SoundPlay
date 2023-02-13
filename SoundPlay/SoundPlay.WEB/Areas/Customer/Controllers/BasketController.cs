@@ -3,10 +3,10 @@
 [Area("Customer")]
 public sealed class BasketController : Controller
 {
-    private readonly ILoggerAdapter<BasketController> _logger;
+    private readonly ILogger<BasketController> _logger;
 
-    public BasketController(ILoggerAdapter<BasketController> logger)
-    {
+    public BasketController(ILogger<BasketController> logger)
+    {   
         _logger=logger;
     }
 

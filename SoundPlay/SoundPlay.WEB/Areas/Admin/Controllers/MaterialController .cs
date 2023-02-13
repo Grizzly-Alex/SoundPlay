@@ -4,11 +4,11 @@
 public sealed class MaterialController : Controller
 {
 	private readonly IEntityService<Material, MaterialViewModel> _materialService;
-	private readonly ILoggerAdapter<MaterialController> _logger;
+	private readonly ILogger<MaterialController> _logger;
 
 	public MaterialController(
 		IEntityService<Material, MaterialViewModel> brandService,
-		ILoggerAdapter<MaterialController> logger)
+		ILogger<MaterialController> logger)
 	{
 		_materialService = brandService;
 		_logger = logger;

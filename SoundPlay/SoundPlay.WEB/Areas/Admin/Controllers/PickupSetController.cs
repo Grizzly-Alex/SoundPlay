@@ -4,11 +4,11 @@
 public sealed class PickupSetController : Controller
 {
 	private readonly IEntityService<PickupSet, PickupSetViewModel> _pickupSetService;
-	private readonly ILoggerAdapter<PickupSetController> _logger;
+	private readonly ILogger<PickupSetController> _logger;
 
 	public PickupSetController(
 		IEntityService<PickupSet, PickupSetViewModel> brandService,
-		ILoggerAdapter<PickupSetController> logger)
+		ILogger<PickupSetController> logger)
 	{
 		_pickupSetService = brandService;
 		_logger = logger;

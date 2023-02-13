@@ -3,12 +3,12 @@
 [Area("Customer")]
 public sealed class PriceController : Controller
 {
-    private readonly ILoggerAdapter<PriceController>? _logger;
+    private readonly ILogger<PriceController>? _logger;
 	private readonly IEntityService<Guitar, GuitarViewModel> _guitars;
 	private readonly IMapper _mapper;
 
     public PriceController(
-        ILoggerAdapter<PriceController>? logger,
+        ILogger<PriceController>? logger,
         IEntityService<Guitar, GuitarViewModel> guitars,
         IMapper mapper)
     {

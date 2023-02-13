@@ -4,11 +4,11 @@
 public sealed class ColorController : Controller
 {
     private readonly IEntityService<Color, ColorViewModel> _colorService;
-	private readonly ILoggerAdapter<ColorController> _logger;
+	private readonly ILogger<ColorController> _logger;
 
 	public ColorController(
 		IEntityService<Color, ColorViewModel> colorService,
-		ILoggerAdapter<ColorController> logger)
+		ILogger<ColorController> logger)
     {
         _colorService = colorService;
         _logger = logger;

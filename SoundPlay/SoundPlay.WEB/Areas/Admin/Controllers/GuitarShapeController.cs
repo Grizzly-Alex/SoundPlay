@@ -4,11 +4,11 @@
 public sealed class GuitarShapeController : Controller
 {
 	private readonly IEntityService<GuitarShape, GuitarShapeViewModel> _guitarShapeService;
-	private readonly ILoggerAdapter<GuitarShapeController> _logger;
+	private readonly ILogger<GuitarShapeController> _logger;
 
 	public GuitarShapeController(
 		IEntityService<GuitarShape, GuitarShapeViewModel> brandService,
-		ILoggerAdapter<GuitarShapeController> logger)
+		ILogger<GuitarShapeController> logger)
 	{
 		_guitarShapeService = brandService;
 		_logger = logger;

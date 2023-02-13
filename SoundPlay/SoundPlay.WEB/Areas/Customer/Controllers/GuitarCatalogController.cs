@@ -4,11 +4,11 @@
 public class GuitarCatalogController : Controller
 {
 	private readonly ICatalogService _catalogGuitar;
-	private readonly ILoggerAdapter<GuitarCatalogController> _logger; //no logging
+	private readonly ILogger<GuitarCatalogController> _logger; //no logging
 
 	public GuitarCatalogController(
 		ICatalogService catalogGuitar,
-		ILoggerAdapter<GuitarCatalogController> logger)
+		ILogger<GuitarCatalogController> logger)
 	{
 		_catalogGuitar = catalogGuitar;
 		_logger = logger;

@@ -47,6 +47,13 @@ body {
     color: #868686;
 }
 
-.catside a:hover {
-    color: #090909;
+
+.aim .target {
+    background: #FDFEFE;
+    transition: 0.3s;
+}
+
+.aim .target:hover {
+    background: #EAECEE;
+    transform: scale(0.97);
 }

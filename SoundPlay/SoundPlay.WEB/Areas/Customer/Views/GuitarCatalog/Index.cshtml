@@ -46,14 +46,12 @@
                     <label asp-for="@Model.PickupSets"></label>
                     <select asp-for="@Model.PickupSetId" asp-items="@Model.PickupSets" class="form-select"></select>
                 </div>
-                @if (Model.TremoloTypes is not null)
-                {
-                    <div class="mb-3">
-                        <label asp-for="@Model.TremoloTypes"></label>
-                        <select asp-for="@Model.TremoloTypeId" asp-items="@Model.TremoloTypes" class="form-select"></select>
-                    </div>                   
-                }
-
+                
+                <div class="mb-3">
+                    <label asp-for="@Model.TremoloTypes"></label>
+                    <select asp-for="@Model.TremoloTypeId" asp-items="@Model.TremoloTypes" class="form-select"></select>
+                </div>                   
+                
 
                 <hr class="featurette-divider">
 
@@ -74,25 +72,50 @@
 
         <div class="col-1"></div>
         
-        <div class="col-auto">          
-            <p></p>
-            @foreach (var obj in Model.Products)
+        <div class="col-9">          
+            
+            @if (Model.Products.Any())
             {
-                <div class="card mb-3 rounded-3 align-content-center" style="max-width: 700px; max-height: 500px;">
-                    <div class="row g-0">
-                        <div class="col-3 align-self-center">
-                            <img src="@WebConstants.GuitarsImages@obj.PictureUrl" class="card-img" style="max-width: 80%" alt="...">
-                        </div>
-                        <div class="col-9">
-                            <div class="card-body ">
-                                <h5 class="card-title">@obj.Name</h5>
-                                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                <p class="pb-2"></p>
+                <div class="row row-cols-1 row-cols-md-4 g-3">
+                    
+                    @foreach (var obj in Model.Products)
+                    {
+
+                        <div class="col aim">
+                            <div class="card h-100 shadow target">
+                                <a asp-area="Customer" asp-controller="" asp-action="" class="link-secondary">
+                                    <div class="card-body p-sm-2">
+                                        <h5 class="card-title float-sm-end">@obj.ViewPrice</h5>
+                                    </div>
+                                    <img src="@WebConstants.GuitarsImages@obj.PictureUrl" class="card-img-top p-3" alt="...">
+
+                                </a>
+                                <div class="card-footer h-100 p-md-3 text-bg-dark">
+
+
+                                    <div class="col-1">
+                                        <button type="submit" class="btn btn-dark btn-sm">
+                                            <p class="bi bi-cart-plus" style="font-size: 1.5rem;"></p>
+                                        </button>
+                                    </div>
+
+                                    
+                                    <div>
+                                        <h6 class="card-title">@obj.Name</h6>
+                                    </div>
+                            
+                                </div>
+                        
                             </div>
                         </div>
-                    </div>
-                </div>
+                        
+                    }
+
+                </div>               
             }
         </div>
     </div>
 </div>
+
+

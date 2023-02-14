@@ -30,7 +30,7 @@ public class GuitarCatalogController : Controller
 
     [HttpGet]
     public async Task<IActionResult> Index(GuitarFilterViewModel filter)
-    {    
+    {
         var listCatalogProducts = await _catalogGuitar.GetCatalogProductsAsync<Guitar>(
             i => (i.CategoryId == (int)filter.Category)
             && (!filter.BrandId.HasValue || i.BrandId == filter.BrandId)
@@ -43,7 +43,8 @@ public class GuitarCatalogController : Controller
             && (!filter.TremoloTypeId.HasValue || i.TremoloTypeId == filter.TremoloTypeId));
 
         var filterViewModel = await _catalogGuitar.GetGuitarCatalogFilterAsync(listCatalogProducts, filter.Category);
-
+        ViewData["MaxPrice"] = filterViewModel.Products?.MaxBy(i => i.Price)?.Price.ToString() ?? new string("0.00");
+       
         return View(filterViewModel);
     }
 }

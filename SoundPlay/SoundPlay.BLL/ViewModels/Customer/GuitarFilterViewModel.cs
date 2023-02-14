@@ -1,9 +1,7 @@
-﻿using SoundPlay.DAL.Extensions;
-
-namespace SoundPlay.BLL.ViewModels.Customer;
+﻿namespace SoundPlay.BLL.ViewModels.Customer;
 
 public sealed class GuitarFilterViewModel : ProductFilterViewModel
-{
+{	
 	public GuitarType Category { get; set; }	
 	public int? BrandId { get; set; }
 	public int? ColorId { get; set; }

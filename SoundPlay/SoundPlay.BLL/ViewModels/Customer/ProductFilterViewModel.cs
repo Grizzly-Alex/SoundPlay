@@ -2,5 +2,7 @@
 
 public abstract class ProductFilterViewModel
 {
-	public List<CatalogProductViewModel>? Products { get; set; }
+    [Display (Name = "Range Price")]
+    public RangePrice? RangePrice { get; set; } 
+    public List<CatalogProductViewModel>? Products { get; set; }
 }

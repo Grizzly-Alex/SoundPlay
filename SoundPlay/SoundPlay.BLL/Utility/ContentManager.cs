@@ -4,13 +4,13 @@ public sealed class ContentManager : IContentManager
 {
 	public List<string> NameFiles { get; private set; }
 	private readonly string _webRootPath;
-	private readonly ILoggerAdapter<ContentManager> _logger;
+	private readonly ILogger<ContentManager> _logger;
 	private readonly IWebHostEnvironment _hostEnvironment;
 
 
 	public ContentManager(
 		IWebHostEnvironment hostEnvironment,
-		ILoggerAdapter<ContentManager> logger)
+		ILogger<ContentManager> logger)
 	{
 		NameFiles = new();
 		_hostEnvironment = hostEnvironment;

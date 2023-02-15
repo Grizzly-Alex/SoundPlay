@@ -5,7 +5,7 @@ public sealed class GuitarService : EntityService<Guitar, GuitarViewModel>
 	public GuitarService(
         IMapper mapper,
         IUnitOfWork unitOfWork,
-        ILoggerAdapter<EntityService<Guitar, GuitarViewModel>> logger) : base(mapper, unitOfWork, logger)
+        ILogger<EntityService<Guitar, GuitarViewModel>> logger) : base(mapper, unitOfWork, logger)
 	{
 	}
 

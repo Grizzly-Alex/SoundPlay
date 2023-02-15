@@ -27,11 +27,11 @@ public sealed class CatalogService : ICatalogService
 			});
 	}
 
-	public async Task<GuitarFilterViewModel> GetGuitarCatalogFilterAsync(IEnumerable<CatalogProductViewModel> catalogProducts)
-	{
-		var allItems = new SelectListItem() { Value = null, Text = "All", Selected = true };
+	public async Task<GuitarFilterViewModel> GetGuitarCatalogFilterAsync(IEnumerable<CatalogProductViewModel> catalogProducts, GuitarType category)
+	{		
+        var allItems = new SelectListItem() { Value = null, Text = "All", Selected = true };
 
-        var selectBrands = await _representService.GetSelectListAsync<Brand>(allItems);
+		var selectBrands = await _representService.GetSelectListAsync<Brand>(allItems);
 		var selectColors = await _representService.GetSelectListAsync<Color>(allItems);
 		var selectGuitarShapes = await _representService.GetSelectListAsync<GuitarShape>(allItems);
 		var selectMaterials = await _representService.GetSelectListAsync<Material>(allItems);
@@ -41,6 +41,7 @@ public sealed class CatalogService : ICatalogService
 		return new GuitarFilterViewModel()
 		{
 			Products = catalogProducts.ToList(),
+			Category = category,
 			Brands = selectBrands,
 			Colors = selectColors,
 			GuitarShapes = selectGuitarShapes,

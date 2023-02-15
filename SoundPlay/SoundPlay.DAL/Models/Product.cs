@@ -8,7 +8,6 @@ public abstract class Product : Item
     public DateTime DateDelivery  { get; set;}  
     public int BrandId { get; set; }
     public int ColorId { get; set; }
-
-	[ForeignKey("BrandId")] public Brand? Brand { get; set; }
-    [ForeignKey("ColorId")] public Color? Color { get; set; }
+	public Brand? Brand { get; set; }
+    public Color? Color { get; set; }
 }

@@ -1,8 +1,10 @@
 ﻿namespace SoundPlay.DAL.Models;
 
 public class GuitarCategory : Item
-{	
-	private GuitarCategory(GuitarType enumGuitar)
+{
+    public List<Guitar> Guitars { get; set; }
+
+    private GuitarCategory(GuitarType enumGuitar)
 	{
 		Id = (int)enumGuitar;
 		Name = enumGuitar.GetDisplayName();

@@ -6,7 +6,7 @@
 
             <div class="col mt-5">
                 <div class="p-3 catside">
-                    <a asp-area="Customer" asp-controller="GuitarCatalog" asp-action="DefineFilter" asp-route-type="@GuitarType.ElectricGuitar" class="nav-link scale">
+                    <a asp-area="Customer" asp-controller="GuitarCatalog" asp-action="DefineCategory" asp-route-category="@GuitarType.ElectricGuitar" class="nav-link scale">
                         <img src="\images\bits\guitarCatalog\ElectricGuitarsCatalogCover.png" style="width:75%">
                         <p class="text-center fs-5">Electric Guitars</p>
                     </a>
@@ -15,7 +15,7 @@
 
             <div class="col mt-5">
                 <div class="p-3 catside">
-                    <a asp-area="Customer" asp-controller="GuitarCatalog" asp-action="Index" asp-route-type="@GuitarType.ClassicGuitar" class="nav-link scale">
+                    <a asp-area="Customer" asp-controller="GuitarCatalog" asp-action="DefineCategory" asp-route-category="@GuitarType.ClassicGuitar" class="nav-link scale">
                         <img src="\images\bits\guitarCatalog\ClassicalGuitarsCatalogCover.png" style="width:75%">
                         <p class="text-center fs-5">Classical Guitars</p>
                     </a>
@@ -24,7 +24,7 @@
 
             <div class="col mt-5">
                 <div class="p-3 catside">
-                    <a asp-area="Customer" asp-controller="GuitarCatalog" asp-action="Index" asp-route-type="@GuitarType.AcousticGuitar" class="nav-link scale">
+                    <a asp-area="Customer" asp-controller="GuitarCatalog" asp-action="DefineCategory" asp-route-category="@GuitarType.AcousticGuitar" class="nav-link scale">
                         <img src="\images\bits\guitarCatalog\AcousticGuitarCatalogCover.png" style="width:75%">
                         <p class="text-center fs-5">Acoustic Guitars</p>
                     </a>
@@ -33,7 +33,7 @@
 
             <div class="col mt-5">
                 <div class="p-3 catside">
-                    <a asp-area="Customer" asp-controller="GuitarCatalog" asp-action="Index" asp-route-type="@GuitarType.ElectricBass" class="nav-link scale">
+                    <a asp-area="Customer" asp-controller="GuitarCatalog" asp-action="DefineCategory" asp-route-category="@GuitarType.ElectricBass" class="nav-link scale">
                         <img src="\images\bits\guitarCatalog\BassGuitarCatalogCover.png" style="width:75%">
                         <p class="text-center fs-5">Bass Guitars</p>
                     </a>
@@ -42,7 +42,7 @@
 
             <div class="col mt-5">
                 <div class="p-3 catside">
-                    <a asp-area="Customer" asp-controller="GuitarCatalog" asp-action="Index" asp-route-type="@GuitarType.AcousticBass" class="nav-link scale">
+                    <a asp-area="Customer" asp-controller="GuitarCatalog" asp-action="DefineCategory" asp-route-category="@GuitarType.AcousticBass" class="nav-link scale">
                         <img src="\images\bits\guitarCatalog\AcousticBassCatalogCover.png" style="width:75%">
                         <p class="text-center fs-5">Acoustic Bass Guitars</p>
                     </a>

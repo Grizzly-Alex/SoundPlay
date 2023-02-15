@@ -1,11 +1,10 @@
-﻿using SoundPlay.DAL;
-using System.Net.Http.Headers;
+﻿using SoundPlay.DAL.Extensions;
 
 namespace SoundPlay.BLL.ViewModels.Customer;
 
 public sealed class GuitarFilterViewModel : ProductFilterViewModel
 {
-	public int CategoryId { get; set; }
+	public GuitarType Category { get; set; }	
 	public int? BrandId { get; set; }
 	public int? ColorId { get; set; }
 	public int? ShapeId { get; set; }
@@ -27,6 +26,5 @@ public sealed class GuitarFilterViewModel : ProductFilterViewModel
 	{
 	}
 
-	public GuitarFilterViewModel(GuitarType type) => CategoryId = (int)type;
-
+	public GuitarFilterViewModel(GuitarType category) => Category = category;	
 }

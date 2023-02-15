@@ -4,6 +4,7 @@ internal sealed class GuitarModelConfiguration : IEntityTypeConfiguration<Guitar
 {
     public void Configure(EntityTypeBuilder<Guitar> builder)
     {
+        #region Properties
         builder.Property(p => p.Id)
             .HasColumnName("id")
             .IsRequired();
@@ -84,6 +85,54 @@ internal sealed class GuitarModelConfiguration : IEntityTypeConfiguration<Guitar
 
 		builder.Property(p => p.PickupSetId)
 	        .HasColumnName("pickup_set_id")
-	        .HasColumnType("int");   
-    }   
+	        .HasColumnType("int");
+        #endregion
+
+        #region ForeignKey
+        builder.HasOne(y => y.Brand)
+			.WithMany(x => x.Guitars)
+            .HasForeignKey(x => x.BrandId)
+			.OnDelete(DeleteBehavior.Restrict);
+
+        builder.HasOne(y => y.Color)
+			.WithMany(x => x.Guitars)
+			.HasForeignKey(x => x.ColorId)
+            .OnDelete(DeleteBehavior.Restrict);
+
+        builder.HasOne(y => y.Category)
+			.WithMany(x => x.Guitars)
+			.HasForeignKey(x => x.CategoryId)
+			.OnDelete(DeleteBehavior.Restrict);
+
+        builder.HasOne(y => y.Shape)
+            .WithMany(x => x.Guitars)
+            .HasForeignKey(x => x.ShapeId)
+            .OnDelete(DeleteBehavior.Restrict);
+
+        builder.HasOne(y => y.Soundboard)
+			.WithMany(x => x.GuitarsOfSoundboard)
+			.HasForeignKey(x => x.SoundboardId)
+            .OnDelete(DeleteBehavior.Restrict);
+
+        builder.HasOne(y => y.Neck)
+            .WithMany(x => x.GuitarsOfNeck)
+            .HasForeignKey(x => x.NeckId)
+            .OnDelete(DeleteBehavior.Restrict);
+
+        builder.HasOne(y => y.Fretboard)
+            .WithMany(x => x.GuitarsOfFretboard)
+            .HasForeignKey(x => x.FretboardId)
+            .OnDelete(DeleteBehavior.Restrict);
+
+        builder.HasOne(y => y.PickupSet)
+            .WithMany(x => x.Guitars)
+            .HasForeignKey(x => x.PickupSetId)
+            .OnDelete(DeleteBehavior.Restrict);
+
+        builder.HasOne(y => y.TremoloType)
+			.WithMany(x => x.Guitars)
+			.HasForeignKey(x => x.TremoloTypeId)
+            .OnDelete(DeleteBehavior.Restrict);
+        #endregion
+    }
 }

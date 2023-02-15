@@ -1,24 +1,14 @@
-﻿using SoundPlay.DAL.Extensions;
-
-namespace SoundPlay.WEB.Areas.Customer.Controllers;
+﻿namespace SoundPlay.WEB.Areas.Customer.Controllers;
 
 [Area("Customer")]
 public class GuitarCatalogController : Controller
 {
 	private readonly ICatalogService _catalogGuitar;
-<<<<<<< HEAD
-	private readonly ILogger<GuitarCatalogController> _logger; //no logging
-
-	public GuitarCatalogController(
-		ICatalogService catalogGuitar,
-		ILogger<GuitarCatalogController> logger)
-=======
 
 	public GuitarCatalogController(
 		ICatalogService catalogGuitar)
->>>>>>> 0953c78 (Update Models Configuration)
 	{
-		_catalogGuitar = catalogGuitar;
+        _catalogGuitar = catalogGuitar;
 	}
 
 
@@ -33,6 +23,8 @@ public class GuitarCatalogController : Controller
     {
         var listCatalogProducts = await _catalogGuitar.GetCatalogProductsAsync<Guitar>(
             i => (i.CategoryId == (int)filter.Category)
+            && (!filter.PriceEnd.HasValue || i.Price <= filter.PriceEnd)
+            && (!filter.PriceStart.HasValue || i.Price >= filter.PriceStart)
             && (!filter.BrandId.HasValue || i.BrandId == filter.BrandId)
             && (!filter.ColorId.HasValue || i.ColorId == filter.ColorId)
             && (!filter.ShapeId.HasValue || i.ShapeId == filter.ShapeId)
@@ -42,8 +34,7 @@ public class GuitarCatalogController : Controller
             && (!filter.PickupSetId.HasValue || i.PickupSetId == filter.PickupSetId)
             && (!filter.TremoloTypeId.HasValue || i.TremoloTypeId == filter.TremoloTypeId));
 
-        var filterViewModel = await _catalogGuitar.GetGuitarCatalogFilterAsync(listCatalogProducts, filter.Category);
-        ViewData["MaxPrice"] = filterViewModel.Products?.MaxBy(i => i.Price)?.Price.ToString() ?? new string("0.00");
+        var filterViewModel = await _catalogGuitar.GetGuitarCatalogFilterAsync(listCatalogProducts, filter);
        
         return View(filterViewModel);
     }

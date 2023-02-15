@@ -19,58 +19,57 @@
             <form method="get">
                 <input asp-for="@Model.Category" hidden />
                 <div class="mb-3">
-                    <label asp-for="@Model.RangePrice"></label>
+                    <label>Range Price</label>
                     <div class="input-group">
-                        <input asp-for="@Model.RangePrice.PriceStart" value="0.00" class="form-control" />
+                        <input asp-for="@Model.PriceStart" value="@Model.PriceStart" class="form-control shadow-none" />
                         <span class="input-group-text"><i class="bi bi-cash-coin"></i></span>
-
-                        <input asp-for="@Model.RangePrice.PriceEnd" value="@ViewData["MaxPrice"]" class="form-control" />
+                        <input asp-for="@Model.PriceEnd" value="@Model.PriceEnd" class="form-control shadow-none" />
                     </div>
                 </div>
                 <div class="mb-3">
                     <label asp-for="@Model.Brands"></label>
-                    <select asp-for="@Model.BrandId" asp-items="@Model.Brands" class="form-select"></select>                  
+                    <select asp-for="@Model.BrandId" asp-items="@Model.Brands" class="form-select shadow-none"></select>
                 </div>
                 <div class ="mb-3">
                     <label asp-for="@Model.Colors"></label>
-                    <select asp-for="@Model.ColorId" asp-items="@Model.Colors" class="form-select"></select>
+                    <select asp-for="@Model.ColorId" asp-items="@Model.Colors" class="form-select shadow-none"></select>
                 </div>
                 <div class="mb-3">
                     <label asp-for="@Model.GuitarShapes"></label>
-                    <select asp-for="@Model.ShapeId" asp-items="@Model.GuitarShapes" class="form-select"></select>
+                    <select asp-for="@Model.ShapeId" asp-items="@Model.GuitarShapes" class="form-select shadow-none"></select>
                 </div>
                 <div class="mb-3">
                     <label asp-for="@Model.Soundboards"></label>
-                    <select asp-for="@Model.SoundboardId" asp-items="@Model.Soundboards" class="form-select"></select>
+                    <select asp-for="@Model.SoundboardId" asp-items="@Model.Soundboards" class="form-select shadow-none"></select>
                 </div>
                 <div class="mb-3">
                     <label asp-for="@Model.Necks"></label>
-                    <select asp-for="@Model.NeckId" asp-items="@Model.Necks" class="form-select"></select>
+                    <select asp-for="@Model.NeckId" asp-items="@Model.Necks" class="form-select shadow-none"></select>
                 </div>
                 <div class="mb-3">
                     <label asp-for="@Model.Fretboards"></label>
-                    <select asp-for="@Model.FretboardId" asp-items="@Model.Fretboards" class="form-select"></select>
+                    <select asp-for="@Model.FretboardId" asp-items="@Model.Fretboards" class="form-select shadow-none"></select>
                 </div>
                 <div class="mb-3">
                     <label asp-for="@Model.PickupSets"></label>
-                    <select asp-for="@Model.PickupSetId" asp-items="@Model.PickupSets" class="form-select"></select>
+                    <select asp-for="@Model.PickupSetId" asp-items="@Model.PickupSets" class="form-select shadow-none"></select>
                 </div>
                 
                 <div class="mb-3">
                     <label asp-for="@Model.TremoloTypes"></label>
-                    <select asp-for="@Model.TremoloTypeId" asp-items="@Model.TremoloTypes" class="form-select"></select>
+                    <select asp-for="@Model.TremoloTypeId" asp-items="@Model.TremoloTypes" class="form-select shadow-none"></select>
                 </div>                   
                 
 
                 <hr class="featurette-divider">
 
                 <div class="d-grid gap-2">
-                    <button type="submit" class="w-100 btn btn-success btn-sm">
+                    <button type="submit" class="w-100 btn btn-success btn-sm shadow-none">
                         <i class="bi bi-check-lg"></i>
                         Apply Filter
                     </button>
 
-                    <a asp-controller="GuitarCatalog" asp-action="DefineCategory" asp-route-category="@Model.Category" class="w-100 btn btn-primary btn-sm">
+                    <a asp-controller="GuitarCatalog" asp-action="DefineCategory" asp-route-category="@Model.Category" class="w-100 btn btn-primary btn-sm shadow-none">
                         <i class="bi bi-arrow-counterclockwise"></i>
                         Reset Filter
                     </a>
@@ -99,17 +98,24 @@
                                     </div>
                                     <img src="@WebConstants.GuitarsImages@obj.PictureUrl" class="card-img-top p-3" alt="...">
                                 </a>
-                                <div class="card-footer h-100 p-md-3 text-bg-dark">
+                                <div class="card-footer h-100 pb-3 text-bg-dark">
 
-                                    <button type="button" class="btn btn-dark btn-sm bi bi-cart-plus float-sm-end" style="font-size: 1.5rem;"></button>
-                                
+                                    <button type="button" class="btn btn-dark btn-sm bi bi-cart-plus float-sm-end shadow-none" style="font-size: 1.5rem;"></button>
+                                     
                                     <h6 class="card-title">@obj.Name</h6>
-                           
+                          
                                 </div>
                         
                             </div>
                         </div>                       
                     }
+                </div>
+            }
+            else
+            {
+                <p class="pb-2"></p>
+                <div>
+                    <h3>Oops! We do not have such products <i class="bi bi-emoji-frown"></i></h3>                   
                 </div>               
             }
         </div>

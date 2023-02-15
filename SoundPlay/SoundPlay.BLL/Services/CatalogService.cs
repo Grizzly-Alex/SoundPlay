@@ -27,7 +27,7 @@ public sealed class CatalogService : ICatalogService
 			});
 	}
 
-	public async Task<GuitarFilterViewModel> GetGuitarCatalogFilterAsync(IEnumerable<CatalogProductViewModel> catalogProducts, GuitarType category)
+	public async Task<GuitarFilterViewModel> GetGuitarCatalogFilterAsync(IEnumerable<CatalogProductViewModel> catalogProducts, GuitarFilterViewModel filter)
 	{		
         var allItems = new SelectListItem() { Value = null, Text = "All", Selected = true };
 
@@ -38,10 +38,12 @@ public sealed class CatalogService : ICatalogService
 		var selectPickupSets = await _representService.GetSelectListAsync<PickupSet>(allItems);
 		var selectTremoloTypes = await _representService.GetSelectListAsync<TremoloType>(allItems);
 
-		return new GuitarFilterViewModel()
+        return new GuitarFilterViewModel()
 		{
+			PriceEnd = filter.PriceEnd ?? catalogProducts.MaxBy(i => i.Price)?.Price,
+			PriceStart = filter.PriceStart ?? default,
 			Products = catalogProducts.ToList(),
-			Category = category,
+			Category = filter.Category,
 			Brands = selectBrands,
 			Colors = selectColors,
 			GuitarShapes = selectGuitarShapes,

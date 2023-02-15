@@ -92,7 +92,7 @@
 
                         <div class="col aim">
                             <div class="card h-100 shadow target">
-                                <a asp-area="Customer" asp-controller="" asp-action="" class="link-secondary">
+                                <a asp-area="Customer" asp-controller="GuitarCatalog" asp-action="Details" asp-route-id="@obj.Id" class="link-secondary">
                                     <div class="card-body p-sm-2">
                                         <h5 class="card-title float-sm-end">@obj.ViewPrice</h5>
                                     </div>
@@ -121,5 +121,3 @@
         </div>
     </div>
 </div>
-
-

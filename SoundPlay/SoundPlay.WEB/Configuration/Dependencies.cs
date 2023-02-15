@@ -34,7 +34,6 @@ public static class Dependencies
             options.Cookie.IsEssential = true;
         });
 
-
         #region Model CRUD services
 
         services.AddTransient<IUnitOfWork, UnitOfWork>();
@@ -63,6 +62,7 @@ public static class Dependencies
         app.UseRouting();
         app.UseAuthentication();
         app.UseAuthorization();
+
         app.MapControllerRoute(
             name: "default",
             pattern: "{area=Customer}/{controller=Home}/{action=Index}/{id?}");

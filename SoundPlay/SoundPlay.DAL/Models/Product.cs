@@ -1,6 +1,6 @@
 ﻿namespace SoundPlay.DAL.Models;
 
-public abstract class Product : Entity
+public abstract class Product : Item
 {
     public string Description { get; set; }
     public decimal Price { get; set; }
@@ -8,7 +8,6 @@ public abstract class Product : Entity
     public DateTime DateDelivery  { get; set;}  
     public int BrandId { get; set; }
     public int ColorId { get; set; }
-
-	[ForeignKey("BrandId")] public Brand? Brand { get; set; }
-    [ForeignKey("ColorId")] public Color? Color { get; set; }
+	public Brand? Brand { get; set; }
+    public Color? Color { get; set; }
 }

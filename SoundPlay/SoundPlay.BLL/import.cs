@@ -19,3 +19,4 @@ global using Microsoft.EntityFrameworkCore;
 global using System.Globalization;
 global using SoundPlay.BLL.ViewModels;
 global using System.Linq.Expressions;
+global using SoundPlay.DAL;

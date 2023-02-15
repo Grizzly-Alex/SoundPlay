@@ -11,11 +11,11 @@ public sealed class Guitar : Product
     public int FretboardId { get; set; }
     public int? TremoloTypeId { get; set; } 
     public int? PickupSetId { get; set; }
-    [ForeignKey("CategoryId")] public GuitarCategory? Category { get; set; }
-    [ForeignKey("ShapeId")] public GuitarShape? Shape { get; set; }
-    [ForeignKey("SoundboardId")] public Material? Soundboard { get; set; }
-    [ForeignKey("NeckId")] public Material? Neck { get; set; }
-    [ForeignKey("FretboardId")] public Material? Fretboard { get; set; }
-    [ForeignKey("PickupSetId")] public PickupSet? PickupSet { get; set; }
-    [ForeignKey("TremoloTypeId")] public TremoloType? TremoloType { get; set; }
+    public GuitarCategory? Category { get; set; }
+    public GuitarShape? Shape { get; set; }
+    public Material? Soundboard { get; set; }
+    public Material? Neck { get; set; }
+    public Material? Fretboard { get; set; }
+    public PickupSet? PickupSet { get; set; }
+    public TremoloType? TremoloType { get; set; }
 }

@@ -9,10 +9,19 @@ public sealed class RepresentationService : IRepresentationService
 		_unitOfWork = unitOfWork;
 	}
 
-	public async Task<IEnumerable<SelectListItem>> GetSelectListAsync<TEntity>() where TEntity : Entity
+	public async Task<IEnumerable<SelectListItem>> GetSelectListAsync<TEntity>()
+		where TEntity : Item
 	{
-		var listEntity = await _unitOfWork.GetRepository<TEntity>().GetAllAsync();
-		var selectList = listEntity!.OrderBy(i => i.Name).Select(i => new SelectListItem { Value = i.Id.ToString(), Text = i.Name });
-		return selectList;
+		var entityList = await _unitOfWork.GetRepository<TEntity>().GetAllAsync();
+        return entityList!.OrderBy(i => i.Name).Select(i => new SelectListItem { Value = i.Id.ToString(), Text = i.Name }).ToList();
 	}
+
+    public async Task<IEnumerable<SelectListItem>> GetSelectListAsync<TEntity>(SelectListItem selectList, int indexInsert = 0)
+		where TEntity : Item
+    {
+        var entityList = await _unitOfWork.GetRepository<TEntity>().GetAllAsync();
+		var selectListItem = entityList!.OrderBy(i => i.Name).Select(i => new SelectListItem { Value = i.Id.ToString(), Text = i.Name }).ToList();
+		selectListItem.Insert(indexInsert, selectList);	
+        return selectListItem;
+    }
 }

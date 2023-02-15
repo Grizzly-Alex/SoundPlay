@@ -2,5 +2,7 @@
 
 public abstract class ProductFilterViewModel
 {
-	public List<CatalogProductViewModel>? Products { get; set; }
+    public decimal? PriceStart { get; set; }
+    public decimal? PriceEnd { get; set; }
+    public List<CatalogProductViewModel>? Products { get; set; }
 }

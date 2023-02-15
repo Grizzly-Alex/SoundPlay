@@ -27,18 +27,23 @@ public sealed class CatalogService : ICatalogService
 			});
 	}
 
-	public async Task<GuitarFilterViewModel> GetGuitarCatalogFilterAsync(IEnumerable<CatalogProductViewModel> catalogProducts)
-	{
-		var selectBrands = await _representService.GetSelectListAsync<Brand>();
-		var selectColors = await _representService.GetSelectListAsync<Color>();
-		var selectGuitarShapes = await _representService.GetSelectListAsync<GuitarShape>();
-		var selectMaterials = await _representService.GetSelectListAsync<Material>();
-		var selectPickupSets = await _representService.GetSelectListAsync<PickupSet>();
-		var selectTremoloTypes = await _representService.GetSelectListAsync<TremoloType>();
+	public async Task<GuitarFilterViewModel> GetGuitarCatalogFilterAsync(IEnumerable<CatalogProductViewModel> catalogProducts, GuitarFilterViewModel filter)
+	{		
+        var allItems = new SelectListItem() { Value = null, Text = "All", Selected = true };
 
-		return new GuitarFilterViewModel()
+		var selectBrands = await _representService.GetSelectListAsync<Brand>(allItems);
+		var selectColors = await _representService.GetSelectListAsync<Color>(allItems);
+		var selectGuitarShapes = await _representService.GetSelectListAsync<GuitarShape>(allItems);
+		var selectMaterials = await _representService.GetSelectListAsync<Material>(allItems);
+		var selectPickupSets = await _representService.GetSelectListAsync<PickupSet>(allItems);
+		var selectTremoloTypes = await _representService.GetSelectListAsync<TremoloType>(allItems);
+
+        return new GuitarFilterViewModel()
 		{
+			PriceEnd = filter.PriceEnd ?? catalogProducts.MaxBy(i => i.Price)?.Price,
+			PriceStart = filter.PriceStart ?? default,
 			Products = catalogProducts.ToList(),
+			Category = filter.Category,
 			Brands = selectBrands,
 			Colors = selectColors,
 			GuitarShapes = selectGuitarShapes,

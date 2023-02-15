@@ -20,11 +20,12 @@ public sealed class ApplicationDbContext : DbContext
 		modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
 
 		modelBuilder.SeedEnumValues<GuitarType, GuitarCategory>(value => value);
-
-		foreach (var foreignKey in modelBuilder.Model.GetEntityTypes()
-			.SelectMany(e => e.GetForeignKeys()))
-		{
-			foreignKey.DeleteBehavior = DeleteBehavior.Restrict;
-		}
+		
+		//foreach (var foreignKey in modelBuilder.Model.GetEntityTypes()
+		//	.SelectMany(e => e.GetForeignKeys()))
+		//{
+		//	foreignKey.DeleteBehavior = DeleteBehavior.Restrict;
+		//}
+		
     }
 }

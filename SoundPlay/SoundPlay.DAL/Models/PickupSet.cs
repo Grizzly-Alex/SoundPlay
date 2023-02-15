@@ -1,5 +1,6 @@
 ﻿namespace SoundPlay.DAL.Models;
 
-public sealed class PickupSet : Entity
+public sealed class PickupSet : Item
 {
+    public List<Guitar> Guitars { get; set; }
 }

@@ -1,5 +1,125 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@model GuitarFilterViewModel
+
+<div class="container-fluid">
+
+    <h2 class="mt-3">@Model.Category.GetDisplayName()</h2>
+
+    <div class="row mt-3 pb-0">
+        <div class="col-6 text-start">
+            <p class="bi bi-sliders text-muted" style="font-size: 1.2rem;"> Filter</p>
+        </div>
+        <div class="col-6 text-end">
+            <p class="text-muted"> Total Found: @Model.Products?.Count</p>
+        </div>
+        <hr class="featurette-divider">
+    </div>
+
+    <div class="row">
+        <div class="col-2">
+            <form method="get">
+                <input asp-for="@Model.Category" hidden />
+                <div class="mb-3">
+                    <label>Range Price</label>
+                    <div class="input-group">
+                        <input asp-for="@Model.PriceStart" value="@Model.PriceStart" class="form-control shadow-none" />
+                        <span class="input-group-text"><i class="bi bi-cash-coin"></i></span>
+                        <input asp-for="@Model.PriceEnd" value="@Model.PriceEnd" class="form-control shadow-none" />
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="@Model.Brands"></label>
+                    <select asp-for="@Model.BrandId" asp-items="@Model.Brands" class="form-select shadow-none"></select>
+                </div>
+                <div class ="mb-3">
+                    <label asp-for="@Model.Colors"></label>
+                    <select asp-for="@Model.ColorId" asp-items="@Model.Colors" class="form-select shadow-none"></select>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="@Model.GuitarShapes"></label>
+                    <select asp-for="@Model.ShapeId" asp-items="@Model.GuitarShapes" class="form-select shadow-none"></select>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="@Model.Soundboards"></label>
+                    <select asp-for="@Model.SoundboardId" asp-items="@Model.Soundboards" class="form-select shadow-none"></select>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="@Model.Necks"></label>
+                    <select asp-for="@Model.NeckId" asp-items="@Model.Necks" class="form-select shadow-none"></select>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="@Model.Fretboards"></label>
+                    <select asp-for="@Model.FretboardId" asp-items="@Model.Fretboards" class="form-select shadow-none"></select>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="@Model.PickupSets"></label>
+                    <select asp-for="@Model.PickupSetId" asp-items="@Model.PickupSets" class="form-select shadow-none"></select>
+                </div>
+                
+                <div class="mb-3">
+                    <label asp-for="@Model.TremoloTypes"></label>
+                    <select asp-for="@Model.TremoloTypeId" asp-items="@Model.TremoloTypes" class="form-select shadow-none"></select>
+                </div>                   
+                
+
+                <hr class="featurette-divider">
+
+                <div class="d-grid gap-2">
+                    <button type="submit" class="w-100 btn btn-success btn-sm shadow-none">
+                        <i class="bi bi-check-lg"></i>
+                        Apply Filter
+                    </button>
+
+                    <a asp-controller="GuitarCatalog" asp-action="DefineCategory" asp-route-category="@Model.Category" class="w-100 btn btn-primary btn-sm shadow-none">
+                        <i class="bi bi-arrow-counterclockwise"></i>
+                        Reset Filter
+                    </a>
+                </div>
+                       
+            </form>
+        </div>
+
+        <div class="col-1"></div>
+        
+        <div class="col-9">          
+            
+            @if (Model.Products.Any())
+            {
+                <p class="pb-2"></p>
+                <div class="row row-cols-1 row-cols-md-4 g-3">
+                    
+                    @foreach (var obj in Model.Products)
+                    {
+
+                        <div class="col aim">
+                            <div class="card h-100 shadow target">
+                                <a asp-area="Customer" asp-controller="" asp-action="" class="link-secondary">
+                                    <div class="card-body p-sm-2">
+                                        <h5 class="card-title float-sm-end">@obj.ViewPrice</h5>
+                                    </div>
+                                    <img src="@WebConstants.GuitarsImages@obj.PictureUrl" class="card-img-top p-3" alt="...">
+                                </a>
+                                <div class="card-footer h-100 pb-3 text-bg-dark">
+
+                                    <button type="button" class="btn btn-dark btn-sm bi bi-cart-plus float-sm-end shadow-none" style="font-size: 1.5rem;"></button>
+                                     
+                                    <h6 class="card-title">@obj.Name</h6>
+                          
+                                </div>
+                        
+                            </div>
+                        </div>                       
+                    }
+                </div>
+            }
+            else
+            {
+                <p class="pb-2"></p>
+                <div>
+                    <h3>Oops! We do not have such products <i class="bi bi-emoji-frown"></i></h3>                   
+                </div>               
+            }
+        </div>
+    </div>
+</div>
+
+

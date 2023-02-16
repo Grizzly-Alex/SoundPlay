@@ -1,10 +1,86 @@
 ﻿@model GuitarViewModel
 
-<div class="row align-content-center">
-    <div class="col-8">
-        <h2>@Model.Name</h2>
-    </div>
-    <div class="col-4">
+<div class="py-5 container">
+    <h2 class="fw-normal pb-4">@Model.Name</h2>
 
+    <div class="row">
+        <div class="col-8">
+            <div >
+                <img src="@WebConstants.GuitarsImages@Model.PictureUrl" class="img-thumbnail shadow-sm" style="max-width:60%" alt="...">
+            </div>
+            <div class="py-lg-4">
+                <h5 class="fw-semibold">@Model.Category?.Name</h5>
+                <div class="text-muted">
+                    <p>@Html.Raw(Model.Description)</p>
+                </div>
+            </div>
+            <div>
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <th scope="row">Date Delivery:</th>
+                            <td>@Model.DateDelivery</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Color:</th>
+                            <td>@Model.Color?.Name</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Shape:</th>
+                            <td>@Model.Shape?.Name</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Frets:</th>
+                            <td>@Model.FretsCount</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Strings:</th>
+                            <td>@Model.StringsCount</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Tremolo:</th>
+                            <td>@Model.TremoloType?.Name</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Pickups:</th>
+                            <td>@Model.PickupSet?.Name</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Soundboard:</th>
+                            <td>@Model.Soundboard?.Name</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Neck:</th>
+                            <td>@Model.Neck?.Name</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Fretboard:</th>
+                            <td>@Model.Fretboard?.Name</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="col-4">
+
+            <div class="card text-center mb-3" style="width: 15rem;">
+                <div class="card-body">
+                    <h5 class="card-title">@Model.ViewPrice</h5>
+
+                    <ul class="list-unstyled mt-3 mb-4 text-muted small">
+                        <li>30-Day Money-Back Guarantee</li>
+                        <li>3-Year Warranty</li>
+                    </ul>           
+                                     
+                    <div class="d-flex justify-content-between align-items-center">
+
+                        <input type="number" min="1" step="1" value="1" class="form-control form-control-sm shadow-none w-25" id="amountInput">
+                       
+                        <button type="button" class="btn btn-success btn-sm shadow-none ">Add To Basket</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

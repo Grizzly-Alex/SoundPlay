@@ -4,11 +4,14 @@
 public class GuitarCatalogController : Controller
 {
 	private readonly ICatalogService _catalogGuitar;
+    private readonly IEntityService<Guitar, GuitarViewModel> _guitarService;
 
 	public GuitarCatalogController(
-		ICatalogService catalogGuitar)
+        IEntityService<Guitar, GuitarViewModel> guitarService,
+        ICatalogService catalogGuitar)
 	{
         _catalogGuitar = catalogGuitar;
+        _guitarService = guitarService;
 	}
 
 
@@ -37,5 +40,12 @@ public class GuitarCatalogController : Controller
         var filterViewModel = await _catalogGuitar.GetGuitarCatalogFilterAsync(listCatalogProducts, filter);
        
         return View(filterViewModel);
+    }
+
+    public async Task<IActionResult> Details(int id)
+    {
+        var guitarViewModel = await _guitarService.GetViewModelByIdAsync(id);
+
+        return View(guitarViewModel);
     }
 }

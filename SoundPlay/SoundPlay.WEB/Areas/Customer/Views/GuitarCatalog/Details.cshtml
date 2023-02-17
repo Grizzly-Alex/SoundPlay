@@ -26,10 +26,6 @@
                             <td>@Model.Color?.Name</td>
                         </tr>
                         <tr>
-                            <th scope="row">Shape:</th>
-                            <td>@Model.Shape?.Name</td>
-                        </tr>
-                        <tr>
                             <th scope="row">Frets:</th>
                             <td>@Model.FretsCount</td>
                         </tr>
@@ -37,25 +33,41 @@
                             <th scope="row">Strings:</th>
                             <td>@Model.StringsCount</td>
                         </tr>
-                        @if (Model.TremoloType is null)
+                        @if (Model.Shape is not null)
+                        {
+                            <tr>
+                                <th scope="row">Shape:</th>
+                                <td>@Model.Shape?.Name</td>
+                            </tr>                           
+                        }
+                        @if (Model.TremoloType is not null)
                         {
                             <tr>
                                 <th scope="row">Tremolo:</th>
                                 <td>@Model.TremoloType?.Name</td>
                             </tr>                           
                         }
-                        <tr>
-                            <th scope="row">Pickups:</th>
-                            <td>@Model.PickupSet?.Name</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Soundboard:</th>
-                            <td>@Model.Soundboard?.Name</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Neck:</th>
-                            <td>@Model.Neck?.Name</td>
-                        </tr>
+                        @if (Model.PickupSet is not null)
+                        {
+                            <tr>
+                                <th scope="row">Pickups:</th>
+                                <td>@Model.PickupSet?.Name</td>
+                            </tr>                           
+                        }
+                        @if (Model.Soundboard is not null)
+                        {
+                            <tr>
+                                <th scope="row">Soundboard:</th>
+                                <td>@Model.Soundboard?.Name</td>
+                            </tr>                           
+                        }
+                        @if (Model.Neck is not null)
+                        {
+                            <tr>
+                                <th scope="row">Neck:</th>
+                                <td>@Model.Neck?.Name</td>
+                            </tr> 
+                        }
                         @if (Model.Fretboard is not null)
                         {
                             <tr>
@@ -69,7 +81,6 @@
         </div>
 
         <div class="col-5">
-
             <div class="card text-center mb-3 sticky-top" style="width: 20rem;">
                 <div class="card-body shadow-sm">
                     <h3 class="card-title">@Model.ViewPrice</h3>
@@ -90,7 +101,6 @@
                             <button type="submit" class="btn btn-primary mb-2">Add To Basket</button>
                         </div>
                     </form>
-
                 </div>
             </div>
         </div>

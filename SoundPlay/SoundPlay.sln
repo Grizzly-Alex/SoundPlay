@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33205.214
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SoundPlay.WEB", "SoundPlay.WEB\SoundPlay.WEB.csproj", "{F5012451-437D-4AFF-8B8B-1F55E46FD5AE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SoundPlay.Web", "SoundPlay.Web\SoundPlay.Web.csproj", "{A220F1D1-7F5B-4299-A391-A356D9B71822}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SoundPlay.DAL", "SoundPlay.DAL\SoundPlay.DAL.csproj", "{8F43E95E-24BA-4B3F-8C29-4FD31FB571F1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SoundPlay.Infrastructure", "SoundPlay.Infrastructure\SoundPlay.Infrastructure.csproj", "{077B5C7E-56F3-4045-AEB0-2D23249CA8FB}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SoundPlay.BLL", "SoundPlay.BLL\SoundPlay.BLL.csproj", "{BF30A406-33D8-4528-B305-759E083E818E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SoundPlay.Core", "SoundPlay.Core\SoundPlay.Core.csproj", "{E8B38424-E35A-486F-A5BD-1767A51A3EDC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,18 +15,18 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{F5012451-437D-4AFF-8B8B-1F55E46FD5AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F5012451-437D-4AFF-8B8B-1F55E46FD5AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F5012451-437D-4AFF-8B8B-1F55E46FD5AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F5012451-437D-4AFF-8B8B-1F55E46FD5AE}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8F43E95E-24BA-4B3F-8C29-4FD31FB571F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8F43E95E-24BA-4B3F-8C29-4FD31FB571F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8F43E95E-24BA-4B3F-8C29-4FD31FB571F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8F43E95E-24BA-4B3F-8C29-4FD31FB571F1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{BF30A406-33D8-4528-B305-759E083E818E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BF30A406-33D8-4528-B305-759E083E818E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BF30A406-33D8-4528-B305-759E083E818E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BF30A406-33D8-4528-B305-759E083E818E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A220F1D1-7F5B-4299-A391-A356D9B71822}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A220F1D1-7F5B-4299-A391-A356D9B71822}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A220F1D1-7F5B-4299-A391-A356D9B71822}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A220F1D1-7F5B-4299-A391-A356D9B71822}.Release|Any CPU.Build.0 = Release|Any CPU
+		{077B5C7E-56F3-4045-AEB0-2D23249CA8FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{077B5C7E-56F3-4045-AEB0-2D23249CA8FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{077B5C7E-56F3-4045-AEB0-2D23249CA8FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{077B5C7E-56F3-4045-AEB0-2D23249CA8FB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E8B38424-E35A-486F-A5BD-1767A51A3EDC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E8B38424-E35A-486F-A5BD-1767A51A3EDC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E8B38424-E35A-486F-A5BD-1767A51A3EDC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E8B38424-E35A-486F-A5BD-1767A51A3EDC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,6 +1,6 @@
 ﻿namespace SoundPlay.Infrastructure.Businesslogic.Services;
 
-public class CatalogService : ICatalogService<CatalogProductViewModel>
+public sealed class CatalogService : ICatalogService<CatalogProductViewModel, GuitarFilterViewModel>
 {
     private readonly IRepresentationService _representService;
     private readonly IUnitOfWork _unitOfWork;
@@ -27,11 +27,47 @@ public class CatalogService : ICatalogService<CatalogProductViewModel>
             });
     }
 
-    public async Task<TFilterModel> GetFilterModelAsync<TFilterModel>(IEnumerable<CatalogProductViewModel> catalogProducts, TFilterModel filter)
-        where TFilterModel : GuitarFilterViewModel
+    public async Task<GuitarFilterViewModel> GetGuitarFilterAsync(IEnumerable<CatalogProductViewModel> catalogProducts, GuitarFilterViewModel filter)
     {
-        throw new NotImplementedException();
+        //var allItems = new SelectListItem() { Value = null, Text = "All", Selected = true };
+        /*
+        var selectBrands = await _representService.GetSelectListAsync<Brand>(allItems);
+        var selectColors = await _representService.GetSelectListAsync<Color>(allItems);
+        var selectGuitarShapes = await _representService.GetSelectListAsync<GuitarShape>(allItems);
+        var selectMaterials = await _representService.GetSelectListAsync<Material>(allItems);
+        var selectPickupSets = await _representService.GetSelectListAsync<PickupSet>(allItems);
+        var selectTremoloTypes = await _representService.GetSelectListAsync<TremoloType>(allItems);
+        */
+
+        var selectBrands = await _unitOfWork.GetRepository<Brand>().GetAllAsync();
+
+        IList<Brand> test = new List<Brand>();
+        IList<Item> s = new List<Item>();
+
+        IList<SelectListItem> selectlist = new List<SelectListItem>();
+        selectlist = (IList<SelectListItem>)s.ToSelectListItems();
+
+
+
+
+        return new GuitarFilterViewModel()
+        {
+            PriceEnd = filter.PriceEnd ?? catalogProducts.MaxBy(i => i.Price)?.Price,
+            PriceStart = filter.PriceStart ?? default,
+            Products = catalogProducts.ToList(),
+            Category = filter.Category,
+            Brands = selectBrands,
+            Colors = selectColors,
+            GuitarShapes = selectGuitarShapes,
+            Soundboards = selectMaterials,
+            Necks = selectMaterials,
+            Fretboards = selectMaterials,
+            PickupSets = selectPickupSets,
+            TremoloTypes = selectTremoloTypes,
+        };
     }
+
+
 
 
     //public async Task<GuitarFilterViewModel> GetGuitarCatalogFilterAsync(IEnumerable<CatalogProductViewModel> catalogProducts, GuitarFilterViewModel filter)

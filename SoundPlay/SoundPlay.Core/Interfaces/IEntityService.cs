@@ -1,6 +1,8 @@
 ﻿namespace SoundPlay.Core.Interfaces;
 
 public interface IEntityService<TModel, TViewModel>
+    where TModel: Entity
+    where TViewModel: class
 {
     public Task<IEnumerable<TViewModel>> GetViewModelsAsync();
     public Task<TViewModel> GetViewModelByIdAsync(int id);

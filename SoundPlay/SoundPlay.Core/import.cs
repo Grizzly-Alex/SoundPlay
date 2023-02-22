@@ -7,3 +7,4 @@ global using Microsoft.AspNetCore.Http;
 global using System.Text.Json;
 global using System.Linq.Expressions;
 global using Microsoft.EntityFrameworkCore.Query;
+global using System.Web.Mvc;

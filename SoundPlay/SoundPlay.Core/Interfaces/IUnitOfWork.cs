@@ -3,5 +3,5 @@
 public interface IUnitOfWork
 {
     public Task SaveChangesAsync();
-    public IRepository<T> GetRepository<T>() where T : Entity;
+    public IRepository<TModel> GetRepository<TModel>() where TModel : Entity;
 }

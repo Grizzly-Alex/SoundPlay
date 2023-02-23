@@ -1,4 +1,4 @@
-﻿namespace SoundPlay.WEB.Areas.Customer.Controllers;
+﻿namespace SoundPlay.Web.Areas.Customer.Controllers;
 
 [Area("Customer")]
 public class CatalogController : Controller

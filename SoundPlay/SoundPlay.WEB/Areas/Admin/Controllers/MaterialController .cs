@@ -1,13 +1,15 @@
-﻿namespace SoundPlay.WEB.Areas.Admin.Controllers;
+﻿using SoundPlay.Web.ViewModels;
+
+namespace SoundPlay.Web.Areas.Admin.Controllers;
 
 [Area("Admin")]
 public sealed class MaterialController : Controller
 {
-	private readonly IEntityService<Material, MaterialViewModel> _materialService;
+	private readonly IViewModelService<Material, MaterialViewModel> _materialService;
 	private readonly ILogger<MaterialController> _logger;
 
 	public MaterialController(
-		IEntityService<Material, MaterialViewModel> brandService,
+		IViewModelService<Material, MaterialViewModel> brandService,
 		ILogger<MaterialController> logger)
 	{
 		_materialService = brandService;

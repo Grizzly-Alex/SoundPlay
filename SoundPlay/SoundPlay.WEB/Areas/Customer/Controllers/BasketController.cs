@@ -1,4 +1,6 @@
-﻿namespace SoundPlay.WEB.Areas.Customer.Controllers;
+﻿using SoundPlay.Web.ViewModels;
+
+namespace SoundPlay.Web.Areas.Customer.Controllers;
 
 [Area("Customer")]
 public sealed class BasketController : Controller

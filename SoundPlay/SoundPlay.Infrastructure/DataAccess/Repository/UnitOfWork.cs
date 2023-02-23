@@ -1,4 +1,4 @@
-﻿namespace SoundPlay.DAL.Repository;
+﻿namespace SoundPlay.Infrastructure.DataAccess.Repository;
 
 public sealed class UnitOfWork : IUnitOfWork 
 {

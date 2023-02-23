@@ -4,7 +4,7 @@
 
 #pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
 
-namespace SoundPlay.DAL.Data.Migrations
+namespace SoundPlay.Infrastructure.DataAccess.Migrations
 {
     /// <inheritdoc />
     public partial class AddGuitarCategory : Migration

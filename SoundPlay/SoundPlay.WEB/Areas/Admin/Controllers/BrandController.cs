@@ -1,13 +1,15 @@
-﻿namespace SoundPlay.WEB.Areas.Admin.Controllers;
+﻿using SoundPlay.Web.ViewModels;
+
+namespace SoundPlay.Web.Areas.Admin.Controllers;
 
 [Area("Admin")]
 public sealed class BrandController : Controller
 {
-	private readonly IEntityService<Brand, BrandViewModel> _brandService;
+	private readonly IViewModelService<Brand, BrandViewModel> _brandService;
 	private readonly ILogger<BrandController> _logger;
 
     public BrandController(
-		IEntityService<Brand, BrandViewModel> brandService,
+        IViewModelService<Brand, BrandViewModel> brandService,
         ILogger<BrandController> logger)
     {
         _brandService = brandService;

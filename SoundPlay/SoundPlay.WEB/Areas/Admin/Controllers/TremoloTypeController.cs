@@ -1,13 +1,15 @@
-﻿namespace SoundPlay.WEB.Areas.Admin.Controllers;
+﻿using SoundPlay.Web.ViewModels;
+
+namespace SoundPlay.Web.Areas.Admin.Controllers;
 
 [Area("Admin")]
 public sealed class TremoloTypeController : Controller
 {
-	private readonly IEntityService<TremoloType, TremoloTypeViewModel> _tremoloTypeService;
+	private readonly IViewModelService<TremoloType, TremoloTypeViewModel> _tremoloTypeService;
 	private readonly ILogger<TremoloTypeController> _logger;
 
 	public TremoloTypeController(
-		IEntityService<TremoloType, TremoloTypeViewModel> brandService,
+		IViewModelService<TremoloType, TremoloTypeViewModel> brandService,
 		ILogger<TremoloTypeController> logger)
 	{
 		_tremoloTypeService = brandService;

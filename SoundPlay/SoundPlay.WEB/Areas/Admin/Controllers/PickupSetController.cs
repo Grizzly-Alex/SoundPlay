@@ -1,13 +1,15 @@
-﻿namespace SoundPlay.WEB.Areas.Admin.Controllers;
+﻿using SoundPlay.Web.ViewModels;
+
+namespace SoundPlay.Web.Areas.Admin.Controllers;
 
 [Area("Admin")]
 public sealed class PickupSetController : Controller
 {
-	private readonly IEntityService<PickupSet, PickupSetViewModel> _pickupSetService;
+	private readonly IViewModelService<PickupSet, PickupSetViewModel> _pickupSetService;
 	private readonly ILogger<PickupSetController> _logger;
 
 	public PickupSetController(
-		IEntityService<PickupSet, PickupSetViewModel> brandService,
+		IViewModelService<PickupSet, PickupSetViewModel> brandService,
 		ILogger<PickupSetController> logger)
 	{
 		_pickupSetService = brandService;

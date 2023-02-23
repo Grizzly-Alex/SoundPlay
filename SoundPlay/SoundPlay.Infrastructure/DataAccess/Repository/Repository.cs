@@ -1,4 +1,4 @@
-﻿namespace SoundPlay.DAL.Repository;
+﻿namespace SoundPlay.Infrastructure.DataAccess.Repository;
 
 public class Repository<TEntity> : IRepository<TEntity> where TEntity : Entity
 {
@@ -23,7 +23,7 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : Entity
 
 	public void Update(IEnumerable<TEntity> entities) => _dbSet.UpdateRange(entities);
 
-	public async Task<IList<TEntity>> GetAllAsync(
+	public async Task<IEnumerable<TEntity>> GetAllAsync(
 		Expression<Func<TEntity, bool>>? predicate = null,
 		Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>>? orderBy = null,
 		Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>>? include = null,
@@ -75,7 +75,7 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : Entity
 			: await query.Select(selector).FirstOrDefaultAsync();
 	}
 
-	public async Task<IList<TResult>> GetAllAsync<TResult>(
+	public async Task<IEnumerable<TResult>> GetAllAsync<TResult>(
 		Expression<Func<TEntity, TResult>> selector,
 		Expression<Func<TEntity, bool>>? predicate = null,
 		Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>>? orderBy = null,

@@ -1,13 +1,15 @@
-﻿namespace SoundPlay.WEB.Areas.Admin.Controllers;
+﻿using SoundPlay.Web.ViewModels;
+
+namespace SoundPlay.Web.Areas.Admin.Controllers;
 
 [Area("Admin")]
 public sealed class GuitarShapeController : Controller
 {
-	private readonly IEntityService<GuitarShape, GuitarShapeViewModel> _guitarShapeService;
+	private readonly IViewModelService<GuitarShape, GuitarShapeViewModel> _guitarShapeService;
 	private readonly ILogger<GuitarShapeController> _logger;
 
 	public GuitarShapeController(
-		IEntityService<GuitarShape, GuitarShapeViewModel> brandService,
+        IViewModelService<GuitarShape, GuitarShapeViewModel> brandService,
 		ILogger<GuitarShapeController> logger)
 	{
 		_guitarShapeService = brandService;

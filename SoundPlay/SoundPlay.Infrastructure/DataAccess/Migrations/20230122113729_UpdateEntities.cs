@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace SoundPlay.DAL.Data.Migrations
+namespace SoundPlay.Infrastructure.DataAccess.Migrations
 {
     /// <inheritdoc />
     public partial class UpdateEntities : Migration

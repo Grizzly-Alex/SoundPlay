@@ -1,9 +1,8 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace SoundPlay.DAL.Data.Migrations
+namespace SoundPlay.Infrastructure.DataAccess.Migrations
 {
     /// <inheritdoc />
     public partial class EverythingUpdate : Migration

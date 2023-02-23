@@ -28,15 +28,9 @@ public interface IRepository<TEntity> where TEntity : Entity
         Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>>? include = null,
         bool isTracking = false);
 
-    void Remove(TEntity entity);
-
-    void Remove(IEnumerable<TEntity> entities);
+    void Remove(int id);
 
     void Add(TEntity entity);
 
-    void Add(IEnumerable<TEntity> entities);
-
     void Update(TEntity entity);
-
-    void Update(IEnumerable<TEntity> entities);
 }

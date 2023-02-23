@@ -29,7 +29,7 @@ public class ViewModelService<TModel, TViewModel> : IViewModelService<TModel, TV
     public virtual async Task<TViewModel> DeleteViewModelAsync(TViewModel viewModel)
     {
         var model = _mapper.Map<TModel>(viewModel);
-        _unitOfWork.GetRepository<TModel>().Remove(model);
+        _unitOfWork.GetRepository<TModel>().Remove(model.Id);
         await _unitOfWork.SaveChangesAsync();
         return viewModel;
     }

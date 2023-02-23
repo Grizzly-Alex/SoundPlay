@@ -18,7 +18,10 @@ public static class Dependencies
     public static void SetDbContext(IConfiguration configuration, IServiceCollection services)
     {
         services.AddDbContext<ApplicationDbContext>(options =>
-            options.UseSqlServer(configuration.GetConnectionString("CatalogConnection")));
+        { 
+            options.UseSqlServer(configuration.GetConnectionString("CatalogConnection")); 
+            options.EnableSensitiveDataLogging();
+        });
     }
 
     public static void SetServices(IServiceCollection services)

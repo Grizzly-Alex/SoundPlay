@@ -8,20 +8,26 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : Entity
 	public Repository(ApplicationDbContext dbContext)
 	{
 		_dbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
-		_dbSet = _dbContext.Set<TEntity>();	
-	}
+		_dbSet = _dbContext.Set<TEntity>();
+        
+    }
 
-	public void Add(TEntity entity) => _dbSet.Add(entity);	
+	public void Add(TEntity entity)
+	{
+		_dbSet.Entry(entity).State = EntityState.Added;
+    }	
 
-	public void Add(IEnumerable<TEntity> entities) => _dbSet.AddRange(entities);
+    public void Remove(int id)
+    {
+		var entity = _dbSet.First(e => e.Id == id);
+        _dbSet.Entry(entity).State = EntityState.Deleted;
 
-	public void Remove(TEntity entity) => _dbSet.Remove(entity);
+    }
 
-	public void Remove(IEnumerable<TEntity> entities) => _dbSet.AddRange(entities);
-
-	public void Update(TEntity entity) => _dbSet.Update(entity);	
-
-	public void Update(IEnumerable<TEntity> entities) => _dbSet.UpdateRange(entities);
+    public void Update(TEntity entity)
+	{
+        _dbSet.Entry(entity).State = EntityState.Modified;
+    }
 
 	public async Task<IEnumerable<TEntity>> GetAllAsync(
 		Expression<Func<TEntity, bool>>? predicate = null,
@@ -62,7 +68,7 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : Entity
 		Expression<Func<TEntity, bool>>? predicate = null,
 		Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>>? orderBy = null,
 		Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>>? include = null,
-		bool isTracking = true)
+		bool isTracking = false)
 	{
 		IQueryable<TEntity> query = _dbSet;
 

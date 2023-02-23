@@ -42,7 +42,7 @@ public sealed class PriceController : Controller
         Basket basket = new();
 
         // getting Basket from session
-        var basketFromSession = HttpContext.Session.Get<Basket>(WebConstants.BasketSession);
+        var basketFromSession = HttpContext.Session.Get<Basket>(Constants.BasketSession);
 
         // if there is a filled Basket in the session, then take the data from it    
         if (basketFromSession!=null
@@ -59,7 +59,7 @@ public sealed class PriceController : Controller
         else position.Count+=basketPosition.Count;
 
         // putting a basket with new properties into the session
-        HttpContext.Session.Set(WebConstants.BasketSession, basket);
+        HttpContext.Session.Set(Constants.BasketSession, basket);
         return RedirectToAction(nameof(Index));
     }
 }

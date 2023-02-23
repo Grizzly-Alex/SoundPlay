@@ -1,13 +1,13 @@
-﻿namespace SoundPlay.WEB.Areas.Customer.Controllers;
+﻿namespace SoundPlay.Web.Areas.Customer.Controllers;
 
 [Area("Customer")]
 public class GuitarCatalogController : Controller
 {
 	private readonly ICatalogService _catalogGuitar;
-    private readonly IEntityService<Guitar, GuitarViewModel> _guitarService;
+    private readonly IViewModelService<Guitar, GuitarViewModel> _guitarService;
 
 	public GuitarCatalogController(
-        IEntityService<Guitar, GuitarViewModel> guitarService,
+        IViewModelService<Guitar, GuitarViewModel> guitarService,
         ICatalogService catalogGuitar)
 	{
         _catalogGuitar = catalogGuitar;
@@ -24,7 +24,7 @@ public class GuitarCatalogController : Controller
     [HttpGet]
     public async Task<IActionResult> Index(GuitarFilterViewModel filter)
     {
-        var listCatalogProducts = await _catalogGuitar.GetCatalogProductsAsync<Guitar>(
+        var listCatalogProducts = await _catalogGuitar.GetCatalogModelsAsync<Guitar>(
             i => (i.CategoryId == (int)filter.Category)
             && (!filter.PriceEnd.HasValue || i.Price <= filter.PriceEnd)
             && (!filter.PriceStart.HasValue || i.Price >= filter.PriceStart)
@@ -37,7 +37,7 @@ public class GuitarCatalogController : Controller
             && (!filter.PickupSetId.HasValue || i.PickupSetId == filter.PickupSetId)
             && (!filter.TremoloTypeId.HasValue || i.TremoloTypeId == filter.TremoloTypeId));
 
-        var filterViewModel = await _catalogGuitar.GetGuitarCatalogFilterAsync(listCatalogProducts, filter);
+        var filterViewModel = await _catalogGuitar.GetGuitarFilterAsync(listCatalogProducts, filter);
        
         return View(filterViewModel);
     }

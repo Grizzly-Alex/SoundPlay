@@ -1,15 +1,17 @@
-﻿namespace SoundPlay.WEB.Areas.Customer.Controllers;
+﻿using SoundPlay.Web.ViewModels;
+
+namespace SoundPlay.Web.Areas.Customer.Controllers;
 
 [Area("Customer")]
 public sealed class PriceController : Controller
 {
     private readonly ILogger<PriceController>? _logger;
-	private readonly IEntityService<Guitar, GuitarViewModel> _guitars;
+	private readonly IViewModelService<Guitar, GuitarViewModel> _guitars;
 	private readonly IMapper _mapper;
 
     public PriceController(
         ILogger<PriceController>? logger,
-        IEntityService<Guitar, GuitarViewModel> guitars,
+        IViewModelService<Guitar, GuitarViewModel> guitars,
         IMapper mapper)
     {
         _logger = logger;

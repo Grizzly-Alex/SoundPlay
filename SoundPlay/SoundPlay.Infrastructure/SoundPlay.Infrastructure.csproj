@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="12.0.0" />
+    <PackageReference Include="Serilog.AspNetCore" Version="6.1.1-dev-00293" />
+    <PackageReference Include="Serilog.Sinks.Console" Version="4.1.1-dev-00901" />
+    <PackageReference Include="Serilog.Sinks.File" Version="5.0.1-dev-00947" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SoundPlay.Core\SoundPlay.Core.csproj" />
+  </ItemGroup>
+
+</Project>

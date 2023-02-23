@@ -1,6 +1,6 @@
-﻿namespace SoundPlay.WEB.Utilities
+﻿namespace SoundPlay.Web.Utilities
 {
-    public class ExceptionHandlingMiddleware:IMiddleware
+    public class ExceptionHandlingMiddleware : IMiddleware
     {
         #region Own fields
 

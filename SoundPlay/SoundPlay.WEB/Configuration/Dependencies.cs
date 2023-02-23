@@ -18,7 +18,10 @@ public static class Dependencies
     public static void SetDbContext(IConfiguration configuration, IServiceCollection services)
     {
         services.AddDbContext<ApplicationDbContext>(options =>
-            options.UseSqlServer(configuration.GetConnectionString("CatalogConnection")));
+        { 
+            options.UseSqlServer(configuration.GetConnectionString("CatalogConnection")); 
+            options.EnableSensitiveDataLogging();
+        });
     }
 
     public static void SetServices(IServiceCollection services)
@@ -35,13 +38,10 @@ public static class Dependencies
         });
 
         #region Model CRUD services
-
         services.AddTransient<IUnitOfWork, UnitOfWork>();
-        services.AddTransient(typeof(IEntityService<,>), typeof(EntityService<,>));
-        services.AddTransient<IEntityService<Guitar, GuitarViewModel>, GuitarService>();
+        services.AddTransient<IViewModelService<Guitar, GuitarViewModel>, GuitarViewModelService>();
+        services.AddTransient(typeof(IViewModelService<,>), typeof(ViewModelService<,>));
         services.AddTransient<ICatalogService, CatalogService>();
-        services.AddTransient<IRepresentationService, RepresentationService>();
-
         #endregion
     }
 

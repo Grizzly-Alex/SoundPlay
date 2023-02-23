@@ -1,13 +1,15 @@
-﻿namespace SoundPlay.WEB.Areas.Admin.Controllers;
+﻿using SoundPlay.Web.ViewModels;
+
+namespace SoundPlay.Web.Areas.Admin.Controllers;
 
 [Area("Admin")]
 public sealed class ColorController : Controller
 {
-    private readonly IEntityService<Color, ColorViewModel> _colorService;
+    private readonly IViewModelService<Color, ColorViewModel> _colorService;
 	private readonly ILogger<ColorController> _logger;
 
 	public ColorController(
-		IEntityService<Color, ColorViewModel> colorService,
+		IViewModelService<Color, ColorViewModel> colorService,
 		ILogger<ColorController> logger)
     {
         _colorService = colorService;

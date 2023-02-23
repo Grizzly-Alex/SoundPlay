@@ -1,23 +1,22 @@
-﻿namespace SoundPlay.WEB.Areas.Admin.Controllers;
+﻿namespace SoundPlay.Web.Areas.Admin.Controllers;
 
 //[Authorize]
 [Area("Admin")]
 public sealed class GuitarController : Controller
 {
     private readonly IContentManager _contentManager;
-    private readonly ILogger<GuitarService>? _logger;
-    private readonly IEntityService<Guitar, GuitarViewModel> _guitars;
-    private readonly IRepresentationService _representationService;
-
+    private readonly ILogger<GuitarViewModelService>? _logger;
+    private readonly IViewModelService<Guitar, GuitarViewModel> _guitars;
+    private readonly IUnitOfWork _unitOfWork;
 
 	public GuitarController(
         IContentManager contentManager,
-		IEntityService<Guitar, GuitarViewModel> guitars,
-        IRepresentationService representationService)
+        IViewModelService<Guitar, GuitarViewModel> guitars,
+        IUnitOfWork unitOfWork)
     {
         _contentManager = contentManager;
         _guitars = guitars;
-        _representationService = representationService;
+        _unitOfWork = unitOfWork;
     }
 
     [HttpGet]
@@ -30,27 +29,23 @@ public sealed class GuitarController : Controller
     [HttpGet]
     public async Task<IActionResult> Create()
     {
-        var selectCategories = await _representationService.GetSelectListAsync<GuitarCategory>();
-        var selectBrands = await _representationService.GetSelectListAsync<Brand>();
-        var selectColors = await _representationService.GetSelectListAsync<Color>();
-        var selectGuitarShapes = await _representationService.GetSelectListAsync<GuitarShape>();
-        var selectMaterials = await _representationService.GetSelectListAsync<Material>();
-        var selectPickupSets = await _representationService.GetSelectListAsync<PickupSet>();
-        var selectTremoloTypes = await _representationService.GetSelectListAsync<TremoloType>();
+        var categories = await _unitOfWork.GetRepository<GuitarCategory>().GetAllAsync();
+        var brands = await _unitOfWork.GetRepository<Brand>().GetAllAsync();
+        var colors = await _unitOfWork.GetRepository<Color>().GetAllAsync();
+        var shapes = await _unitOfWork.GetRepository<GuitarShape>().GetAllAsync();
+        var materials = await _unitOfWork.GetRepository<Material>().GetAllAsync();
+        var pickupSets = await _unitOfWork.GetRepository<PickupSet>().GetAllAsync();
+        var tremoloTypes = await _unitOfWork.GetRepository<TremoloType>().GetAllAsync();
 
-        CreateGuitarViewModel guitarForCreateViewModel = new()
-        {
-            GuitarViewModel = new(),
-            Categories = selectCategories,
-            Brands = selectBrands,
-            Colors = selectColors,
-            GuitarShapes = selectGuitarShapes,
-            Soundboards = selectMaterials,
-            Necks = selectMaterials,
-            Fretboards = selectMaterials,
-            PickupSets = selectPickupSets,
-            TremoloTypes = selectTremoloTypes,
-        };
+        CreateGuitarViewModel guitarForCreateViewModel = new(
+            new GuitarViewModel(),
+            categories.ToSelectListItems(),
+            brands.ToSelectListItems(),
+            colors.ToSelectListItems(),
+            shapes.ToSelectListItems(),
+            materials.ToSelectListItems(),
+            pickupSets.ToSelectListItems(),
+            tremoloTypes.ToSelectListItems());
 
         return View(guitarForCreateViewModel);
     }
@@ -80,28 +75,25 @@ public sealed class GuitarController : Controller
     public async Task<IActionResult> Edit(int id)
     {
         var guitars = await _guitars!.GetViewModelByIdAsync(id);
-        var selectCategories = await _representationService.GetSelectListAsync<GuitarCategory>();
-        var selectBrands = await _representationService.GetSelectListAsync<Brand>();
-        var selectColors = await _representationService.GetSelectListAsync<Color>();
-        var selectGuitarShapes = await _representationService.GetSelectListAsync<GuitarShape>();
-        var selectMaterials = await _representationService.GetSelectListAsync<Material>();
-        var selectPickupSets = await _representationService.GetSelectListAsync<PickupSet>();
-        var selectTremoloTypes = await _representationService.GetSelectListAsync<TremoloType>();
+        var categories = await _unitOfWork.GetRepository<GuitarCategory>().GetAllAsync();
+        var brands = await _unitOfWork.GetRepository<Brand>().GetAllAsync();
+        var colors = await _unitOfWork.GetRepository<Color>().GetAllAsync();
+        var shapes = await _unitOfWork.GetRepository<GuitarShape>().GetAllAsync();
+        var materials = await _unitOfWork.GetRepository<Material>().GetAllAsync();
+        var pickupSets = await _unitOfWork.GetRepository<PickupSet>().GetAllAsync();
+        var tremoloTypes = await _unitOfWork.GetRepository<TremoloType>().GetAllAsync();
 
 
-        CreateGuitarViewModel guitarForCreateViewModel = new()
-        {
-            GuitarViewModel = guitars,
-            Categories = selectCategories,
-            Brands = selectBrands,
-            Colors = selectColors,
-            GuitarShapes = selectGuitarShapes,
-            Soundboards = selectMaterials,
-            Necks = selectMaterials,
-            Fretboards = selectMaterials,
-            PickupSets = selectPickupSets,
-            TremoloTypes = selectTremoloTypes,
-        };
+        CreateGuitarViewModel guitarForCreateViewModel = new(
+            guitars,
+            categories.ToSelectListItems(),
+            brands.ToSelectListItems(),
+            colors.ToSelectListItems(),
+            shapes.ToSelectListItems(),
+            materials.ToSelectListItems(),
+            pickupSets.ToSelectListItems(),
+            tremoloTypes.ToSelectListItems());
+
 
         return View(guitarForCreateViewModel);
     }

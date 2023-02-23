@@ -17,8 +17,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\SoundPlay.BLL\SoundPlay.BLL.csproj" />
-    <ProjectReference Include="..\SoundPlay.DAL\SoundPlay.DAL.csproj" />
+    <ProjectReference Include="..\SoundPlay.Core\SoundPlay.Core.csproj" />
+    <ProjectReference Include="..\SoundPlay.Infrastructure\SoundPlay.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

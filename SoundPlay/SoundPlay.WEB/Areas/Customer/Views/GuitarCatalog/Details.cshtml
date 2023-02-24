@@ -1,4 +1,7 @@
 ﻿@model GuitarViewModel
+@{
+    ViewData["price"] = Model.ViewPrice;
+}
 
 <div class="py-5 container">
     <h2 class="fw-normal pb-4">@Model.Name</h2>
@@ -81,28 +84,7 @@
         </div>
 
         <div class="col-5">
-            <div class="card text-center mb-3 sticky-top" style="width: 20rem;">
-                <div class="card-body shadow-sm">
-                    <h3 class="card-title">@Model.ViewPrice</h3>
-
-                    <ul class="list-unstyled mt-3 mb-4 text-muted">
-                        <li>30-Day Money-Back Guarantee</li>
-                        <li>3-Year Warranty</li>
-                    </ul>           
-
-                    <form class="form-inline row g-3">
-                        <div class="col-sm-6">
-                            <div class="input-group mb-3">
-                                <span class="input-group-text text-bg-primary">qty.</span>
-                                <input type="number" min="1" step="1" value="1" class="form-control shadow-none" id="amountInput">
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <button type="submit" class="btn btn-primary mb-2">Add To Basket</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
+            <partial name="~/Views/Shared/Catalog/_AddToBasket.cshtml" view-data="ViewData">
         </div>
     </div>
 </div>

@@ -1,0 +1,56 @@
+﻿<nav id="sidebarMenu" class="col-md-2 d-md-block bg-light sidebar collapse">
+    <div class="position-sticky pt-3 sidebar-sticky">
+        <ul class="nav flex-column">
+            <li class="nav-item">
+                <button class="btn btn-toggle d-inline-flex align-items-center border-0 rounded shadow-none" data-bs-toggle="collapse" data-bs-target="#home" aria-expanded="false">
+                    <h6 class="bi bi-house"> Home</h6>
+                </button>
+                <div class="collapse" id="home">
+                    <ul class="btn-toggle-nav list-unstyled fw-normal pb-1">
+                        <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">Test</a></li>
+                    </ul>
+                </div>
+            </li>
+            <li class="nav-item">
+                <button class="btn btn-toggle d-inline-flex align-items-center border-0 rounded shadow-none" data-bs-toggle="collapse" data-bs-target="#customers" aria-expanded="false">
+                    <h6 class="bi bi-people"> Customers</h6>
+                </button>
+                <div class="collapse" id="customers">
+                    <ul class="btn-toggle-nav list-unstyled fw-normal pb-1">
+                        <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">Test</a></li>
+                    </ul>
+                </div>
+            </li>
+            <li class="nav-item">
+                <button class="btn btn-toggle d-inline-flex align-items-center border-0 rounded shadow-none" data-bs-toggle="collapse" data-bs-target="#orders" aria-expanded="false">
+                    <h6 class="bi bi-journal-check"> Orders</h6>
+                </button>
+                <div class="collapse" id="orders">
+                    <ul class="btn-toggle-nav list-unstyled fw-normal pb-1">
+                        <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">Test</a></li>
+                    </ul>
+                </div>
+            </li>
+            <li class="nav-item">
+                <button class="btn btn-toggle d-inline-flex align-items-center border-0 rounded shadow-none" data-bs-toggle="collapse" data-bs-target="#products" aria-expanded="false">
+                    <h6 class="bi bi-cart2"> Products</h6>
+                </button>
+                <div class="collapse" id="products">
+                    <ul class="btn-toggle-nav list-unstyled fw-normal pb-1">
+                        <partial name="~/Views/Shared/Components/Links/_ProductLinks.cshtml" />
+                    </ul>
+                </div>
+            </li>
+            <li class="nav-item">
+                <button class="btn btn-toggle d-inline-flex align-items-center border-0 rounded shadow-none" data-bs-toggle="collapse" data-bs-target="#data" aria-expanded="false">
+                    <h6 class="bi bi-database-gear"> Data</h6>
+                </button>
+                <div class="collapse" id="data">
+                    <ul class="btn-toggle-nav list-unstyled fw-normal pb-1">
+                        <partial name="~/Views/Shared/Components/Links/_DataLinks.cshtml" />
+                    </ul>
+                </div>
+            </li>
+        </ul>
+    </div>
+</nav>

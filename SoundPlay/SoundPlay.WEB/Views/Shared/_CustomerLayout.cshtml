@@ -15,46 +15,8 @@
 
     <partial name="~/Views/Shared/Components/_CustomNavBar.cshtml" />
 
-    @*header catalog*@
-    <div>
-        <nav class="navbar navbar-dark bg-dark" aria-label="Dark offcanvas navbar">
-            <div class="container">
-             
-                @*button start offcanvass*@
-                <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbarDark" aria-controls="offcanvasNavbarDark">
-                    <span class="bi bi-music-note-list"></span>
-                </button>
+    <partial name="~/Views/Shared/Components/_CatalogNavBar.cshtml" />
 
-                @*button category*@
-                <div class="navbar-expand">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <a class="btn btn-dark shadow-none" asp-controller="Catalog" asp-action="AllCategories">All Categories</a>
-                            <a class="btn btn-dark shadow-none" asp-controller="Catalog" asp-action="GuitarsArea">Guitars</a>
-                            <a class="btn btn-dark shadow-none" asp-controller="Catalog" asp-action="DrumsArea">Drums</a>
-                            <a class="btn btn-dark shadow-none" asp-controller="Catalog" asp-action="KeysArea">Keys</a>
-                            <a class="btn btn-dark shadow-none" asp-controller="Catalog" asp-action="BrassArea">Brass</a>
-                            <a class="btn btn-dark shadow-none" asp-controller="Catalog" asp-action="TraditionalArea">Traditional</a>
-                            <a class="btn btn-dark shadow-none" asp-controller="Catalog" asp-action="StudioArea">Studio</a>
-                            <a class="btn btn-dark shadow-none" asp-controller="Catalog" asp-action="CasesArea">Cases</a>
-                            <a class="btn btn-dark shadow-none" asp-controller="Catalog" asp-action="CablesArea">Cables</a>
-                            <a class="btn btn-dark shadow-none" asp-controller="Catalog" asp-action="AccessoriesArea">Accessories</a>
-                        </li>
-                    </ul>
-                </div>
-
-                @*searcher*@
-                <form class="d-flex mt-3 mt-lg-0" role="search">
-                    <div class="input-group mb-0">
-                        <input class="form-control me-0" type="search" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-outline-success" type="submit">
-                            <i class="bi bi-search"></i>
-                        </button>
-                    </div>                  
-                </form>
-            </div>
-        </nav>
-    </div>
 
     @*offcanvass category*@
     <div class="offcanvas offcanvas-start text-bg-dark" tabindex="-1" id="offcanvasNavbarDark" aria-labelledby="offcanvasNavbarDarkLabel">

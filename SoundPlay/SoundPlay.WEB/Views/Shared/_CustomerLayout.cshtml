@@ -3,63 +3,17 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - SoundPlay</title>
+    <title>@ViewData["Title"] - Sound Play</title>
     <link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/SoundPlay.WEB.styles.css" asp-append-version="true" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css" />
 </head>
 
-
-<body class="bg-light">
-
+<body class="bg-light"> 
     <partial name="~/Views/Shared/Components/_CustomNavBar.cshtml" />
-
     <partial name="~/Views/Shared/Components/_CatalogNavBar.cshtml" />
+    <partial name="~/Views/Shared/Components/_CatalogOffcanvas.cshtml" />
 
-
-    @*offcanvass category*@
-    <div class="offcanvas offcanvas-start text-bg-dark" tabindex="-1" id="offcanvasNavbarDark" aria-labelledby="offcanvasNavbarDarkLabel">
-
-        @*offcanvass header*@
-        <div class="offcanvas-header">
-            <h5 class="offcanvas-title" id="offcanvasNavbarDarkLabel">Products</h5>
-            <button type="button" class="btn-close btn-close-start" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-        </div>
-
-        @*body offcanvas*@
-        <div class="offcanvas-body">
-            <ul class="navbar-nav justify-content-start flex-grow-1 pe-3">
-                <li class="nav-item">
-                    <a class="nav-link" href="/Customer/GuitarCatalog?Category=@GuitarType.ElectricGuitar">Electric Guitars</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/Customer/GuitarCatalog?Category=@GuitarType.ClassicGuitar">Classical Guitars</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/Customer/GuitarCatalog?Category=@GuitarType.AcousticGuitar">Accustic Guitars</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/Customer/GuitarCatalog?Category=@GuitarType.ElectricBass">Electric Bass</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/Customer/GuitarCatalog?Category=@GuitarType.AcousticBass">Accustic Bass</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Amps</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Strings</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Effects</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Pickups</a>
-                </li>
-            </ul>
-        </div>
-    </div>
  
     @*offcanvass admin panel*@
     <div class="offcanvas offcanvas-start" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
@@ -157,7 +111,6 @@
     <script src="~/js/cheatsheet.js" asp-append-version="true"></script>
     <script src="https://cdn.tiny.cloud/1/ia0sr3vihwibbslg5o7ktdm2v362cz4mazddl49ekljeta4b/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
    
-
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

@@ -1,10 +1,24 @@
 ﻿@model MaterialViewModel
 
 <form method="post" asp-controller="Material" asp-action="Create" class="row g-3 needs-validation" novalidate>
-	<div class="border p-3 mt-4">
-		<div class="row pb-2">
-			<h2 class="text-black-50">Create</h2>
+
+	<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+		<h2 class="text-muted">Create Material</h2>
+		<div class="btn-toolbar mb-2 mb-md-0">
+			<div class="text-end">
+
+				<button type="submit" class="btn btn-outline-secondary btn-sm shadow-none" style="width:80px">
+					<span class="bi bi-check-lg">Create</span>
+				</button>
+
+				<a asp-controller="Material" asp-action="Index" class="btn btn-outline-secondary btn-sm shadow-none" style="width:80px">
+					<span class="bi bi-reply"> Back</span>
+				</a>
+			</div>
 		</div>
+	</div>
+
+	<div class="row">
 		<div class="mb-3">
 			<label asp-for="@Model.Name"></label>
 			<input asp-for="@Model.Name" class="form-control" required>
@@ -13,13 +27,6 @@
 				Valid!
 			</div>
 		</div>
-		<button type="submit" class="btn btn-secondary btn-sm" style="width:100px">
-			<i class="bi bi-check-lg"></i>
-			Create
-		</button>
-		<a asp-controller="Material" asp-action="index" class="btn btn-secondary btn-sm" style="width:100px">
-			<span class="bi bi-reply"> Back</span>
-		</a>
 	</div>
 </form>
 

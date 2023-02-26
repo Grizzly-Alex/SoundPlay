@@ -1,0 +1,37 @@
+﻿<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Sound Play</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/dashboard.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/sidebars.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css" />
+</head>
+
+<partial name="~/Views/Shared/Components/_AdminNavBar.cshtml" />
+
+<body>
+    <div class="container-fluid">
+        <div class="row">
+
+            <partial name="~/Views/Shared/Components/_AdminMenu.cshtml" />
+
+            <div class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+                @RenderBody()
+            </div>           
+        </div>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/js/bootstrap.bundle.js"></script>
+    <script src="~/js/cheatsheet.js" asp-append-version="true"></script>
+    <script src="https://cdn.tiny.cloud/1/ia0sr3vihwibbslg5o7ktdm2v362cz4mazddl49ekljeta4b/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+
+</body>
+</html>

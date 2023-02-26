@@ -20,7 +20,7 @@ public sealed class BasketController : Controller
         Basket basket = new();
 
         // getting Basket from session
-        var basketFromSession = HttpContext.Session.Get<Basket>(WebConstants.BasketSession);
+        var basketFromSession = HttpContext.Session.Get<Basket>(Constants.BasketSession);
 
         // if there is a filled Basket in the session, then take the data from it    
         if (basketFromSession!=null
@@ -43,7 +43,7 @@ public sealed class BasketController : Controller
         Basket basket = new();
 
         // getting Basket from session
-        var basketFromSession = HttpContext.Session.Get<Basket>(WebConstants.BasketSession);
+        var basketFromSession = HttpContext.Session.Get<Basket>(Constants.BasketSession);
 
         // if there is a filled Basket in the session, then take the data from it    
         if (basketFromSession!=null
@@ -68,7 +68,7 @@ public sealed class BasketController : Controller
         Basket basket = new();
 
         // getting Basket from session
-        var basketFromSession = HttpContext.Session.Get<Basket>(WebConstants.BasketSession);
+        var basketFromSession = HttpContext.Session.Get<Basket>(Constants.BasketSession);
 
         // if there is a filled Basket in the session, then take the data from it    
         if (basketFromSession!=null
@@ -87,7 +87,7 @@ public sealed class BasketController : Controller
             basket.ProductList!.Add(basketPosition!);
 
             // putting a basket with new properties into the session
-            HttpContext.Session.Set(WebConstants.BasketSession, basket);
+            HttpContext.Session.Set(Constants.BasketSession, basket);
             return RedirectToAction(nameof(Index));
         }
     }
@@ -101,7 +101,7 @@ public sealed class BasketController : Controller
         Basket basket = new();
 
         // getting Basket from session
-        var basketFromSession = HttpContext.Session.Get<Basket>(WebConstants.BasketSession);
+        var basketFromSession = HttpContext.Session.Get<Basket>(Constants.BasketSession);
 
         // if there is a filled Basket in the session, then take the data from it    
         if (basketFromSession!=null
@@ -119,7 +119,7 @@ public sealed class BasketController : Controller
             basket.ProductList!.Remove(positionForDelete!);
 
             // putting a basket with new properties into the session
-            HttpContext.Session.Set(WebConstants.BasketSession, basket);
+            HttpContext.Session.Set(Constants.BasketSession, basket);
             return RedirectToAction(nameof(Index));
         }
     }
@@ -132,7 +132,7 @@ public sealed class BasketController : Controller
         Basket basket = new();
 
         // getting Basket from session
-        var basketFromSession = HttpContext.Session.Get<Basket>(WebConstants.BasketSession);
+        var basketFromSession = HttpContext.Session.Get<Basket>(Constants.BasketSession);
 
         // if there is a filled Basket in the session, then take the data from it    
         if (basketFromSession!=null
@@ -146,7 +146,7 @@ public sealed class BasketController : Controller
         basket.ProductList!.Clear();
 
         // putting a basket with new properties into the session
-        HttpContext.Session.Set(WebConstants.BasketSession, basket);
+        HttpContext.Session.Set(Constants.BasketSession, basket);
         return RedirectToAction(nameof(Index));
     }
 }

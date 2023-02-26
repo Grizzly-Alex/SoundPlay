@@ -1,18 +1,30 @@
 ﻿@model GuitarViewModel
 
 <form method="get">
-	<div class="border p-3 mt-4 row">
-		<div class="row pb-2">
-			<h2 class="text-black-50">Full Information</h2>
-		</div>
 
+	<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+		<h2 class="text-muted">Detail Guitar</h2>
+		<div class="btn-toolbar mb-2 mb-md-0">
+			<div class="text-end">
+				<a asp-controller="Guitar" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-outline-secondary btn-sm shadow-none" style="width:80px">
+					<span class="bi bi-wrench"> Edit</span>
+				</a>
+
+				<a asp-controller="Guitar" asp-action="index" class="btn btn-outline-secondary btn-sm shadow-none" style="width:80px">
+					<span class="bi bi-reply"> Back</span>
+				</a>
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
 		<div>
 			<p><b>Model Guitar: </b>@Model.Name</p>
 		</div>
 
 		<div class="col-5">
 			<img src="@Constants.GuitarsImages@Model.PictureUrl"
-				style="width:400px" />
+					style="width:400px" />
 			<p></p>
 		</div>
 
@@ -21,7 +33,7 @@
 			<p><b>Date Delivery: </b>@Model.DateDelivery</p>
 		</div>
 
-		<div >
+		<div>
 			<b>Description:</b>
 			<div class="small">
 				<p>@Html.Raw(Model.Description)</p>
@@ -36,7 +48,7 @@
 			<p><b>Color: </b>@Model.Color?.Name</p>
 			<p><b>Shape: </b>@Model.Shape?.Name</p>
 
-			
+
 		</div>
 
 		<div class="col-4">
@@ -51,15 +63,6 @@
 			<p><b>Neck Material: </b>@Model.Neck?.Name</p>
 			<p><b>Fretboard Material: </b>@Model.Fretboard?.Name</p>
 		</div>
-		
-		<div class="col-12">
-			<a asp-controller="Guitar" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-secondary btn-sm" style="width:100px">
-				<span class="bi bi-wrench"> Edit</span>
-			</a>
-
-			<a asp-controller="Guitar" asp-action="index" class="btn btn-secondary btn-sm" style="width:100px">
-				<span class="bi bi-reply"> Back</span>
-			</a>
-		</div>
 	</div>
+
 </form>

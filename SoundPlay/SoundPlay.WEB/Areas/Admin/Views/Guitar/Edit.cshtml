@@ -5,10 +5,23 @@
 	<input asp-for="GuitarViewModel!.Id" hidden />
 	<input asp-for="GuitarViewModel!.PictureUrl" hidden />
 
-	<div class="border p-3 mt-4 row">
-		<div class="row pb-2">
-			<h2 class="text-black-50">Edit Guitar</h2>
+	<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+		<h2 class="text-muted">Edit Guitar</h2>
+		<div class="btn-toolbar mb-2 mb-md-0">
+			<div class="text-end">
+
+				<button type="submit" class="btn btn-outline-secondary btn-sm shadow-none" style="width:80px">
+					<span class="bi bi-check-lg">Save</span>
+				</button>
+
+				<a asp-controller="Guitar" asp-action="Details" asp-route-id="@Model.GuitarViewModel!.Id" class="btn btn-outline-secondary btn-sm shadow-none" style="width:80px">
+					<span class="bi bi-reply"> Back</span>
+				</a>
+			</div>
 		</div>
+	</div>
+
+	<div class="row">
 		<div class="mb-3">
 			<label asp-for="GuitarViewModel!.Name"></label>
 			<input asp-for="GuitarViewModel!.Name" class="form-control" required>
@@ -166,20 +179,6 @@
 			<div class="valid-feedback">
 				Optional.
 			</div>
-		</div>
-
-		@*Buttons*@
-		<div class="col-12">
-
-			<button type="submit" class="btn btn-secondary btn-sm" style="width:100px">
-				<i class="bi bi-check-lg"></i>
-				Update
-			</button>
-
-			<a asp-controller="Guitar" asp-action="Details" asp-route-id="@Model.GuitarViewModel!.Id" class="btn btn-secondary btn-sm" style="width:100px">
-				<span class="bi bi-reply"> Back</span>
-			</a>
-
 		</div>
 	</div>
 

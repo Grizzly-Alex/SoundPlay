@@ -1,6 +1,6 @@
 ﻿namespace SoundPlay.Infrastructure.DataAccess.Repository;
 
-public sealed class PagedList<TItem> : IPagedList<TItem> where TItem : class
+public sealed class PagedList<TResult> : IPagedList<TResult> where TResult : class
 {
     public int IndexFrom { get; init; }
 
@@ -12,13 +12,13 @@ public sealed class PagedList<TItem> : IPagedList<TItem> where TItem : class
 
     public int TotalPages { get; init; }
 
-    public IList<TItem> Items { get; init; }
+    public IList<TResult> Items { get; init; }
 
     public bool HasPreviousPage => PageIndex - IndexFrom > 0;
 
     public bool HasNextPage => PageIndex - IndexFrom + 1 < TotalPages;
 
-    internal PagedList(IEnumerable<TItem> source, int pageIndex, int pageSize, int indexFrom)
+    internal PagedList(IEnumerable<TResult> source, int pageIndex, int pageSize, int indexFrom)
     {
         if (indexFrom > pageIndex)
         {
@@ -26,7 +26,7 @@ public sealed class PagedList<TItem> : IPagedList<TItem> where TItem : class
                 $"indexFrom: {indexFrom} > pageIndex: {pageIndex}, must indexFrom <= pageIndex");
         }
 
-        if (source is IQueryable<TItem> queryable)
+        if (source is IQueryable<TResult> queryable)
         {
             PageIndex = pageIndex;
             PageSize = pageSize;
@@ -50,5 +50,5 @@ public sealed class PagedList<TItem> : IPagedList<TItem> where TItem : class
         }
     }
 
-    internal PagedList() => Items = Array.Empty<TItem>();
+    internal PagedList() => Items = Array.Empty<TResult>();
 }

@@ -1,13 +1,13 @@
 ﻿namespace SoundPlay.Core.Interfaces;
 
-public interface IPagedList<TEntity> where TEntity : Entity
+public interface IPagedList<TItem> where TItem : class
 {
-    int IndexFrom { get; }
-    int PageIndex { get; }  
-    int PageSize { get; }
-    int TotalCount { get; } 
-    int TotalPages { get; }
-    IList<TEntity> Items { get; }
-    bool HasPreviousPage { get; }
-    bool HasNextPage { get; }
+    public int IndexFrom { get; }
+    public int PageIndex { get; }  
+    public int PageSize { get; }
+    public int TotalCount { get; } 
+    public int TotalPages { get; }
+    public IList<TItem> Items { get; }
+    public bool HasPreviousPage { get; }
+    public bool HasNextPage { get; }
 }

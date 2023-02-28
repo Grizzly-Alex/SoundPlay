@@ -1,7 +1,7 @@
 ﻿@model GuitarFilterViewModel
 @{
     ViewData["title"] = Model.Category.GetDisplayName();
-    ViewData["product_count"] = Model.Products?.Count;
+    ViewData["product_count"] = Model.Products?.TotalItems;
     ViewData["img_path"] = Constants.GuitarsImages;
 }
 
@@ -16,9 +16,9 @@
                 <div class="mb-3">
                     <label>Range Price</label>
                     <div class="input-group">
-                        <input asp-for="@Model.PriceStart" value="@Model.PriceStart" class="form-control shadow-none" />
+                        <input asp-for="@Model.MinPrice" value="@Model.MinPrice" class="form-control shadow-none" />
                         <span class="input-group-text"><i class="bi bi-cash-coin"></i></span>
-                        <input asp-for="@Model.PriceEnd" value="@Model.PriceEnd" class="form-control shadow-none" />
+                        <input asp-for="@Model.MaxPrice" value="@Model.MaxPrice" class="form-control shadow-none" />
                     </div>
                 </div>
                 <div class="mb-3">

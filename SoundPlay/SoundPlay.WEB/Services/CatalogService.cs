@@ -9,10 +9,12 @@ public sealed class CatalogService : ICatalogService
         _unitOfWork = unitOfWork;
     }
 
-    public async Task<IEnumerable<CatalogProductViewModel>> GetCatalogModelsAsync<TModel>(Expression<Func<TModel, bool>>? filter)
+    public async Task<IPagedList<CatalogProductViewModel>> GetCatalogPageAsync<TModel>(Expression<Func<TModel, bool>>? filter, int currentPageIndex, int totalItems)
         where TModel : Product
     {
-        return await _unitOfWork.GetRepository<TModel>().GetAllAsync(
+        return await _unitOfWork.GetRepository<TModel>().GetPagedListAsync(
+            pageIndex: currentPageIndex,
+            itemsPerPage: totalItems,
             predicate: filter,
             selector: i => new CatalogProductViewModel
             {
@@ -23,7 +25,7 @@ public sealed class CatalogService : ICatalogService
             });
     }
 
-    public async Task<GuitarFilterViewModel> GetGuitarFilterAsync(IEnumerable<CatalogProductViewModel> catalogProducts, GuitarFilterViewModel filter)
+    public async Task<GuitarFilterViewModel> GetGuitarFilterAsync(IPagedList<CatalogProductViewModel> catalogProducts, GuitarFilterViewModel filter)
     {
         var brands = await _unitOfWork.GetRepository<Brand>().GetAllAsync();
         var colors = await _unitOfWork.GetRepository<Color>().GetAllAsync();
@@ -35,10 +37,10 @@ public sealed class CatalogService : ICatalogService
         var allSelect = new SelectListItem { Text = "All" };
 
         return new GuitarFilterViewModel(
-            filter.PriceStart ?? default,
-            filter.PriceEnd ?? catalogProducts.MaxBy(i => i.Price)?.Price,
+            filter.MinPrice ?? default,
+            filter.MaxPrice ?? catalogProducts.Items.MaxBy(i => i.Price)?.Price,
             filter.Category,
-            catalogProducts.ToList(),
+            catalogProducts,
             brands.ToSelectListItems(allSelect),
             colors.ToSelectListItems(allSelect),
             shapes.ToSelectListItems(allSelect),

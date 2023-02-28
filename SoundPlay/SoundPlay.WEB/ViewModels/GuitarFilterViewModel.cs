@@ -33,23 +33,20 @@ public class GuitarFilterViewModel : ProductFilterViewModel
     {
     }
 
-    public GuitarFilterViewModel(GuitarType category)
-    {
-        Category = category;
-    }
+    public GuitarFilterViewModel(GuitarType category) => Category = category;
 
     public GuitarFilterViewModel(
-        decimal? priceStart,
-        decimal? priceEnd,
+        decimal? minPrice,
+        decimal? maxPrice,
         GuitarType category,
-        List<CatalogProductViewModel>? products,
+        IPagedList<CatalogProductViewModel>? products,
         IEnumerable<SelectListItem>? brands,
         IEnumerable<SelectListItem>? colors,
         IEnumerable<SelectListItem>? guitarShapes,
         IEnumerable<SelectListItem>? materials,
         IEnumerable<SelectListItem>? pickupSets,
         IEnumerable<SelectListItem>? tremoloTypes)            
-        : base(priceStart, priceEnd, products)
+        : base(minPrice, maxPrice, products)
     {
         Category = category;
         Brands = brands;

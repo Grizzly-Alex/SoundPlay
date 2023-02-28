@@ -33,9 +33,10 @@ public interface IRepository<TEntity> where TEntity : Entity
         Expression<Func<TEntity, bool>>? predicate = null,
         Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>>? orderBy = null,
         Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>>? include = null,
-        int pageIndex = 0,
-        int pageSize = int.MaxValue,
-        bool isTracking = false) where TResult : class;
+        int pageIndex = default,
+        int itemsPerPage = int.MinValue,
+        bool isTracking = true,
+        CancellationToken cancellationToken = default);
 
     void Remove(int id);
 

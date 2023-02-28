@@ -1,4 +1,6 @@
-﻿namespace SoundPlay.Web.Areas.Customer.Controllers;
+﻿using SoundPlay.Core.ValueModels;
+
+namespace SoundPlay.Web.Areas.Customer.Controllers;
 
 [Area("Customer")]
 public class GuitarCatalogController : Controller
@@ -24,10 +26,10 @@ public class GuitarCatalogController : Controller
     [HttpGet]
     public async Task<IActionResult> Index(GuitarFilterViewModel filter)
     {
-        var listCatalogProducts = await _catalogGuitar.GetCatalogModelsAsync<Guitar>(
+        var listCatalogProducts = await _catalogGuitar.GetCatalogPageAsync<Guitar>(
             i => (i.CategoryId == (int)filter.Category)
-            && (!filter.PriceEnd.HasValue || i.Price <= filter.PriceEnd)
-            && (!filter.PriceStart.HasValue || i.Price >= filter.PriceStart)
+            && (!filter.MaxPrice.HasValue || i.Price <= filter.MaxPrice)
+            && (!filter.MinPrice.HasValue || i.Price >= filter.MinPrice)
             && (!filter.BrandId.HasValue || i.BrandId == filter.BrandId)
             && (!filter.ColorId.HasValue || i.ColorId == filter.ColorId)
             && (!filter.ShapeId.HasValue || i.ShapeId == filter.ShapeId)
@@ -35,7 +37,9 @@ public class GuitarCatalogController : Controller
             && (!filter.NeckId.HasValue || i.NeckId == filter.NeckId)
             && (!filter.FretboardId.HasValue || i.FretboardId == filter.FretboardId)
             && (!filter.PickupSetId.HasValue || i.PickupSetId == filter.PickupSetId)
-            && (!filter.TremoloTypeId.HasValue || i.TremoloTypeId == filter.TremoloTypeId));
+            && (!filter.TremoloTypeId.HasValue || i.TremoloTypeId == filter.TremoloTypeId),
+            filter.Products.PageIndex,
+            Constants.ItemsPerPage);
 
         var filterViewModel = await _catalogGuitar.GetGuitarFilterAsync(listCatalogProducts, filter);
        

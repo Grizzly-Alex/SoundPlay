@@ -2,18 +2,18 @@
 
 public abstract class ProductFilterViewModel
 {
-    public decimal? PriceStart { get; set; }
-    public decimal? PriceEnd { get; set; }
-    public List<CatalogProductViewModel>? Products { get; set; }
+    public decimal? MinPrice { get; set; }
+    public decimal? MaxPrice { get; set; }
+    public IPagedList<CatalogProductViewModel>? Products { get; set; }
 
     protected ProductFilterViewModel()
     {
     }
     
-    protected ProductFilterViewModel(decimal? priceStart, decimal? priceEnd, List<CatalogProductViewModel>? products)
+    protected ProductFilterViewModel(decimal? minPrice, decimal? maxPrice, IPagedList<CatalogProductViewModel>? products)
     {
-        PriceStart = priceStart ?? default;
-        PriceEnd = priceEnd;
+        MinPrice = minPrice ?? default;
+        MaxPrice = maxPrice;
         Products = products;
     }
 }

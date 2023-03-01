@@ -99,7 +99,7 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : Entity
 			: await query.Select(selector).ToListAsync();
 	}
 
-    public async Task<IPagedList<TResult>> GetPagedListAsync<TResult>(
+    public async Task<IEnumerable<TResult>> GetPagedListAsync<TResult>(
 		Expression<Func<TEntity, TResult>> selector,
 		Expression<Func<TEntity, bool>>? predicate = null,
 		Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>>? orderBy = null,
@@ -119,4 +119,11 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : Entity
             ? await orderBy(query).Select(selector).ToPagedListAsync(pageIndex, itemsPerPage, cancellationToken)
             : await query.Select(selector).ToPagedListAsync(pageIndex, itemsPerPage, cancellationToken);
     }
+
+    public async Task<int> CountAsync(
+        Expression<Func<TEntity, bool>>? predicate = null,
+        CancellationToken cancellationToken = default) =>
+        predicate is null
+            ? await _dbSet.CountAsync(cancellationToken)
+            : await _dbSet.CountAsync(predicate, cancellationToken);
 }

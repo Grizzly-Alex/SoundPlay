@@ -2,6 +2,12 @@
 
 public interface IRepository<TEntity> where TEntity : Entity
 {
+    void Remove(int id);
+
+    void Add(TEntity entity);
+
+    void Update(TEntity entity);
+
     Task<TResult?> GetFirstOrDefaultAsync<TResult>(
         Expression<Func<TEntity, TResult>> selector,
         Expression<Func<TEntity, bool>>? predicate = null,
@@ -28,7 +34,7 @@ public interface IRepository<TEntity> where TEntity : Entity
         Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>>? include = null,
         bool isTracking = false);
 
-    Task<IPagedList<TResult>> GetPagedListAsync<TResult>(
+    Task<IEnumerable<TResult>> GetPagedListAsync<TResult>(
         Expression<Func<TEntity, TResult>> selector,
         Expression<Func<TEntity, bool>>? predicate = null,
         Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>>? orderBy = null,
@@ -38,9 +44,5 @@ public interface IRepository<TEntity> where TEntity : Entity
         bool isTracking = true,
         CancellationToken cancellationToken = default);
 
-    void Remove(int id);
-
-    void Add(TEntity entity);
-
-    void Update(TEntity entity);
+    Task<int> CountAsync(Expression<Func<TEntity, bool>>? predicate = null, CancellationToken cancellationToken = default);
 }

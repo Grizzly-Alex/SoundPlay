@@ -9,12 +9,12 @@ public sealed class CatalogService : ICatalogService
         _unitOfWork = unitOfWork;
     }
 
-    public async Task<IPagedList<CatalogProductViewModel>> GetCatalogPageAsync<TModel>(Expression<Func<TModel, bool>>? filter, int currentPageIndex, int totalItems)
+    public async Task<IEnumerable<CatalogProductViewModel>> GetProductsPerPageAsync<TModel>(Expression<Func<TModel, bool>>? filter, int itemsPerPage, int pageIndex)
         where TModel : Product
     {
         return await _unitOfWork.GetRepository<TModel>().GetPagedListAsync(
-            pageIndex: currentPageIndex,
-            itemsPerPage: totalItems,
+            pageIndex: pageIndex,
+            itemsPerPage: itemsPerPage, 
             predicate: filter,
             selector: i => new CatalogProductViewModel
             {
@@ -24,8 +24,22 @@ public sealed class CatalogService : ICatalogService
                 PictureUrl = i.PictureUrl
             });
     }
+    public async Task<PaginationInfoViewModel> GetPaginationInfoAsync<TModel>(int ItemsPerPage, int pageIndex)
+        where TModel : Entity
+    {
+        var totalItems = await _unitOfWork.GetRepository<TModel>().GetAllAsync();
 
-    public async Task<GuitarFilterViewModel> GetGuitarFilterAsync(IPagedList<CatalogProductViewModel> catalogProducts, GuitarFilterViewModel filter)
+        var paginationInfo = new PaginationInfoViewModel();
+        paginationInfo.PageIndex = pageIndex;
+        paginationInfo.ItemsPerPage = ItemsPerPage;
+        //paginationInfo.TotalPages = 
+        paginationInfo.HasPreviousPage = pageIndex > 0;
+        //paginationInfo.HasNextPage = 
+
+        return paginationInfo;
+    }
+
+    public async Task<GuitarFilterViewModel> GetGuitarFilterAsync(GuitarType category, decimal? minPrice, decimal? maxPrice)
     {
         var brands = await _unitOfWork.GetRepository<Brand>().GetAllAsync();
         var colors = await _unitOfWork.GetRepository<Color>().GetAllAsync();
@@ -37,15 +51,15 @@ public sealed class CatalogService : ICatalogService
         var allSelect = new SelectListItem { Text = "All" };
 
         return new GuitarFilterViewModel(
-            filter.MinPrice ?? default,
-            filter.MaxPrice ?? catalogProducts.Items.MaxBy(i => i.Price)?.Price,
-            filter.Category,
-            catalogProducts,
             brands.ToSelectListItems(allSelect),
             colors.ToSelectListItems(allSelect),
             shapes.ToSelectListItems(allSelect),
             materials.ToSelectListItems(allSelect),
             pickupSets.ToSelectListItems(allSelect),
-            tremoloTypes.ToSelectListItems(allSelect));
+            tremoloTypes.ToSelectListItems(allSelect),
+            minPrice,
+            maxPrice,
+            category);
     }
+
 }

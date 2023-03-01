@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <None Remove="Areas\Admin\Views\Color\Edit.cshtml~RF3282c6fd.TMP" />
+    <None Remove="Services\mu5siwpl.it5~" />
   </ItemGroup>
 
   <ItemGroup>

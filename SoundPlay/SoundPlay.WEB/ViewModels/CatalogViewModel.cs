@@ -2,7 +2,12 @@
 
 public class CatalogViewModel<TFilter>
 {
-    public List<CatalogProductViewModel> Products { get; set; }
-    public PaginationInfoViewModel PaginationInfo { get; set; }
-    public TFilter Filter { get; set; }
+    public PagedInfoViewModel<CatalogProductViewModel>? PagedInfo { get; set; }
+    public TFilter? Filter { get; set; }
+
+    public CatalogViewModel(PagedInfoViewModel<CatalogProductViewModel>? pagedInfo, TFilter? filter)
+    {
+        PagedInfo = pagedInfo;
+        Filter = filter;
+    }
 }

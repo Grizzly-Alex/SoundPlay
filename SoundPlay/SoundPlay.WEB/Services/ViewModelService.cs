@@ -71,4 +71,7 @@ public class ViewModelService<TModel, TViewModel> : IViewModelService<TModel, TV
         await _unitOfWork.SaveChangesAsync();
         return viewModel;
     }
+
+    public virtual async Task<int> GetCountAsync(Expression<Func<TModel, bool>>? predicate = null)
+        => await _unitOfWork.GetRepository<TModel>().CountAsync(predicate);
 }

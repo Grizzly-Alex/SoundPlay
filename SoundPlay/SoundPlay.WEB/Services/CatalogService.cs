@@ -9,10 +9,11 @@ public sealed class CatalogService : ICatalogService
         _unitOfWork = unitOfWork;
     }
 
-    public async Task<IEnumerable<CatalogProductViewModel>> GetProductsPerPageAsync<TModel>(Expression<Func<TModel, bool>>? filter, int itemsPerPage, int pageIndex)
-        where TModel : Product
+    public async Task<PagedInfoViewModel<CatalogProductViewModel>> GetProductPagedInfoAsync<TModel>(
+        Expression<Func<TModel, bool>>? filter, int itemsPerPage, int totalItems, int pageIndex) where TModel : Product
     {
-        return await _unitOfWork.GetRepository<TModel>().GetPagedListAsync(
+        var items =  await _unitOfWork.GetRepository<TModel>()
+            .GetPagedListAsync(
             pageIndex: pageIndex,
             itemsPerPage: itemsPerPage, 
             predicate: filter,
@@ -23,20 +24,15 @@ public sealed class CatalogService : ICatalogService
                 Price = i.Price,
                 PictureUrl = i.PictureUrl
             });
-    }
-    public async Task<PaginationInfoViewModel> GetPaginationInfoAsync<TModel>(int ItemsPerPage, int pageIndex)
-        where TModel : Entity
-    {
-        var totalItems = await _unitOfWork.GetRepository<TModel>().GetAllAsync();
 
-        var paginationInfo = new PaginationInfoViewModel();
-        paginationInfo.PageIndex = pageIndex;
-        paginationInfo.ItemsPerPage = ItemsPerPage;
-        //paginationInfo.TotalPages = 
-        paginationInfo.HasPreviousPage = pageIndex > 0;
-        //paginationInfo.HasNextPage = 
-
-        return paginationInfo;
+        return new PagedInfoViewModel<CatalogProductViewModel>()
+        {
+            PageIndex = pageIndex,
+            ItemsPerPage = itemsPerPage,
+            TotalItems = totalItems,
+            TotalPages = (int)Math.Ceiling(totalItems / (double)itemsPerPage),
+            Products = items.ToList(),
+        };
     }
 
     public async Task<GuitarFilterViewModel> GetGuitarFilterAsync(GuitarType category, decimal? minPrice, decimal? maxPrice)
@@ -61,5 +57,4 @@ public sealed class CatalogService : ICatalogService
             maxPrice,
             category);
     }
-
 }

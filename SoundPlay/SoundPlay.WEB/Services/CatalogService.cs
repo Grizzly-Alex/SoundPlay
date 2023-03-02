@@ -11,7 +11,7 @@ public sealed class CatalogService : ICatalogService
         _mapper = mapper;
     }
 
-    public async Task<PagedInfoViewModel<CatalogProductViewModel>> GetCatalogPageInfoAsync<TModel>(
+    public async Task<PagedListViewModel<CatalogProductViewModel>> GetCatalogPageInfoAsync<TModel>(
         Expression<Func<TModel, bool>>? filter, int itemsPerPage, int pageIndex) where TModel : Product
     {
         var items =  await _unitOfWork.GetRepository<TModel>()
@@ -27,7 +27,7 @@ public sealed class CatalogService : ICatalogService
                 PictureUrl = i.PictureUrl
             });
 
-        var pagedInfo = _mapper.Map<PagedInfoViewModel<CatalogProductViewModel>>(items);
+        var pagedInfo = _mapper.Map<PagedListViewModel<CatalogProductViewModel>>(items);
 
         return pagedInfo;
     }

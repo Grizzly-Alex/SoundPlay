@@ -2,10 +2,10 @@
 
 public class CatalogViewModel<TFilter>
 {
-    public PagedInfoViewModel<CatalogProductViewModel>? PagedInfo { get; set; }
+    public PagedListViewModel<CatalogProductViewModel>? PagedInfo { get; set; }
     public TFilter? Filter { get; set; }
 
-    public CatalogViewModel(PagedInfoViewModel<CatalogProductViewModel>? pagedInfo, TFilter? filter)
+    public CatalogViewModel(PagedListViewModel<CatalogProductViewModel>? pagedInfo, TFilter? filter)
     {
         PagedInfo = pagedInfo;
         Filter = filter;

@@ -2,7 +2,7 @@
 
 public interface ICatalogService
 {
-	public Task<PagedInfoViewModel<CatalogProductViewModel>> GetCatalogPageInfoAsync<TModel>(
+	public Task<PagedListViewModel<CatalogProductViewModel>> GetCatalogPageInfoAsync<TModel>(
         Expression<Func<TModel, bool>>? filter, int itemsPerPage, int pageIndex)
         where TModel : Product;
 

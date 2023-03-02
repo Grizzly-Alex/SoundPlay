@@ -1,8 +1,10 @@
 ﻿@model CatalogViewModel<GuitarFilterViewModel>
 @{
-    ViewData["title"] = Model.Filter.Category.GetDisplayName();
-    ViewData["product_count"] = Model.PagedInfo.TotalItems;
     ViewData["img_path"] = Constants.GuitarsImages;
+    ViewData["title"] = Model.Filter.Category.GetDisplayName();
+    ViewData["total_items"] = Model.PagedInfo.TotalItems;
+    ViewData["total_pages"] = Model.PagedInfo.TotalPages;
+    
 }
 
 <div class="container-fluid">
@@ -66,6 +68,8 @@
                         <i class="bi bi-arrow-counterclockwise"></i>
                         Reset Filter
                     </a>
+
+                    
                 </div>
                        
             </form>
@@ -76,5 +80,8 @@
         <div class="col-9">
             <partial name="~/Areas/Customer/Views/Shared/Catalog/_ProductCards.cshtml" model="Model.PagedInfo.Items" view-data="ViewData">
         </div>
+
+        <partial name="~/Views/Shared/Components/_Pagination.cshtml" model="Model.PagedInfo">
+
     </div>
 </div>

@@ -9,5 +9,4 @@ public interface IViewModelService<TModel, TViewModel>
     public Task<TViewModel> CreateViewModelAsync(TViewModel viewModel);
     public Task<TViewModel> UpdateViewModelAsync(TViewModel viewModel);
     public Task<TViewModel> DeleteViewModelAsync(TViewModel viewModel);
-    public Task<int> GetCountAsync(Expression<Func<TModel, bool>>? predicate = null);
 }

@@ -14,7 +14,9 @@
     <div class="row">
         <div class="col-2">
             <form method="get">
+
                 <input asp-for="@Model.Filter.Category" hidden />
+
                 <div class="mb-3">
                     <label>Range Price</label>
                     <div class="input-group">
@@ -67,21 +69,18 @@
                     <a asp-controller="GuitarCatalog" asp-action="DefineCategory" asp-route-category="@Model.Filter.Category" class="w-100 btn btn-primary btn-sm shadow-none">
                         <i class="bi bi-arrow-counterclockwise"></i>
                         Reset Filter
-                    </a>
-
-                    
-                </div>
-                       
+                    </a>                        
+                </div> 
+                
             </form>
         </div>
 
-        <div class="col-1"></div> 
-        
+        <div class="col-1"></div>
+
         <div class="col-9">
             <partial name="~/Areas/Customer/Views/Shared/Catalog/_ProductCards.cshtml" model="Model.PagedInfo.Items" view-data="ViewData">
         </div>
 
         <partial name="~/Views/Shared/Components/_Pagination.cshtml" model="Model.PagedInfo">
-
     </div>
 </div>

@@ -1,23 +1,45 @@
 ﻿@model PagedInfoViewModel
 
 <nav ari a-label="Page navigation example">
+    <div class="esh-pager"></div>
     <ul class="pagination justify-content-end">
-        <li class="page-item disabled">
-            <a class="page-link">Previous</a>
-        </li>
 
-        @for(int i = 1; i <= Model.TotalPages; i++)
+        @if (Model.HasPreviousPage)
         {
             <li class="page-item">
-                <a asp-route="@i - 1" class="page-link">@i</a>
+                <a class="page-link">Previous</a>
             </li>
         }
-        <li class="page-item">
-            <a class="page-link" href="#">Next</a>
-        </li>
+        else
+        {
+            <li class="page-item disabled">
+                <a class="page-link">Previous</a>
+            </li>
+        }
+
+        @for(int i = 0; i < Model.TotalPages; i++)
+        {
+            var numPage = i + 1;
+
+            <li class="page-item">
+                <a asp-route-pageIndex="@i" class="page-link">@numPage</a>
+            </li>
+        }
+
+        @if (Model.HasNextPage)
+        {
+            <li class="page-item">
+                <a class="page-link" href="#">Next</a>
+            </li>
+        }
+        else
+        {
+            <li class="page-item disabled">
+                <a class="page-link" href="#">Next</a>
+            </li>
+        }
     </ul>
 </nav>
-
 
 
 <i>

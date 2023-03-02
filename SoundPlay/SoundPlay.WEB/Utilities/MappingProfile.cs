@@ -4,6 +4,7 @@ public sealed class MappingProfile : Profile
 {
     public MappingProfile()
     {
+        CreateMap(typeof(PagedList<>), typeof(PagedInfoViewModel<>));
 		CreateMap<GuitarCategory, GuitarCategoryViewModel>().ReverseMap();
 		CreateMap<Brand, BrandViewModel>().ReverseMap();
         CreateMap<GuitarShape, GuitarShapeViewModel>().ReverseMap();

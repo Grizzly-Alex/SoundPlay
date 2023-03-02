@@ -1,6 +1,4 @@
-﻿using SoundPlay.Core.ValueModels;
-
-namespace SoundPlay.Web.Areas.Customer.Controllers;
+﻿namespace SoundPlay.Web.Areas.Customer.Controllers;
 
 [Area("Customer")]
 public class GuitarCatalogController : Controller
@@ -16,7 +14,6 @@ public class GuitarCatalogController : Controller
         _guitarService = guitarService;
 	}
 
-
     public IActionResult DefineCategory(GuitarType category)
     {       
         var filter = new GuitarFilterViewModel(category);
@@ -26,9 +23,7 @@ public class GuitarCatalogController : Controller
     [HttpGet]
     public async Task<IActionResult> Index(GuitarFilterViewModel filter, int pageIndex)
     {
-        var totalItems = await _guitarService.GetCountAsync(i => i.CategoryId == (int)filter.Category);
-
-        var pagedInfo = await _catalogService.GetProductPagedInfoAsync<Guitar>(
+        var pagedInfo = await _catalogService.GetCatalogPageInfoAsync<Guitar>(
             i => (i.CategoryId == (int)filter.Category)
             && (!filter.MaxPrice.HasValue || i.Price <= filter.MaxPrice)
             && (!filter.MinPrice.HasValue || i.Price >= filter.MinPrice)
@@ -40,12 +35,12 @@ public class GuitarCatalogController : Controller
             && (!filter.FretboardId.HasValue || i.FretboardId == filter.FretboardId)
             && (!filter.PickupSetId.HasValue || i.PickupSetId == filter.PickupSetId)
             && (!filter.TremoloTypeId.HasValue || i.TremoloTypeId == filter.TremoloTypeId),
-            Constants.ItemsPerPage, totalItems, pageIndex);
+            Constants.ItemsPerPageCatalog, pageIndex);
 
         var guitarFilter = await _catalogService.GetGuitarFilterAsync(
             filter.Category,
             filter.MinPrice ?? default,
-            filter.MaxPrice ?? pagedInfo.Products?.MaxBy(i => i.Price)?.Price);
+            filter.MaxPrice ?? pagedInfo.Items?.MaxBy(i => i.Price)?.Price);
 
         var catalog = new CatalogViewModel<GuitarFilterViewModel>(pagedInfo, guitarFilter);
        

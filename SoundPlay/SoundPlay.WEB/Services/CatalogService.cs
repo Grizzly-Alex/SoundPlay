@@ -3,14 +3,16 @@
 public sealed class CatalogService : ICatalogService
 {
     private readonly IUnitOfWork _unitOfWork;
+    private readonly IMapper _mapper;
 
-    public CatalogService(IUnitOfWork unitOfWork)
+    public CatalogService(IUnitOfWork unitOfWork, IMapper mapper)
     {
         _unitOfWork = unitOfWork;
+        _mapper = mapper;
     }
 
-    public async Task<PagedInfoViewModel<CatalogProductViewModel>> GetProductPagedInfoAsync<TModel>(
-        Expression<Func<TModel, bool>>? filter, int itemsPerPage, int totalItems, int pageIndex) where TModel : Product
+    public async Task<PagedInfoViewModel<CatalogProductViewModel>> GetCatalogPageInfoAsync<TModel>(
+        Expression<Func<TModel, bool>>? filter, int itemsPerPage, int pageIndex) where TModel : Product
     {
         var items =  await _unitOfWork.GetRepository<TModel>()
             .GetPagedListAsync(
@@ -25,14 +27,9 @@ public sealed class CatalogService : ICatalogService
                 PictureUrl = i.PictureUrl
             });
 
-        return new PagedInfoViewModel<CatalogProductViewModel>()
-        {
-            PageIndex = pageIndex,
-            ItemsPerPage = itemsPerPage,
-            TotalItems = totalItems,
-            TotalPages = (int)Math.Ceiling(totalItems / (double)itemsPerPage),
-            Products = items.ToList(),
-        };
+        var pagedInfo = _mapper.Map<PagedInfoViewModel<CatalogProductViewModel>>(items);
+
+        return pagedInfo;
     }
 
     public async Task<GuitarFilterViewModel> GetGuitarFilterAsync(GuitarType category, decimal? minPrice, decimal? maxPrice)

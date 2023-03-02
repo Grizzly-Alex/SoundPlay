@@ -34,7 +34,7 @@ public interface IRepository<TEntity> where TEntity : Entity
         Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>>? include = null,
         bool isTracking = false);
 
-    Task<IEnumerable<TResult>> GetPagedListAsync<TResult>(
+    Task<IPagedList<TResult>> GetPagedListAsync<TResult>(
         Expression<Func<TEntity, TResult>> selector,
         Expression<Func<TEntity, bool>>? predicate = null,
         Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>>? orderBy = null,

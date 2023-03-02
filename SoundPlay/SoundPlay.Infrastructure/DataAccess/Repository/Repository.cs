@@ -99,7 +99,7 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : Entity
 			: await query.Select(selector).ToListAsync();
 	}
 
-    public async Task<IEnumerable<TResult>> GetPagedListAsync<TResult>(
+    public async Task<IPagedList<TResult>> GetPagedListAsync<TResult>(
 		Expression<Func<TEntity, TResult>> selector,
 		Expression<Func<TEntity, bool>>? predicate = null,
 		Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>>? orderBy = null,

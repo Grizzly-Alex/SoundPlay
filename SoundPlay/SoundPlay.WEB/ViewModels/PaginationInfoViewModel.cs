@@ -8,5 +8,5 @@ public sealed class PagedInfoViewModel<TModel>
     public int TotalItems { get; set; }
     public bool HasPreviousPage => PageIndex > 0;
     public bool HasNextPage => PageIndex < TotalPages;
-    public List<TModel>? Products { get;set; }
+    public List<TModel>? Items { get;set; }
 }

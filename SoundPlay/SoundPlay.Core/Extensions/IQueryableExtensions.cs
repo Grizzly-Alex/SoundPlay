@@ -1,16 +1,22 @@
-﻿namespace SoundPlay.Core.Extensions
+﻿using SoundPlay.Core.ValueModels;
+
+namespace SoundPlay.Core.Extensions
 {
     public static class IQueryableExtensions
     {
-        public static async Task<IEnumerable<T>> ToPagedListAsync<T>(this IQueryable<T> source,
+        public static async Task<IPagedList<TItem>> ToPagedListAsync<TItem>(this IQueryable<TItem> source,
             int pageIndex, int itemsPerPage, CancellationToken cancellationToken = default)
         {
+            var totalItems = await source
+                .CountAsync(cancellationToken)
+                .ConfigureAwait(false);  
             var items = await source
                 .Skip(pageIndex * itemsPerPage)
                 .Take(itemsPerPage)
-                .ToListAsync(cancellationToken);
+                .ToListAsync(cancellationToken)
+                .ConfigureAwait(false);
 
-            return items;
+            return new PagedList<TItem>(items, pageIndex, itemsPerPage, totalItems);
         }
     }
 }

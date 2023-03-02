@@ -23,3 +23,4 @@ global using System.ComponentModel.DataAnnotations;
 global using Microsoft.AspNetCore.Mvc.Rendering;
 global using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 global using System.Globalization;
+global using SoundPlay.Core.ValueModels;

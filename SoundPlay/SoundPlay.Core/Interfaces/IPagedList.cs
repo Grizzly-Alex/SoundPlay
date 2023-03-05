@@ -2,7 +2,7 @@
 
 public interface IPagedList<TItem> 
 {
-    public int PageIndex { get; }  
+    public int ActualPage { get; }  
     public int TotalPages { get; }
     public int ItemsPerPage { get; }
     public int TotalItems { get; } 

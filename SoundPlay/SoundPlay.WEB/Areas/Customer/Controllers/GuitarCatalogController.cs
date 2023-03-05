@@ -21,7 +21,7 @@ public class GuitarCatalogController : Controller
     }
 
     [HttpGet]
-    public async Task<IActionResult> Index(GuitarFilterViewModel filter, int pageIndex)
+    public async Task<IActionResult> Index(GuitarFilterViewModel filter, int pageId)
     {
         var pagedInfo = await _catalogService.GetCatalogPageInfoAsync<Guitar>(
             i => (i.CategoryId == (int)filter.Category)
@@ -35,7 +35,7 @@ public class GuitarCatalogController : Controller
             && (!filter.FretboardId.HasValue || i.FretboardId == filter.FretboardId)
             && (!filter.PickupSetId.HasValue || i.PickupSetId == filter.PickupSetId)
             && (!filter.TremoloTypeId.HasValue || i.TremoloTypeId == filter.TremoloTypeId),
-            Constants.ItemsPerPageCatalog, pageIndex);
+            Constants.ItemsPerPageCatalog, pageId);
 
         var guitarFilter = await _catalogService.GetGuitarFilterAsync(
             filter.Category,

@@ -15,7 +15,7 @@ public class GuitarCatalogController : Controller
 	}
 
     public IActionResult DefineCategory(GuitarType category)
-    {       
+    {
         var filter = new GuitarFilterViewModel(category);
         return RedirectToAction(nameof(Index), filter);
     }

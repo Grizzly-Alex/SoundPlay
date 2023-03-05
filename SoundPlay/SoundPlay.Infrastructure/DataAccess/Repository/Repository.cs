@@ -120,6 +120,14 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : Entity
             : await query.Select(selector).ToPagedListAsync(pageIndex, itemsPerPage, cancellationToken);
     }
 
+    public async Task<TResult> MaxAsync<TResult>(
+		Expression<Func<TEntity, TResult>> selector,
+		Expression<Func<TEntity, bool>>? predicate = null,
+		CancellationToken cancellationToken = default) =>
+		predicate is null
+			? await _dbSet.MaxAsync(selector, cancellationToken)
+			: await _dbSet.Where(predicate).MaxAsync(selector, cancellationToken);
+
     public async Task<int> CountAsync(
         Expression<Func<TEntity, bool>>? predicate = null,
         CancellationToken cancellationToken = default) =>

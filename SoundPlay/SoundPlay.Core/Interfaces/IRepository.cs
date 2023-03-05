@@ -1,4 +1,6 @@
-﻿namespace SoundPlay.Core.Interfaces;
+﻿using Microsoft.EntityFrameworkCore;
+
+namespace SoundPlay.Core.Interfaces;
 
 public interface IRepository<TEntity> where TEntity : Entity
 {
@@ -44,5 +46,12 @@ public interface IRepository<TEntity> where TEntity : Entity
         bool isTracking = true,
         CancellationToken cancellationToken = default);
 
-    Task<int> CountAsync(Expression<Func<TEntity, bool>>? predicate = null, CancellationToken cancellationToken = default);
+    Task<int> CountAsync(
+        Expression<Func<TEntity, bool>>? predicate = null,
+        CancellationToken cancellationToken = default);
+
+    Task<TResult> MaxAsync<TResult>(
+        Expression<Func<TEntity, TResult>> selector,
+        Expression<Func<TEntity, bool>>? predicate = null,
+        CancellationToken cancellationToken = default);
 }

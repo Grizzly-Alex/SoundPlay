@@ -32,11 +32,11 @@
     }
 }
 
+<div class="col-12 text-end">
+    <p class="text-muted">Page @(Model.ActualPage + 1) - @Model.TotalPages</p>
+</div>
 
-<i>
-    Showing @Model.ItemsPerPage of @Model.TotalItems products - Page @(Model.ActualPage + 1) - @Model.TotalPages
-</i>
-
+<hr class="featurette-divider">
 
 <nav ari a-label="Page navigation example">
     <div class="esh-pager"></div>
@@ -50,7 +50,6 @@
                 </a>
             </li>
         }
-
 
         @for (int i = 0; i < pagesRouteData.Count; i++)
         {

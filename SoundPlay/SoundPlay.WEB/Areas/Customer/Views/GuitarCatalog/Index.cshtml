@@ -1,15 +1,12 @@
 ﻿@model CatalogViewModel<GuitarFilterViewModel>
 @{
     ViewData["img_path"] = Constants.GuitarsImages;
-    ViewData["title"] = Model.Filter.Category.GetDisplayName();
-    ViewData["total_items"] = Model.PagedInfo.TotalItems;
-    ViewData["total_pages"] = Model.PagedInfo.TotalPages;
-    
+    ViewData["title"] = Model.Filter.Category.GetDisplayName();   
 }
 
 <div class="container-fluid">
 
-    <partial name="~/Areas/Customer/Views/Shared/Catalog/_Roof.cshtml" view-data="ViewData">
+    <partial name="~/Areas/Customer/Views/Shared/Catalog/_Roof.cshtml" model="@Model.PagedInfo" view-data="ViewData">
 
     <div class="row">
         <div class="col-2">

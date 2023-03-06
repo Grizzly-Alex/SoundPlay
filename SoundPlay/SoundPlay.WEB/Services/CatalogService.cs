@@ -11,20 +11,17 @@ public sealed class CatalogService : ICatalogService
         _mapper = mapper;
     }
 
-    public async Task<decimal> GetMinPrice<TModel>(Expression<Func<TModel, bool>>? filter = null) where TModel : Product
+    public async Task<decimal?> GetMinPrice<TModel>(Expression<Func<TModel, bool>>? filter = null) where TModel : Product
     {
-        return await _unitOfWork.GetRepository<TModel>().MinAsync(
-            selector: i => i.Price,
-            predicate: filter);
+        return (await _unitOfWork.GetRepository<TModel>().MinAsync(
+            selector: i => (decimal?)i.Price, predicate: filter)) ?? default;    
     }
 
-    public async Task<decimal> GetMaxPrice<TModel>(Expression<Func<TModel, bool>>? filter = null) where TModel : Product
+    public async Task<decimal?> GetMaxPrice<TModel>(Expression<Func<TModel, bool>>? filter = null) where TModel : Product
     {
         return await _unitOfWork.GetRepository<TModel>().MaxAsync(
-            selector: i => i.Price,
-            predicate: filter);
+            selector: i => (decimal?)i.Price, predicate: filter) ?? default;
     }
-
 
     public async Task<PagedListViewModel<CatalogProductViewModel>> GetCatalogPageInfoAsync<TModel>(
         Expression<Func<TModel, bool>>? filter, int itemsPerPage, int pageIndex) where TModel : Product

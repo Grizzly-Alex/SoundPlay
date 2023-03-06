@@ -2,8 +2,12 @@
 
 public interface ICatalogService
 {
-	public Task<IEnumerable<CatalogProductViewModel>> GetCatalogModelsAsync<TModel>(Expression<Func<TModel, bool>>? filter)
+    public Task<decimal> GetMinPrice<TModel>(Expression<Func<TModel, bool>>? filter = null)
         where TModel : Product;
-
-    public Task<GuitarFilterViewModel> GetGuitarFilterAsync(IEnumerable<CatalogProductViewModel> catalogProducts, GuitarFilterViewModel filter);
+    public Task<decimal> GetMaxPrice<TModel>(Expression<Func<TModel, bool>>? filter = null)
+        where TModel : Product;
+    public Task<PagedListViewModel<CatalogProductViewModel>> GetCatalogPageInfoAsync<TModel>(
+        Expression<Func<TModel, bool>>? filter, int itemsPerPage, int pageIndex)
+        where TModel : Product;
+    public Task<GuitarFilterViewModel> GetGuitarFilterAsync(GuitarType category, decimal? minPrice, decimal? maxPrice);
 }

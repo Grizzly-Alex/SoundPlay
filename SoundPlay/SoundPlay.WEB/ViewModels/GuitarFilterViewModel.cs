@@ -1,6 +1,6 @@
 ﻿namespace SoundPlay.Web.ViewModels;
 
-public class GuitarFilterViewModel : ProductFilterViewModel
+public sealed class GuitarFilterViewModel : ProductFilterViewModel
 {
     public GuitarType Category { get; set; }
     public int? BrandId { get; set; }
@@ -29,32 +29,33 @@ public class GuitarFilterViewModel : ProductFilterViewModel
     [Display(Name = "Tremolo Types")]
     public IEnumerable<SelectListItem>? TremoloTypes { get; set; }
 
-    public GuitarFilterViewModel()
-    {
-    }
-
-    public GuitarFilterViewModel(GuitarType category)
-    {
-        Category = category;
-    }
+    public GuitarFilterViewModel() { }
 
     public GuitarFilterViewModel(
-        decimal? priceStart,
-        decimal? priceEnd,
         GuitarType category,
-        List<CatalogProductViewModel>? products,
+        decimal? minPrice,
+        decimal? maxPrice)
+    {
+        MinPrice = minPrice;
+        MaxPrice = maxPrice;
+        Category = category;
+    }
+
+
+    public GuitarFilterViewModel(
         IEnumerable<SelectListItem>? brands,
         IEnumerable<SelectListItem>? colors,
-        IEnumerable<SelectListItem>? guitarShapes,
+        IEnumerable<SelectListItem>? shapes,
         IEnumerable<SelectListItem>? materials,
         IEnumerable<SelectListItem>? pickupSets,
-        IEnumerable<SelectListItem>? tremoloTypes)            
-        : base(priceStart, priceEnd, products)
-    {
-        Category = category;
+        IEnumerable<SelectListItem>? tremoloTypes,
+        decimal? minPrice,
+        decimal? maxPrice,
+        GuitarType category) : this (category, minPrice, maxPrice)
+    {  
         Brands = brands;
         Colors = colors;
-        GuitarShapes = guitarShapes;
+        GuitarShapes = shapes;
         Soundboards = materials;
         Necks = materials;
         Fretboards = materials;

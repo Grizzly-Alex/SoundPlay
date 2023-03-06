@@ -1,7 +1,15 @@
-﻿namespace SoundPlay.Core.Interfaces;
+﻿using Microsoft.EntityFrameworkCore;
+
+namespace SoundPlay.Core.Interfaces;
 
 public interface IRepository<TEntity> where TEntity : Entity
 {
+    void Remove(int id);
+
+    void Add(TEntity entity);
+
+    void Update(TEntity entity);
+
     Task<TResult?> GetFirstOrDefaultAsync<TResult>(
         Expression<Func<TEntity, TResult>> selector,
         Expression<Func<TEntity, bool>>? predicate = null,
@@ -28,9 +36,27 @@ public interface IRepository<TEntity> where TEntity : Entity
         Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>>? include = null,
         bool isTracking = false);
 
-    void Remove(int id);
+    Task<IPagedList<TResult>> GetPagedListAsync<TResult>(
+        Expression<Func<TEntity, TResult>> selector,
+        Expression<Func<TEntity, bool>>? predicate = null,
+        Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>>? orderBy = null,
+        Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>>? include = null,
+        int pageIndex = default,
+        int itemsPerPage = int.MinValue,
+        bool isTracking = true,
+        CancellationToken cancellationToken = default);
 
-    void Add(TEntity entity);
+    Task<int> CountAsync(
+        Expression<Func<TEntity, bool>>? predicate = null,
+        CancellationToken cancellationToken = default);
 
-    void Update(TEntity entity);
+    Task<TResult> MaxAsync<TResult>(
+        Expression<Func<TEntity, TResult>> selector,
+        Expression<Func<TEntity, bool>>? predicate = null,
+        CancellationToken cancellationToken = default);
+
+    Task<TResult> MinAsync<TResult>(
+        Expression<Func<TEntity, TResult>> selector,
+        Expression<Func<TEntity, bool>>? predicate = null,
+        CancellationToken cancellationToken = default);
 }

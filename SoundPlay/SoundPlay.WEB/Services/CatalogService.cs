@@ -3,16 +3,36 @@
 public sealed class CatalogService : ICatalogService
 {
     private readonly IUnitOfWork _unitOfWork;
+    private readonly IMapper _mapper;
 
-    public CatalogService(IUnitOfWork unitOfWork)
+    public CatalogService(IUnitOfWork unitOfWork, IMapper mapper)
     {
         _unitOfWork = unitOfWork;
+        _mapper = mapper;
     }
 
-    public async Task<IEnumerable<CatalogProductViewModel>> GetCatalogModelsAsync<TModel>(Expression<Func<TModel, bool>>? filter)
-        where TModel : Product
+    public async Task<decimal> GetMinPrice<TModel>(Expression<Func<TModel, bool>>? filter = null) where TModel : Product
     {
-        return await _unitOfWork.GetRepository<TModel>().GetAllAsync(
+        return await _unitOfWork.GetRepository<TModel>().MinAsync(
+            selector: i => i.Price,
+            predicate: filter);
+    }
+
+    public async Task<decimal> GetMaxPrice<TModel>(Expression<Func<TModel, bool>>? filter = null) where TModel : Product
+    {
+        return await _unitOfWork.GetRepository<TModel>().MaxAsync(
+            selector: i => i.Price,
+            predicate: filter);
+    }
+
+
+    public async Task<PagedListViewModel<CatalogProductViewModel>> GetCatalogPageInfoAsync<TModel>(
+        Expression<Func<TModel, bool>>? filter, int itemsPerPage, int pageIndex) where TModel : Product
+    {
+        var pagedList =  await _unitOfWork.GetRepository<TModel>()
+            .GetPagedListAsync(
+            pageIndex: pageIndex,
+            itemsPerPage: itemsPerPage, 
             predicate: filter,
             selector: i => new CatalogProductViewModel
             {
@@ -21,9 +41,13 @@ public sealed class CatalogService : ICatalogService
                 Price = i.Price,
                 PictureUrl = i.PictureUrl
             });
+
+        var pagedInfo = _mapper.Map<PagedListViewModel<CatalogProductViewModel>>(pagedList);
+
+        return pagedInfo;
     }
 
-    public async Task<GuitarFilterViewModel> GetGuitarFilterAsync(IEnumerable<CatalogProductViewModel> catalogProducts, GuitarFilterViewModel filter)
+    public async Task<GuitarFilterViewModel> GetGuitarFilterAsync(GuitarType category, decimal? minPrice, decimal? maxPrice)
     {
         var brands = await _unitOfWork.GetRepository<Brand>().GetAllAsync();
         var colors = await _unitOfWork.GetRepository<Color>().GetAllAsync();
@@ -35,15 +59,14 @@ public sealed class CatalogService : ICatalogService
         var allSelect = new SelectListItem { Text = "All" };
 
         return new GuitarFilterViewModel(
-            filter.PriceStart ?? default,
-            filter.PriceEnd ?? catalogProducts.MaxBy(i => i.Price)?.Price,
-            filter.Category,
-            catalogProducts.ToList(),
             brands.ToSelectListItems(allSelect),
             colors.ToSelectListItems(allSelect),
             shapes.ToSelectListItems(allSelect),
             materials.ToSelectListItems(allSelect),
             pickupSets.ToSelectListItems(allSelect),
-            tremoloTypes.ToSelectListItems(allSelect));
+            tremoloTypes.ToSelectListItems(allSelect),
+            minPrice,
+            maxPrice,
+            category);
     }
 }

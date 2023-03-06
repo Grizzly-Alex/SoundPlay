@@ -1,0 +1,83 @@
+﻿@model PagedInfoViewModel
+
+@{
+    var prevRouteData = Context.Request.Query.ToDictionary(x => x.Key, x => x.Value.ToString());
+    if (prevRouteData.ContainsKey("pageId"))
+    {
+        prevRouteData.Remove("pageId");
+    }
+    prevRouteData.Add("pageId", (Model.ActualPage - 1).ToString());       
+
+
+    var nextRouteData = Context.Request.Query.ToDictionary(x => x.Key, x => x.Value.ToString());
+    if (nextRouteData.ContainsKey("pageId"))
+    {
+        nextRouteData.Remove("pageId");
+    }
+    nextRouteData.Add("pageId", (Model.ActualPage + 1).ToString());
+
+    
+    List<Dictionary<string, string>> pagesRouteData = new();
+
+    for (int i = 0; i < Model.TotalPages; i++)
+    {
+        var routeData = Context.Request.Query.ToDictionary(x => x.Key, x => x.Value.ToString());
+        if (routeData.ContainsKey("pageId"))
+        {
+            routeData.Remove("pageId");
+        }
+        routeData.Add("pageId", (i).ToString());
+
+        pagesRouteData.Insert(i, routeData);
+    }
+}
+
+<div class="col-12 text-end">
+    <p class="text-muted">Page @(Model.ActualPage + 1) - @Model.TotalPages</p>
+</div>
+
+<hr class="featurette-divider">
+
+<nav ari a-label="Page navigation example">
+    <div class="esh-pager"></div>
+    <ul class="pagination pagination-sm justify-content-end">
+
+        @if (Model.HasPreviousPage)
+        {
+            <li class="page-item">
+                <a class="page-link" asp-all-route-data="prevRouteData">
+                    <span aria-hidden="true"><i class="bi bi-chevron-double-left"></i></span>
+                </a>
+            </li>
+        }
+
+        @for (int i = 0; i < pagesRouteData.Count; i++)
+        {
+            var numPage = i + 1;
+
+            var pageRouteData = pagesRouteData[i];
+            if(Model.ActualPage == i)
+            {
+                <li class="page-item active">
+                    <a class="page-link" asp-all-route-data="pageRouteData">@numPage</a>
+                </li>
+            }
+            else
+            {
+                <li class="page-item">
+                    <a class="page-link" asp-all-route-data="pageRouteData">@numPage</a>
+                </li>              
+            }
+        }
+
+        @if (Model.HasNextPage)
+        {
+            <li class="page-item">
+                <a class="page-link" asp-all-route-data="nextRouteData">
+                    <span aria-hidden="true"><i class="bi bi-chevron-double-right"></i></span>
+                </a>
+            </li>
+        }
+   
+    </ul>
+</nav>

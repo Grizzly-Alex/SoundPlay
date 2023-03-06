@@ -14,6 +14,7 @@ global using SoundPlay.Web.Models;
 global using SoundPlay.Core;
 global using SoundPlay.Web.Utilities;
 global using SoundPlay.Core.Extensions;
+global using SoundPlay.Web.Extensions;
 global using SoundPlay.Core.Exceptions;
 global using System.Linq.Expressions;
 global using SoundPlay.Web.ViewModels;

@@ -1,4 +1,4 @@
-﻿namespace SoundPlay.Core.ValueModels;
+﻿ namespace SoundPlay.Core.ValueModels;
 
 public sealed class PagedList<TItem> : IPagedList<TItem> 
 {

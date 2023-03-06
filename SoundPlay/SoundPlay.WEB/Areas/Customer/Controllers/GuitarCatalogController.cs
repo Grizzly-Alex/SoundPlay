@@ -14,14 +14,18 @@ public class GuitarCatalogController : Controller
         _guitarService = guitarService;
 	}
 
-    public IActionResult DefineCategory(GuitarType category)
+    public async Task<IActionResult> DefineCategory(GuitarType category)
     {
-        var filter = new GuitarFilterViewModel(category);
+        var _minPrice = await _catalogService.GetMinPrice<Guitar>(i => i.CategoryId == (int)category);
+        var _maxPrice = await _catalogService.GetMaxPrice<Guitar>(i => i.CategoryId == (int)category);
+
+        var filter = new GuitarFilterViewModel(category, _minPrice, _maxPrice);
+
         return RedirectToAction(nameof(Index), filter);
     }
 
     [HttpGet]
-    public async Task<IActionResult> Index(GuitarFilterViewModel filter, int pageId)
+    public async Task<IActionResult> Index(GuitarFilterViewModel filter, int pageId, int itemsPerPage)
     {
         var pagedInfo = await _catalogService.GetCatalogPageInfoAsync<Guitar>(
             i => (i.CategoryId == (int)filter.Category)
@@ -37,16 +41,14 @@ public class GuitarCatalogController : Controller
             && (!filter.TremoloTypeId.HasValue || i.TremoloTypeId == filter.TremoloTypeId),
             Constants.ItemsPerPageCatalog, pageId);
 
-        var guitarFilter = await _catalogService.GetGuitarFilterAsync(
-            filter.Category,
-            filter.MinPrice ?? default,
-            filter.MaxPrice ?? pagedInfo.Items?.MaxBy(i => i.Price)?.Price);
+        var guitarFilter = await _catalogService.GetGuitarFilterAsync(filter.Category, filter.MinPrice, filter.MaxPrice);
 
         var catalog = new CatalogViewModel<GuitarFilterViewModel>(pagedInfo, guitarFilter);
        
         return View(catalog);
     }
 
+    [HttpGet]
     public async Task<IActionResult> Details(int id)
     {
         var guitarViewModel = await _guitarService.GetViewModelByIdAsync(id);

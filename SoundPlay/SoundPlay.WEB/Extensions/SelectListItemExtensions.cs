@@ -1,4 +1,4 @@
-﻿namespace SoundPlay.Core.Extensions;
+﻿namespace SoundPlay.Web.Extensions;
 
 public static class SelectListItemExtensions
 {

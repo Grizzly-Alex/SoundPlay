@@ -31,7 +31,16 @@ public sealed class GuitarFilterViewModel : ProductFilterViewModel
 
     public GuitarFilterViewModel() { }
 
-    public GuitarFilterViewModel(GuitarType category) => Category = category;
+    public GuitarFilterViewModel(
+        GuitarType category,
+        decimal? minPrice,
+        decimal? maxPrice)
+    {
+        MinPrice = minPrice;
+        MaxPrice = maxPrice;
+        Category = category;
+    }
+
 
     public GuitarFilterViewModel(
         IEnumerable<SelectListItem>? brands,
@@ -42,7 +51,7 @@ public sealed class GuitarFilterViewModel : ProductFilterViewModel
         IEnumerable<SelectListItem>? tremoloTypes,
         decimal? minPrice,
         decimal? maxPrice,
-        GuitarType category) : this (category)
+        GuitarType category) : this (category, minPrice, maxPrice)
     {  
         Brands = brands;
         Colors = colors;
@@ -52,7 +61,5 @@ public sealed class GuitarFilterViewModel : ProductFilterViewModel
         Fretboards = materials;
         PickupSets = pickupSets;
         TremoloTypes = tremoloTypes;
-        MinPrice = minPrice;
-        MaxPrice = maxPrice;
     }
 }

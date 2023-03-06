@@ -54,4 +54,9 @@ public interface IRepository<TEntity> where TEntity : Entity
         Expression<Func<TEntity, TResult>> selector,
         Expression<Func<TEntity, bool>>? predicate = null,
         CancellationToken cancellationToken = default);
+
+    Task<TResult> MinAsync<TResult>(
+        Expression<Func<TEntity, TResult>> selector,
+        Expression<Func<TEntity, bool>>? predicate = null,
+        CancellationToken cancellationToken = default);
 }

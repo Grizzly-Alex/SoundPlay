@@ -1,6 +1,6 @@
 ﻿namespace SoundPlay.Core.Extensions
 {
-    public static class QueryableExtensions
+    public static class IQueryableExtensions
     {
         public static async Task<IPagedList<TItem>> ToPagedListAsync<TItem>(this IQueryable<TItem> source,
             int pageIndex, int itemsPerPage, CancellationToken cancellationToken = default)

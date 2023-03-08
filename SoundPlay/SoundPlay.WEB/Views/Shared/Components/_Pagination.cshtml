@@ -1,39 +1,40 @@
 ﻿@model PagedInfoViewModel
 
 @{
-    var prevRouteData = Context.Request.Query.ToDictionary(x => x.Key, x => x.Value.ToString());
-    if (prevRouteData.ContainsKey("pageId"))
+    var actualPage = nameof(Model.PageId);
+    var sourceRouteData = Context.Request.Query.ToDictionary(x => x.Key, x => x.Value.ToString());
+    if (sourceRouteData.ContainsKey(actualPage))
     {
-        prevRouteData.Remove("pageId");
+        sourceRouteData.Remove(actualPage);
     }
-    prevRouteData.Add("pageId", (Model.ActualPage - 1).ToString());       
 
+    var prevRouteData = new Dictionary<string, string>(sourceRouteData);
+    prevRouteData.Add(actualPage, (Model.PageId - 1).ToString());
 
-    var nextRouteData = Context.Request.Query.ToDictionary(x => x.Key, x => x.Value.ToString());
-    if (nextRouteData.ContainsKey("pageId"))
-    {
-        nextRouteData.Remove("pageId");
-    }
-    nextRouteData.Add("pageId", (Model.ActualPage + 1).ToString());
+    var nextRouteData = new Dictionary<string, string>(sourceRouteData);
+    nextRouteData.Add(actualPage, (Model.PageId + 1).ToString());
 
     
     List<Dictionary<string, string>> pagesRouteData = new();
 
     for (int i = 0; i < Model.TotalPages; i++)
     {
-        var routeData = Context.Request.Query.ToDictionary(x => x.Key, x => x.Value.ToString());
-        if (routeData.ContainsKey("pageId"))
-        {
-            routeData.Remove("pageId");
-        }
-        routeData.Add("pageId", (i).ToString());
+        var routeData = new Dictionary<string, string>(sourceRouteData);
 
+        routeData.Add(actualPage, (i).ToString());
         pagesRouteData.Insert(i, routeData);
     }
 }
 
 <div class="col-12 text-end">
-    <p class="text-muted">Page @(Model.ActualPage + 1) - @Model.TotalPages</p>
+    @if (Model.TotalPages == 0)
+    {
+        <p class="p-2"></p>
+    }
+    else
+    {
+        <p class="text-muted">Page @(Model.PageId + 1) - @Model.TotalPages</p>
+    }
 </div>
 
 <hr class="featurette-divider">
@@ -56,7 +57,7 @@
             var numPage = i + 1;
 
             var pageRouteData = pagesRouteData[i];
-            if(Model.ActualPage == i)
+            if (Model.PageId == i)
             {
                 <li class="page-item active">
                     <a class="page-link" asp-all-route-data="pageRouteData">@numPage</a>
@@ -77,7 +78,7 @@
                     <span aria-hidden="true"><i class="bi bi-chevron-double-right"></i></span>
                 </a>
             </li>
-        }
-   
+        } 
+
     </ul>
 </nav>

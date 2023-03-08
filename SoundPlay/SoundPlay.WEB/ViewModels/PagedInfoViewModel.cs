@@ -2,7 +2,7 @@
 
 public class PagedInfoViewModel
 {
-    public int ActualPage { get; set; }
+    public int PageId { get; set; }
     public int TotalPages { get; set; }
     public int ItemsPerPage { get; set; }
     public int TotalItems { get; set; }

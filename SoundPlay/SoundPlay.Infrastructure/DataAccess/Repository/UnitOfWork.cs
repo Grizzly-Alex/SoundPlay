@@ -1,4 +1,6 @@
-﻿namespace SoundPlay.Infrastructure.DataAccess.Repository;
+﻿using SoundPlay.Infrastructure.DataAccess.DbContexts;
+
+namespace SoundPlay.Infrastructure.DataAccess.Repository;
 
 public sealed class UnitOfWork : IUnitOfWork 
 {

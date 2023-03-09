@@ -2,6 +2,7 @@
 
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
+using SoundPlay.Infrastructure.DataAccess.DbContexts;
 
 
 #nullable disable

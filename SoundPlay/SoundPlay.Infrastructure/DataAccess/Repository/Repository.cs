@@ -1,4 +1,6 @@
-﻿namespace SoundPlay.Infrastructure.DataAccess.Repository;
+﻿using SoundPlay.Infrastructure.DataAccess.DbContexts;
+
+namespace SoundPlay.Infrastructure.DataAccess.Repository;
 
 public class Repository<TEntity> : IRepository<TEntity> where TEntity : Entity
 {

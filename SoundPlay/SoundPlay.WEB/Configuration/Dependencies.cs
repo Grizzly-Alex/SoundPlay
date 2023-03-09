@@ -1,4 +1,5 @@
-﻿using SoundPlay.Infrastructure.DataAccess.DbContexts;
+﻿using Microsoft.AspNetCore.Identity;
+using SoundPlay.Infrastructure.DataAccess.DbContexts;
 using ILogger = Serilog.ILogger;
 
 namespace SoundPlay.WEB.Configuration;
@@ -23,6 +24,14 @@ public static class Dependencies
             options.UseSqlServer(configuration.GetConnectionString("CatalogConnection")); 
             options.EnableSensitiveDataLogging();
         });
+
+        services.AddDbContext<IdentityAppDbContext>(options =>
+            options.UseSqlServer(configuration.GetConnectionString("IdentityConnection")));
+
+        services.AddIdentity<IdentityUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
+            .AddDefaultTokenProviders()
+            .AddDefaultUI()
+            .AddEntityFrameworkStores<IdentityAppDbContext>();
     }
 
 
@@ -65,6 +74,7 @@ public static class Dependencies
         app.UseRouting();
         app.UseAuthentication();
         app.UseAuthorization();
+        app.MapRazorPages();
 
         app.MapAreaControllerRoute(
             name: "CustomerDefault",

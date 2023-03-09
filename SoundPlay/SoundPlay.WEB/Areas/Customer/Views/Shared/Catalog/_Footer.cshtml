@@ -1,0 +1,14 @@
+﻿@model PagedInfoViewModel
+
+<div class="col-12 text-end">
+    @if (Model.TotalPages == 0)
+    {
+        <p class="p-2"></p>
+    }
+    else
+    {
+        <p class="text-muted">Page @(Model.PageId + 1) - @Model.TotalPages</p>
+    }
+</div>
+
+<hr class="featurette-divider">

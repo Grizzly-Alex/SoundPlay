@@ -3,14 +3,13 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using SoundPlay.Infrastructure.DataAccess.DbContexts;
 
-
 #nullable disable
 
-namespace SoundPlay.Infrastructure.DataAccess.Migrations
+namespace SoundPlay.Infrastructure.DataAccess.Migrations.Catalog
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230122132354_UpdateProduct")]
-    partial class UpdateProduct
+    [Migration("20230122140230_UpdateGuitar")]
+    partial class UpdateGuitar
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -97,7 +96,7 @@ namespace SoundPlay.Infrastructure.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("FretboardId")
+                    b.Property<int>("FretboardId")
                         .HasColumnType("int");
 
                     b.Property<byte>("FretsCount")
@@ -107,7 +106,7 @@ namespace SoundPlay.Infrastructure.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("NeckId")
+                    b.Property<int>("NeckId")
                         .HasColumnType("int");
 
                     b.Property<int?>("PickupSetId")
@@ -123,7 +122,7 @@ namespace SoundPlay.Infrastructure.DataAccess.Migrations
                     b.Property<int?>("ShapeId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("SoundboardId")
+                    b.Property<int>("SoundboardId")
                         .HasColumnType("int");
 
                     b.Property<byte>("StringsCount")
@@ -228,44 +227,53 @@ namespace SoundPlay.Infrastructure.DataAccess.Migrations
                     b.HasOne("SoundPlay.DAL.Models.Brand", "Brand")
                         .WithMany()
                         .HasForeignKey("BrandId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("SoundPlay.DAL.Models.Category", "Category")
                         .WithMany()
                         .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("SoundPlay.DAL.Models.Color", "Color")
                         .WithMany()
                         .HasForeignKey("ColorId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("SoundPlay.DAL.Models.Material", "Fretboard")
                         .WithMany()
-                        .HasForeignKey("FretboardId");
+                        .HasForeignKey("FretboardId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.HasOne("SoundPlay.DAL.Models.Material", "Neck")
                         .WithMany()
-                        .HasForeignKey("NeckId");
+                        .HasForeignKey("NeckId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.HasOne("SoundPlay.DAL.Models.PickupSet", "PickupSet")
                         .WithMany()
-                        .HasForeignKey("PickupSetId");
+                        .HasForeignKey("PickupSetId")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("SoundPlay.DAL.Models.GuitarShape", "Shape")
                         .WithMany()
-                        .HasForeignKey("ShapeId");
+                        .HasForeignKey("ShapeId")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("SoundPlay.DAL.Models.Material", "Soundboard")
                         .WithMany()
-                        .HasForeignKey("SoundboardId");
+                        .HasForeignKey("SoundboardId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.HasOne("SoundPlay.DAL.Models.TremoloType", "TremoloType")
                         .WithMany()
-                        .HasForeignKey("TremoloTypeId");
+                        .HasForeignKey("TremoloTypeId")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.Navigation("Brand");
 

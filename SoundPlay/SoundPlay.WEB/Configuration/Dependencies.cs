@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Identity;
-using SoundPlay.Infrastructure.DataAccess.DbContexts;
-using ILogger = Serilog.ILogger;
+﻿using ILogger = Serilog.ILogger;
 
 namespace SoundPlay.WEB.Configuration;
 

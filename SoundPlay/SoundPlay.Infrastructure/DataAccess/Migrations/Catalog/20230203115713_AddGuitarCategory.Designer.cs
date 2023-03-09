@@ -3,13 +3,14 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using SoundPlay.Infrastructure.DataAccess.DbContexts;
 
+
 #nullable disable
 
-namespace SoundPlay.Infrastructure.DataAccess.Migrations
+namespace SoundPlay.Infrastructure.DataAccess.Migrations.Catalog
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230202142428_DeleteCategory")]
-    partial class DeleteCategory
+    [Migration("20230203115713_AddGuitarCategory")]
+    partial class AddGuitarCategory
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -38,25 +39,6 @@ namespace SoundPlay.Infrastructure.DataAccess.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Brands");
-                });
-
-            modelBuilder.Entity("SoundPlay.DAL.Models.Category", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasColumnName("id");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("varchar(max)")
-                        .HasColumnName("name");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Category");
                 });
 
             modelBuilder.Entity("SoundPlay.DAL.Models.Color", b =>
@@ -91,6 +73,12 @@ namespace SoundPlay.Infrastructure.DataAccess.Migrations
                         .HasColumnType("int")
                         .HasColumnName("brand_id");
 
+                    b.Property<int>("CategoryId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(1)
+                        .HasColumnName("category_id");
+
                     b.Property<int>("ColorId")
                         .HasColumnType("int")
                         .HasColumnName("color_id");
@@ -111,11 +99,6 @@ namespace SoundPlay.Infrastructure.DataAccess.Migrations
                     b.Property<byte>("FretsCount")
                         .HasColumnType("tinyint")
                         .HasColumnName("frets_count");
-
-                    b.Property<string>("GuitarCategory")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("category");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -160,6 +143,8 @@ namespace SoundPlay.Infrastructure.DataAccess.Migrations
 
                     b.HasIndex("BrandId");
 
+                    b.HasIndex("CategoryId");
+
                     b.HasIndex("ColorId");
 
                     b.HasIndex("FretboardId");
@@ -175,6 +160,54 @@ namespace SoundPlay.Infrastructure.DataAccess.Migrations
                     b.HasIndex("TremoloTypeId");
 
                     b.ToTable("Guitars");
+                });
+
+            modelBuilder.Entity("SoundPlay.DAL.Models.GuitarCategory", b =>
+                {
+                    b.Property<int>("Id")
+                        .HasColumnType("int")
+                        .HasColumnName("id");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("varchar(max)")
+                        .HasColumnName("name");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("GuitarCategories");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Electric Guitar"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Accoustic Guitar"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Classic Guitar"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "Electric Bass"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Name = "Accoustic Bass"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Name = "Ukulele"
+                        });
                 });
 
             modelBuilder.Entity("SoundPlay.DAL.Models.GuitarShape", b =>
@@ -261,6 +294,12 @@ namespace SoundPlay.Infrastructure.DataAccess.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
+                    b.HasOne("SoundPlay.DAL.Models.GuitarCategory", "Category")
+                        .WithMany()
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
                     b.HasOne("SoundPlay.DAL.Models.Color", "Color")
                         .WithMany()
                         .HasForeignKey("ColorId")
@@ -301,6 +340,8 @@ namespace SoundPlay.Infrastructure.DataAccess.Migrations
                         .OnDelete(DeleteBehavior.Restrict);
 
                     b.Navigation("Brand");
+
+                    b.Navigation("Category");
 
                     b.Navigation("Color");
 

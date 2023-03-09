@@ -6,11 +6,11 @@ using SoundPlay.Infrastructure.DataAccess.DbContexts;
 
 #nullable disable
 
-namespace SoundPlay.Infrastructure.DataAccess.Migrations
+namespace SoundPlay.Infrastructure.DataAccess.Migrations.Catalog
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230122113729_UpdateEntities")]
-    partial class UpdateEntities
+    [Migration("20230119194334_UpdateProductModel")]
+    partial class UpdateProductModel
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -97,8 +97,8 @@ namespace SoundPlay.Infrastructure.DataAccess.Migrations
                     b.Property<int?>("FretboardId")
                         .HasColumnType("int");
 
-                    b.Property<byte>("FretsCount")
-                        .HasColumnType("tinyint");
+                    b.Property<int>("FretsCount")
+                        .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -114,8 +114,7 @@ namespace SoundPlay.Infrastructure.DataAccess.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("Price")
-                        .HasPrecision(8, 3)
-                        .HasColumnType("decimal(8,3)");
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<int?>("ShapeId")
                         .HasColumnType("int");
@@ -123,8 +122,8 @@ namespace SoundPlay.Infrastructure.DataAccess.Migrations
                     b.Property<int?>("SoundboardId")
                         .HasColumnType("int");
 
-                    b.Property<byte>("StringsCount")
-                        .HasColumnType("tinyint");
+                    b.Property<int>("StringsCount")
+                        .HasColumnType("int");
 
                     b.Property<int?>("TremoloTypeId")
                         .HasColumnType("int");

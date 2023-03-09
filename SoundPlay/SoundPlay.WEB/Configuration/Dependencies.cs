@@ -24,6 +24,7 @@ public static class Dependencies
         });
     }
 
+
     public static void SetServices(IServiceCollection services)
     {
         services.AddHttpContextAccessor();
@@ -57,6 +58,7 @@ public static class Dependencies
             app.UseHsts();
         }
 
+        app.UseRequestLocalization("en-US", "en-US");
         app.UseHttpsRedirection();
         app.UseStaticFiles();
         app.UseRouting();

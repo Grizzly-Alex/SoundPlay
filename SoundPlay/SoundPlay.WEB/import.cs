@@ -25,3 +25,5 @@ global using Microsoft.AspNetCore.Mvc.Rendering;
 global using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 global using System.Globalization;
 global using SoundPlay.Core.ValueModels;
+global using Microsoft.AspNetCore.Localization;
+global using Microsoft.Extensions.DependencyInjection;

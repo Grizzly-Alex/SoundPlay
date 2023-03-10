@@ -39,6 +39,7 @@ public static class Dependencies
         services.AddTransient<ExceptionHandlingMiddleware>();
         services.AddControllersWithViews();
         services.AddScoped<IContentManager, ContentManager>();
+        services.AddSingleton<IEmailSender, EmailSender>();
         services.AddAutoMapper(typeof(MappingProfile));
         services.AddSession(options => {
             options.IdleTimeout = TimeSpan.FromMinutes(10);

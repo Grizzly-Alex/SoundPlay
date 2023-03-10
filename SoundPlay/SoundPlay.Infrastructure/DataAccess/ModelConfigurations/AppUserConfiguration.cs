@@ -22,6 +22,10 @@ internal class AppUserConfiguration : IEntityTypeConfiguration<AppUser>
             .HasColumnName("state")
             .HasColumnType("varchar(max)");
 
+        builder.Property(p => p.PhoneNumber)
+            .HasColumnName("phone_number")
+            .HasColumnType("varchar(max)");
+
         builder.Property(p => p.PostalCode)
             .HasColumnName("postal_code")
             .HasColumnType("varchar(max)");

@@ -24,6 +24,7 @@ global using Microsoft.AspNetCore.Mvc.Rendering;
 global using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 global using System.Globalization;
 global using SoundPlay.Core.ValueModels;
-global using Microsoft.Extensions.DependencyInjection;
 global using Microsoft.AspNetCore.Identity;
 global using SoundPlay.Infrastructure.DataAccess.DbContexts;
+global using Microsoft.AspNetCore.Identity.UI.Services;
+global using SoundPlay.Infrastructure.Services;

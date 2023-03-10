@@ -8,3 +8,4 @@ global using Microsoft.EntityFrameworkCore.Metadata.Builders;
 global using Microsoft.EntityFrameworkCore.Query;
 global using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 global using SoundPlay.Infrastructure.DataAccess.ModelConfigurations;
+global using Microsoft.AspNetCore.Identity.UI.Services;

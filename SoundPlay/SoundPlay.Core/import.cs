@@ -9,3 +9,4 @@ global using System.Linq.Expressions;
 global using Microsoft.EntityFrameworkCore.Query;
 global using SoundPlay.Core.Interfaces;
 global using SoundPlay.Core.ValueModels;
+global using Microsoft.AspNetCore.Identity; 

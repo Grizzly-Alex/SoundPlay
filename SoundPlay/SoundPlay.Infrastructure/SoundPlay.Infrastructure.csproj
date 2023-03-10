@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="12.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="7.0.3" />
     <PackageReference Include="Serilog.AspNetCore" Version="6.1.1-dev-00295" />
     <PackageReference Include="Serilog.Sinks.Console" Version="4.1.1-dev-00907" />
     <PackageReference Include="Serilog.Sinks.File" Version="5.0.1-dev-00947" />
@@ -15,6 +16,10 @@
 
   <ItemGroup>
     <ProjectReference Include="..\SoundPlay.Core\SoundPlay.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="DataAccess\Migrations\Identity\" />
   </ItemGroup>
 
 </Project>

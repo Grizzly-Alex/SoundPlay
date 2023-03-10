@@ -1,0 +1,37 @@
+﻿@using Microsoft.AspNetCore.Identity
+
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+@if (SignInManager.IsSignedIn(User))
+{
+    <div class="btn-group dropdown-center">
+        <button type="button" class="btn btn-link shadow-none" data-bs-toggle="dropdown">
+            <i class="bi bi-person-circle text-muted" style="font-size: 1.5rem;"></i>
+            <span class="position-absolute top-100 start-50 translate-middle badge rounded-pill bg-primary">
+                @UserManager.GetUserName(User)
+                <span class="visually-hidden">unread messages</span>
+            </span>
+        </button>
+        <ul class="dropdown-menu">
+            <li><a class="dropdown-item" id="manage" asp-area="Identity" asp-page="/Account/Manage/Index">Manage</a></li>
+            <li>
+                <form class="dropdown-item" id="logoutForm" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="/Home/Index">
+                    <button id="logout" type="submit" class="nav-link btn btn-link text-dark border-0">Logout</button>
+                </form>
+            </li>
+        </ul>
+    </div>
+}
+else
+{
+    <div class="btn-group dropdown-center">
+        <button type="button" class="btn btn-link shadow-none" data-bs-toggle="dropdown">
+            <i class="bi bi-person-circle text-muted" style="font-size: 1.5rem;"></i>
+        </button>
+        <ul class="dropdown-menu">
+            <li><a class="dropdown-item" id="login" asp-area="Identity" asp-page="/Account/Login">Login</a></li>
+            <li><a class="dropdown-item" id="register" asp-area="Identity" asp-page="/Account/Register">Register</a></li>
+        </ul>
+    </div>
+}

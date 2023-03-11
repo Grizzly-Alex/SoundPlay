@@ -9,3 +9,10 @@ public enum GuitarType
 	[Display(Name = "Accoustic Bass")] AcousticBass = 5,
 	[Display(Name = "Ukulele")] Ukulele = 6,
 }
+
+public enum Roles
+{
+	Admin,
+	Employee,
+	Customer,
+}

@@ -14,5 +14,5 @@ public enum Roles
 {
 	Admin,
 	Employee,
-	Customer
+	Customer,
 }

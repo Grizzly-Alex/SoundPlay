@@ -26,7 +26,7 @@ public static class Dependencies
         services.AddDbContext<IdentityAppDbContext>(options =>
             options.UseSqlServer(configuration.GetConnectionString("IdentityConnection")));
 
-        services.AddIdentity<IdentityUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
+        services.AddIdentity<IdentityUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = false)
             .AddDefaultTokenProviders()
             .AddDefaultUI()
             .AddEntityFrameworkStores<IdentityAppDbContext>();
@@ -79,6 +79,7 @@ public static class Dependencies
             name: "CustomerDefault",
             areaName: "Customer",
             pattern: "{controller=Home}/{action=Index}/{id?}");
+
         app.MapAreaControllerRoute(
             name: "AdminDefault",
             areaName: "Admin",

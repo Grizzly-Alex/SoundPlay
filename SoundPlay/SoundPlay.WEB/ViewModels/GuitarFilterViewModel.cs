@@ -41,7 +41,6 @@ public sealed class GuitarFilterViewModel : ProductFilterViewModel
         Category = category;
     }
 
-
     public GuitarFilterViewModel(
         IEnumerable<SelectListItem>? brands,
         IEnumerable<SelectListItem>? colors,

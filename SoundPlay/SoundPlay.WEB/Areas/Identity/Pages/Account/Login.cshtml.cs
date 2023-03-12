@@ -119,7 +119,6 @@ namespace SoundPlay.Web.Areas.Identity.Pages.Account
                 {
                     var user = await _signInManager.UserManager.FindByEmailAsync(Input.Email);
                     var roles = await _signInManager.UserManager.GetRolesAsync(user);
-
                     bool isAdmin = roles.Any(i => i.Equals(Roles.Admin.ToString(), StringComparison.OrdinalIgnoreCase));
 
                     if (isAdmin) 

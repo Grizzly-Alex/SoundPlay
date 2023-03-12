@@ -21,4 +21,16 @@ public class IdentityManagerController : Controller
         var customers = await _userManager.GetUsersInRoleAsync(role.ToString());
         return View(customers);
     }
+
+    [HttpGet]
+    public IActionResult Create()
+    {
+        return View();
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> Create(string returnUrl = null)
+    {      
+        return View();
+    }
 }

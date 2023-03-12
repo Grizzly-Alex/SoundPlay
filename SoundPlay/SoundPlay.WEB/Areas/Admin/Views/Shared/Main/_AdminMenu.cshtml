@@ -12,12 +12,18 @@
                 </div>
             </li>
             <li class="nav-item">
-                <button class="btn btn-toggle d-inline-flex align-items-center border-0 rounded shadow-none" data-bs-toggle="collapse" data-bs-target="#customers" aria-expanded="false">
-                    <h6 class="bi bi-people"> Customers</h6>
+                <button class="btn btn-toggle d-inline-flex align-items-center border-0 rounded shadow-none" data-bs-toggle="collapse" data-bs-target="#users" aria-expanded="false">
+                    <h6 class="bi bi-people"> Users</h6>
                 </button>
-                <div class="collapse" id="customers">
+                <div class="collapse" id="users">
                     <ul class="btn-toggle-nav list-unstyled fw-normal pb-1">
-                        <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">Test</a></li>
+                        <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">Create User</a></li>
+                        <li><a asp-area="Admin" asp-controller="IdentityManager" asp-action="Index" asp-route-role="@Roles.Admin"
+                               class="link-dark d-inline-flex text-decoration-none rounded">Admins</a></li>
+                        <li><a asp-area="Admin" asp-controller="IdentityManager" asp-action="Index" asp-route-role="@Roles.Customer"
+                               class="link-dark d-inline-flex text-decoration-none rounded">Customers</a></li>
+                        <li><a asp-area="Admin" asp-controller="IdentityManager" asp-action="Index" asp-route-role="@Roles.Employee"
+                               class="link-dark d-inline-flex text-decoration-none rounded">Employees</a></li>
                     </ul>
                 </div>
             </li>

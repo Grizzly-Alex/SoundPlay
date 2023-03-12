@@ -1,6 +1,4 @@
-﻿using Microsoft.Data.SqlClient;
-
-namespace SoundPlay.Web.Services;
+﻿namespace SoundPlay.Web.Services;
 
 public class ViewModelService<TModel, TViewModel> : IViewModelService<TModel, TViewModel>
     where TModel : Entity

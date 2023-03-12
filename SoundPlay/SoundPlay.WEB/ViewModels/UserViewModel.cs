@@ -37,5 +37,7 @@ public sealed class UserViewModel
 
     [Display(Name = "Phone Number")]
     public string? PhoneNumber { get; set; }
+
     public string? Role { get; set; }
+    public IEnumerable<SelectListItem>? RoleList { get; set; }
 }

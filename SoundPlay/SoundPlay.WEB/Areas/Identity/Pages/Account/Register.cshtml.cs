@@ -29,7 +29,6 @@ namespace SoundPlay.Web.Areas.Identity.Pages.Account
         private readonly IUserEmailStore<AppUser> _emailStore;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
-        private readonly RoleManager<IdentityRole> _roleManager;
         private readonly IMapper _mapper;
 
         public RegisterModel(
@@ -38,7 +37,6 @@ namespace SoundPlay.Web.Areas.Identity.Pages.Account
             SignInManager<AppUser> signInManager,
             ILogger<RegisterModel> logger,
             IEmailSender emailSender,
-            RoleManager<IdentityRole> roleManager,
             IMapper mapper)
         {
             _userManager = userManager;
@@ -47,7 +45,6 @@ namespace SoundPlay.Web.Areas.Identity.Pages.Account
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
-            _roleManager = roleManager;
             _mapper = mapper;
         }
 

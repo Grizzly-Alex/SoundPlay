@@ -2,53 +2,21 @@
 
 <h2 class="text-muted pt-3 pb-2 mb-3">@ViewData["role"]s List</h2>
 
+@{
+    string role = ViewData["role"].ToString() ?? string.Empty;
 
-@if (Model.Count() == 0)
-{
-    <table class="table table-bordered table-striped table-sm">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Email</th>
-                <th>Name</th>
-                <th>State</th>
-                <th>City</th>
-                <th>Streat Address</th>
-                <th>Phone Number</th>
-                <th>Postal Code</th>
-            </tr>
-        </thead>
-    </table>
+    if (role.Equals(Roles.Admin.ToString(),StringComparison.OrdinalIgnoreCase))
+    {
+        <partial name="~/Areas/Admin/Views/Shared/Tables/_AdminTable.cshtml" model="@Model" />
+    }
+    else if (role.Equals(Roles.Employee.ToString(), StringComparison.OrdinalIgnoreCase))
+    {
+        <partial name="~/Areas/Admin/Views/Shared/Tables/_EmployeeTable.cshtml" model="@Model" />
+    }
+    else if (role.Equals(Roles.Customer.ToString(), StringComparison.OrdinalIgnoreCase))
+    {
+        <partial name="~/Areas/Admin/Views/Shared/Tables/_CustomerTable.cshtml" model="@Model" />
+    }
 }
-else
-{
-    <table class="table table-bordered table-striped table-sm">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Email</th>
-                <th>Name</th>
-                <th>State</th>
-                <th>City</th>
-                <th>Streat Address</th>
-                <th>Phone Number</th>
-                <th>Postal Code</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var obj in Model)
-            {
-                <tr>
-                    <td>@obj.Id</td>
-                    <td>@obj.Email</td>
-                    <td>@obj.Name</td>
-                    <td>@obj.State</td>
-                    <td>@obj.City</td>
-                    <td>@obj.StreetAddress</td>
-                    <td>@obj.PhoneNumber</td>
-                    <td>@obj.PostalCode</td>
-                </tr>
-            }
-        </tbody>
-    </table>
-}
+
+

@@ -13,7 +13,6 @@ internal class AppUserConfiguration : IEntityTypeConfiguration<AppUser>
             .HasColumnName("street_address")
             .HasColumnType("varchar(max)");
 
-
         builder.Property(p => p.City)
             .HasColumnName("city")
             .HasColumnType("varchar(max)");

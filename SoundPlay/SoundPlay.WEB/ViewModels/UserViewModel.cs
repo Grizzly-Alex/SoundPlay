@@ -2,6 +2,8 @@
 
 public sealed class UserViewModel
 {
+    public string? Id { get; set; }
+
     [Required]
     [EmailAddress]
     [Display(Name = "Email")]

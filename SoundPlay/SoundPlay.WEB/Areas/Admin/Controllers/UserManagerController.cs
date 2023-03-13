@@ -60,15 +60,23 @@ public class UserManagerController : Controller
 
                 return RedirectToAction(nameof(Index), new {role = userView.Role});
             }
+            else
+            {
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError(string.Empty, error.Description);
+                }
+            }
         }
-        return RedirectToAction(nameof(Create));
+        return View(userView);
     }
 
-    public async Task<IActionResult> Delete(string userId)
-    {     
+    [HttpPost]
+    public async Task<IActionResult> Delete(string userId, string role)
+    {
         var user = await _userManager.FindByIdAsync(userId);
 
-        if (user is not null) 
+        if (user is not null)
         {
             var result = await _userManager.DeleteAsync(user);
 
@@ -76,11 +84,53 @@ public class UserManagerController : Controller
             {
                 _logger.LogInformation("User deleted.");
             }
+            else
+            {
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError(string.Empty, error.Description);
+                }
+            }
         }
-        else
+        return RedirectToAction(nameof(Index), new { role = role });
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> Edit(string userId)
+    {
+        var user = await _userManager.FindByIdAsync(userId);
+        if (user is null) { return NotFound(); }
+        var userView = _mapper.Map<UserViewModel>(user);
+
+        return View(userView);
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> Edit(UserViewModel userView)
+    {
+        if (ModelState.IsValid)
         {
-            _logger.LogInformation("User not found.");
+            var user = await _userManager.FindByIdAsync(userView.Id);
+
+            if (user is not null)
+            {
+                user.Name= userView.Name;
+                user.PhoneNumber = userView.PhoneNumber;
+                var result = await _userManager.UpdateAsync(user);
+
+                if (result.Succeeded)
+                {
+                    return RedirectToAction(nameof(Index), new { role = userView.Role });
+                }
+                else
+                {
+                    foreach (var error in result.Errors)
+                    {
+                        ModelState.AddModelError(string.Empty, error.Description);
+                    }
+                }
+            }
         }
-        return RedirectToAction(nameof(Index), new { role = TempData["role"] });
+        return View(userView);
     }
 }

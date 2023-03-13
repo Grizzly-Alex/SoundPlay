@@ -1,4 +1,4 @@
-﻿namespace SoundPlay.Core.Interfaces;
+﻿namespace SoundPlay.Web.Interfaces;
 
 public interface ICatalogService
 {

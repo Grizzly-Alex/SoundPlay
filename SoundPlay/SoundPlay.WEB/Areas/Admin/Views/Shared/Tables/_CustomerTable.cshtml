@@ -47,7 +47,7 @@ else
                     <td>@obj.PostalCode</td>
                     <td align="center">
                         <div class="btn-toolbar justify-content-between" role="toolbar">
-                            <form method="post" asp-controller="IdentityManager" asp-action="Delete" asp-route-userId="@obj.Id">
+                            <form method="post" asp-controller="UserManager" asp-action="Delete" asp-route-userId="@obj.Id" asp-route-role="@TempData["role"]">
                                 <button type="submit" class="btn btn-outline-danger btn-sm shadow-none">
                                     <i class="bi bi-trash3"></i>
                                 </button>

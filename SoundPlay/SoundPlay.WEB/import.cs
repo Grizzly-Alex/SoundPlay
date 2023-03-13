@@ -28,3 +28,4 @@ global using Microsoft.AspNetCore.Identity;
 global using SoundPlay.Infrastructure.DataAccess.DbContexts;
 global using Microsoft.AspNetCore.Identity.UI.Services;
 global using SoundPlay.Infrastructure.Services;
+global using SoundPlay.Web.Interfaces;

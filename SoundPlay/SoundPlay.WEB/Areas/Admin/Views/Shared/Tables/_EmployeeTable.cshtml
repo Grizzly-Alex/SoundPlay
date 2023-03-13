@@ -22,6 +22,7 @@ else
                 <th>Email</th>
                 <th>Name</th>
                 <th>Phone Number</th>
+                <th width="40px"></th>
             </tr>
         </thead>
         <tbody>
@@ -32,6 +33,15 @@ else
                     <td>@obj.Email</td>
                     <td>@obj.Name</td>
                     <td>@obj.PhoneNumber</td>
+                    <td align="center">
+                        <div class="btn-toolbar justify-content-between" role="toolbar">
+                            <form method="post" asp-controller="IdentityManager" asp-action="Delete" asp-route-userId="@obj.Id">
+                                <button type="submit" class="btn btn-outline-danger btn-sm shadow-none">
+                                    <i class="bi bi-trash3"></i>
+                                </button>
+                            </form>
+                        </div>
+                    </td>
                 </tr>
             }
         </tbody>

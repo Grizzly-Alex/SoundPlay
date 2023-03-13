@@ -17,14 +17,14 @@
                 </button>
                 <div class="collapse" id="users">
                     <ul class="btn-toggle-nav list-unstyled fw-normal pb-1">
-                        <li><a asp-area="Admin" asp-controller="IdentityManager" asp-action="Create"
-                               class="link-dark d-inline-flex text-decoration-none rounded">Create User</a></li>
-                        <li><a asp-area="Admin" asp-controller="IdentityManager" asp-action="Index" asp-route-role="@Roles.Admin"
-                               class="link-dark d-inline-flex text-decoration-none rounded">Admins</a></li>
-                        <li><a asp-area="Admin" asp-controller="IdentityManager" asp-action="Index" asp-route-role="@Roles.Customer"
-                               class="link-dark d-inline-flex text-decoration-none rounded">Customers</a></li>
-                        <li><a asp-area="Admin" asp-controller="IdentityManager" asp-action="Index" asp-route-role="@Roles.Employee"
-                               class="link-dark d-inline-flex text-decoration-none rounded">Employees</a></li>
+                        <li><a asp-area="Admin" asp-controller="UserManager" asp-action="Create"
+                            class="link-dark d-inline-flex text-decoration-none rounded">Create User</a></li>
+                        <li><a asp-area="Admin" asp-controller="UserManager" asp-action="Index" asp-route-role="@Roles.Admin.ToString()"
+                            class="link-dark d-inline-flex text-decoration-none rounded">Admins</a></li>
+                        <li><a asp-area="Admin" asp-controller="UserManager" asp-action="Index" asp-route-role="@Roles.Customer.ToString()"
+                            class="link-dark d-inline-flex text-decoration-none rounded">Customers</a></li>
+                        <li><a asp-area="Admin" asp-controller="UserManager" asp-action="Index" asp-route-role="@Roles.Employee.ToString()"
+                            class="link-dark d-inline-flex text-decoration-none rounded">Employees</a></li>
                     </ul>
                 </div>
             </li>

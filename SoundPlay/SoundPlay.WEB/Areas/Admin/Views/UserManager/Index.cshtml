@@ -1,9 +1,9 @@
 ﻿@model IList<AppUser> 
 
-<h2 class="text-muted pt-3 pb-2 mb-3">@ViewData["role"]s List</h2>
+<h2 class="text-muted pt-3 pb-2 mb-3">@TempData["role"]s List</h2>
 
 @{
-    string role = ViewData["role"].ToString() ?? string.Empty;
+    string role = TempData["role"].ToString() ?? string.Empty;
 
     if (role.Equals(Roles.Admin.ToString(),StringComparison.OrdinalIgnoreCase))
     {

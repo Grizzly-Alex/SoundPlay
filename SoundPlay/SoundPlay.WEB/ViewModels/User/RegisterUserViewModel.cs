@@ -1,9 +1,7 @@
-﻿namespace SoundPlay.Web.ViewModels;
+﻿namespace SoundPlay.Web.ViewModels.User;
 
-public sealed class CreateUserViewModel
+public sealed class RegisterUserViewModel
 {
-    public string? Id { get; set; }
-
     [Required]
     [EmailAddress]
     [Display(Name = "Email")]

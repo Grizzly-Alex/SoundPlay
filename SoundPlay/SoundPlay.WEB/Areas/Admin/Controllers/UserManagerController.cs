@@ -37,23 +37,20 @@ public class UserManagerController : Controller
     [HttpGet]
     public IActionResult Create()
     {
-        var user = new CreateUserViewModel
+        var user = new RegisterUserViewModel
         {
-            RoleList = _roleManager.Roles
-            .Where(i =>  i.Name != Roles.Customer.ToString())
-            .Select(i => i.Name)
-            .Select(i => new SelectListItem { Text = i, Value = i })
+            RoleList = GetSelectListRoles()
         };
         return View(user);
     }
 
     [HttpPost]
-    public async Task<IActionResult> Create(CreateUserViewModel userView)
+    public async Task<IActionResult> Create(RegisterUserViewModel userView)
     {
         if (ModelState.IsValid)
         {
             var user = _mapper.Map<AppUser>(userView);
-            await _userStore.SetUserNameAsync(user, userView.Name, CancellationToken.None);           
+            await _userStore.SetUserNameAsync(user, userView.Email, CancellationToken.None);
             var result = await _userManager.CreateAsync(user, userView.Password);
 
             if (result.Succeeded)
@@ -71,6 +68,8 @@ public class UserManagerController : Controller
                 }
             }
         }
+        userView.RoleList = GetSelectListRoles();
+
         return View(userView);
     }
 
@@ -109,14 +108,9 @@ public class UserManagerController : Controller
         }
 
         var roles = await _userManager.GetRolesAsync(user);
-
 		var userView = _mapper.Map<EditUserViewModel>(user);
-        userView.Role = roles.FirstOrDefault(); 
-
-        userView.RoleList = _roleManager.Roles
-            .Where(i => i.Name != Roles.Customer.ToString())
-            .Select(i => i.Name)
-            .Select(i => new SelectListItem { Text = i, Value = i });
+        userView.Role = roles.FirstOrDefault();
+        userView.RoleList = GetSelectListRoles();
 
 		return View(userView);
 	}
@@ -145,7 +139,6 @@ public class UserManagerController : Controller
 						await _userManager.AddToRoleAsync(user, userView.Role);
 						await _signInManager.RefreshSignInAsync(user);
 					}
-
 					return RedirectToAction(nameof(Index), new { role = userView.Role });
                 }
                 else
@@ -157,6 +150,15 @@ public class UserManagerController : Controller
                 }
             }
         }
+        userView.RoleList = GetSelectListRoles();
+
         return View(userView);
     }
+
+
+    private IEnumerable<SelectListItem> GetSelectListRoles()
+        => _roleManager.Roles
+            .Where(i => i.Name != Roles.Customer.ToString())
+            .Select(i => i.Name)
+            .Select(i => new SelectListItem { Text = i, Value = i });
 }

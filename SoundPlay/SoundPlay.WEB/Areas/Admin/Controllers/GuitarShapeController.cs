@@ -4,14 +4,10 @@
 public sealed class GuitarShapeController : Controller
 {
 	private readonly IViewModelService<GuitarShape, GuitarShapeViewModel> _guitarShapeService;
-	private readonly ILogger<GuitarShapeController> _logger;
 
-	public GuitarShapeController(
-        IViewModelService<GuitarShape, GuitarShapeViewModel> brandService,
-		ILogger<GuitarShapeController> logger)
+	public GuitarShapeController(IViewModelService<GuitarShape, GuitarShapeViewModel> brandService)
 	{
 		_guitarShapeService = brandService;
-		_logger = logger;
 	}
 
 	[HttpGet]

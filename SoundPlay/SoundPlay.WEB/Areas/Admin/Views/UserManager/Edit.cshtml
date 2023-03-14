@@ -14,7 +14,7 @@
 					<span class="bi bi-check-lg">Save</span>
 				</button>
 
-				<a asp-controller="UserManager" asp-action="index" asp-route-role="@TempData["role"]" class="btn btn-outline-secondary btn-sm shadow-none" style="width:80px">
+				<a asp-controller="UserManager" asp-action="index" asp-route-role="@Model.Role" class="btn btn-outline-secondary btn-sm shadow-none" style="width:80px">
 					<span class="bi bi-reply"> Back</span>
 				</a>
 			</div>

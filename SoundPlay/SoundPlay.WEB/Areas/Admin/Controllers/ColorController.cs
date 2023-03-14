@@ -4,14 +4,10 @@
 public sealed class ColorController : Controller
 {
     private readonly IViewModelService<Color, ColorViewModel> _colorService;
-	private readonly ILogger<ColorController> _logger;
 
-	public ColorController(
-		IViewModelService<Color, ColorViewModel> colorService,
-		ILogger<ColorController> logger)
+	public ColorController(IViewModelService<Color, ColorViewModel> colorService)
     {
         _colorService = colorService;
-        _logger = logger;
     }
 
 	[HttpGet]

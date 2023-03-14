@@ -18,6 +18,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
+using SoundPlay.Web.ViewModels.User;
 
 namespace SoundPlay.Web.Areas.Identity.Pages.Account
 {
@@ -49,7 +50,7 @@ namespace SoundPlay.Web.Areas.Identity.Pages.Account
         }
 
         [BindProperty]
-        public CreateUserViewModel UserInput { get; set; }
+        public RegisterUserViewModel UserInput { get; set; }
 
         /// <summary>
         ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
@@ -78,7 +79,7 @@ namespace SoundPlay.Web.Areas.Identity.Pages.Account
             {
                 var user = _mapper.Map<AppUser>(UserInput);
 
-                await _userStore.SetUserNameAsync(user, UserInput.Name, CancellationToken.None);
+                await _userStore.SetUserNameAsync(user, UserInput.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, UserInput.Email, CancellationToken.None);
 
                 var result = await _userManager.CreateAsync(user, UserInput.Password);

@@ -1,57 +1,76 @@
-﻿@model CreateUserViewModel
+﻿@model RegisterUserViewModel
 
-    <form method="post" asp-controller="UserManager" asp-action="Create" class="needs-validation" novalidate>
-        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-		    <h2 class="text-muted">Create User</h2>
-            <div class="btn-toolbar mb-2 mb-md-0">
-			    <div class="text-end">
-                    <button type="submit" class="btn btn-outline-secondary btn-sm shadow-none" style="width:80px">
-                        <span class="bi bi-check-lg">Create</span>
-                    </button>
-			    </div>
-		    </div>
-	    </div>
 
-        <div asp-validation-summary="All" class="text-danger"></div>
+<form method="post" asp-controller="UserManager" asp-action="Create" class="needs-validation" novalidate>
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+		<h2 class="text-muted">Create User</h2>
+        <div class="btn-toolbar mb-2 mb-md-0">
+		</div>
+	</div>
 
-        <div class="modal-body p-5 pt-3">
-            <div class="col-md-6 py-3">
-                <select asp-for="@Model.Role" asp-items="@Model.RoleList" class="form-select" required>
-                    <option selected disabled value="">--Select Role--</option>
-                </select>
-                <span asp-validation-for="@Model.Role" class="text-danger"></span>
-                <div class="valid-feedback">
-                    Valid!
+    <div class="modal position-static d-block py-2">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content rounded-4 shadow">
+                <div class="modal-body p-5 pt-5">
+
+                    <div asp-validation-summary="All" class="text-danger"></div>
+
+                    <div class="form-floating mb-3">
+                        <input asp-for="@Model.Email" class="form-control rounded-3" placeholder="name@example.com" required />
+                        <label asp-for="@Model.Email">Email</label>
+                        <span asp-validation-for="@Model.Email" class="text-danger"></span>
+                        <div class="valid-feedback">
+                            Valid!
+                        </div>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input asp-for="@Model.Name" class="form-control rounded-3" placeholder="name" required />
+                        <label asp-for="@Model.Name">Name</label>
+                        <span asp-validation-for="@Model.Name" class="text-danger"></span>
+                        <div class="valid-feedback">
+                            Valid!
+                        </div>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input asp-for="@Model.PhoneNumber" class="form-control" placeholder="8029-111-11-11" required />
+                        <label asp-for="@Model.PhoneNumber">Phone Number</label>
+                        <span asp-validation-for="@Model.PhoneNumber" class="text-danger"></span>
+                        <div class="valid-feedback">
+                            Valid!
+                        </div>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input asp-for="@Model.Password" class="form-control" placeholder="password" required />
+                        <label asp-for="@Model.Password">Password</label>
+                        <span asp-validation-for="@Model.Password" class="text-danger"></span>
+                        <div class="valid-feedback">
+                            Valid!
+                        </div>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input asp-for="@Model.ConfirmPassword" class="form-control" placeholder="password" required />
+                        <label asp-for="@Model.ConfirmPassword">Confirm Password</label>
+                        <span asp-validation-for="@Model.ConfirmPassword" class="text-danger"></span>
+                        <div class="valid-feedback">
+                            Valid!
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <select asp-for="@Model.Role" asp-items="@Model.RoleList" class="form-select" required>
+                            <option selected disabled value="">--Select Role--</option>
+                        </select>
+                        <span asp-validation-for="@Model.Role" class="text-danger"></span>
+                        <div class="valid-feedback">
+                            Valid!
+                        </div>
+                    </div>
+                    <button class="w-100 mb-2 btn btn-lg rounded-3 btn-secondary" type="submit">Create</button>
                 </div>
             </div>
-            <div class="form-floating col-md-6 py-3">
-                <label asp-for="@Model.Email">Email</label>
-                <input asp-for="@Model.Email" class="form-control"  placeholder="name@example.com" required />
-                <span asp-validation-for="@Model.Email" class="text-danger"></span>
-            </div>
-            <div class="form-floating col-md-6 py-3">
-                <label asp-for="@Model.Name">Name</label>
-                <input asp-for="@Model.Name" class="form-control" placeholder="name" required />
-                <span asp-validation-for="@Model.Name" class="text-danger"></span>
-            </div>
-            <div class="form-floating col-md-6 py-3">
-                <label asp-for="@Model.PhoneNumber">Phone Number</label>
-                <input asp-for="@Model.PhoneNumber" class="form-control" placeholder="8029-111-11-11" required />
-                <span asp-validation-for="@Model.PhoneNumber" class="text-danger"></span>
-            </div>
-            <div class="form-floating col-md-6 py-3">
-                <label asp-for="@Model.Password">Password</label>
-                <input asp-for="@Model.Password" class="form-control" placeholder="password" required />
-                <span asp-validation-for="@Model.Password" class="text-danger"></span>
-            </div>
-            <div class="form-floating col-md-6 py-3">
-                <label asp-for="@Model.ConfirmPassword">Confirm Password</label>
-                <input asp-for="@Model.ConfirmPassword" class="form-control" placeholder="password" required />
-                <span asp-validation-for="@Model.ConfirmPassword" class="text-danger"></span>
-            </div>
         </div>
+    </div>
+</form>
 
-    </form>
 
 
 @section Scripts {

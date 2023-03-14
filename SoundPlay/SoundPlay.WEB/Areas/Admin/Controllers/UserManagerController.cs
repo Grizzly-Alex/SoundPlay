@@ -3,20 +3,23 @@
 [Area("Admin")]
 public class UserManagerController : Controller
 {
-    private readonly UserManager<AppUser> _userManager;
+	private readonly SignInManager<AppUser> _signInManager;
+	private readonly UserManager<AppUser> _userManager;
     private readonly IUserStore<AppUser> _userStore;
     private readonly ILogger<UserManagerController> _logger;
     private readonly IMapper _mapper;
     private readonly RoleManager<IdentityRole> _roleManager;
 
     public UserManagerController(
-        UserManager<AppUser> userManager,
+		SignInManager<AppUser> signInManager,
+		UserManager<AppUser> userManager,
         IUserStore<AppUser> userStore,
         ILogger<UserManagerController> logger,
         IMapper mapper,
         RoleManager<IdentityRole> roleManager)
     {
-        _userManager = userManager;
+		_signInManager = signInManager;
+		_userManager = userManager;
         _userStore = userStore;
         _logger = logger;
         _mapper = mapper;
@@ -27,14 +30,14 @@ public class UserManagerController : Controller
     public async Task<IActionResult> Index(string role)
     {
         TempData["role"] = role;
-        var customers = await _userManager.GetUsersInRoleAsync(role.ToString());
+		var customers = await _userManager.GetUsersInRoleAsync(role.ToString());
         return View(customers);
     }
 
     [HttpGet]
     public IActionResult Create()
     {
-        var user = new UserViewModel
+        var user = new CreateUserViewModel
         {
             RoleList = _roleManager.Roles
             .Where(i =>  i.Name != Roles.Customer.ToString())
@@ -45,7 +48,7 @@ public class UserManagerController : Controller
     }
 
     [HttpPost]
-    public async Task<IActionResult> Create(UserViewModel userView)
+    public async Task<IActionResult> Create(CreateUserViewModel userView)
     {
         if (ModelState.IsValid)
         {
@@ -99,14 +102,27 @@ public class UserManagerController : Controller
     public async Task<IActionResult> Edit(string userId)
     {
         var user = await _userManager.FindByIdAsync(userId);
-        if (user is null) { return NotFound(); }
-        var userView = _mapper.Map<UserViewModel>(user);
 
-        return View(userView);
-    }
+        if (user is null) 
+        { 
+            return NotFound();
+        }
+
+        var roles = await _userManager.GetRolesAsync(user);
+
+		var userView = _mapper.Map<EditUserViewModel>(user);
+        userView.Role = roles.FirstOrDefault(); 
+
+        userView.RoleList = _roleManager.Roles
+            .Where(i => i.Name != Roles.Customer.ToString())
+            .Select(i => i.Name)
+            .Select(i => new SelectListItem { Text = i, Value = i });
+
+		return View(userView);
+	}
 
     [HttpPost]
-    public async Task<IActionResult> Edit(UserViewModel userView)
+    public async Task<IActionResult> Edit(EditUserViewModel userView)
     {
         if (ModelState.IsValid)
         {
@@ -120,7 +136,17 @@ public class UserManagerController : Controller
 
                 if (result.Succeeded)
                 {
-                    return RedirectToAction(nameof(Index), new { role = userView.Role });
+					var roles = await _userManager.GetRolesAsync(user);
+                    var role = roles.FirstOrDefault();
+
+                    if(!role.Equals(userView.Role, StringComparison.CurrentCultureIgnoreCase))
+					{
+						await _userManager.RemoveFromRoleAsync(user, role);
+						await _userManager.AddToRoleAsync(user, userView.Role);
+						await _signInManager.RefreshSignInAsync(user);
+					}
+
+					return RedirectToAction(nameof(Index), new { role = userView.Role });
                 }
                 else
                 {

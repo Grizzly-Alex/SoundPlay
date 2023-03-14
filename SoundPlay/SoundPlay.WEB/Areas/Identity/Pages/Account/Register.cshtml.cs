@@ -49,7 +49,7 @@ namespace SoundPlay.Web.Areas.Identity.Pages.Account
         }
 
         [BindProperty]
-        public UserViewModel UserInput { get; set; }
+        public CreateUserViewModel UserInput { get; set; }
 
         /// <summary>
         ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used

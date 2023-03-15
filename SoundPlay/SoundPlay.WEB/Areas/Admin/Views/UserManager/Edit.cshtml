@@ -21,11 +21,10 @@
 		</div>
 	</div>
 
-	<div asp-validation-summary="All" class="text-danger"></div>
+	<div class="modal-content">
+		<div asp-validation-summary="All" class="text-danger"></div>
 
-	<div class="row">
-		<div class="mb-3 col-4">
-			<label asp-for="@Model.Role"></label>
+		<div class="col-6 mb-3">
 			<select asp-for="@Model.Role" asp-items="@Model.RoleList" class="form-select" required>
 				<option selected disabled value="">@Model.Role</option>
 			</select>
@@ -34,22 +33,23 @@
 				Valid!
 			</div>
 		</div>
-		<div class="mb-3 col-4">
-			<label asp-for="@Model.Name"></label>
+		<div class="form-floating col-6 mb-3">
 			<input asp-for="@Model.Name" class="form-control" required>
+			<label asp-for="@Model.Name">Name</label>
 			<span asp-validation-for="@Model.Name" class="text-danger"></span>
 			<div class="valid-feedback">
 				Valid!
 			</div>
 		</div>
-		<div class="mb-3 col-4">
-			<label asp-for="@Model.PhoneNumber"></label>
+		<div class="form-floating col-6 mb-3">
 			<input asp-for="@Model.PhoneNumber" class="form-control" required>
+			<label asp-for="@Model.PhoneNumber">Phone number</label>
 			<span asp-validation-for="@Model.PhoneNumber" class="text-danger"></span>
 			<div class="valid-feedback">
 				Valid!
 			</div>
 		</div>
+		
 	</div>
 </form>
 

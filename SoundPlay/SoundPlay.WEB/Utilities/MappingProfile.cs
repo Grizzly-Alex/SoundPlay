@@ -1,10 +1,14 @@
-﻿namespace SoundPlay.Web.Utilities;
+﻿using SoundPlay.Web.ViewModels.User;
+
+namespace SoundPlay.Web.Utilities;
 
 public sealed class MappingProfile : Profile
 {
     public MappingProfile()
     {
-        CreateMap(typeof(PagedList<>), typeof(PagedListViewModel<>));
+        CreateMap<AppUser, RegisterUserViewModel>().ReverseMap();
+		CreateMap<AppUser, EditUserViewModel>().ReverseMap();
+		CreateMap(typeof(PagedList<>), typeof(PagedListViewModel<>));
 		CreateMap<GuitarCategory, GuitarCategoryViewModel>().ReverseMap();
 		CreateMap<Brand, BrandViewModel>().ReverseMap();
         CreateMap<GuitarShape, GuitarShapeViewModel>().ReverseMap();

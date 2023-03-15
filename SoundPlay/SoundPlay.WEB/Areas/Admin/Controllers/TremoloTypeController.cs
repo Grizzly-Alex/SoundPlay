@@ -4,14 +4,10 @@
 public sealed class TremoloTypeController : Controller
 {
 	private readonly IViewModelService<TremoloType, TremoloTypeViewModel> _tremoloTypeService;
-	private readonly ILogger<TremoloTypeController> _logger;
 
-	public TremoloTypeController(
-		IViewModelService<TremoloType, TremoloTypeViewModel> brandService,
-		ILogger<TremoloTypeController> logger)
+	public TremoloTypeController(IViewModelService<TremoloType, TremoloTypeViewModel> brandService)
 	{
 		_tremoloTypeService = brandService;
-		_logger = logger;
 	}
 
 	[HttpGet]

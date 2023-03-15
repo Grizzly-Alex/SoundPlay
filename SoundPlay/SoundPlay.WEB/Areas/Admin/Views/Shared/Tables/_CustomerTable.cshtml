@@ -1,0 +1,61 @@
+﻿@model IList<AppUser>
+
+@if (Model.Count() == 0)
+{
+    <table class="table table-bordered table-striped table-sm">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Email</th>
+                <th>Name</th>
+                <th>State</th>
+                <th>City</th>
+                <th>Streat Address</th>
+                <th>Phone Number</th>
+                <th>Postal Code</th>
+            </tr>
+        </thead>
+    </table>
+}
+else
+{
+    <table class="table table-bordered table-striped table-sm">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Email</th>
+                <th>Name</th>
+                <th>State</th>
+                <th>City</th>
+                <th>Streat Address</th>
+                <th>Phone Number</th>
+                <th>Postal Code</th>
+                <th width="40px"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var obj in Model)
+            {
+                <tr>
+                    <td>@obj.Id</td>
+                    <td>@obj.Email</td>
+                    <td>@obj.Name</td>
+                    <td>@obj.State</td>
+                    <td>@obj.City</td>
+                    <td>@obj.StreetAddress</td>
+                    <td>@obj.PhoneNumber</td>
+                    <td>@obj.PostalCode</td>
+                    <td align="center">
+                        <div class="btn-toolbar justify-content-between" role="toolbar">
+                            <form method="post" asp-controller="UserManager" asp-action="Delete" asp-route-userId="@obj.Id" asp-route-role="@TempData["role"]">
+                                <button type="submit" class="btn btn-outline-danger btn-sm shadow-none">
+                                    <i class="bi bi-trash3"></i>
+                                </button>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

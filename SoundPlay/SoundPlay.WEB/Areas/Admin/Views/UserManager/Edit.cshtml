@@ -1,0 +1,59 @@
+﻿@model EditUserViewModel
+
+
+<form method="post" asp-controller="UserManager" asp-action="Edit" class="row g-3 needs-validation" novalidate>
+
+	<input asp-for="@Model.Id" hidden />
+
+	<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+		<h2 class="text-muted">Edit User</h2>
+		<div class="btn-toolbar mb-2 mb-md-0">
+			<div class="text-end">
+
+				<button type="submit" class="btn btn-outline-secondary btn-sm shadow-none" style="width:80px">
+					<span class="bi bi-check-lg">Save</span>
+				</button>
+
+				<a asp-controller="UserManager" asp-action="index" asp-route-role="@Model.Role" class="btn btn-outline-secondary btn-sm shadow-none" style="width:80px">
+					<span class="bi bi-reply"> Back</span>
+				</a>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal-content">
+		<div asp-validation-summary="All" class="text-danger"></div>
+
+		<div class="col-6 mb-3">
+			<select asp-for="@Model.Role" asp-items="@Model.RoleList" class="form-select" required>
+				<option selected disabled value="">@Model.Role</option>
+			</select>
+			<span asp-validation-for="@Model.Role" class="text-danger"></span>
+			<div class="valid-feedback">
+				Valid!
+			</div>
+		</div>
+		<div class="form-floating col-6 mb-3">
+			<input asp-for="@Model.Name" class="form-control" required>
+			<label asp-for="@Model.Name">Name</label>
+			<span asp-validation-for="@Model.Name" class="text-danger"></span>
+			<div class="valid-feedback">
+				Valid!
+			</div>
+		</div>
+		<div class="form-floating col-6 mb-3">
+			<input asp-for="@Model.PhoneNumber" class="form-control" required>
+			<label asp-for="@Model.PhoneNumber">Phone number</label>
+			<span asp-validation-for="@Model.PhoneNumber" class="text-danger"></span>
+			<div class="valid-feedback">
+				Valid!
+			</div>
+		</div>
+		
+	</div>
+</form>
+
+@section Scripts{
+	<partial name="_ValidationScriptsPartial" />
+
+}

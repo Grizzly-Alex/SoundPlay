@@ -4,14 +4,10 @@
 public sealed class MaterialController : Controller
 {
 	private readonly IViewModelService<Material, MaterialViewModel> _materialService;
-	private readonly ILogger<MaterialController> _logger;
 
-	public MaterialController(
-		IViewModelService<Material, MaterialViewModel> brandService,
-		ILogger<MaterialController> logger)
+	public MaterialController(IViewModelService<Material, MaterialViewModel> brandService)
 	{
 		_materialService = brandService;
-		_logger = logger;
 	}
 
 	[HttpGet]

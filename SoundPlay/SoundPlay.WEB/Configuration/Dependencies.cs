@@ -26,7 +26,7 @@ public static class Dependencies
         services.AddDbContext<IdentityAppDbContext>(options =>
             options.UseSqlServer(configuration.GetConnectionString("IdentityConnection")));
 
-        services.AddIdentity<IdentityUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = false)
+        services.AddIdentity<AppUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = false)
             .AddDefaultTokenProviders()
             .AddDefaultUI()
             .AddEntityFrameworkStores<IdentityAppDbContext>();
@@ -76,14 +76,13 @@ public static class Dependencies
         app.MapRazorPages();
 
         app.MapAreaControllerRoute(
-            name: "CustomerDefault",
-            areaName: "Customer",
-            pattern: "{controller=Home}/{action=Index}/{id?}");
-
-        app.MapAreaControllerRoute(
             name: "AdminDefault",
             areaName: "Admin",
             pattern: "{area=Admin}/{controller=Home}/{action=Index}/{id?}");
+        app.MapAreaControllerRoute(
+            name: "CustomerDefault",
+            areaName: "Customer",
+            pattern: "{controller=Home}/{action=Index}/{id?}");
 
         app.UseMiddleware<ExceptionHandlingMiddleware>();
 

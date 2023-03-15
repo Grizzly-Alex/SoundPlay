@@ -4,14 +4,10 @@
 public sealed class BrandController : Controller
 {
 	private readonly IViewModelService<Brand, BrandViewModel> _brandService;
-	private readonly ILogger<BrandController> _logger;
 
-    public BrandController(
-        IViewModelService<Brand, BrandViewModel> brandService,
-        ILogger<BrandController> logger)
+    public BrandController(IViewModelService<Brand, BrandViewModel> brandService)
     {
         _brandService = brandService;
-        _logger = logger;
     }
 
     [HttpGet]

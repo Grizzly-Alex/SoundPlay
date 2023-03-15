@@ -4,14 +4,10 @@
 public sealed class PickupSetController : Controller
 {
 	private readonly IViewModelService<PickupSet, PickupSetViewModel> _pickupSetService;
-	private readonly ILogger<PickupSetController> _logger;
 
-	public PickupSetController(
-		IViewModelService<PickupSet, PickupSetViewModel> brandService,
-		ILogger<PickupSetController> logger)
+	public PickupSetController(IViewModelService<PickupSet, PickupSetViewModel> brandService)
 	{
 		_pickupSetService = brandService;
-		_logger = logger;
 	}
 
 	[HttpGet]

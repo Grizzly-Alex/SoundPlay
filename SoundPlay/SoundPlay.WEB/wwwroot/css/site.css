@@ -57,3 +57,11 @@ body {
     background: #EAECEE;
     transform: scale(0.97);
 }
+
+div.container-full {
+    background: #ccc;
+    left: 50%;
+    margin-left: -50vw;
+    position: relative;
+    width: 100vw
+}

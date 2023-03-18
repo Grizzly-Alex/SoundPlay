@@ -1,4 +1,4 @@
-﻿namespace SoundPlay.Web.ViewModels;
+﻿namespace SoundPlay.Web.ViewModels.Filters;
 
 public abstract class ProductFilterViewModel
 {

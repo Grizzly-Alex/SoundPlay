@@ -1,8 +1,10 @@
-﻿namespace SoundPlay.Web.ViewModels;
+﻿using SoundPlay.Core.Enums;
+
+namespace SoundPlay.Web.ViewModels.Filters;
 
 public sealed class GuitarFilterViewModel : ProductFilterViewModel
 {
-    public GuitarType Category { get; set; }
+    public GuitarTag Category { get; set; }
     public int? BrandId { get; set; }
     public int? ColorId { get; set; }
     public int? ShapeId { get; set; }
@@ -32,7 +34,7 @@ public sealed class GuitarFilterViewModel : ProductFilterViewModel
     public GuitarFilterViewModel() { }
 
     public GuitarFilterViewModel(
-        GuitarType category,
+        GuitarTag category,
         decimal? minPrice,
         decimal? maxPrice)
     {
@@ -50,8 +52,8 @@ public sealed class GuitarFilterViewModel : ProductFilterViewModel
         IEnumerable<SelectListItem>? tremoloTypes,
         decimal? minPrice,
         decimal? maxPrice,
-        GuitarType category) : this (category, minPrice, maxPrice)
-    {  
+        GuitarTag category) : this(category, minPrice, maxPrice)
+    {
         Brands = brands;
         Colors = colors;
         GuitarShapes = shapes;

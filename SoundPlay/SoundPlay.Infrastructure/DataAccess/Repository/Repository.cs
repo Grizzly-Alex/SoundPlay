@@ -1,17 +1,16 @@
-﻿using SoundPlay.Infrastructure.DataAccess.DbContexts;
+﻿namespace SoundPlay.Infrastructure.DataAccess.Repository;
 
-namespace SoundPlay.Infrastructure.DataAccess.Repository;
-
-public class Repository<TEntity> : IRepository<TEntity> where TEntity : Entity
+public class Repository<TDbContext, TEntity> : IRepository<TDbContext, TEntity>
+	where TDbContext : DbContext
+	where TEntity : Entity	
 {
-	protected readonly ApplicationDbContext _dbContext;
+	private readonly TDbContext _dbContext;
 	private readonly DbSet<TEntity> _dbSet;
 
-	public Repository(ApplicationDbContext dbContext)
+	public Repository(TDbContext dbContext)
 	{
 		_dbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
-		_dbSet = _dbContext.Set<TEntity>();
-        
+		_dbSet = _dbContext.Set<TEntity>();       
     }
 
 	public void Add(TEntity entity)
@@ -22,8 +21,7 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : Entity
     public void Remove(int id)
     {
 		var entity = _dbSet.First(e => e.Id == id);
-        _dbSet.Entry(entity).State = EntityState.Deleted;
-
+		_dbSet.Entry(entity).State = EntityState.Deleted;
     }
 
     public void Update(TEntity entity)

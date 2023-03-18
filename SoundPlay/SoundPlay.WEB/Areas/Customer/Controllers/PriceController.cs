@@ -1,6 +1,4 @@
-﻿using SoundPlay.Web.ViewModels;
-
-namespace SoundPlay.Web.Areas.Customer.Controllers;
+﻿namespace SoundPlay.Web.Areas.Customer.Controllers;
 
 [Area("Customer")]
 public sealed class PriceController : Controller

@@ -5,12 +5,12 @@ public class ViewModelService<TModel, TViewModel> : IViewModelService<TModel, TV
     where TViewModel : EntityViewModel
 {
     protected readonly IMapper _mapper;
-    protected readonly IUnitOfWork _unitOfWork;
+    protected readonly IUnitOfWork<CatalogDbContext> _unitOfWork;
     protected readonly ILogger<ViewModelService<TModel, TViewModel>> _logger;
 
     public ViewModelService(
         IMapper mapper,
-        IUnitOfWork unitOfWork,
+		IUnitOfWork<CatalogDbContext> unitOfWork,
         ILogger<ViewModelService<TModel, TViewModel>> logger)
     {
         _mapper = mapper;

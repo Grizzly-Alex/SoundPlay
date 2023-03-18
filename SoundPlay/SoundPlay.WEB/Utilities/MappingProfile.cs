@@ -1,4 +1,4 @@
-﻿using SoundPlay.Web.ViewModels.User;
+﻿using SoundPlay.Web.ViewModels.Products;
 
 namespace SoundPlay.Web.Utilities;
 

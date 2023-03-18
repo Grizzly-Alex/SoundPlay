@@ -8,13 +8,16 @@
             var totalItems = await source
                 .CountAsync(cancellationToken)
                 .ConfigureAwait(false);  
+
             var items = await source
                 .Skip(pageIndex * itemsPerPage)
                 .Take(itemsPerPage)
                 .ToListAsync(cancellationToken)
                 .ConfigureAwait(false);
 
-            return new PagedList<TItem>(items, pageIndex, itemsPerPage, totalItems);
+            var totalPages = (int)Math.Ceiling(totalItems / (double)itemsPerPage);
+
+			return new PagedList<TItem>(items.ToList(), pageIndex, itemsPerPage, totalItems, totalPages);
         }
     }
 }

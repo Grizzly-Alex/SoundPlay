@@ -1,4 +1,6 @@
-﻿namespace SoundPlay.Web.ViewModels;
+﻿using SoundPlay.Web.ViewModels.Products;
+
+namespace SoundPlay.Web.ViewModels.Administration;
 
 public sealed class CreateGuitarViewModel
 {

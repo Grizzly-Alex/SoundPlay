@@ -1,4 +1,6 @@
-﻿namespace SoundPlay.Web.ViewModels;
+﻿using SoundPlay.Web.ViewModels.Page;
+
+namespace SoundPlay.Web.ViewModels.Shop;
 
 public class CatalogViewModel<TFilter>
 {

@@ -15,6 +15,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using System.Security.Claims;
+using SoundPlay.Core.Enums;
 
 namespace SoundPlay.Web.Areas.Identity.Pages.Account
 {

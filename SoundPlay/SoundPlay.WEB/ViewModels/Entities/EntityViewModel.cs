@@ -1,4 +1,4 @@
-﻿namespace SoundPlay.Infrastructure.Buisnesslogic.ViewModels;
+﻿namespace SoundPlay.Web.ViewModels.Entities;
 
 public abstract class EntityViewModel
 {

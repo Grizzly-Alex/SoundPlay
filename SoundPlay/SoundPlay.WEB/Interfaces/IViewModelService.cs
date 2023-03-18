@@ -1,4 +1,6 @@
-﻿namespace SoundPlay.Web.Interfaces;
+﻿using SoundPlay.Web.ViewModels.Entities;
+
+namespace SoundPlay.Web.Interfaces;
 
 public interface IViewModelService<TModel, TViewModel>
     where TModel: Entity

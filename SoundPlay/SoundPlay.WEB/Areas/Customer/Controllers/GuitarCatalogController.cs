@@ -1,4 +1,10 @@
-﻿namespace SoundPlay.Web.Areas.Customer.Controllers;
+﻿using SoundPlay.Core.Enums;
+using SoundPlay.Web.ViewModels.Filters;
+using SoundPlay.Web.ViewModels.Page;
+using SoundPlay.Web.ViewModels.Products;
+using SoundPlay.Web.ViewModels.Shop;
+
+namespace SoundPlay.Web.Areas.Customer.Controllers;
 
 [Area("Customer")]
 public class GuitarCatalogController : Controller
@@ -14,7 +20,7 @@ public class GuitarCatalogController : Controller
         _guitarService = guitarService;
 	}
 
-    public async Task<IActionResult> DefineCategory(GuitarType category)
+    public async Task<IActionResult> DefineCategory(GuitarTag category)
     {
         var _minPrice = await _catalogService.GetMinPrice<Guitar>(i => i.CategoryId == (int)category);
         var _maxPrice = await _catalogService.GetMaxPrice<Guitar>(i => i.CategoryId == (int)category);

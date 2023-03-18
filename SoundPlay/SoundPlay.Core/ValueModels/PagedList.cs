@@ -10,13 +10,13 @@ public sealed class PagedList<TItem> : IPagedList<TItem>
     public bool HasNextPage => PageId + 1 < TotalPages;
     public IList<TItem> Items { get; init; }
 
-    public PagedList(IEnumerable<TItem> items, int pageId, int itemsPerPage, int totalItems)
+    public PagedList(IList<TItem> items, int pageId, int itemsPerPage, int totalItems, int totalPages)
     {
-        Items = items.ToList();
+        Items = items;
         PageId = pageId;
         ItemsPerPage = itemsPerPage;
         TotalItems = totalItems;
-        TotalPages = (int)Math.Ceiling(totalItems / (double)ItemsPerPage);
+        TotalPages = totalPages;
     }
 
     public PagedList() => Items = Array.Empty<TItem>();

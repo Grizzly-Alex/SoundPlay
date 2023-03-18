@@ -1,4 +1,4 @@
-﻿namespace SoundPlay.Web.ViewModels;
+﻿namespace SoundPlay.Web.ViewModels.Shop;
 
 public sealed class Basket
 {

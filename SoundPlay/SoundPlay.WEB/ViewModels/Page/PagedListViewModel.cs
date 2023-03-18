@@ -1,4 +1,4 @@
-﻿namespace SoundPlay.Web.ViewModels;
+﻿namespace SoundPlay.Web.ViewModels.Page;
 
 public sealed class PagedListViewModel<TModel> : PagedInfoViewModel
 {

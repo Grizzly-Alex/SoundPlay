@@ -24,7 +24,7 @@ public sealed class BasketController : Controller
 
         // if there is a filled Basket in the session, then take the data from it    
         if (basketFromSession!=null
-            &&basketFromSession!.TotalCount>0)
+            &&basketFromSession!.TotalCount > 0)
         {
             basket=basketFromSession!;
         }

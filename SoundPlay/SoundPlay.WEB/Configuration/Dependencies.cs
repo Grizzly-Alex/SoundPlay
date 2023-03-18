@@ -1,4 +1,5 @@
-﻿using ILogger = Serilog.ILogger;
+﻿using SoundPlay.Web.ViewModels.Products;
+using ILogger = Serilog.ILogger;
 
 namespace SoundPlay.WEB.Configuration;
 
@@ -17,7 +18,7 @@ public static class Dependencies
 
     public static void SetDbContext(IConfiguration configuration, IServiceCollection services)
     {
-        services.AddDbContext<ApplicationDbContext>(options =>
+        services.AddDbContext<CatalogDbContext>(options =>
         { 
             options.UseSqlServer(configuration.GetConnectionString("CatalogConnection")); 
             options.EnableSensitiveDataLogging();
@@ -48,7 +49,7 @@ public static class Dependencies
         });
 
         #region Model CRUD services
-        services.AddTransient<IUnitOfWork, UnitOfWork>();
+        services.AddTransient(typeof(IUnitOfWork<>), typeof(UnitOfWork<>));
         services.AddTransient<IViewModelService<Guitar, GuitarViewModel>, GuitarViewModelService>();
         services.AddTransient(typeof(IViewModelService<,>), typeof(ViewModelService<,>));
         services.AddTransient<ICatalogService, CatalogService>();

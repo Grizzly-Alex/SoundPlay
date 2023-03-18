@@ -2,10 +2,10 @@
 
 public sealed class CatalogService : ICatalogService
 {
-    private readonly IUnitOfWork _unitOfWork;
+    private readonly IUnitOfWork<CatalogDbContext> _unitOfWork;
     private readonly IMapper _mapper;
 
-    public CatalogService(IUnitOfWork unitOfWork, IMapper mapper)
+    public CatalogService(IUnitOfWork<CatalogDbContext> unitOfWork, IMapper mapper)
     {
         _unitOfWork = unitOfWork;
         _mapper = mapper;
@@ -44,7 +44,7 @@ public sealed class CatalogService : ICatalogService
         return pagedInfo;
     }
 
-    public async Task<GuitarFilterViewModel> GetGuitarFilterAsync(GuitarType category, decimal? minPrice, decimal? maxPrice)
+    public async Task<GuitarFilterViewModel> GetGuitarFilterAsync(GuitarTag category, decimal? minPrice, decimal? maxPrice)
     {
         var brands = await _unitOfWork.GetRepository<Brand>().GetAllAsync();
         var colors = await _unitOfWork.GetRepository<Color>().GetAllAsync();

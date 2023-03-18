@@ -1,10 +1,12 @@
-﻿namespace SoundPlay.Web.Services;
+﻿using SoundPlay.Web.ViewModels.Products;
+
+namespace SoundPlay.Web.Services;
 
 public sealed class GuitarViewModelService : ViewModelService<Guitar, GuitarViewModel>
 {
     public GuitarViewModelService(
         IMapper mapper,
-        IUnitOfWork unitOfWork,
+        IUnitOfWork<CatalogDbContext> unitOfWork,
         ILogger<ViewModelService<Guitar, GuitarViewModel>> logger) : base(mapper, unitOfWork, logger)
     {
     }

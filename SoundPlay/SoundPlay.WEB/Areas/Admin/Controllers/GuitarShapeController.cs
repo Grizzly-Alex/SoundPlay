@@ -1,4 +1,6 @@
-﻿namespace SoundPlay.Web.Areas.Admin.Controllers;
+﻿using SoundPlay.Web.ViewModels.Entities;
+
+namespace SoundPlay.Web.Areas.Admin.Controllers;
 
 [Area("Admin")]
 public sealed class GuitarShapeController : Controller

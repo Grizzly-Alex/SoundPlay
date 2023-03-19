@@ -10,3 +10,7 @@ global using SoundPlay.Infrastructure.DataAccess.ModelConfigurations;
 global using Microsoft.AspNetCore.Identity.UI.Services;
 global using SoundPlay.Core.Enums;
 global using SoundPlay.Infrastructure.DataAccess.DbContexts;
+global using SoundPlay.Core.ValueModels;
+global using Microsoft.Extensions.Logging;
+global using Microsoft.AspNetCore.Http;
+global using SoundPlay.Core.Exceptions;

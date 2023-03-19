@@ -1,23 +1,20 @@
-﻿using SoundPlay.Core.Enums;
-using SoundPlay.Web.ViewModels.Filters;
-using SoundPlay.Web.ViewModels.Page;
-using SoundPlay.Web.ViewModels.Products;
-using SoundPlay.Web.ViewModels.Shop;
-
-namespace SoundPlay.Web.Areas.Customer.Controllers;
+﻿namespace SoundPlay.Web.Areas.Customer.Controllers;
 
 [Area("Customer")]
 public class GuitarCatalogController : Controller
 {
 	private readonly ICatalogService _catalogService;
     private readonly IViewModelService<Guitar, GuitarViewModel> _guitarService;
+    private readonly IBasketManager _basketManager;
 
 	public GuitarCatalogController(
         IViewModelService<Guitar, GuitarViewModel> guitarService,
-        ICatalogService catalogGuitar)
+        ICatalogService catalogGuitar,
+		IBasketManager basketManager)
 	{
         _catalogService = catalogGuitar;
         _guitarService = guitarService;
+		_basketManager = basketManager;
 	}
 
     public async Task<IActionResult> DefineCategory(GuitarTag category)
@@ -61,4 +58,29 @@ public class GuitarCatalogController : Controller
 
         return View(guitarViewModel);
     }
+
+	[HttpPost]
+	public async Task<IActionResult> AddToBasket(int id, byte count = 1)
+    {
+		var basket = _basketManager.GetBasket(HttpContext.Session);
+        var basketPosition = await _basketManager.GetBasketPositionAsync<Guitar>(id, count);
+        _basketManager.AddPositionToBasket(basketPosition);
+
+		HttpContext.Session.Set(Constants.BasketSession, basket);
+
+		return RedirectToAction(nameof(Index));
+    }
+
+
+	[HttpPost]
+	public async Task<IActionResult> UpdateBasket(int id, byte count = 1)
+	{
+		var basket = _basketManager.GetBasket(HttpContext.Session);
+		var positionForChange = await _basketManager.GetBasketPositionAsync<Guitar>(id, count);
+		_basketManager.AddPositionToBasket(positionForChange);
+
+		HttpContext.Session.Set(Constants.BasketSession, basket);
+
+		return RedirectToAction(nameof(Index));
+	}
 }

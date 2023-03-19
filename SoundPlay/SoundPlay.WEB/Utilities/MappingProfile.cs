@@ -1,6 +1,4 @@
-﻿using SoundPlay.Web.ViewModels.Products;
-
-namespace SoundPlay.Web.Utilities;
+﻿namespace SoundPlay.Web.Utilities;
 
 public sealed class MappingProfile : Profile
 {
@@ -17,10 +15,10 @@ public sealed class MappingProfile : Profile
         CreateMap<Color, ColorViewModel>().ReverseMap();
         CreateMap<PickupSet, PickupSetViewModel>().ReverseMap();
         CreateMap<Guitar, GuitarViewModel>().ReverseMap();
-        CreateMap<GuitarViewModel, BasketPosition>()
-            .ForMember(position => position.ProductId, opt => opt.MapFrom(guitar => guitar.Id))
-            .ForMember(position => position.ProductName, opt => opt.MapFrom(guitar => guitar.Name))
-            .ForMember(position => position.ProductPictureUrl, opt => opt.MapFrom(guitar => guitar.PictureUrl))
-            .ForMember(position => position.ProductPrice, opt => opt.MapFrom(guitar => guitar.Price));
+        //CreateMap<GuitarViewModel, BasketPosition>()
+        //    .ForMember(position => position.ProductId, opt => opt.MapFrom(guitar => guitar.Id))
+        //    .ForMember(position => position.ProductName, opt => opt.MapFrom(guitar => guitar.Name))
+        //    .ForMember(position => position.ProductPictureUrl, opt => opt.MapFrom(guitar => guitar.PictureUrl))
+        //    .ForMember(position => position.ProductPrice, opt => opt.MapFrom(guitar => guitar.Price));
     }
 }

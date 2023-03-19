@@ -1,5 +1,4 @@
-﻿using SoundPlay.Web.ViewModels.Products;
-using ILogger = Serilog.ILogger;
+﻿using ILogger = Serilog.ILogger;
 
 namespace SoundPlay.WEB.Configuration;
 
@@ -40,6 +39,7 @@ public static class Dependencies
         services.AddTransient<ExceptionHandlingMiddleware>();
         services.AddControllersWithViews();
         services.AddScoped<IContentManager, ContentManager>();
+        services.AddScoped<IBasketManager, BasketManager>();
         services.AddSingleton<IEmailSender, EmailSender>();
         services.AddAutoMapper(typeof(MappingProfile));
         services.AddSession(options => {

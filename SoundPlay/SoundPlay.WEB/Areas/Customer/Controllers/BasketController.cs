@@ -1,6 +1,4 @@
-﻿using SoundPlay.Web.ViewModels;
-
-namespace SoundPlay.Web.Areas.Customer.Controllers;
+﻿namespace SoundPlay.Web.Areas.Customer.Controllers;
 
 [Area("Customer")]
 public sealed class BasketController : Controller
@@ -46,16 +44,15 @@ public sealed class BasketController : Controller
         var basketFromSession = HttpContext.Session.Get<Basket>(Constants.BasketSession);
 
         // if there is a filled Basket in the session, then take the data from it    
-        if (basketFromSession!=null
-            &&basketFromSession!.TotalCount>0)
+        if (basketFromSession is not null && basketFromSession!.TotalCount>0)
         {
             basket=basketFromSession!;
         }
 
         #endregion
 
-        var position = basket.ProductList!.First(p => p.BasketPositionId.Equals(id));
-        if (position!=null) return NotFound();
+        var position = basket.ProductList!.First(p => p.Id.Equals(id));
+        if (position is not null) return NotFound();
         else return View(position);
     }
 
@@ -71,16 +68,15 @@ public sealed class BasketController : Controller
         var basketFromSession = HttpContext.Session.Get<Basket>(Constants.BasketSession);
 
         // if there is a filled Basket in the session, then take the data from it    
-        if (basketFromSession!=null
-            &&basketFromSession!.TotalCount>0)
+        if (basketFromSession is not null && basketFromSession!.TotalCount>0)
         {
-            basket=basketFromSession!;
+            basket = basketFromSession!;
         }
 
         #endregion
 
-        var positionForChange = basket.ProductList!.First(p => p.BasketPositionId.Equals(basketPosition.BasketPositionId));
-        if (positionForChange!=null) return NotFound();
+        var positionForChange = basket.ProductList!.First(p => p.Id.Equals(basketPosition.Id));
+        if (positionForChange is null) return NotFound();
         else
         {
             basket.ProductList!.Remove(positionForChange!);
@@ -104,16 +100,15 @@ public sealed class BasketController : Controller
         var basketFromSession = HttpContext.Session.Get<Basket>(Constants.BasketSession);
 
         // if there is a filled Basket in the session, then take the data from it    
-        if (basketFromSession!=null
-            &&basketFromSession!.TotalCount>0)
+        if (basketFromSession is not null && basketFromSession!.TotalCount > 0)
         {
             basket=basketFromSession!;
         }
 
         #endregion
 
-        var positionForDelete = basket.ProductList!.First(p => p.BasketPositionId.Equals(id));
-        if (positionForDelete!=null) return NotFound();
+        var positionForDelete = basket.ProductList!.First(p => p.Id.Equals(id));
+        if (positionForDelete is not null) return NotFound();
         else
         {
             basket.ProductList!.Remove(positionForDelete!);
@@ -135,8 +130,7 @@ public sealed class BasketController : Controller
         var basketFromSession = HttpContext.Session.Get<Basket>(Constants.BasketSession);
 
         // if there is a filled Basket in the session, then take the data from it    
-        if (basketFromSession!=null
-            &&basketFromSession!.TotalCount>0)
+        if (basketFromSession is not null && basketFromSession!.TotalCount > 0)
         {
             basket=basketFromSession!;
         }

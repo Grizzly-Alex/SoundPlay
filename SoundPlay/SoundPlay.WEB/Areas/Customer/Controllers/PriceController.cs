@@ -28,6 +28,7 @@ public sealed class PriceController : Controller
     public async Task<IActionResult> AddToBasket(int id)
     {
         var guitar = await _guitars!.GetViewModelByIdAsync(id);
+
         var basketPosition = _mapper.Map<BasketPosition>(guitar);
         return View(basketPosition);
     }
@@ -43,18 +44,17 @@ public sealed class PriceController : Controller
         var basketFromSession = HttpContext.Session.Get<Basket>(Constants.BasketSession);
 
         // if there is a filled Basket in the session, then take the data from it    
-        if (basketFromSession!=null
-            &&basketFromSession!.TotalCount>0)
+        if (basketFromSession is not null && basketFromSession!.TotalCount > 0)
         {
-            basket=basketFromSession!;
+            basket = basketFromSession!;
         }
 
         #endregion
 
-        var position = basket.ProductList!.First(p => p.ProductId.Equals(basketPosition.ProductId));
+        var position = basket.ProductList!.FirstOrDefault(p => p.Product.Id.Equals(basketPosition.Product.Id));
 
-        if (position==null) basket.ProductList!.Add(basketPosition);
-        else position.Count+=basketPosition.Count;
+        if (position is null) basket.ProductList!.Add(basketPosition);
+        else position.Count += basketPosition.Count;
 
         // putting a basket with new properties into the session
         HttpContext.Session.Set(Constants.BasketSession, basket);

@@ -73,17 +73,4 @@ public class GuitarCatalogController : Controller
 
         return RedirectToAction(nameof(Index), sourceRoute);
     }
-
-
-	//[HttpPost]
-	//public async Task<IActionResult> UpdateBasket(int id, byte count = 1)
-	//{
-	//	var basket = _basketManager.GetBasket(HttpContext.Session);
-	//	var positionForChange = await _basketManager.GetBasketPositionAsync<Guitar>(id, count);
-	//	_basketManager.AddPositionToBasket(positionForChange);
-
-	//	HttpContext.Session.Set(Constants.BasketSession, basket);
-
-	//	return RedirectToAction(nameof(Index));
-	//}
 }

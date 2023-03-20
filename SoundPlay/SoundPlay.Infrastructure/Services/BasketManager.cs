@@ -16,7 +16,7 @@ public sealed class BasketManager : IBasketManager
 		Basket = new();
     }
 
-	public Basket GetBasket(ISession session)
+	public Basket? GetBasket(ISession session)
 	{
 		var basketFromSession = session.Get<Basket>(_basketSession);
 		_logger.LogInformation("Get basket from session");
@@ -49,7 +49,7 @@ public sealed class BasketManager : IBasketManager
 		return basketPosition ?? throw new ObjectNotFoundException($"Product not exist! Product Id = {id}");
 	}
 
-	public Basket AddPositionToBasket(BasketPosition basketPosition)
+	public BasketPosition? AddPositionToBasket(BasketPosition basketPosition)
 	{
 		var position = Basket.ProductList!.FirstOrDefault(p => p.ProductId.Equals(basketPosition.ProductId));
 		if (position is null)
@@ -61,15 +61,26 @@ public sealed class BasketManager : IBasketManager
 			position.Count += basketPosition.Count;
 		}
 		_logger.LogInformation("Position was added in basket");
-		return Basket;
+		return position;
 	}
 
-	public Basket UpdateBasket(BasketPosition basketPosition)
-	{
-		var positionForChange = Basket.ProductList!.FirstOrDefault(p => p.PositionId.Equals(basketPosition.PositionId));
-		if (positionForChange is not null)
+    public BasketPosition? RemovePositionFromBasket(Guid id)
+    {
+        var position = Basket.ProductList!.FirstOrDefault(p => p.PositionId.Equals(id));
+        if (position is not null)
 		{
-			Basket.ProductList!.Remove(positionForChange!);
+            Basket.ProductList!.Remove(position!);
+			_logger.LogInformation("Position was removed from basket");
+        }
+        return position;
+    }
+
+	public Basket? UpdateBasket(BasketPosition basketPosition)
+	{
+		var position = Basket.ProductList!.FirstOrDefault(p => p.PositionId.Equals(basketPosition.PositionId));
+		if (position is not null)
+		{
+			Basket.ProductList!.Remove(position!);
 			Basket.ProductList!.Add(basketPosition!);
 			_logger.LogInformation("Basket was updated");
 		}
@@ -80,5 +91,15 @@ public sealed class BasketManager : IBasketManager
 		return Basket;
 	}
 
-    public void SaveBasketInSession(ISession session) => session.Set(_basketSession, Basket);
+	public void SaveBasketInSession(ISession session)
+	{
+		session.Set(_basketSession, Basket);
+        _logger.LogInformation("Basket was saved in session");
+    }
+
+	public void ClearBasket()
+	{
+		Basket.ProductList?.Clear();
+        _logger.LogInformation("Basket was cleared");
+    }
 }

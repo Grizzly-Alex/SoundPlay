@@ -1,7 +1,15 @@
-﻿<button type="button" class="btn btn-link position-relative shadow-none">
-    <i class="bi bi-bag-check text-muted" style="font-size: 1.5rem;"></i>
-    <span class="position-absolute top-0 start-70 translate-middle badge rounded-pill bg-danger">
+﻿@inject IBasketManager BasketManager
+@{
+    var basket = BasketManager.GetBasket(Context.Session);
+}
 
+<button type="button" class="btn btn-link position-relative shadow-none">
+    <i class="bi bi-bag-check text-muted" style="font-size: 1.5rem;"></i>
+    @if (basket?.TotalCount > 0 && basket is not null)
+    {
+        <span class="position-absolute top-0 start-70 translate-middle badge rounded-pill bg-danger">
+        @basket.TotalCount
         <span class="visually-hidden">unread messages</span>
-    </span>
+        </span>
+    }
 </button>

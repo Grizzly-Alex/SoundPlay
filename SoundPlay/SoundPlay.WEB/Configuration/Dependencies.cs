@@ -42,7 +42,6 @@ public static class Dependencies
         services.AddScoped<IBasketManager, BasketManager>();
         services.AddSingleton<IEmailSender, EmailSender>();
         services.AddAutoMapper(typeof(MappingProfile));
-        services.AddMvc();
         services.AddDistributedMemoryCache();
         services.AddSession(options => {
             options.IdleTimeout = TimeSpan.FromMinutes(30);

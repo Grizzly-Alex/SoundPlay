@@ -4,7 +4,7 @@
     var actualPage = nameof(Model.PageId);
 
     var sourceRouteData = Context.Request.Query.ToDictionary(x => x.Key, x => x.Value.ToString());
-  
+
     if (sourceRouteData.ContainsKey(actualPage))
         sourceRouteData.Remove(actualPage);
 }

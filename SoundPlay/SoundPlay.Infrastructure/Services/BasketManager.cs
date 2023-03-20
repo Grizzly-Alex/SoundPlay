@@ -2,6 +2,7 @@
 
 public sealed class BasketManager : IBasketManager
 {
+	private const string _basketSession = "BasketSession";
 	private readonly IUnitOfWork<CatalogDbContext> _unitOfWork;
 	private readonly ILogger<BasketManager> _logger;
 	public Basket Basket { get; set; } 
@@ -17,8 +18,8 @@ public sealed class BasketManager : IBasketManager
 
 	public Basket GetBasket(ISession session)
 	{
-		var basketFromSession = session.Get<Basket>("BasketSession");
-
+		var basketFromSession = session.Get<Basket>(_basketSession);
+		_logger.LogInformation("Get basket from session");
 		if (basketFromSession is not null && basketFromSession!.TotalCount > 0)
 		{
 			Basket = basketFromSession!;
@@ -29,7 +30,7 @@ public sealed class BasketManager : IBasketManager
 	public async Task<BasketPosition?> GetBasketPositionAsync<TModel>(int id, byte count = 1)
 		where TModel : Product
 	{
-		Type type = typeof(TModel);	
+		Type type = typeof(TModel);
 
 		var basketPosition = await _unitOfWork.GetRepository<TModel>()
 			.GetFirstOrDefaultAsync(
@@ -44,7 +45,7 @@ public sealed class BasketManager : IBasketManager
 				Count = count,
 				TypeName = type.Name,
             });
-
+		_logger.LogInformation("Get basket position");
 		return basketPosition ?? throw new ObjectNotFoundException($"Product not exist! Product Id = {id}");
 	}
 
@@ -58,7 +59,8 @@ public sealed class BasketManager : IBasketManager
 		else
 		{
 			position.Count += basketPosition.Count;
-		} 
+		}
+		_logger.LogInformation("Position was added in basket");
 		return Basket;
 	}
 
@@ -69,6 +71,7 @@ public sealed class BasketManager : IBasketManager
 		{
 			Basket.ProductList!.Remove(positionForChange!);
 			Basket.ProductList!.Add(basketPosition!);
+			_logger.LogInformation("Basket was updated");
 		}
 		else
 		{
@@ -77,5 +80,5 @@ public sealed class BasketManager : IBasketManager
 		return Basket;
 	}
 
-    public void SaveBasketInSession(ISession session) => session.Set("BasketSession", Basket);
+    public void SaveBasketInSession(ISession session) => session.Set(_basketSession, Basket);
 }

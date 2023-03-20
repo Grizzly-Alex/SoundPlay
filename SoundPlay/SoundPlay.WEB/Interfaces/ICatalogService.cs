@@ -1,9 +1,4 @@
-﻿using SoundPlay.Core.Enums;
-using SoundPlay.Web.ViewModels.Filters;
-using SoundPlay.Web.ViewModels.Page;
-using SoundPlay.Web.ViewModels.Shop;
-
-namespace SoundPlay.Web.Interfaces;
+﻿namespace SoundPlay.Web.Interfaces;
 
 public interface ICatalogService
 {

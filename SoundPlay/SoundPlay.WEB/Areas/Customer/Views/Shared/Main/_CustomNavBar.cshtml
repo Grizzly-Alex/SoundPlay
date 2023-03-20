@@ -13,16 +13,8 @@
             <li><a href="#" class="nav-link px-2 link-dark">About</a></li>
         </ul>
         <div class="col-md-3 text-end">
-
             <partial name="~/Views/Shared/_LoginPartial.cshtml" />
-
-            <button type="button" class="btn btn-link position-relative shadow-none">
-                <i class="bi bi-bag-check text-muted" style="font-size: 1.5rem;"></i>
-                <span class="position-absolute top-0 start-70 translate-middle badge rounded-pill bg-danger">
-                    3
-                    <span class="visually-hidden">unread messages</span>
-                </span>
-            </button>
+            <partial name="~/Areas/Customer/Views/Shared/Components/_Basket.cshtml" />
         </div>
     </header>
 </div>

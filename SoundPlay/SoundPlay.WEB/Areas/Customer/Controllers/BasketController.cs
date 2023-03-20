@@ -51,7 +51,7 @@ public sealed class BasketController : Controller
 
         #endregion
 
-        var position = basket.ProductList!.First(p => p.Id.Equals(id));
+        var position = basket.ProductList!.First(p => p.PositionId.Equals(id));
         if (position is not null) return NotFound();
         else return View(position);
     }
@@ -75,7 +75,7 @@ public sealed class BasketController : Controller
 
         #endregion
 
-        var positionForChange = basket.ProductList!.First(p => p.Id.Equals(basketPosition.Id));
+        var positionForChange = basket.ProductList!.First(p => p.PositionId.Equals(basketPosition.PositionId));
         if (positionForChange is null) return NotFound();
         else
         {
@@ -107,7 +107,7 @@ public sealed class BasketController : Controller
 
         #endregion
 
-        var positionForDelete = basket.ProductList!.First(p => p.Id.Equals(id));
+        var positionForDelete = basket.ProductList!.First(p => p.PositionId.Equals(id));
         if (positionForDelete is not null) return NotFound();
         else
         {

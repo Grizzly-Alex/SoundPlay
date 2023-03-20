@@ -47,7 +47,9 @@ public class GuitarCatalogController : Controller
         var guitarFilter = await _catalogService.GetGuitarFilterAsync(filter.Category, filter.MinPrice, filter.MaxPrice);
 
         var catalog = new CatalogViewModel<GuitarFilterViewModel>(pagedList, guitarFilter);
-       
+
+        TempData["source_route"] = HttpContext.Request.Query.ToDictionary(x => x.Key, x => x.Value.ToString());
+
         return View(catalog);
     }
 
@@ -62,25 +64,26 @@ public class GuitarCatalogController : Controller
 	[HttpPost]
 	public async Task<IActionResult> AddToBasket(int id, byte count = 1)
     {
-		var basket = _basketManager.GetBasket(HttpContext.Session);
+        var basket = _basketManager.GetBasket(HttpContext.Session);
         var basketPosition = await _basketManager.GetBasketPositionAsync<Guitar>(id, count);
         _basketManager.AddPositionToBasket(basketPosition);
+        _basketManager.SaveBasketInSession(HttpContext.Session);
 
-		HttpContext.Session.Set(Constants.BasketSession, basket);
+        var sourceRoute = TempData["source_route"];
 
-		return RedirectToAction(nameof(Index));
+        return RedirectToAction(nameof(Index), sourceRoute);
     }
 
 
-	[HttpPost]
-	public async Task<IActionResult> UpdateBasket(int id, byte count = 1)
-	{
-		var basket = _basketManager.GetBasket(HttpContext.Session);
-		var positionForChange = await _basketManager.GetBasketPositionAsync<Guitar>(id, count);
-		_basketManager.AddPositionToBasket(positionForChange);
+	//[HttpPost]
+	//public async Task<IActionResult> UpdateBasket(int id, byte count = 1)
+	//{
+	//	var basket = _basketManager.GetBasket(HttpContext.Session);
+	//	var positionForChange = await _basketManager.GetBasketPositionAsync<Guitar>(id, count);
+	//	_basketManager.AddPositionToBasket(positionForChange);
 
-		HttpContext.Session.Set(Constants.BasketSession, basket);
+	//	HttpContext.Session.Set(Constants.BasketSession, basket);
 
-		return RedirectToAction(nameof(Index));
-	}
+	//	return RedirectToAction(nameof(Index));
+	//}
 }

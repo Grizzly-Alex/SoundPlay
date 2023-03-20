@@ -42,8 +42,10 @@ public static class Dependencies
         services.AddScoped<IBasketManager, BasketManager>();
         services.AddSingleton<IEmailSender, EmailSender>();
         services.AddAutoMapper(typeof(MappingProfile));
+        services.AddMvc();
+        services.AddDistributedMemoryCache();
         services.AddSession(options => {
-            options.IdleTimeout = TimeSpan.FromMinutes(10);
+            options.IdleTimeout = TimeSpan.FromMinutes(30);
             options.Cookie.HttpOnly = true;
             options.Cookie.IsEssential = true;
         });
@@ -74,6 +76,7 @@ public static class Dependencies
         app.UseRouting();
         app.UseAuthentication();
         app.UseAuthorization();
+        app.UseSession();
         app.MapRazorPages();
 
         app.MapAreaControllerRoute(

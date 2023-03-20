@@ -14,6 +14,6 @@ public sealed class Basket
 
     public Basket()
     {
-        ProductList = Array.Empty<BasketPosition>();
+        ProductList = new List<BasketPosition>();
     }
 }

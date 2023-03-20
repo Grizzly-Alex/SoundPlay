@@ -51,7 +51,7 @@ public sealed class PriceController : Controller
 
         #endregion
 
-        var position = basket.ProductList!.FirstOrDefault(p => p.Product.Id.Equals(basketPosition.Product.Id));
+        var position = basket.ProductList!.FirstOrDefault(p => p.ProductId.Equals(basketPosition.ProductId));
 
         if (position is null) basket.ProductList!.Add(basketPosition);
         else position.Count += basketPosition.Count;

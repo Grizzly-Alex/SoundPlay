@@ -2,21 +2,24 @@
 
 public sealed class BasketPosition
 {
-    public Guid Id { get; set; }
-    public Product Product { get; set; }
-    public Type Type { get; set; }
-    //public int ProductId { get; set; }
-    //public string? ProductName { get; set; }
-    //public decimal ProductPrice { get; set; }
-    //public string? ProductPictureUrl { get; set; }
+    #region Product properties
+    public int ProductId { get; set; } 
+    public string? ProductName { get; set; }
+    public string? ProductPictureUrl { get; set; }
+    public decimal ProductPrice { get; set; }
+    public string? ProductDescription { get; set; }
+    public string? TypeName { get; set; }
+    #endregion
+    public Guid PositionId { get; set; }
     public byte Count { get; set; }
     public decimal TotalPrice
     {
-        get => Product.Price * Count;
+        get => ProductPrice * Count;
     }
 
     public BasketPosition()
+
     {
-		Id = Guid.NewGuid();
+		PositionId = Guid.NewGuid();
     }
 }

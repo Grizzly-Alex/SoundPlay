@@ -4,7 +4,7 @@ public sealed class BasketManager : IBasketManager
 {
 	private readonly IUnitOfWork<CatalogDbContext> _unitOfWork;
 	private readonly ILogger<BasketManager> _logger;
-	public Basket Basket { get; set; }
+	public Basket Basket { get; set; } 
 	
 	public BasketManager(
 		IUnitOfWork<CatalogDbContext> unitOfWork,
@@ -29,30 +29,42 @@ public sealed class BasketManager : IBasketManager
 	public async Task<BasketPosition?> GetBasketPositionAsync<TModel>(int id, byte count = 1)
 		where TModel : Product
 	{
+		Type type = typeof(TModel);	
+
 		var basketPosition = await _unitOfWork.GetRepository<TModel>()
 			.GetFirstOrDefaultAsync(
 			predicate: i => i.Id == id,
 			selector: i => new BasketPosition
 			{
-				Product = i,
+				ProductId = i.Id,
+				ProductName = i.Name,
+				ProductPictureUrl = i.PictureUrl,
+				ProductPrice = i.Price,
+				ProductDescription = i.Description,
 				Count = count,
-				Type = typeof(TModel)	
-			});
+				TypeName = type.Name,
+            });
 
 		return basketPosition ?? throw new ObjectNotFoundException($"Product not exist! Product Id = {id}");
 	}
+
 	public Basket AddPositionToBasket(BasketPosition basketPosition)
 	{
-		var position = Basket.ProductList!.FirstOrDefault(p => p.Product.Id.Equals(basketPosition.Product.Id));
-		if (position is null) Basket.ProductList!.Add(basketPosition);
-		else position.Count += basketPosition.Count;
+		var position = Basket.ProductList!.FirstOrDefault(p => p.ProductId.Equals(basketPosition.ProductId));
+		if (position is null)
+		{
+			Basket.ProductList!.Add(basketPosition);
+		}
+		else
+		{
+			position.Count += basketPosition.Count;
+		} 
 		return Basket;
 	}
 
-
 	public Basket UpdateBasket(BasketPosition basketPosition)
 	{
-		var positionForChange = Basket.ProductList!.First(p => p.Id.Equals(basketPosition.Id));
+		var positionForChange = Basket.ProductList!.FirstOrDefault(p => p.PositionId.Equals(basketPosition.PositionId));
 		if (positionForChange is not null)
 		{
 			Basket.ProductList!.Remove(positionForChange!);
@@ -60,8 +72,10 @@ public sealed class BasketManager : IBasketManager
 		}
 		else
 		{
-			throw new ObjectNotFoundException($"Basket position not exist! Product Id = {basketPosition.Id}");
+			throw new ObjectNotFoundException($"Basket position not exist! Product Id = {basketPosition.PositionId}");
 		}
 		return Basket;
 	}
+
+    public void SaveBasketInSession(ISession session) => session.Set("BasketSession", Basket);
 }

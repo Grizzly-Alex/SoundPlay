@@ -48,8 +48,6 @@ public class GuitarCatalogController : Controller
 
         var catalog = new CatalogViewModel<GuitarFilterViewModel>(pagedList, guitarFilter);
 
-        TempData["source_route"] = HttpContext.Request.Query.ToDictionary(x => x.Key, x => x.Value.ToString());
-
         return View(catalog);
     }
 
@@ -64,13 +62,11 @@ public class GuitarCatalogController : Controller
 	[HttpPost]
 	public async Task<IActionResult> AddToBasket(int id, byte count = 1)
     {
-        var basket = _basketManager.GetBasket(HttpContext.Session);
+        _basketManager.GetBasket(HttpContext.Session);
         var basketPosition = await _basketManager.GetBasketPositionAsync<Guitar>(id, count);
         _basketManager.AddPositionToBasket(basketPosition);
         _basketManager.SaveBasketInSession(HttpContext.Session);
 
-        var sourceRoute = TempData["source_route"];
-
-        return RedirectToAction(nameof(Index), sourceRoute);
+        return Redirect(Request.GetTypedHeaders().Referer.ToString());
     }
 }

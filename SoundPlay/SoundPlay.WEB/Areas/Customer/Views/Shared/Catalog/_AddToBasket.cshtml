@@ -7,11 +7,11 @@
             <li>3-Year Warranty</li>
         </ul>           
 
-        <form class="form-inline row g-3">
+        <form method="post" asp-action="AddToBasket" asp-route-id="@ViewData["id"]" class="form-inline row g-3">
             <div class="col-sm-6">
                 <div class="input-group mb-3">
                     <span class="input-group-text text-bg-primary">qty.</span>
-                    <input type="number" min="1" step="1" value="1" class="form-control shadow-none" id="amountInput">
+                    <input type="number" min="1" step="1" value="1" name="count" class="form-control shadow-none" id="amountInput">
                 </div>
             </div>
             <div class="col-sm-6">

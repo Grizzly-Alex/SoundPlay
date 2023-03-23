@@ -43,10 +43,17 @@ public static class Dependencies
         services.AddSingleton<IEmailSender, EmailSender>();
         services.AddAutoMapper(typeof(MappingProfile));
         services.AddDistributedMemoryCache();
-        services.AddSession(options => {
-            options.IdleTimeout = TimeSpan.FromMinutes(30);
+        services.AddSession(options => {            
+            options.IdleTimeout = TimeSpan.FromMinutes(20);
+            options.Cookie.Name = ".SoundPlay.Session";
             options.Cookie.HttpOnly = true;
             options.Cookie.IsEssential = true;
+        });
+        services.AddCookiePolicy(options => {
+            options.CheckConsentNeeded = ctx => false;
+            options.OnAppendCookie = ctx => {
+                ctx.CookieOptions.Expires = DateTimeOffset.UtcNow.AddDays(30);
+            };
         });
 
         #region Model CRUD services
@@ -75,6 +82,7 @@ public static class Dependencies
         app.UseRouting();
         app.UseAuthentication();
         app.UseAuthorization();
+        app.UseCookiePolicy();
         app.UseSession();
         app.MapRazorPages();
 

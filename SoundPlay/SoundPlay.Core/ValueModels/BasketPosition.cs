@@ -8,7 +8,7 @@ public sealed class BasketPosition
     public string? ProductPictureUrl { get; set; }
     public decimal ProductPrice { get; set; }
     public string? ProductDescription { get; set; }
-    public string? TypeName { get; set; }
+    public string? DataType { get; set; }
     #endregion
     public Guid PositionId { get; set; }
     public byte Count { get; set; }
@@ -18,7 +18,6 @@ public sealed class BasketPosition
     }
 
     public BasketPosition()
-
     {
 		PositionId = Guid.NewGuid();
     }

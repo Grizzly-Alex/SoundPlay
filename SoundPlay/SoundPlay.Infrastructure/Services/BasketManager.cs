@@ -43,9 +43,9 @@ public sealed class BasketManager : IBasketManager
 				ProductPrice = i.Price,
 				ProductDescription = i.Description,
 				Count = count,
-				TypeName = type.Name,
+				DataType = type.Name,
             });
-		_logger.LogInformation("Get basket position");
+		_logger.LogInformation("Basket position was created");
 		return basketPosition ?? throw new ObjectNotFoundException($"Product not exist! Product Id = {id}");
 	}
 
@@ -93,7 +93,7 @@ public sealed class BasketManager : IBasketManager
 
 	public void SaveBasketInSession(ISession session)
 	{
-		session.Set(_basketSession, Basket);
+		session.Set(_basketSession, Basket);		
         _logger.LogInformation("Basket was saved in session");
     }
 

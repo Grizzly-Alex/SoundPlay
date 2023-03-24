@@ -23,6 +23,12 @@ public static class Dependencies
             options.EnableSensitiveDataLogging();
         });
 
+        services.AddDbContext<ShoppingDbContext>(options =>
+        {
+            options.UseSqlServer(configuration.GetConnectionString("ShoppingConnection"));
+            options.EnableSensitiveDataLogging();
+        });
+
         services.AddDbContext<IdentityAppDbContext>(options =>
             options.UseSqlServer(configuration.GetConnectionString("IdentityConnection")));
 

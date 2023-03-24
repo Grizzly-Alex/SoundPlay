@@ -1,6 +1,4 @@
-﻿using SoundPlay.Core.Models.Entities.Items;
-
-namespace SoundPlay.Infrastructure.DataAccess.ModelConfigurations;
+﻿namespace SoundPlay.Infrastructure.DataAccess.ModelConfigurations;
 
 internal sealed class BrandConfiguration : IEntityTypeConfiguration<Brand>
 {

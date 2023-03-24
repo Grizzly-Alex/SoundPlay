@@ -13,3 +13,4 @@ global using SoundPlay.Core.Models.Entities.Items;
 global using SoundPlay.Core.Models.Entities.Products;
 global using SoundPlay.Core.Models.Entities;
 global using SoundPlay.Infrastructure.DataAccess.DbContexts;
+global using SoundPlay.Core.Models.Entities.Basket;

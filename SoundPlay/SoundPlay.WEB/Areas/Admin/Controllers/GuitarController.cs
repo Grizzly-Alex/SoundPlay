@@ -1,20 +1,17 @@
-﻿using SoundPlay.Core.Models.Entities.Items;
-using SoundPlay.Core.Models.Entities.Products;
+﻿namespace SoundPlay.Web.Areas.Admin.Controllers;
 
-namespace SoundPlay.Web.Areas.Admin.Controllers;
 
-//[Authorize]
 [Area("Admin")]
 public sealed class GuitarController : Controller
 {
     private readonly IContentManager _contentManager;
     private readonly IViewModelService<Guitar, GuitarViewModel> _guitars;
-    private readonly IUnitOfWork _unitOfWork;
+    private readonly IUnitOfWork<CatalogDbContext> _unitOfWork;
 
 	public GuitarController(
         IContentManager contentManager,
         IViewModelService<Guitar, GuitarViewModel> guitars,
-        IUnitOfWork unitOfWork)
+        IUnitOfWork<CatalogDbContext> unitOfWork)
     {
         _contentManager = contentManager;
         _guitars = guitars;

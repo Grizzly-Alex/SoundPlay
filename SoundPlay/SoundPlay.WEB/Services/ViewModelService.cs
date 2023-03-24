@@ -1,18 +1,16 @@
-﻿using SoundPlay.Core.Models.Entities;
-
-namespace SoundPlay.Web.Services;
+﻿namespace SoundPlay.Web.Services;
 
 public class ViewModelService<TModel, TViewModel> : IViewModelService<TModel, TViewModel>
     where TModel : Entity
     where TViewModel : EntityViewModel
 {
     protected readonly IMapper _mapper;
-    protected readonly IUnitOfWork _unitOfWork;
+    protected readonly IUnitOfWork<CatalogDbContext> _unitOfWork;
     protected readonly ILogger<ViewModelService<TModel, TViewModel>> _logger;
 
     public ViewModelService(
         IMapper mapper,
-        IUnitOfWork unitOfWork,
+        IUnitOfWork<CatalogDbContext> unitOfWork,
         ILogger<ViewModelService<TModel, TViewModel>> logger)
     {
         _mapper = mapper;

@@ -1,12 +1,16 @@
 ﻿namespace SoundPlay.Infrastructure.DataAccess.Repository;
 
-public sealed class UnitOfWork : IUnitOfWork 
+public sealed class UnitOfWork<TDbContext> : IUnitOfWork<TDbContext>
+    where TDbContext : DbContext
 {
-    private CatalogDbContext _db;
+    private readonly TDbContext _db;
 
-	public UnitOfWork(CatalogDbContext db) => _db = db;
+    public UnitOfWork(TDbContext db) => _db = db;
 
-	public async Task SaveChangesAsync() => await _db.SaveChangesAsync();
+    public async Task SaveChangesAsync() => await _db.SaveChangesAsync();
 
-	public  IRepository<T> GetRepository<T>() where T : Entity => new Repository<T>(_db);
+    public IRepository<TDbContext, TEntity> GetRepository<TEntity>()
+        where TEntity : Entity
+        => new Repository<TDbContext, TEntity>(_db);
+    
 }

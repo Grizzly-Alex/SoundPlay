@@ -29,3 +29,6 @@ global using SoundPlay.Infrastructure.Services;
 global using SoundPlay.Web.Interfaces;
 global using SoundPlay.Web.ViewModels.User;
 global using SoundPlay.Core.Constants;
+global using SoundPlay.Core.Models.Entities.Products;
+global using SoundPlay.Core.Models.Entities.Items;
+global using SoundPlay.Core.Models.Entities;

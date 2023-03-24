@@ -1,9 +1,9 @@
-﻿using SoundPlay.Core.Models.Entities;
+﻿namespace SoundPlay.Core.Interfaces;
 
-namespace SoundPlay.Core.Interfaces;
-
-public interface IUnitOfWork
+public interface IUnitOfWork<TDbContext>
+    where TDbContext : DbContext
 {
     public Task SaveChangesAsync();
-    public IRepository<TModel> GetRepository<TModel>() where TModel : Entity;
+    public IRepository<TDbContext, TEntity> GetRepository<TEntity>()
+        where TEntity : Entity;
 }

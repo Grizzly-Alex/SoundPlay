@@ -1,15 +1,11 @@
-﻿using SoundPlay.Core.Constants;
-using SoundPlay.Core.Models.Entities.Items;
-using SoundPlay.Core.Models.Entities.Products;
-
-namespace SoundPlay.Web.Services;
+﻿namespace SoundPlay.Web.Services;
 
 public sealed class CatalogService : ICatalogService
 {
-    private readonly IUnitOfWork _unitOfWork;
+    private readonly IUnitOfWork<CatalogDbContext> _unitOfWork;
     private readonly IMapper _mapper;
 
-    public CatalogService(IUnitOfWork unitOfWork, IMapper mapper)
+    public CatalogService(IUnitOfWork<CatalogDbContext> unitOfWork, IMapper mapper)
     {
         _unitOfWork = unitOfWork;
         _mapper = mapper;

@@ -1,9 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
-using SoundPlay.Core.Models.Entities;
+﻿namespace SoundPlay.Core.Interfaces;
 
-namespace SoundPlay.Core.Interfaces;
-
-public interface IRepository<TEntity> where TEntity : Entity
+public interface IRepository<TDbContext, TEntity>
+    where TDbContext : DbContext
+    where TEntity : Entity
 {
     void Remove(int id);
 

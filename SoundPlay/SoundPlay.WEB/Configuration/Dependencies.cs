@@ -1,5 +1,4 @@
-﻿using SoundPlay.Core.Models.Entities.Products;
-using ILogger = Serilog.ILogger;
+﻿using ILogger = Serilog.ILogger;
 
 namespace SoundPlay.WEB.Configuration;
 
@@ -33,7 +32,6 @@ public static class Dependencies
             .AddEntityFrameworkStores<IdentityAppDbContext>();
     }
 
-
     public static void SetServices(IServiceCollection services)
     {
         services.AddHttpContextAccessor();
@@ -49,7 +47,7 @@ public static class Dependencies
         });
 
         #region Model CRUD services
-        services.AddTransient<IUnitOfWork, UnitOfWork>();
+        services.AddTransient(typeof(IUnitOfWork<>), typeof(UnitOfWork<>));
         services.AddTransient<IViewModelService<Guitar, GuitarViewModel>, GuitarViewModelService>();
         services.AddTransient(typeof(IViewModelService<,>), typeof(ViewModelService<,>));
         services.AddTransient<ICatalogService, CatalogService>();

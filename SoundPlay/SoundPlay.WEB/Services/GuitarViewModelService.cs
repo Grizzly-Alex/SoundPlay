@@ -1,12 +1,10 @@
-﻿using SoundPlay.Core.Models.Entities.Products;
-
-namespace SoundPlay.Web.Services;
+﻿namespace SoundPlay.Web.Services;
 
 public sealed class GuitarViewModelService : ViewModelService<Guitar, GuitarViewModel>
 {
     public GuitarViewModelService(
         IMapper mapper,
-        IUnitOfWork unitOfWork,
+        IUnitOfWork<CatalogDbContext> unitOfWork,
         ILogger<ViewModelService<Guitar, GuitarViewModel>> logger) : base(mapper, unitOfWork, logger)
     {
     }

@@ -1,6 +1,4 @@
-﻿using SoundPlay.Core.Models.Entities.Items;
-
-namespace SoundPlay.Web.ViewModels;
+﻿namespace SoundPlay.Web.ViewModels;
 
 public abstract class ProductViewModel : EntityViewModel
 {
@@ -9,6 +7,10 @@ public abstract class ProductViewModel : EntityViewModel
 
     [Required(ErrorMessage = "Value {0} must not be empty!")]
     public string Description { get; set; }
+
+    [Range(0, 999999, ErrorMessage = "Value for {0} must be between {1} and {2}.")]
+    [Required(ErrorMessage = "Value {0} must not be empty!")]
+    public byte Stock { get; set; }
 
     [Precision(8, 2)]
     [Range(1, 999999, ErrorMessage = "Value for {0} must be between {1} and {2}.")]

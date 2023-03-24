@@ -21,6 +21,15 @@
 
 	<div class="row">
 
+		<div class="mb-3 col-2">
+			<label asp-for="GuitarViewModel!.Stock"></label>
+			<input asp-for="GuitarViewModel!.Stock" placeholder="0" class="form-control" min="0" max="999999" required>
+			<span asp-validation-for="GuitarViewModel!.Stock" class="text-danger"></span>
+			<div class="valid-feedback">
+				Valid!
+			</div>
+		</div>
+
 		<div class="mb-3">
 			<label asp-for="GuitarViewModel!.Name"></label>
 			<input asp-for="GuitarViewModel!.Name" class="form-control" required>

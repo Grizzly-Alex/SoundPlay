@@ -1,6 +1,4 @@
-﻿using SoundPlay.Core.Models.Entities.Items;
-
-namespace SoundPlay.Web.ViewModels;
+﻿namespace SoundPlay.Web.ViewModels;
 
 public sealed class GuitarViewModel : ProductViewModel
 {

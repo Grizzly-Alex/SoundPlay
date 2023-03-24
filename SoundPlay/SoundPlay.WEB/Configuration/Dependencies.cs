@@ -81,13 +81,13 @@ public static class Dependencies
         app.MapRazorPages();
 
         app.MapAreaControllerRoute(
-            name: "CustomerDefault",
-            areaName: "Customer",
-            pattern: "{controller=Home}/{action=Index}/{id?}");
-        app.MapAreaControllerRoute(
             name: "AdminDefault",
             areaName: "Admin",
             pattern: "{area=Admin}/{controller=Home}/{action=Index}/{id?}");
+        app.MapAreaControllerRoute(
+            name: "CustomerDefault",
+            areaName: "Customer",
+            pattern: "{controller=Home}/{action=Index}/{id?}");
 
         app.UseMiddleware<ExceptionHandlingMiddleware>();
 

@@ -225,6 +225,9 @@ namespace SoundPlay.Infrastructure.DataAccess.Migrations.Catalog
                     b.Property<int>("SoundboardId")
                         .HasColumnType("int");
 
+                    b.Property<byte>("Stock")
+                        .HasColumnType("tinyint");
+
                     b.Property<byte>("StringsCount")
                         .HasColumnType("tinyint");
 

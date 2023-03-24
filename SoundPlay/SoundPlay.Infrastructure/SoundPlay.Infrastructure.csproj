@@ -20,6 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="DataAccess\Migrations\Catalog\" />
     <Folder Include="DataAccess\Migrations\Identity\" />
     <Folder Include="DataAccess\Migrations\Shopping\" />
   </ItemGroup>

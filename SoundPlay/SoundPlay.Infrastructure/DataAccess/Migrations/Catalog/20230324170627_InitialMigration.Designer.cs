@@ -12,8 +12,8 @@ using SoundPlay.Infrastructure.DataAccess.DbContexts;
 namespace SoundPlay.Infrastructure.DataAccess.Migrations.Catalog
 {
     [DbContext(typeof(CatalogDbContext))]
-    [Migration("20230324104532_UpdateAllConfigurations")]
-    partial class UpdateAllConfigurations
+    [Migration("20230324170627_InitialMigration")]
+    partial class InitialMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -227,6 +227,9 @@ namespace SoundPlay.Infrastructure.DataAccess.Migrations.Catalog
 
                     b.Property<int>("SoundboardId")
                         .HasColumnType("int");
+
+                    b.Property<byte>("Stock")
+                        .HasColumnType("tinyint");
 
                     b.Property<byte>("StringsCount")
                         .HasColumnType("tinyint");

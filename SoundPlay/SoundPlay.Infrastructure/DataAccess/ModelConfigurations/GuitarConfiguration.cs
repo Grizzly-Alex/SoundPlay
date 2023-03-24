@@ -12,6 +12,10 @@ internal sealed class GuitarConfiguration : IEntityTypeConfiguration<Guitar>
             .HasColumnType("varchar(max)")
             .IsRequired();
 
+        builder.Property(p => p.Stock)
+            .HasColumnType("tinyint")
+            .IsRequired();
+
         builder.Property(p => p.Description)
             .HasColumnType("varchar(max)")
             .IsRequired();

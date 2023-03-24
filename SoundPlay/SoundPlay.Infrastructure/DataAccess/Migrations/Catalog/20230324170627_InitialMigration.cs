@@ -1,6 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
+
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
 
 namespace SoundPlay.Infrastructure.DataAccess.Migrations.Catalog
 {
@@ -16,24 +19,11 @@ namespace SoundPlay.Infrastructure.DataAccess.Migrations.Catalog
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Name = table.Column<string>(type: "varchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Brands", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Categories",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Categories", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -42,11 +32,23 @@ namespace SoundPlay.Infrastructure.DataAccess.Migrations.Catalog
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Name = table.Column<string>(type: "varchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Colors", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "GuitarCategories",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false),
+                    Name = table.Column<string>(type: "varchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_GuitarCategories", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -55,7 +57,7 @@ namespace SoundPlay.Infrastructure.DataAccess.Migrations.Catalog
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Name = table.Column<string>(type: "varchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -68,7 +70,7 @@ namespace SoundPlay.Infrastructure.DataAccess.Migrations.Catalog
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Name = table.Column<string>(type: "varchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -81,7 +83,7 @@ namespace SoundPlay.Infrastructure.DataAccess.Migrations.Catalog
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Name = table.Column<string>(type: "varchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -94,7 +96,7 @@ namespace SoundPlay.Infrastructure.DataAccess.Migrations.Catalog
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Name = table.Column<string>(type: "varchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -107,22 +109,23 @@ namespace SoundPlay.Infrastructure.DataAccess.Migrations.Catalog
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    FrestCount = table.Column<int>(type: "int", nullable: false),
-                    StringsCount = table.Column<int>(type: "int", nullable: false),
+                    FretsCount = table.Column<byte>(type: "tinyint", nullable: false),
+                    StringsCount = table.Column<byte>(type: "tinyint", nullable: false),
+                    CategoryId = table.Column<int>(type: "int", nullable: false, defaultValue: 1),
                     ShapeId = table.Column<int>(type: "int", nullable: true),
-                    SoundboardId = table.Column<int>(type: "int", nullable: true),
-                    NeckId = table.Column<int>(type: "int", nullable: true),
-                    FretboardId = table.Column<int>(type: "int", nullable: true),
+                    SoundboardId = table.Column<int>(type: "int", nullable: false),
+                    NeckId = table.Column<int>(type: "int", nullable: false),
+                    FretboardId = table.Column<int>(type: "int", nullable: false),
                     TremoloTypeId = table.Column<int>(type: "int", nullable: true),
                     PickupSetId = table.Column<int>(type: "int", nullable: true),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    PictureUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    DateDelivery = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CategoryId = table.Column<int>(type: "int", nullable: true),
-                    BrandId = table.Column<int>(type: "int", nullable: true),
-                    ColorId = table.Column<int>(type: "int", nullable: true)
+                    Name = table.Column<string>(type: "varchar(max)", nullable: false),
+                    Stock = table.Column<byte>(type: "tinyint", nullable: false),
+                    Description = table.Column<string>(type: "varchar(max)", nullable: false),
+                    Price = table.Column<decimal>(type: "decimal(8,2)", precision: 8, scale: 2, nullable: false),
+                    PictureUrl = table.Column<string>(type: "varchar(max)", nullable: true),
+                    DateDelivery = table.Column<DateTime>(type: "datetime2(7)", nullable: false),
+                    BrandId = table.Column<int>(type: "int", nullable: false),
+                    ColorId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -131,47 +134,69 @@ namespace SoundPlay.Infrastructure.DataAccess.Migrations.Catalog
                         name: "FK_Guitars_Brands_BrandId",
                         column: x => x.BrandId,
                         principalTable: "Brands",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_Guitars_Categories_CategoryId",
-                        column: x => x.CategoryId,
-                        principalTable: "Categories",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Guitars_Colors_ColorId",
                         column: x => x.ColorId,
                         principalTable: "Colors",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Guitars_GuitarCategories_CategoryId",
+                        column: x => x.CategoryId,
+                        principalTable: "GuitarCategories",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Guitars_GuitarShapes_ShapeId",
                         column: x => x.ShapeId,
                         principalTable: "GuitarShapes",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Guitars_Materials_FretboardId",
                         column: x => x.FretboardId,
                         principalTable: "Materials",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Guitars_Materials_NeckId",
                         column: x => x.NeckId,
                         principalTable: "Materials",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Guitars_Materials_SoundboardId",
                         column: x => x.SoundboardId,
                         principalTable: "Materials",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Guitars_PickupSets_PickupSetId",
                         column: x => x.PickupSetId,
                         principalTable: "PickupSets",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Guitars_TremoloTypes_TremoloTypeId",
                         column: x => x.TremoloTypeId,
                         principalTable: "TremoloTypes",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.InsertData(
+                table: "GuitarCategories",
+                columns: new[] { "Id", "Name" },
+                values: new object[,]
+                {
+                    { 1, "Electric Guitar" },
+                    { 2, "Accoustic Guitar" },
+                    { 3, "Classic Guitar" },
+                    { 4, "Electric Bass" },
+                    { 5, "Accoustic Bass" },
+                    { 6, "Ukulele" }
                 });
 
             migrationBuilder.CreateIndex(
@@ -230,10 +255,10 @@ namespace SoundPlay.Infrastructure.DataAccess.Migrations.Catalog
                 name: "Brands");
 
             migrationBuilder.DropTable(
-                name: "Categories");
+                name: "Colors");
 
             migrationBuilder.DropTable(
-                name: "Colors");
+                name: "GuitarCategories");
 
             migrationBuilder.DropTable(
                 name: "GuitarShapes");

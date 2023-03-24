@@ -1,4 +1,6 @@
-﻿namespace SoundPlay.Core.Interfaces;
+﻿using SoundPlay.Core.Models.Entities;
+
+namespace SoundPlay.Core.Interfaces;
 
 public interface IUnitOfWork
 {

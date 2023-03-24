@@ -1,4 +1,6 @@
-﻿namespace SoundPlay.Web.Areas.Admin.Controllers;
+﻿using SoundPlay.Core.Constants;
+
+namespace SoundPlay.Web.Areas.Admin.Controllers;
 
 [Area("Admin")]
 public class UserManagerController : Controller

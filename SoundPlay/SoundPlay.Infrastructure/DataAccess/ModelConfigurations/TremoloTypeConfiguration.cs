@@ -1,4 +1,6 @@
-﻿namespace SoundPlay.Infrastructure.DataAccess.ModelConfigurations;
+﻿using SoundPlay.Core.Models.Entities.Items;
+
+namespace SoundPlay.Infrastructure.DataAccess.ModelConfigurations;
 
 internal sealed class TremoloTypeConfiguration : IEntityTypeConfiguration<TremoloType>
 {

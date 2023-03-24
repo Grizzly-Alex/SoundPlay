@@ -1,4 +1,4 @@
-﻿namespace SoundPlay.Core.Models;
+﻿namespace SoundPlay.Core.Models.Entities.Products;
 
 public sealed class Guitar : Product
 {
@@ -9,7 +9,7 @@ public sealed class Guitar : Product
     public int SoundboardId { get; set; }
     public int NeckId { get; set; }
     public int FretboardId { get; set; }
-    public int? TremoloTypeId { get; set; } 
+    public int? TremoloTypeId { get; set; }
     public int? PickupSetId { get; set; }
     public GuitarCategory? Category { get; set; }
     public GuitarShape? Shape { get; set; }

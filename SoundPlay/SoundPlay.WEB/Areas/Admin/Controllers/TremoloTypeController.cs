@@ -1,4 +1,6 @@
-﻿namespace SoundPlay.Web.Areas.Admin.Controllers;
+﻿using SoundPlay.Core.Models.Entities.Items;
+
+namespace SoundPlay.Web.Areas.Admin.Controllers;
 
 [Area("Admin")]
 public sealed class TremoloTypeController : Controller

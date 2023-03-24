@@ -1,4 +1,6 @@
-﻿namespace SoundPlay.Web.ViewModels;
+﻿using SoundPlay.Core.Models.Entities.Items;
+
+namespace SoundPlay.Web.ViewModels;
 
 public abstract class ProductViewModel : EntityViewModel
 {

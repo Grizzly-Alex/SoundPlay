@@ -1,4 +1,6 @@
-﻿namespace SoundPlay.Infrastructure.DataAccess.ModelConfigurations;
+﻿using SoundPlay.Core.Models.Entities.Products;
+
+namespace SoundPlay.Infrastructure.DataAccess.ModelConfigurations;
 
 internal sealed class GuitarConfiguration : IEntityTypeConfiguration<Guitar>
 {

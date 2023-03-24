@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using SoundPlay.Core.Models.Entities;
 
 namespace SoundPlay.Core.Interfaces;
 

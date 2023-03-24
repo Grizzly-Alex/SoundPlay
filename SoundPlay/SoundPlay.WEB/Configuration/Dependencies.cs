@@ -1,4 +1,5 @@
-﻿using ILogger = Serilog.ILogger;
+﻿using SoundPlay.Core.Models.Entities.Products;
+using ILogger = Serilog.ILogger;
 
 namespace SoundPlay.WEB.Configuration;
 

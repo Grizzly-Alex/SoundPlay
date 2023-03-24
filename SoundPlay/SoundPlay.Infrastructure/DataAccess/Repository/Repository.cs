@@ -1,4 +1,5 @@
-﻿using SoundPlay.Infrastructure.DataAccess.DbContexts;
+﻿using SoundPlay.Core.Models.Entities;
+using SoundPlay.Infrastructure.DataAccess.DbContexts;
 
 namespace SoundPlay.Infrastructure.DataAccess.Repository;
 

@@ -1,4 +1,7 @@
-﻿namespace SoundPlay.Web.Areas.Admin.Controllers;
+﻿using SoundPlay.Core.Models.Entities.Items;
+using SoundPlay.Core.Models.Entities.Products;
+
+namespace SoundPlay.Web.Areas.Admin.Controllers;
 
 //[Authorize]
 [Area("Admin")]

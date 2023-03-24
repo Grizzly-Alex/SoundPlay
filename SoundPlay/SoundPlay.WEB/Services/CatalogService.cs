@@ -1,4 +1,8 @@
-﻿namespace SoundPlay.Web.Services;
+﻿using SoundPlay.Core.Constants;
+using SoundPlay.Core.Models.Entities.Items;
+using SoundPlay.Core.Models.Entities.Products;
+
+namespace SoundPlay.Web.Services;
 
 public sealed class CatalogService : ICatalogService
 {
@@ -44,7 +48,7 @@ public sealed class CatalogService : ICatalogService
         return pagedInfo;
     }
 
-    public async Task<GuitarFilterViewModel> GetGuitarFilterAsync(GuitarType category, decimal? minPrice, decimal? maxPrice)
+    public async Task<GuitarFilterViewModel> GetGuitarFilterAsync(GuitarTag category, decimal? minPrice, decimal? maxPrice)
     {
         var brands = await _unitOfWork.GetRepository<Brand>().GetAllAsync();
         var colors = await _unitOfWork.GetRepository<Color>().GetAllAsync();

@@ -1,4 +1,4 @@
-﻿namespace SoundPlay.Core.Models;
+﻿namespace SoundPlay.Core.Models.Entities.Items;
 
 public sealed class Color : Item
 {

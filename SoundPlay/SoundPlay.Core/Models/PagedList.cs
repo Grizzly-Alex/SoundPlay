@@ -1,6 +1,6 @@
-﻿ namespace SoundPlay.Core.ValueModels;
+﻿namespace SoundPlay.Core.Models;
 
-public sealed class PagedList<TItem> : IPagedList<TItem> 
+public sealed class PagedList<TItem> : IPagedList<TItem>
 {
     public int PageId { get; init; }
     public int TotalPages { get; init; }

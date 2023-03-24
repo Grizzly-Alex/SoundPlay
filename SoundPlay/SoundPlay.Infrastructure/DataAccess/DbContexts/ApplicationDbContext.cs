@@ -17,6 +17,6 @@ public sealed class ApplicationDbContext : DbContext
     {
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
 
-        modelBuilder.SeedEnumValues<GuitarType, GuitarCategory>(value => value);
+        modelBuilder.SeedEnumValues<GuitarTag, GuitarCategory>(value => value);
     }
 }

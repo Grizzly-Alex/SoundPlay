@@ -1,4 +1,6 @@
-﻿using SoundPlay.Web.ViewModels.User;
+﻿using SoundPlay.Core.Models.Entities.Items;
+using SoundPlay.Core.Models.Entities.Products;
+using SoundPlay.Web.ViewModels.User;
 
 namespace SoundPlay.Web.Utilities;
 

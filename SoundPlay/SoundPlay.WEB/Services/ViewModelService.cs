@@ -1,4 +1,6 @@
-﻿namespace SoundPlay.Web.Services;
+﻿using SoundPlay.Core.Models.Entities;
+
+namespace SoundPlay.Web.Services;
 
 public class ViewModelService<TModel, TViewModel> : IViewModelService<TModel, TViewModel>
     where TModel : Entity

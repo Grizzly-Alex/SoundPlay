@@ -1,4 +1,6 @@
-﻿namespace SoundPlay.Web.Services;
+﻿using SoundPlay.Core.Models.Entities.Products;
+
+namespace SoundPlay.Web.Services;
 
 public sealed class GuitarViewModelService : ViewModelService<Guitar, GuitarViewModel>
 {

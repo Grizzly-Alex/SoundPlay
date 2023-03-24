@@ -7,7 +7,7 @@ using SoundPlay.Infrastructure.DataAccess.DbContexts;
 
 namespace SoundPlay.Infrastructure.DataAccess.Migrations.Catalog
 {
-    [DbContext(typeof(ApplicationDbContext))]
+    [DbContext(typeof(CatalogDbContext))]
     [Migration("20230202121724_EverythingUpdate")]
     partial class EverythingUpdate
     {

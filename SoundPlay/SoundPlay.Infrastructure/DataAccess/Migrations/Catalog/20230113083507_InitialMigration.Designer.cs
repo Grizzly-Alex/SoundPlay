@@ -8,7 +8,7 @@ using SoundPlay.Infrastructure.DataAccess.DbContexts;
 
 namespace SoundPlay.Infrastructure.DataAccess.Migrations.Catalog
 {
-    [DbContext(typeof(ApplicationDbContext))]
+    [DbContext(typeof(CatalogDbContext))]
     [Migration("20230113083507_InitialMigration")]
     partial class InitialMigration
     {

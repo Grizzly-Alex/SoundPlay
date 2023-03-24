@@ -1,13 +1,10 @@
-﻿using SoundPlay.Core.Models.Entities;
-using SoundPlay.Infrastructure.DataAccess.DbContexts;
-
-namespace SoundPlay.Infrastructure.DataAccess.Repository;
+﻿namespace SoundPlay.Infrastructure.DataAccess.Repository;
 
 public sealed class UnitOfWork : IUnitOfWork 
 {
-    private ApplicationDbContext _db;
+    private CatalogDbContext _db;
 
-	public UnitOfWork(ApplicationDbContext db) => _db = db;
+	public UnitOfWork(CatalogDbContext db) => _db = db;
 
 	public async Task SaveChangesAsync() => await _db.SaveChangesAsync();
 

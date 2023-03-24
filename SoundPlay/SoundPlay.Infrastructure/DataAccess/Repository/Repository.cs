@@ -5,10 +5,10 @@ namespace SoundPlay.Infrastructure.DataAccess.Repository;
 
 public class Repository<TEntity> : IRepository<TEntity> where TEntity : Entity
 {
-	protected readonly ApplicationDbContext _dbContext;
+	protected readonly CatalogDbContext _dbContext;
 	private readonly DbSet<TEntity> _dbSet;
 
-	public Repository(ApplicationDbContext dbContext)
+	public Repository(CatalogDbContext dbContext)
 	{
 		_dbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
 		_dbSet = _dbContext.Set<TEntity>();

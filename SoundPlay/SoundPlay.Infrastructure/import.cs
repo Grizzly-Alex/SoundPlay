@@ -11,3 +11,5 @@ global using Microsoft.AspNetCore.Identity.UI.Services;
 global using SoundPlay.Core.Constants;
 global using SoundPlay.Core.Models.Entities.Items;
 global using SoundPlay.Core.Models.Entities.Products;
+global using SoundPlay.Core.Models.Entities;
+global using SoundPlay.Infrastructure.DataAccess.DbContexts;

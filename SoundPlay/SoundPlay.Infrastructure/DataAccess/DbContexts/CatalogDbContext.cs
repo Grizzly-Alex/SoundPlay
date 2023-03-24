@@ -1,6 +1,6 @@
 ﻿namespace SoundPlay.Infrastructure.DataAccess.DbContexts;
 
-public sealed class ApplicationDbContext : DbContext
+public sealed class CatalogDbContext : DbContext
 {
     public DbSet<Brand> Brands { get; set; }
     public DbSet<GuitarShape> GuitarShapes { get; set; }
@@ -11,11 +11,11 @@ public sealed class ApplicationDbContext : DbContext
     public DbSet<Guitar> Guitars { get; set; }
     public DbSet<GuitarCategory> GuitarCategories { get; set; }
 
-    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
+    public CatalogDbContext(DbContextOptions<CatalogDbContext> options) : base(options) { }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
+        modelBuilder.ApplyConfigurationsFromAssembly(typeof(CatalogDbContext).Assembly);
 
         modelBuilder.SeedEnumValues<GuitarTag, GuitarCategory>(value => value);
     }

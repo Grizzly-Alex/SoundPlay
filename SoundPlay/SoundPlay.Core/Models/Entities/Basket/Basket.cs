@@ -10,11 +10,11 @@
 
         public void SetNewBuyerId(string buyerId) => BuyerId = buyerId;
 
-        public void AddItem(int productId, decimal unitPrice, int quantity = 1)
+        public void AddItem(int productId, decimal unitPrice, string productType, int quantity = 1)
         {
-            if (!Items.Any(i => i.ProductId == productId))
+            if (!Items.Any(i => i.ProductId == productId && i.ProductType.Equals(productType, StringComparison.OrdinalIgnoreCase)))
             {
-                Items.Add(new BasketItem(productId, quantity, unitPrice));
+                Items.Add(new BasketItem(productId, quantity, unitPrice, productType));
             }
             else
             {

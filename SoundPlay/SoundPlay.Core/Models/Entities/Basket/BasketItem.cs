@@ -6,12 +6,14 @@ public sealed class BasketItem : Entity
     public int ProductId { get; private set; }
     public int Quantity { get; private set; }
     public decimal UnitPrice { get; private set; }
-   
-    public BasketItem(int catalogItemId, int quantity, decimal unitPrice)
+    public string ProductType { get; private set; }
+
+    public BasketItem(int productId, int quantity, decimal unitPrice, string productType)
     {
-        ProductId = catalogItemId;
+        ProductId = productId;
         UnitPrice = unitPrice;
         SetQuantity(quantity);
+        ProductType = productType;
     }
 
     public void SetQuantity(int quantity)

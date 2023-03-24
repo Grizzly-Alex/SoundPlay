@@ -15,8 +15,19 @@ public sealed class CatalogDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.ApplyConfigurationsFromAssembly(typeof(CatalogDbContext).Assembly);
-
+        #region Seeds
         modelBuilder.SeedEnumValues<GuitarTag, GuitarCategory>(value => value);
+        #endregion
+
+        #region Configurations
+        modelBuilder.ApplyConfiguration(new BrandConfiguration());
+        modelBuilder.ApplyConfiguration(new GuitarShapeConfiguration());
+        modelBuilder.ApplyConfiguration(new MaterialConfiguration());
+        modelBuilder.ApplyConfiguration(new TremoloTypeConfiguration());
+        modelBuilder.ApplyConfiguration(new ColorConfiguration());
+        modelBuilder.ApplyConfiguration(new PickupSetConfiguration());
+        modelBuilder.ApplyConfiguration(new GuitarConfiguration());
+        modelBuilder.ApplyConfiguration(new GuitarCategoryConfiguration());
+        #endregion
     }
 }

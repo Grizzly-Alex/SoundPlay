@@ -1,12 +1,13 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
+
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
 
 namespace SoundPlay.Infrastructure.DataAccess.Migrations.Catalog
 {
     /// <inheritdoc />
-    public partial class ChangeColumnName : Migration
+    public partial class UpdateAllConfigurations : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -17,10 +18,6 @@ namespace SoundPlay.Infrastructure.DataAccess.Migrations.Catalog
 
             migrationBuilder.DropForeignKey(
                 name: "FK_Guitars_Colors_color_id",
-                table: "Guitars");
-
-            migrationBuilder.DropForeignKey(
-                name: "FK_Guitars_GuitarCategories_category_id",
                 table: "Guitars");
 
             migrationBuilder.DropForeignKey(
@@ -45,6 +42,13 @@ namespace SoundPlay.Infrastructure.DataAccess.Migrations.Catalog
 
             migrationBuilder.DropForeignKey(
                 name: "FK_Guitars_TremoloTypes_tremolo_id",
+                table: "Guitars");
+
+            migrationBuilder.DropTable(
+                name: "Category");
+
+            migrationBuilder.DropColumn(
+                name: "category",
                 table: "Guitars");
 
             migrationBuilder.RenameColumn(
@@ -163,11 +167,6 @@ namespace SoundPlay.Infrastructure.DataAccess.Migrations.Catalog
                 newName: "ColorId");
 
             migrationBuilder.RenameColumn(
-                name: "category_id",
-                table: "Guitars",
-                newName: "CategoryId");
-
-            migrationBuilder.RenameColumn(
                 name: "brand_id",
                 table: "Guitars",
                 newName: "BrandId");
@@ -208,24 +207,9 @@ namespace SoundPlay.Infrastructure.DataAccess.Migrations.Catalog
                 newName: "IX_Guitars_ColorId");
 
             migrationBuilder.RenameIndex(
-                name: "IX_Guitars_category_id",
-                table: "Guitars",
-                newName: "IX_Guitars_CategoryId");
-
-            migrationBuilder.RenameIndex(
                 name: "IX_Guitars_brand_id",
                 table: "Guitars",
                 newName: "IX_Guitars_BrandId");
-
-            migrationBuilder.RenameColumn(
-                name: "name",
-                table: "GuitarCategories",
-                newName: "Name");
-
-            migrationBuilder.RenameColumn(
-                name: "id",
-                table: "GuitarCategories",
-                newName: "Id");
 
             migrationBuilder.RenameColumn(
                 name: "name",
@@ -255,35 +239,42 @@ namespace SoundPlay.Infrastructure.DataAccess.Migrations.Catalog
                 oldClrType: typeof(string),
                 oldType: "varchar(max)");
 
+            migrationBuilder.AddColumn<int>(
+                name: "CategoryId",
+                table: "Guitars",
+                type: "int",
+                nullable: false,
+                defaultValue: 1);
+
             migrationBuilder.CreateTable(
-                name: "AppUser",
+                name: "GuitarCategories",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Name = table.Column<string>(type: "varchar(max)", nullable: false),
-                    StreetAddress = table.Column<string>(type: "varchar(max)", nullable: true),
-                    City = table.Column<string>(type: "varchar(max)", nullable: true),
-                    State = table.Column<string>(type: "varchar(max)", nullable: true),
-                    PostalCode = table.Column<string>(type: "varchar(max)", nullable: true),
-                    UserName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    NormalizedUserName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    NormalizedEmail = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    EmailConfirmed = table.Column<bool>(type: "bit", nullable: false),
-                    PasswordHash = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    SecurityStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ConcurrencyStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PhoneNumberConfirmed = table.Column<bool>(type: "bit", nullable: false),
-                    TwoFactorEnabled = table.Column<bool>(type: "bit", nullable: false),
-                    LockoutEnd = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
-                    LockoutEnabled = table.Column<bool>(type: "bit", nullable: false),
-                    AccessFailedCount = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false),
+                    Name = table.Column<string>(type: "varchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AppUser", x => x.Id);
+                    table.PrimaryKey("PK_GuitarCategories", x => x.Id);
                 });
+
+            migrationBuilder.InsertData(
+                table: "GuitarCategories",
+                columns: new[] { "Id", "Name" },
+                values: new object[,]
+                {
+                    { 1, "Electric Guitar" },
+                    { 2, "Accoustic Guitar" },
+                    { 3, "Classic Guitar" },
+                    { 4, "Electric Bass" },
+                    { 5, "Accoustic Bass" },
+                    { 6, "Ukulele" }
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Guitars_CategoryId",
+                table: "Guitars",
+                column: "CategoryId");
 
             migrationBuilder.AddForeignKey(
                 name: "FK_Guitars_Brands_BrandId",
@@ -398,7 +389,15 @@ namespace SoundPlay.Infrastructure.DataAccess.Migrations.Catalog
                 table: "Guitars");
 
             migrationBuilder.DropTable(
-                name: "AppUser");
+                name: "GuitarCategories");
+
+            migrationBuilder.DropIndex(
+                name: "IX_Guitars_CategoryId",
+                table: "Guitars");
+
+            migrationBuilder.DropColumn(
+                name: "CategoryId",
+                table: "Guitars");
 
             migrationBuilder.RenameColumn(
                 name: "Name",
@@ -516,11 +515,6 @@ namespace SoundPlay.Infrastructure.DataAccess.Migrations.Catalog
                 newName: "color_id");
 
             migrationBuilder.RenameColumn(
-                name: "CategoryId",
-                table: "Guitars",
-                newName: "category_id");
-
-            migrationBuilder.RenameColumn(
                 name: "BrandId",
                 table: "Guitars",
                 newName: "brand_id");
@@ -561,24 +555,9 @@ namespace SoundPlay.Infrastructure.DataAccess.Migrations.Catalog
                 newName: "IX_Guitars_color_id");
 
             migrationBuilder.RenameIndex(
-                name: "IX_Guitars_CategoryId",
-                table: "Guitars",
-                newName: "IX_Guitars_category_id");
-
-            migrationBuilder.RenameIndex(
                 name: "IX_Guitars_BrandId",
                 table: "Guitars",
                 newName: "IX_Guitars_brand_id");
-
-            migrationBuilder.RenameColumn(
-                name: "Name",
-                table: "GuitarCategories",
-                newName: "name");
-
-            migrationBuilder.RenameColumn(
-                name: "Id",
-                table: "GuitarCategories",
-                newName: "id");
 
             migrationBuilder.RenameColumn(
                 name: "Name",
@@ -610,6 +589,26 @@ namespace SoundPlay.Infrastructure.DataAccess.Migrations.Catalog
                 oldType: "varchar(max)",
                 oldNullable: true);
 
+            migrationBuilder.AddColumn<string>(
+                name: "category",
+                table: "Guitars",
+                type: "nvarchar(max)",
+                nullable: false,
+                defaultValue: "");
+
+            migrationBuilder.CreateTable(
+                name: "Category",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    name = table.Column<string>(type: "varchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Category", x => x.id);
+                });
+
             migrationBuilder.AddForeignKey(
                 name: "FK_Guitars_Brands_brand_id",
                 table: "Guitars",
@@ -623,14 +622,6 @@ namespace SoundPlay.Infrastructure.DataAccess.Migrations.Catalog
                 table: "Guitars",
                 column: "color_id",
                 principalTable: "Colors",
-                principalColumn: "id",
-                onDelete: ReferentialAction.Restrict);
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_Guitars_GuitarCategories_category_id",
-                table: "Guitars",
-                column: "category_id",
-                principalTable: "GuitarCategories",
                 principalColumn: "id",
                 onDelete: ReferentialAction.Restrict);
 

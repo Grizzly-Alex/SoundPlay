@@ -9,6 +9,7 @@ public sealed class ShoppingDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.ApplyConfigurationsFromAssembly(typeof(ShoppingDbContext).Assembly);
+        modelBuilder.ApplyConfiguration(new BasketConfiguration());
+        modelBuilder.ApplyConfiguration(new BasketItemConfiguration());
     }
 }

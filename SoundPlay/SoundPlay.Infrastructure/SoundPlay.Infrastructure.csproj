@@ -21,6 +21,7 @@
 
   <ItemGroup>
     <Folder Include="DataAccess\Migrations\Identity\" />
+    <Folder Include="DataAccess\Migrations\Shopping\" />
   </ItemGroup>
 
 </Project>

@@ -8,5 +8,8 @@ internal sealed class BasketItemConfiguration : IEntityTypeConfiguration<BasketI
             .HasColumnType("decimal")
             .HasPrecision(8, 2)
             .IsRequired();
+
+        builder.Property(p => p.CreateDate)
+            .HasColumnType("datetime2(7)");
     }
 }

@@ -7,6 +7,7 @@ public sealed class BasketItem : Entity
     public int Quantity { get; private set; }
     public decimal UnitPrice { get; private set; }
     public string ProductType { get; private set; }
+    public DateTime CreateDate { get; private set; }
 
     public BasketItem(int productId, int quantity, decimal unitPrice, string productType)
     {
@@ -14,6 +15,7 @@ public sealed class BasketItem : Entity
         UnitPrice = unitPrice;
         SetQuantity(quantity);
         ProductType = productType;
+        CreateDate = DateTime.Now;
     }
 
     public void SetQuantity(int quantity)

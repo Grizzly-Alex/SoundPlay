@@ -10,5 +10,11 @@ internal sealed class BasketConfiguration : IEntityTypeConfiguration<Basket>
         builder.Property(b => b.BuyerId)
             .IsRequired()
             .HasMaxLength(256);
+
+        builder.Property(p => p.CreateDate)
+            .HasColumnType("datetime2(7)");
+
+        builder.Property(p => p.UpdateDate)
+            .HasColumnType("datetime2(7)");
     }
 }

@@ -15,4 +15,4 @@ global using SoundPlay.Core.Models.Entities;
 global using SoundPlay.Infrastructure.DataAccess.DbContexts;
 global using SoundPlay.Core.Models.Entities.Basket;
 global using Microsoft.Extensions.Logging;
-global using SoundPlay.Core.Exceptions;
+global using Ardalis.GuardClauses;

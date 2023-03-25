@@ -1,13 +1,13 @@
-﻿using Ardalis.GuardClauses;
-
-namespace SoundPlay.Infrastructure.Services;
+﻿namespace SoundPlay.Infrastructure.Services;
 
 public class BasketService : IBasketService
 {
 	private readonly IUnitOfWork<CatalogDbContext> _unitOfWork;
 	private readonly ILogger<BasketService> _logger;
 
-    public BasketService(IUnitOfWork<CatalogDbContext> unitOfWork, ILogger<BasketService> logger)
+    public BasketService(
+		IUnitOfWork<CatalogDbContext> unitOfWork,
+		ILogger<BasketService> logger)
     {
 		_unitOfWork = unitOfWork;
 		_logger = logger;
@@ -53,12 +53,51 @@ public class BasketService : IBasketService
 			include: query => query.Include(b => b.Items));
 		Guard.Against.NullBasket(basketId, basket);
 
+		foreach (var item in basket.Items) 
+		{
+			if(quantities.TryGetValue(item.Id.ToString(), out var quantity))
+			{
+				_logger?.LogInformation($"Updating quantity of item ID:{item.Id} to {quantity}.");
+				item.SetQuantity(quantity);
+			}
+		}
+		basket.RemoveEmptyItems();
+		basketRepository.Update(basket);
 
-		throw new NotImplementedException();
+		await _unitOfWork.SaveChangesAsync();
+
+		return basket;
 	}
 
-	public async Task TransferBasketAsync(string anonymousId, string userName)
+	public async Task TransferBasketAsync(string anonymousId, string userId)
 	{
-		throw new NotImplementedException();
+		Guard.Against.NullOrEmpty(anonymousId, nameof(anonymousId));
+		Guard.Against.NullOrEmpty(userId, nameof(userId));
+
+		var basketRepository = _unitOfWork.GetRepository<Basket>();
+
+		var anonymousBasket = await basketRepository.GetFirstOrDefaultAsync(
+			predicate: i => i.BuyerId == anonymousId,
+			include: query => query.Include(b => b.Items));
+		if (anonymousBasket is null) return;
+
+		var userBasket = await basketRepository.GetFirstOrDefaultAsync(
+			predicate: i => i.BuyerId == userId,
+			include: query => query.Include(b => b.Items));
+		if (userBasket is null)
+		{
+			userBasket = new Basket(userId);
+			basketRepository.Add(userBasket);
+		}
+
+		foreach (var item in anonymousBasket.Items)
+		{
+			userBasket.AddItem(item.ProductId, item.UnitPrice, item.ProductType, item.Quantity);
+		}
+
+		basketRepository.Update(userBasket);
+		basketRepository.Remove(anonymousBasket.Id);
+
+		await _unitOfWork.SaveChangesAsync();
 	}
 }

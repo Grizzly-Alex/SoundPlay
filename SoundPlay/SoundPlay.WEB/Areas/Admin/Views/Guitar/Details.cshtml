@@ -47,20 +47,38 @@
 			<p><b>Category: </b>@Model.Category?.Name</p>
 			<p><b>Brand: </b>@Model.Brand?.Name</p>
 			<p><b>Color: </b>@Model.Color?.Name</p>
-			<p><b>Shape: </b>@Model.Shape?.Name</p>
+			@if (Model.Shape is not null)
+			{				
+				<p><b>Shape: </b>@Model.Shape?.Name</p>
+			}
 		</div>
 
 		<div class="col-4">
 			<p><b>Frets Count: </b>@Model.FretsCount</p>
 			<p><b>Strings Count: </b>@Model.StringsCount</p>
-			<p><b>Tremolo Type: </b>@Model.TremoloType?.Name</p>
-			<p><b>Pickup Set: </b>@Model.PickupSet?.Name</p>
+			@if (Model.TremoloType is not null)
+			{
+				<p><b>Tremolo Type: </b>@Model.TremoloType?.Name</p>				
+			}
+			@if (Model.PickupSet is not null)
+			{
+				<p><b>Pickup Set: </b>@Model.PickupSet?.Name</p>				
+			}                        
 		</div>
 
 		<div class="col-4">
-			<p><b>Soundboard Material: </b>@Model.Soundboard?.Name</p>
-			<p><b>Neck Material: </b>@Model.Neck?.Name</p>
-			<p><b>Fretboard Material: </b>@Model.Fretboard?.Name</p>
+			@if (Model.Soundboard is not null)
+			{
+				<p><b>Soundboard Material: </b>@Model.Soundboard?.Name</p>				
+			}
+			@if (Model.Neck is not null)
+			{
+				<p><b>Neck Material: </b>@Model.Neck?.Name</p>				
+			}
+			@if (Model.Fretboard is not null)
+			{				
+				<p><b>Fretboard Material: </b>@Model.Fretboard?.Name</p>
+			}
 		</div>
 	</div>
 

@@ -14,3 +14,5 @@ global using SoundPlay.Core.Models.Entities;
 global using SoundPlay.Core.Models.Entities.Products;
 global using SoundPlay.Core.Constants;
 global using Ardalis.GuardClauses;
+global using SoundPlay.Core.Models.Entities.Basket;
+global using SoundPlay.Core.Exceptions;

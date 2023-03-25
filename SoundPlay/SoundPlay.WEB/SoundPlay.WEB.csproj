@@ -34,4 +34,8 @@
     <ProjectReference Include="..\SoundPlay.Infrastructure\SoundPlay.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\images\products\guitars\" />
+  </ItemGroup>
+
 </Project>

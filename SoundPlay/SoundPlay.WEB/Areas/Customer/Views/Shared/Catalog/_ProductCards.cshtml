@@ -17,7 +17,9 @@
                     </a>
                     <div class="card-footer h-100 pb-3 text-bg-dark">
 
-                        <button type="button" class="btn btn-dark btn-sm bi bi-cart-plus float-sm-end shadow-none" style="font-size: 1.2rem;"></button>
+                        <form method="post" asp-action="AddToBasket" asp-route-productId="@obj.Id">
+                            <button type="submit" class="btn btn-dark btn-sm bi bi-cart-plus float-sm-end shadow-none" style="font-size: 1.2rem;"></button>
+                        </form>
 
                         <h6 class="card-title small">@obj.Name</h6>
                     </div>

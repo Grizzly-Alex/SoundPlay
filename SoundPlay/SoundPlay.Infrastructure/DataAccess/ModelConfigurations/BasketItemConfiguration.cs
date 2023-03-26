@@ -4,11 +4,6 @@ internal sealed class BasketItemConfiguration : IEntityTypeConfiguration<BasketI
 {
     public void Configure(EntityTypeBuilder<BasketItem> builder)
     {
-        builder.Property(bi => bi.UnitPrice)
-            .HasColumnType("decimal")
-            .HasPrecision(8, 2)
-            .IsRequired();
-
         builder.Property(p => p.CreateDate)
             .HasColumnType("datetime2(7)");
     }

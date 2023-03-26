@@ -2,48 +2,146 @@
 
 public class BasketService : IBasketService
 {
-	private readonly IUnitOfWork<CatalogDbContext> _unitOfWork;
-	private readonly ILogger<BasketService> _logger;
+	private const string _basketCookie = "BasketCookie";
+	private readonly IUnitOfWork<ShoppingDbContext> _shopping;
+    private readonly IUnitOfWork<CatalogDbContext> _catalog;
+    private readonly ILogger<BasketService> _logger;
 
     public BasketService(
-		IUnitOfWork<CatalogDbContext> unitOfWork,
-		ILogger<BasketService> logger)
+        IUnitOfWork<ShoppingDbContext> shopping,
+        IUnitOfWork<CatalogDbContext> catalog,
+        ILogger<BasketService> logger)
     {
-		_unitOfWork = unitOfWork;
+        _shopping = shopping;
+		_catalog = catalog;
 		_logger = logger;
 	}
 
-    public async Task<Basket> AddItemToBasket(
-		string userId, int productId, decimal price, string productType, int quantity = 1)
-	{
-		var basketRepository = _unitOfWork.GetRepository<Basket>();
+    public async Task<int> GetQuantityItems(int basketId)
+		=> await _shopping.GetRepository<BasketItem>().SumAsync(
+			predicate: i => i.BasketId == basketId,
+			selector: i => i.Quantity);
 
+    public async Task<Basket> AddItemToBasketAsync<TModel>(string userId, int productId, int productQuantity = 1)
+		where TModel : Product
+	{
+		var basketRepository = _shopping.GetRepository<Basket>();
 		var basket = await basketRepository.GetFirstOrDefaultAsync(
 			predicate: i => i.BuyerId == userId,
 			include: query => query.Include(b => b.Items));
 
-		if (basket is null) 
+		if (basket is null)
 		{
 			basket = new Basket(userId);
 			basketRepository.Add(basket);
-		}
+            await _shopping.SaveChangesAsync();
+			_logger.LogInformation("Basket was created.");
+        }
 
-		basket.AddItem(productId, price, productType, quantity);
+		var basketItem = await _catalog.GetRepository<TModel>()
+			.GetFirstOrDefaultAsync(
+			predicate: product => product.Id == productId,
+			selector: product => new BasketItem(product, productQuantity));
 
-		await _unitOfWork.SaveChangesAsync();
+		basket.AddItem(basketItem!);
 
-		return basket;
+        basketRepository.Update(basket);
+        await _shopping.SaveChangesAsync();
+
+        _logger.LogInformation("Basket was updated.");
+        return basket;
+	}
+
+
+	public async Task RemoveItemFromBasketAsync(int basketItemId)
+	{
+        _shopping.GetRepository<BasketItem>().Remove(basketItemId);
+		await _shopping.SaveChangesAsync();
 	}
 
 	public async Task DeleteBasketAsync(int basketId)
 	{
-		var basketRepository = _unitOfWork.GetRepository<Basket>();
+		var basketRepository = _shopping.GetRepository<Basket>();
 		var basket = await basketRepository.GetFirstOrDefaultAsync(predicate: b => b.Id == basketId);
-		basketRepository.Remove(basketId); 
+		basketRepository.Remove(basketId);
 
-		await _unitOfWork.SaveChangesAsync();
+		await _shopping.SaveChangesAsync();
 	}
 
+	public async Task TransferBasketAsync(string anonymousId, string userId)
+	{
+		Guard.Against.NullOrEmpty(anonymousId, nameof(anonymousId));
+		Guard.Against.NullOrEmpty(userId, nameof(userId));
+
+		var basketRepository = _shopping.GetRepository<Basket>();
+
+		var anonymousBasket = await basketRepository.GetFirstOrDefaultAsync(
+			predicate: i => i.BuyerId == anonymousId,
+			include: query => query.Include(b => b.Items));
+
+		if (anonymousBasket is not null) 
+		{
+			var userBasket = await basketRepository.GetFirstOrDefaultAsync(
+				predicate: i => i.BuyerId == userId,
+				include: query => query.Include(b => b.Items));
+
+			if (userBasket is null)
+			{
+				userBasket = new Basket(userId);
+				basketRepository.Add(userBasket);
+			}
+
+			foreach (var item in anonymousBasket.Items)
+			{
+				userBasket.AddItem(item);
+			}
+
+			basketRepository.Update(userBasket);
+			basketRepository.Remove(anonymousBasket.Id);
+
+			await _shopping.SaveChangesAsync();
+		};
+	}
+
+	public async Task<string> GetBasketOwnerIdAsync(HttpRequest request, HttpResponse response)
+	{
+		string? userId = null;
+
+		if (request.HttpContext.User.Identity.IsAuthenticated)
+		{
+			return request.HttpContext.User.Identity.Name;
+		}
+
+		if (request.Cookies.ContainsKey(_basketCookie))
+		{
+			userId = request.Cookies[_basketCookie];
+
+			if (!request.HttpContext.User.Identity.IsAuthenticated)
+			{
+				if (!Guid.TryParse(userId, out var _))
+				{
+					userId = null;
+				}
+			}
+		}
+
+		if (userId is not null) return userId;
+
+		userId = Guid.NewGuid().ToString();
+		var cookieOptions = new CookieOptions
+		{
+			IsEssential = true,
+			Expires = DateTime.Today.AddYears(30)
+		};
+
+		response.Cookies.Append(_basketCookie, userId, cookieOptions);
+
+		return userId;
+	}
+
+
+
+    /*
 	public async Task<Basket> SetQuantities(int basketId, Dictionary<string, int> quantities)
 	{
 		Guard.Against.Null(quantities, nameof(quantities));
@@ -68,36 +166,5 @@ public class BasketService : IBasketService
 
 		return basket;
 	}
-
-	public async Task TransferBasketAsync(string anonymousId, string userId)
-	{
-		Guard.Against.NullOrEmpty(anonymousId, nameof(anonymousId));
-		Guard.Against.NullOrEmpty(userId, nameof(userId));
-
-		var basketRepository = _unitOfWork.GetRepository<Basket>();
-
-		var anonymousBasket = await basketRepository.GetFirstOrDefaultAsync(
-			predicate: i => i.BuyerId == anonymousId,
-			include: query => query.Include(b => b.Items));
-		if (anonymousBasket is null) return;
-
-		var userBasket = await basketRepository.GetFirstOrDefaultAsync(
-			predicate: i => i.BuyerId == userId,
-			include: query => query.Include(b => b.Items));
-		if (userBasket is null)
-		{
-			userBasket = new Basket(userId);
-			basketRepository.Add(userBasket);
-		}
-
-		foreach (var item in anonymousBasket.Items)
-		{
-			userBasket.AddItem(item.ProductId, item.UnitPrice, item.ProductType, item.Quantity);
-		}
-
-		basketRepository.Update(userBasket);
-		basketRepository.Remove(anonymousBasket.Id);
-
-		await _unitOfWork.SaveChangesAsync();
-	}
+	*/
 }

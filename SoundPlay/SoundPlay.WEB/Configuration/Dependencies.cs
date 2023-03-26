@@ -44,10 +44,11 @@ public static class Dependencies
         services.AddTransient<ExceptionHandlingMiddleware>();
         services.AddControllersWithViews();
         services.AddScoped<IContentManager, ContentManager>();
+        services.AddScoped<IBasketService, BasketService>();
         services.AddSingleton<IEmailSender, EmailSender>();
         services.AddAutoMapper(typeof(MappingProfile));
         services.AddSession(options => {
-            options.IdleTimeout = TimeSpan.FromMinutes(10);
+            options.IdleTimeout = TimeSpan.FromMinutes(15);
             options.Cookie.HttpOnly = true;
             options.Cookie.IsEssential = true;
         });

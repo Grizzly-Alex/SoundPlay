@@ -12,8 +12,8 @@ using SoundPlay.Infrastructure.DataAccess.DbContexts;
 namespace SoundPlay.Infrastructure.DataAccess.Migrations.Shopping
 {
     [DbContext(typeof(ShoppingDbContext))]
-    [Migration("20230324172540_AddDate")]
-    partial class AddDate
+    [Migration("20230326142817_InitialMigrtation")]
+    partial class InitialMigrtation
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -72,10 +72,6 @@ namespace SoundPlay.Infrastructure.DataAccess.Migrations.Shopping
 
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
-
-                    b.Property<decimal>("UnitPrice")
-                        .HasPrecision(8, 2)
-                        .HasColumnType("decimal");
 
                     b.HasKey("Id");
 

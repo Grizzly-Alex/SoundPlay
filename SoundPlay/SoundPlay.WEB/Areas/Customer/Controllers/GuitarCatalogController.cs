@@ -1,19 +1,19 @@
-﻿using SoundPlay.Core.Constants;
-using SoundPlay.Core.Models.Entities.Products;
-
-namespace SoundPlay.Web.Areas.Customer.Controllers;
+﻿namespace SoundPlay.Web.Areas.Customer.Controllers;
 
 [Area("Customer")]
 public class GuitarCatalogController : Controller
 {
 	private readonly ICatalogService _catalogService;
+    private readonly IBasketService _basketService;
     private readonly IViewModelService<Guitar, GuitarViewModel> _guitarService;
 
 	public GuitarCatalogController(
         IViewModelService<Guitar, GuitarViewModel> guitarService,
-        ICatalogService catalogGuitar)
+        ICatalogService catalogGuitar,
+        IBasketService basketService)
 	{
-        _catalogService = catalogGuitar;
+		_basketService = basketService;
+		_catalogService = catalogGuitar;
         _guitarService = guitarService;
 	}
 
@@ -58,4 +58,13 @@ public class GuitarCatalogController : Controller
 
         return View(guitarViewModel);
     }
+
+	[HttpPost]
+	public async Task<IActionResult> AddToBasket(int productId, byte productQuantity = 1)
+    {
+        var userId = await _basketService.GetBasketOwnerIdAsync(Request, Response);
+        await _basketService.AddItemToBasketAsync<Guitar>(userId, productId, productQuantity);
+
+		return Redirect(Request.GetTypedHeaders().Referer.ToString());
+	}
 }

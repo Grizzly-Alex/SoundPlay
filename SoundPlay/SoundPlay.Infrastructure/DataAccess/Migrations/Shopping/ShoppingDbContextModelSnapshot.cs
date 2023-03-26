@@ -70,10 +70,6 @@ namespace SoundPlay.Infrastructure.DataAccess.Migrations.Shopping
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
-                    b.Property<decimal>("UnitPrice")
-                        .HasPrecision(8, 2)
-                        .HasColumnType("decimal");
-
                     b.HasKey("Id");
 
                     b.HasIndex("BasketId");

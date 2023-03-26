@@ -16,3 +16,4 @@ global using SoundPlay.Infrastructure.DataAccess.DbContexts;
 global using SoundPlay.Core.Models.Entities.Basket;
 global using Microsoft.Extensions.Logging;
 global using Ardalis.GuardClauses;
+global using Microsoft.AspNetCore.Http;

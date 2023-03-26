@@ -3,20 +3,23 @@
 public sealed class BasketItem : Entity 
 {
     public int BasketId { get; private set; }
-    public int ProductId { get; private set; }
     public int Quantity { get; private set; }
-    public decimal UnitPrice { get; private set; }
-    public string ProductType { get; private set; }
     public DateTime CreateDate { get; private set; }
 
-    public BasketItem(int productId, int quantity, decimal unitPrice, string productType)
+	#region Product properties
+	public int ProductId { get; private set; }
+    public string ProductType { get; private set; }
+    #endregion
+
+    private BasketItem() { }
+
+    public BasketItem(Product product, int quantity)
     {
-        ProductId = productId;
-        UnitPrice = unitPrice;
-        SetQuantity(quantity);
-        ProductType = productType;
+		ProductId = product.Id;
+        ProductType = product.GetType().FullName!;
+		SetQuantity(quantity);
         CreateDate = DateTime.Now;
-    }
+	}
 
     public void SetQuantity(int quantity)
     {

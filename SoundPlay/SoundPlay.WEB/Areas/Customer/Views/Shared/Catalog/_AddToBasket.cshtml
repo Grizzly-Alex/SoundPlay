@@ -6,11 +6,11 @@
             <li>Stock: @ViewData["stock"]</li>
         </ul>           
 
-        <form class="form-inline row g-3">
+        <form method="post" asp-action="AddToBasket" asp-route-productId="@ViewData["id"]" class="form-inline row g-3">
             <div class="col-sm-6">
                 <div class="input-group mb-3">
                     <span class="input-group-text text-bg-primary">qty.</span>
-                    <input type="number" min="1" max="@ViewData["stock"]" step="1" value="1" class="form-control shadow-none" id="amountInput">
+                    <input type="number" min="1" max="@ViewData["stock"]" step="1" value="1" name="productQuantity" class="form-control shadow-none" id="amountInput">
                 </div>
             </div>
             <div class="col-sm-6">

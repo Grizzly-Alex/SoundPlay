@@ -1,11 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
 namespace SoundPlay.Infrastructure.DataAccess.Migrations.Shopping
 {
     /// <inheritdoc />
-    public partial class AddBasket : Migration
+    public partial class InitialMigrtation : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -16,7 +17,9 @@ namespace SoundPlay.Infrastructure.DataAccess.Migrations.Shopping
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    BuyerId = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: false)
+                    BuyerId = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: false),
+                    CreateDate = table.Column<DateTime>(type: "datetime2(7)", nullable: false),
+                    UpdateDate = table.Column<DateTime>(type: "datetime2(7)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -30,9 +33,10 @@ namespace SoundPlay.Infrastructure.DataAccess.Migrations.Shopping
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     BasketId = table.Column<int>(type: "int", nullable: false),
-                    ProductId = table.Column<int>(type: "int", nullable: false),
                     Quantity = table.Column<int>(type: "int", nullable: false),
-                    UnitPrice = table.Column<decimal>(type: "decimal(8,2)", precision: 8, scale: 2, nullable: false)
+                    CreateDate = table.Column<DateTime>(type: "datetime2(7)", nullable: false),
+                    ProductId = table.Column<int>(type: "int", nullable: false),
+                    ProductType = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {

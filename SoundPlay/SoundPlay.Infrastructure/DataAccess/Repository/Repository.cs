@@ -15,19 +15,18 @@ public class Repository<TDbContext, TEntity> : IRepository<TDbContext, TEntity>
 
     public void Add(TEntity entity)
 	{
-		_dbSet.Entry(entity).State = EntityState.Added;
+		_dbSet.Add(entity).State = EntityState.Added;
     }	
 
     public void Remove(int id)
     {
 		var entity = _dbSet.First(e => e.Id == id);
-        _dbSet.Entry(entity).State = EntityState.Deleted;
-
+		_dbSet.Remove(entity).State = EntityState.Deleted;
     }
 
     public void Update(TEntity entity)
 	{
-        _dbSet.Entry(entity).State = EntityState.Modified;
+		_dbSet.Update(entity).State = EntityState.Modified;
     }
 
 	public async Task<IEnumerable<TEntity>> GetAllAsync(
@@ -143,4 +142,12 @@ public class Repository<TDbContext, TEntity> : IRepository<TDbContext, TEntity>
         predicate is null
             ? await _dbSet.CountAsync(cancellationToken)
             : await _dbSet.CountAsync(predicate, cancellationToken);
+
+    public Task<int> SumAsync(
+		Expression<Func<TEntity, int>> selector,
+		Expression<Func<TEntity, bool>>? predicate = null,
+		CancellationToken cancellationToken = default) =>
+		predicate is null
+			? _dbSet.SumAsync(selector, cancellationToken)
+			: _dbSet.Where(predicate).SumAsync(selector, cancellationToken);
 }

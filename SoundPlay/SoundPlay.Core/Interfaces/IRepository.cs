@@ -59,4 +59,9 @@ public interface IRepository<TDbContext, TEntity>
         Expression<Func<TEntity, TResult>> selector,
         Expression<Func<TEntity, bool>>? predicate = null,
         CancellationToken cancellationToken = default);
+
+    public Task<int> SumAsync(
+       Expression<Func<TEntity, int>> selector,
+       Expression<Func<TEntity, bool>>? predicate = null,
+       CancellationToken cancellationToken = default);
 }

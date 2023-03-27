@@ -1,4 +1,4 @@
-﻿namespace SoundPlay.Web.ViewModels;
+﻿namespace SoundPlay.Web.ViewModels.Filters;
 
 public sealed class GuitarFilterViewModel : ProductFilterViewModel
 {
@@ -50,8 +50,8 @@ public sealed class GuitarFilterViewModel : ProductFilterViewModel
         IEnumerable<SelectListItem>? tremoloTypes,
         decimal? minPrice,
         decimal? maxPrice,
-        GuitarTag category) : this (category, minPrice, maxPrice)
-    {  
+        GuitarTag category) : this(category, minPrice, maxPrice)
+    {
         Brands = brands;
         Colors = colors;
         GuitarShapes = shapes;

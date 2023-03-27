@@ -1,4 +1,5 @@
 ﻿using SoundPlay.Core.Models.Entities;
+using SoundPlay.Web.ViewModels.Entities;
 
 namespace SoundPlay.Web.Interfaces;
 

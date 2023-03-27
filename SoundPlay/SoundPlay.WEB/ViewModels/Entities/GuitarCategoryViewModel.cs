@@ -1,4 +1,4 @@
-﻿namespace SoundPlay.Web.ViewModels;
+﻿namespace SoundPlay.Web.ViewModels.Entities;
 
 public sealed class GuitarCategoryViewModel : EntityViewModel
 {

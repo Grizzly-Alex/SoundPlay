@@ -1,4 +1,8 @@
-﻿namespace SoundPlay.Web.Services;
+﻿using SoundPlay.Web.ViewModels.Catalog;
+using SoundPlay.Web.ViewModels.Filters;
+using SoundPlay.Web.ViewModels.Pagination;
+
+namespace SoundPlay.Web.Services;
 
 public sealed class CatalogService : ICatalogService
 {

@@ -17,11 +17,6 @@ public class BasketService : IBasketService
 		_logger = logger;
 	}
 
-    public async Task<int> GetQuantityItems(int basketId)
-		=> await _shopping.GetRepository<BasketItem>().SumAsync(
-			predicate: i => i.BasketId == basketId,
-			selector: i => i.Quantity);
-
     public async Task<Basket> AddItemToBasketAsync<TModel>(string userId, int productId, int productQuantity = 1)
 		where TModel : Product
 	{

@@ -1,5 +1,8 @@
 ﻿using SoundPlay.Core.Constants;
 using SoundPlay.Core.Models.Entities.Products;
+using SoundPlay.Web.ViewModels.Catalog;
+using SoundPlay.Web.ViewModels.Filters;
+using SoundPlay.Web.ViewModels.Pagination;
 
 namespace SoundPlay.Web.Interfaces;
 

@@ -2,6 +2,6 @@
 
 public interface IBasketViewModelService
 {
-    Task<BasketViewModel> GetBasketForUser(string userName);
-    Task<int> CountTotalBasketItems(string username);
+    Task<BasketViewModel> GetBasketForUser(string userId);
+    Task<int> CountTotalBasketItems(string userId);
 }

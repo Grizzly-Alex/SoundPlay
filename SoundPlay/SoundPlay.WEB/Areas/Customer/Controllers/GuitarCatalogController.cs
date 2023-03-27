@@ -1,8 +1,5 @@
-﻿using SoundPlay.Web.ViewModels.Filters;
-using SoundPlay.Web.ViewModels.Pagination;
-using SoundPlay.Web.ViewModels.Products;
+﻿namespace SoundPlay.Web.Areas.Customer.Controllers;
 
-namespace SoundPlay.Web.Areas.Customer.Controllers;
 
 [Area("Customer")]
 public class GuitarCatalogController : Controller

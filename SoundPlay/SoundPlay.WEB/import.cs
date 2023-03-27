@@ -37,3 +37,4 @@ global using SoundPlay.Web.ViewModels.Create;
 global using SoundPlay.Web.ViewModels.Filters;
 global using SoundPlay.Web.ViewModels.Pagination;
 global using SoundPlay.Web.ViewModels.Products;
+global using SoundPlay.Core.Models.Entities.Basket;

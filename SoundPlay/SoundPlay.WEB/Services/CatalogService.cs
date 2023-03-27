@@ -1,8 +1,4 @@
-﻿using SoundPlay.Web.ViewModels.Catalog;
-using SoundPlay.Web.ViewModels.Filters;
-using SoundPlay.Web.ViewModels.Pagination;
-
-namespace SoundPlay.Web.Services;
+﻿namespace SoundPlay.Web.Services;
 
 public sealed class CatalogService : ICatalogService
 {
@@ -17,6 +13,10 @@ public sealed class CatalogService : ICatalogService
 
     public async Task<decimal?> GetMinPrice<TModel>(Expression<Func<TModel, bool>>? filter = null) where TModel : Product
     {
+
+        string guitar = typeof(Guitar).FullName;
+        Type type = Type.GetType(guitar);
+
         return (await _unitOfWork.GetRepository<TModel>().MinAsync(
             selector: i => (decimal?)i.Price, predicate: filter)) ?? default;    
     }
